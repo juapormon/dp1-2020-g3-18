@@ -254,6 +254,17 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+	<developers>
+		<developer>
+			<id>Pepe</id>
+			<name>Pepe</name>
+			<email>josrojrom1@alum.us.es</email>
+			<url></url>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
 
 
 
