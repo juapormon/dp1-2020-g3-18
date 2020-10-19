@@ -254,7 +254,23 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
-	<developers>
+  
+    <!-- Developers -->
+<developers>
+
+<developer>
+<id>davcuecar</id>
+<name>David</name>
+<email>davcuecar@alum.us.es</email>
+<url>http://www.example.com</url>
+<roles><role>Project Manager</role></roles>
+<properties>
+<picUrl></picUrl>
+</properties>
+</developer>
+
+    
+
 		<developer>
 			<id>Pepe</id>
 			<name>Pepe</name>
@@ -268,6 +284,13 @@
  <id>Fran</id>
  <name>Francisco</name>
  <email>francisco.fer.an@gmail.com</email>
+</developer>
+
+ <developer>
+ <id>Luis</id>
+ <name>Leonardo Pardo</name>
+ <email>luiparlop1@alum.us.es</email>
+ <url>http://www.example.com</url>
  <roles>
  <role>developer</role>
  </roles>
