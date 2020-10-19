@@ -255,6 +255,22 @@
         </license>
     </licenses>
 
+	<developers>
+		<developer>
+			<id>tomrodrod</id>
+			<name>Tomás</name>
+			<email>tomrodrod@alum.us.es</email>
+			<url>http://www.example.com/</url>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<properties>
+				<picUrl>
+				</picUrl>
+			</properties>
+		</developer>
+	</developers>
+
 
 
 </project>
