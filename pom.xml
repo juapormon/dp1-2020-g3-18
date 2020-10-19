@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework.samples</groupId>
-    <artifactId>spring-petclinic</artifactId>
+    <artifactId>G3-18</artifactId>
     <version>2.2.0.BUILD-SNAPSHOT</version>
 
     <parent>
@@ -254,9 +254,17 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
-
-<developers>
- <developer>
+	<developers>
+		<developer>
+			<id>Pepe</id>
+			<name>Pepe</name>
+			<email>josrojrom1@alum.us.es</email>
+			<url></url>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+		 <developer>
  <id>Fran</id>
  <name>Francisco</name>
  <email>francisco.fer.an@gmail.com</email>
@@ -264,7 +272,6 @@
  <role>developer</role>
  </roles>
  </developer>
-</developers>
-
+	</developers> 
 
 </project>
