@@ -255,6 +255,19 @@
         </license>
     </licenses>
 
-
+<developers>
+ <developer>
+ <id>Luis</id>
+ <name>Leonardo Pardo</name>
+ <email>luiparlop1@alum.us.es</email>
+ <url>http://www.example.com</url>
+ <roles>
+ <role>developer</role>
+ </roles>
+ <properties>
+ </properties>
+ </developer>
+ </developers>
+ 
 
 </project>
