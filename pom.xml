@@ -258,20 +258,29 @@
     <!-- Developers -->
 <developers>
 
-<developer>
-<id>davcuecar</id>
-<name>David</name>
-<email>davcuecar@alum.us.es</email>
-<url>http://www.example.com</url>
-<roles><role>Project Manager</role></roles>
-<properties>
-<picUrl></picUrl>
-</properties>
-</developer>
-
-    
-
-		<developer>
+      <developer>
+      <id>Luis</id>
+      <name>Leonardo Pardo</name>
+      <email>luiparlop1@alum.us.es</email>
+      <url>http://www.example.com</url>
+      <roles>
+      <role>developer</role>
+      </roles>
+      <properties>
+      </properties>
+      </developer>
+  
+   		<developer>
+ 			<id>juapormon</id>
+ 			<name>Juan Pablo</name>
+ 			<email>juapormon@alum.us.es</email>
+ 			<url>https://github.com/juapormon</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>			
+		</developer>
+  
+   	<developer>
 			<id>Pepe</id>
 			<name>Pepe</name>
 			<email>josrojrom1@alum.us.es</email>
@@ -295,6 +304,15 @@
  <role>developer</role>
  </roles>
  </developer>
-	</developers> 
-
+    <developer>
+    <id>davcuecar</id>
+    <name>David</name>
+    <email>davcuecar@alum.us.es</email>
+    <url>http://www.example.com</url>
+    <roles><role>Project Manager</role></roles>
+    <properties>
+    <picUrl></picUrl>
+    </properties>
+    </developer>
+ </developers>
 </project>
