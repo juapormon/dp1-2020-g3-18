@@ -255,6 +255,16 @@
         </license>
     </licenses>
 
+<developers>
+ <developer>
+ <id>Fran</id>
+ <name>Francisco</name>
+ <email>francisco.fer.an@gmail.com</email>
+ <roles>
+ <role>developer</role>
+ </roles>
+ </developer>
+</developers>
 
 
 </project>
