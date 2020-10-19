@@ -254,6 +254,21 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+    
+    <!-- Developers -->
+    <developers>
+<developer>
+<id>davcuecar</id>
+<name>David</name>
+<email>davcuecar@alum.us.es</email>
+<url>http://www.example.com</url>
+<roles><role>Project Manager</role></roles>
+<properties>
+<picUrl></picUrl>
+</properties>
+</developer>
+</developers>
+    
 
 
 
