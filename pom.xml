@@ -254,7 +254,17 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
-
-
+    
+   	<developers>
+ 		<developer>
+ 			<id>juapormon</id>
+ 			<name>Juan Pablo</name>
+ 			<email>juapormon@alum.us.es</email>
+ 			<url>https://github.com/juapormon</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>			
+		</developer>
+ 	</developers>
 
 </project>
