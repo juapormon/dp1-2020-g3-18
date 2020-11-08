@@ -15,7 +15,7 @@ INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (3,'vet1','veterinarian');
 
 INSERT INTO users(username,password,enabled) VALUES ('juapormon','juapormon',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (5,'juapormon','owner');
+INSERT INTO authorities(id,username,authority) VALUES (7,'juapormon','owner');
 
 INSERT INTO vets VALUES (1, 'James', 'Carter');
 INSERT INTO vets VALUES (2, 'Helen', 'Leary');
@@ -74,7 +74,7 @@ INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (14, 'EsnupDoc', '2
 
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (15, 'snoop dog', '2012-06-08', 2, 12);
 INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (16, 'Piucha', '2018-06-06', 5, 13);
-INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (14, 'Adm', '2015-07-09', 1, 14);
+INSERT INTO pets(id,name,birth_date,type_id,owner_id) VALUES (17, 'Adm', '2015-07-09', 1, 14);
 
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (1, 7, '2013-01-01', 'rabies shot');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02', 'rabies shot');
