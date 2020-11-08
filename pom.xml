@@ -256,8 +256,25 @@
     </licenses>
   
     <!-- Developers -->
-
 <developers>
+
+
+		<developer>
+			<id>tomrodrod</id>
+			<name>Tomás</name>
+			<email>tomrodrod@alum.us.es</email>
+			<url>http://www.example.com/</url>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<properties>
+				<picUrl>
+				</picUrl>
+			</properties>
+		</developer>
+	
+
+
       <developer>
       <id>Luis</id>
       <name>Leonardo Pardo</name>
@@ -289,7 +306,21 @@
 				<role>Developer</role>
 			</roles>
 		</developer>
-     
+		 <developer>
+ <id>Fran</id>
+ <name>Francisco</name>
+ <email>francisco.fer.an@gmail.com</email>
+</developer>
+
+ <developer>
+ <id>Luis</id>
+ <name>Leonardo Pardo</name>
+ <email>luiparlop1@alum.us.es</email>
+ <url>http://www.example.com</url>
+ <roles>
+ <role>developer</role>
+ </roles>
+ </developer>
     <developer>
     <id>davcuecar</id>
     <name>David</name>
@@ -301,5 +332,4 @@
     </properties>
     </developer>
  </developers>
-
 </project>
