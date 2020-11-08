@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Score;
+import org.springframework.samples.petclinic.model.Scores;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -30,17 +31,17 @@ public class ScoreController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
-	@ModelAttribute("score")
-	public Score findOwner(@PathVariable("scoreId") int scoreId) {
-		return this.scoreService.findScoreById(scoreId);
-	}
+//	@ModelAttribute("score")
+//	public Score findOwner(@PathVariable("scoreId") int scoreId) {
+//		return this.scoreService.findScoreById(scoreId);
+//	}
 
-	@GetMapping(value = "/scores")
-	public String processFindForm(Map<String, Object> model) {
-
-		Collection<Score> scores = this.scoreService.findScores();
+	@GetMapping(value = { "/scores" })
+	public String showScoreList(Map<String, Object> model) {
+		
+		Scores scores = new Scores();
+		scores.getScoreList().addAll(this.scoreService.findScores());
 		model.put("scores", scores);
-
 		return "scores/scoresList";
 	}
 }

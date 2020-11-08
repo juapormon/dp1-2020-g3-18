@@ -27,6 +27,12 @@
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<span>Home</span>
 				</petclinic:menuItem>
+				
+				<%-- <petclinic:menuItem active="${name eq 'scores'}" url="/scores"
+					title="Scores">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Scores</span>
+				</petclinic:menuItem> --%>
 
 				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
 					title="find owners">
@@ -39,6 +45,12 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Veterinarians</span>
 				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'scores'}" url="/scores"
+					title="scores">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Scores</span>
+				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
@@ -47,7 +59,7 @@
 				</petclinic:menuItem>
 
 			</ul>
-
+			
 
 
 
