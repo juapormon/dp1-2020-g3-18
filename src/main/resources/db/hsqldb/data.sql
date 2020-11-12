@@ -83,3 +83,7 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04',
 
 INSERT INTO scores(id,point,comment) VALUES (1, 1, 'Comentario del score 1');
 INSERT INTO scores(id,point,comment) VALUES (2, 3, 'Comentario del score 2');
+
+INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
+
+INSERT INTO colleges(id,name,ciudad,dean_id) VALUES (1, 'etsii', 'Sevilla', 1);
