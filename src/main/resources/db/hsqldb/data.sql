@@ -87,3 +87,6 @@ INSERT INTO scores(id,point,comment) VALUES (2, 3, 'Comentario del score 2');
 INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
 
 INSERT INTO colleges(id,name,ciudad,dean_id) VALUES (1, 'etsii', 'Sevilla', 1);
+
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julian', 'Locuelo', 'profesor1');
+
