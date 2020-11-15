@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Scores;
 import org.springframework.samples.petclinic.service.ScoreService;

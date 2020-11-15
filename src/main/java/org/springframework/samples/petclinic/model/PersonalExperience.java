@@ -7,8 +7,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "personalExperience")
-public class PersonalExperience {
+@Table(name = "personalExperiences")
+public class PersonalExperience extends BaseEntity{
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
