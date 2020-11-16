@@ -88,5 +88,17 @@ INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javiele
 
 INSERT INTO colleges(id,name,ciudad,dean_id) VALUES (1, 'etsii', 'Sevilla', 1);
 
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julian', 'Locuelo', 'profesor1');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
+
+INSERT INTO personalExperiences(id,resExperience_id,teaExperience_id,proExperience_id, extEvaluation_id) VALUES (1, 'Descubridor de América en una galleta', 'Enseñó a si hijastra a decir potata', 3);
+
+INSERT INTO professionalExperiences(id,university,comment) VALUES (1, 'Universidad de Sevilla', 'Comentario de prueba 1.');
+
+INSERT INTO researchExperiences(id,research) VALUES (1, 'Investigación sobre como sobre como cocinar arroz sin que se te pegue con un boli y un transportador');
+
+INSERT INTO teachingExperiences(id,titulation,comment) VALUES (1, 'Graduado en ciencias sociales y económicas del gramo y medio', 'Comentario de prueba a ver que sale...');
+
+INSERT INTO externalEvaluations(id,note,comment) VALUES (1, 8, 'Otro comentario de prueba a ver que sale...');
+
 
