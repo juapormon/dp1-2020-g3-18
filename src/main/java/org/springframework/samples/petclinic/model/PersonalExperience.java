@@ -7,7 +7,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "personalExperiences")
-public class PersonalExperience extends Person{
+
+public class PersonalExperience extends BaseEntity{
+
 	
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "resExperience_id")
