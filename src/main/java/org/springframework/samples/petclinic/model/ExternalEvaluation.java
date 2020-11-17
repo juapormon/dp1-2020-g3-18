@@ -9,7 +9,7 @@ import com.sun.istack.NotNull;
 
 
 @Entity
-@Table(name = "externalEvaluations")
+@Table(name = "externalevaluations")
 public class ExternalEvaluation extends Person{
 
 	@Column(name = "note")

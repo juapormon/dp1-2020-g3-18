@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "professionalExperiences")
+@Table(name = "professionalexperiences")
 
 public class ProfessionalExperience extends Person{
 

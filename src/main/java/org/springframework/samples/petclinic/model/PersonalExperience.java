@@ -6,25 +6,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "personalExperiences")
+@Table(name = "personalexperiences")
 
 public class PersonalExperience extends BaseEntity{
 
 	
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "resExperience_id")
+	@JoinColumn(name = "res_experience_id")
 	private ResearchExperience researchExperience;
 	
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "teaExperience_id")
+	@JoinColumn(name = "tea_experience_id")
 	private TeachingExperience teachingExperience;
 	
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "proExperience_id")
+	@JoinColumn(name = "pro_experience_id")
 	private ProfessionalExperience professionalExperience;
 	
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "extEvaluation_id")
+	@JoinColumn(name = "ext_evaluation_id")
 	private ExternalEvaluation externalEvaluation;
 
 }
