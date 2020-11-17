@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name ="teachingExperiences")
-public class TeachingExperience {
+public class TeachingExperience extends BaseEntity{
 
 	@Column(name="titulation")
 	@NotBlank
