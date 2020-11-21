@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Scores {
 
-	
-
 		private List<Score> scores;
 
 		@XmlElement
