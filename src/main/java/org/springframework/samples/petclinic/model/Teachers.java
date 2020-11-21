@@ -11,10 +11,10 @@ public class Teachers {
 
 	
 
-		private List<Teachers> teachers;
+		private List<Teacher> teachers;
 
 		@XmlElement
-		public List<Teachers> getTeachersList() {
+		public List<Teacher> getTeachersList() {
 			if (teachers == null) {
 				teachers = new ArrayList<>();
 			}

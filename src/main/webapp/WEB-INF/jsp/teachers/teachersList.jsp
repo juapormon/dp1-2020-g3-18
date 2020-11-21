@@ -8,39 +8,24 @@
 <petclinic:layout pageName="teachers">
     <h2>Teachers</h2>
 
-    <table id="teachersTable" class="table table-striped">
+   <table id="teachersTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Name</th>
-            <th style="width: 200px;">Address</th>
-            <th>City</th>
-            <th style="width: 120px">Telephone</th>
-            <th>Pets</th>
+            <th>First name</th>
+            <th>Last name</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${selections}" var="teacher">
-            <tr>
+        <c:forEach items="${teachers.teachersList}" var="teacher">
+             <tr>
                 <td>
-                    <spring:url value="/teachers/{teacherId}" var="teacherUrl">
-                        <spring:param name="teacherId" value="${teacher.id}"/>
-                    </spring:url>
-                    <a href="${fn:escapeXml(teacherUrl)}"><c:out value="${teacher.firstName} ${teacher.lastName}"/></a>
+                    <c:out value="${teacher.firstName}"/>
+                </td>
+                <td>
+                    <c:out value=" ${teacher.lastName}"/>
                 </td>
                
-               
-                
-      
-<!--
-                <td> 
-                    <c:out value="${owner.user.username}"/> 
-                </td>
-                <td> 
-                   <c:out value="${owner.user.password}"/> 
-                </td> 
--->
-                
-            </tr>
+            </tr> 
         </c:forEach>
         </tbody>
     </table>

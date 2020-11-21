@@ -1,6 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.Collection;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +31,11 @@ public class TeacherController {
 	@GetMapping(value = { "/teachers" })
 	public String showTeacherList(Map<String, Object> model) {
 		
+//		Teachers teachers = new Teachers();
+//		teachers.getTeachersList().addAll( this.teacherService.findTeachers());
+//		model.put("teachers", teachers);
 		Teachers teachers = new Teachers();
-		teachers.getTeachersList().add((Teachers) this.teacherService.findTeachers());
+		teachers.getTeachersList().addAll(this.teacherService.findTeachers());
 		model.put("teachers", teachers);
 		return "teachers/teachersList";
 		
@@ -42,7 +45,7 @@ public class TeacherController {
 	public @ResponseBody Teachers showResourcesTeacherList() {
 
 		Teachers teachers = new Teachers();
-		teachers.getTeachersList().add((Teachers) this.teacherService.findTeachers());
+		teachers.getTeachersList().addAll( this.teacherService.findTeachers());
 		return teachers;
 	}
 	
