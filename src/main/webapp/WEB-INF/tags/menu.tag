@@ -46,6 +46,16 @@
 					<span>Veterinarians</span>
 				</petclinic:menuItem> --%>
 				
+				
+				
+				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers/new"
+					title="teachers">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Add new Teacher</span>
+				</petclinic:menuItem>
+					
+				
+				
 				<petclinic:menuItem active="${name eq 'scores'}" url="/scores"
 					title="scores">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>

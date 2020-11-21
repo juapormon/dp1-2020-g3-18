@@ -11,4 +11,8 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	Teacher findById(int id) throws DataAccessException;
 	
 	Collection<Teacher> findAll() throws DataAccessException;
+
+	void save(Teacher teacher) throws DataAccessException;
+
+
 }
