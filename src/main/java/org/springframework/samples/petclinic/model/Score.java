@@ -3,7 +3,8 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -17,6 +18,10 @@ public class Score extends BaseEntity {
 
 	@Column(name = "comment")
 	private String comment;
+	
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	private Teacher teacher;
 
 	public Integer getPoint() {
 		return point;
@@ -32,6 +37,14 @@ public class Score extends BaseEntity {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 
 }
