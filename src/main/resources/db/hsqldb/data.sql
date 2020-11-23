@@ -11,7 +11,7 @@ INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (2,'owner1','owner');
 
 INSERT INTO users(username,password,enabled) VALUES ('josrojrom1','pepe12345',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (5,'josrojrom1','owner');
+INSERT INTO authorities(id,username,authority) VALUES (5,'josrojrom1','dean');
 
 INSERT INTO users(username,password,enabled) VALUES ('luis','luis',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (6,'luis','owner');
