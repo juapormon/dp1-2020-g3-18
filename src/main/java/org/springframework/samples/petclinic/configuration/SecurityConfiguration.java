@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/scores/**").permitAll()
 				.antMatchers("/teachers/**").permitAll()
 				.antMatchers("/deans/**").hasAnyAuthority("dean")
-				.antMatchers("/colleges/**").hasAnyAuthority("dean") //habra que incluir teacher tambien
+				.antMatchers("/colleges/**").hasAnyAuthority("dean") 
 				.antMatchers("/teachers/**").permitAll()
 				.anyRequest().denyAll()
 				.and()
