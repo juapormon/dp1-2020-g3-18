@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Teacher</label>
                     <div class="col-sm-10">
-                        <c:out value="${score.teacher.firstName} ${score.teacher.lastName}"/>
+                        <c:out value="${teacher.firstName} ${teacher.lastName}"/>
                     </div>
                 </div>
                 <petclinic:inputField label="Point" name="point"/>
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                	<button class="btn btn-default" type="submit">Add Pet</button>
+                	<button class="btn btn-default" type="submit">Add Score</button>
                 </div>
             </div>
         </form:form>
