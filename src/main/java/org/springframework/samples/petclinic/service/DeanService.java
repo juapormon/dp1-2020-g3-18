@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Teacher;
@@ -15,6 +17,12 @@ public class DeanService {
 	private DeanRepository deanRepository;
 	
 	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private AuthoritiesService authoritiesService;
+	
+	@Autowired
 	public DeanService(TeacherRepository teacherRepository, DeanRepository deanRepository) {
 		this.deanRepository = deanRepository;
 		this.teacherRepository = teacherRepository;
@@ -25,6 +33,11 @@ public class DeanService {
 	@Transactional(readOnly = true)
 	public void saveTeacher(Teacher teacher) throws DataAccessException{
 		teacherRepository.save(teacher);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Teacher> findAll() throws DataAccessException {
+		return teacherRepository.findAll();
 	}
 
 }
