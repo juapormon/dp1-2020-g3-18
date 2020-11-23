@@ -11,17 +11,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name = "teachers")
+@AllArgsConstructor @NoArgsConstructor
 public class Teacher extends Person{
 	
 
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
 
-	
-	
 	private User user;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
