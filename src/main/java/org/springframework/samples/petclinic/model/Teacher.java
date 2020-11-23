@@ -20,6 +20,8 @@ public class Teacher extends Person{
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
 
+	
+	
 	private User user;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")

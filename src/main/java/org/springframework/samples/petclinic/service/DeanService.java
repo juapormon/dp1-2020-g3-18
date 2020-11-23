@@ -1,21 +1,20 @@
-
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Teacher;
+import org.springframework.samples.petclinic.repository.DeanRepository;
 import org.springframework.samples.petclinic.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class TeacherService {
-
+public class DeanService {
 	
 	private TeacherRepository teacherRepository;
+	private DeanRepository deanRepository;
 	
 	@Autowired
 	private UserService userService;
@@ -24,30 +23,21 @@ public class TeacherService {
 	private AuthoritiesService authoritiesService;
 	
 	@Autowired
-	public TeacherService(TeacherRepository teacherRepository) {
+	public DeanService(TeacherRepository teacherRepository, DeanRepository deanRepository) {
+		this.deanRepository = deanRepository;
 		this.teacherRepository = teacherRepository;
-	}	
+	}
+
+
 
 	@Transactional(readOnly = true)
-	public Teacher findTeacherById(int id) throws DataAccessException {
-		return teacherRepository.findById(id);
+	public void saveTeacher(Teacher teacher) throws DataAccessException{
+		teacherRepository.save(teacher);
 	}
 	
-	@Transactional(readOnly = true)	
-	public Collection<Teacher> findTeachers() throws DataAccessException {
+	@Transactional(readOnly = true)
+	public Collection<Teacher> findAll() throws DataAccessException {
 		return teacherRepository.findAll();
 	}
-	
 
-	@Transactional
-	public void saveTeacher(Teacher teacher) throws DataAccessException {
-		//creating teacher
-		teacherRepository.save(teacher);		
-		//creating user
-		userService.saveUser(teacher.getUser());
-		//creating authorities
-		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
-	}	
-	
 }
-
