@@ -7,10 +7,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 
 
 @Entity
 @Table(name = "scores")
+@AllArgsConstructor @NoArgsConstructor
 public class Score extends BaseEntity {
 
 	@Column(name = "point")
