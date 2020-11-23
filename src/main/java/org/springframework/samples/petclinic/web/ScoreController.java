@@ -13,7 +13,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ScoreController {
@@ -44,7 +43,7 @@ public class ScoreController {
 		return "scores/scoresList";
 	}
 	
-	@PostMapping(value = { "/scores/new"})
+	@GetMapping(value = { "/scores/new"})
 	public String initCreationForm(Teacher teacher, ModelMap model) { //para crear el modelo que va a la vista.
 		Score score = new Score();
 		teacher.addScore(score);

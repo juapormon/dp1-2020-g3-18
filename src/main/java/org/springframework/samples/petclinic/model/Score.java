@@ -20,7 +20,7 @@ public class Score extends BaseEntity {
 	private String comment;
 	
 	@ManyToOne
-	@JoinColumn(name = "owner_id")
+	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
 
 	public Integer getPoint() {
