@@ -25,6 +25,7 @@
     </spring:url>
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add New Score</a>
 
+
     <br/>
     <br/>
     <br/>
@@ -32,7 +33,9 @@
 
     <table class="table table-striped">
 
-
+	<c:forEach items="${mav.model.teacher.value.scores}" var="scor">
+   		<h1>${scor.point} ${scor.comment}</h1>
+	</c:forEach>
     </table>
 
 </petclinic:layout>
