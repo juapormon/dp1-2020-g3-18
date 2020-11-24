@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "professionalexperiences")
 @AllArgsConstructor @NoArgsConstructor
-public class ProfessionalExperience extends Person{
+public class ProfessionalExperience extends BaseEntity{
 
 	@Column(name ="university")
 	@NotBlank
