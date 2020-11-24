@@ -29,6 +29,7 @@ public class Teacher extends Person{
 	private User user;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+	//@JoinColumn(name = "scores_id")
 	private Set<Score> scores;
 	
 	@ManyToMany
