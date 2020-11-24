@@ -18,6 +18,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor @NoArgsConstructor
 public class College extends BaseEntity{
 	
+	@Column(name = "name")
+	@NotEmpty
+	private String name;
+	
 	@Column(name = "ciudad")
 	@NotEmpty
 	private String ciudad;
