@@ -39,8 +39,11 @@ INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javiele
 INSERT INTO colleges(id,name, ciudad,dean_id) VALUES (1,'etsii', 'Sevilla', 1);
 
 
-INSERT INTO teachers(id,first_name,last_name,username/*,scores_id*/) VALUES (1, 'Julián', 'Locuelo García', 'juloga1'/*,1*/);
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
+
+INSERT INTO teacher_scores VALUES (2, 1);
+INSERT INTO teacher_scores VALUES (2, 2);
 
 INSERT INTO professionalexperiences(id,university,comment) VALUES (1, 'Universidad de Sevilla', 'Comentario de prueba 1.');
 

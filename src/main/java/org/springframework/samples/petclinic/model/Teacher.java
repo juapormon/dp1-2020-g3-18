@@ -7,7 +7,9 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,11 +30,14 @@ public class Teacher extends Person{
 
 	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
-	//@JoinColumn(name = "scores_id")
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "teacher_scores", joinColumns = @JoinColumn(name = "teachers_id"),
+	inverseJoinColumns = @JoinColumn(name = "scores_id"))
 	private Set<Score> scores;
 	
-	@ManyToMany
+	@ManyToMany (fetch = FetchType.EAGER)
+	@JoinTable(name = "teacher_colleges", joinColumns = @JoinColumn(name = "teachers_id"),
+	inverseJoinColumns = @JoinColumn(name = "colleges_id"))
 	private List<College> colleges;
 	
 	@OneToOne (optional = true)
