@@ -49,6 +49,7 @@ INSERT INTO externalevaluations(id,note,comment) VALUES (1, 8, 'Otro comentario 
 
 INSERT INTO personalexperiences(id,res_experience_id,tea_experience_id,pro_experience_id, ext_evaluation_id) VALUES (1,1,1,1,1);
 
+INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 
 
 

@@ -30,12 +30,20 @@
     <br/>
     <br/>
     <h2>Scores</h2>
-
+ 
+    <spring:url value="{teacherId}/scores" var="showScoresUrl">
+        <spring:param name="teacherId" value="${teacher.id}"/>
+    </spring:url>
+    <a href="${fn:escapeXml(showScoresUrl)}" class="btn btn-default">Show Scores</a>
     <table class="table table-striped">
 
-	<c:forEach items="${mav.model.teacher.value.scores}" var="scor">
+	<c:forEach items="${scores}" var="scor">
    		<h1>${scor.point} ${scor.comment}</h1>
 	</c:forEach>
     </table>
+    
+    <h2>Personal experience</h2>
+    
+    <!--  Dentro de personal experience pondremos un boton o varios, hay que decidirlo -->
 
 </petclinic:layout>
