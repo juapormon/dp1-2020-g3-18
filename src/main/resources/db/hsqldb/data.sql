@@ -11,7 +11,7 @@ INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (2,'owner1','owner');
 
 INSERT INTO users(username,password,enabled) VALUES ('josrojrom1','pepe12345',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (5,'josrojrom1','owner');
+INSERT INTO authorities(id,username,authority) VALUES (5,'josrojrom1','dean');
 
 INSERT INTO users(username,password,enabled) VALUES ('luis','luis',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (6,'luis','owner');
@@ -49,6 +49,7 @@ INSERT INTO externalevaluations(id,note,comment) VALUES (1, 8, 'Otro comentario 
 
 INSERT INTO personalexperiences(id,res_experience_id,tea_experience_id,pro_experience_id, ext_evaluation_id) VALUES (1,1,1,1,1);
 
+INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 
 
 
