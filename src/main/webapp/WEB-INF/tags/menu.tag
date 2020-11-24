@@ -27,17 +27,37 @@
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<span>Home</span>
 				</petclinic:menuItem>
-
+				
+				<%-- <petclinic:menuItem active="${name eq 'scores'}" url="/scores"
+					title="Scores">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Scores</span>
+				</petclinic:menuItem> --%>
+<%-- 
 				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
 					title="find owners">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					<span>Find owners</span>
 				</petclinic:menuItem>
-
-				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
+ --%>
+				<%-- <petclinic:menuItem active="${name eq 'vets'}" url="/vets"
 					title="veterinarians">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Veterinarians</span>
+				</petclinic:menuItem> --%>
+				
+				
+				
+				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers/new"
+					title="teachers">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Add new Teacher</span>
+				</petclinic:menuItem>
+
+				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers"
+					title="teachers">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Teachers</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
@@ -48,9 +68,6 @@
 
 			</ul>
 
-
-
-
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">
 					<li><a href="<c:url value="/login" />">Login</a></li>
@@ -58,7 +75,7 @@
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span> 
+						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>Â 
 							<strong><sec:authentication property="name" /></strong> <span
 							class="glyphicon glyphicon-chevron-down"></span>
 					</a>

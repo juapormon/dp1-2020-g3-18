@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
+
 //import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -30,6 +31,7 @@ public class Student extends Person{
 	
 //	@ManyToMany
 //	private Teacher teacher;
+
 	
 	
 }
