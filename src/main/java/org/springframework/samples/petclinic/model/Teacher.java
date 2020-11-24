@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,11 +11,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
 
 @Entity
+@Data
 @Table(name = "teachers")
 @AllArgsConstructor @NoArgsConstructor
 public class Teacher extends Person{
@@ -28,37 +26,22 @@ public class Teacher extends Person{
 
 	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
-	private Set<Score> scores;
-	
 	@ManyToMany
 	private List<College> colleges;
 	
 	@OneToOne
 	private PersonalExperience personalExperience;
 	
+	@OneToOne
+	private ProfessionalExperience professionalExperience;
 	
-	public User getUser() {
-		return user;
-	}
+	@OneToOne
+	private ResearchExperience researchExperience;
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+	@OneToMany
+	private List<Score> scores;
 	
-	protected Set<Score> getScoresInternal() {
-		if (this.scores == null) {
-			this.scores = new HashSet<>();
-		}
-		return this.scores;
-	}
-	
-	public void addScore(Score score) {
-		getScoresInternal().add(score);
-		score.setTeacher(this);
-	}
-	
-
-
-
+//	@OneToMany
+//	private List<Subject> subjects;
 }
+
