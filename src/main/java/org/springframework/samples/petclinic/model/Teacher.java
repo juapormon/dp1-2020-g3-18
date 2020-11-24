@@ -34,7 +34,7 @@ public class Teacher extends Person{
 	@ManyToMany
 	private List<College> colleges;
 	
-	@OneToOne
+	@OneToOne (optional = true)
 	private PersonalExperience personalExperience;
 	
 	
