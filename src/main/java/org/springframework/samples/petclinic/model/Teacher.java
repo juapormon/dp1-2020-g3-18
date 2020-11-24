@@ -2,11 +2,13 @@ package org.springframework.samples.petclinic.model;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,6 +30,13 @@ public class Teacher extends Person{
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
 	private Set<Score> scores;
+	
+	@ManyToMany
+	private List<College> colleges;
+	
+	@OneToOne
+	private PersonalExperience personalExperience;
+	
 	
 	public User getUser() {
 		return user;
