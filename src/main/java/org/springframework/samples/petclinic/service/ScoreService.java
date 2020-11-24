@@ -2,6 +2,8 @@ package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Score;
@@ -27,5 +29,10 @@ public class ScoreService {
 	@Transactional(readOnly = true)	
 	public Score findScoreById(int id) throws DataAccessException {
 		return scoreRepository.findById(id);
+	}
+	
+	@Transactional(readOnly = true)	
+	public void saveScore(@Valid Score score) throws DataAccessException  {
+		scoreRepository.save(score);
 	}	
 }
