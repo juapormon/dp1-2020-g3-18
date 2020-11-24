@@ -10,14 +10,17 @@ INSERT INTO authorities(id,username,authority) VALUES (99,'admin','admin');
 INSERT INTO users(username,password,enabled) VALUES ('owner1','0wn3r',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (2,'owner1','owner');
 
+
 INSERT INTO users(username,password,enabled) VALUES ('josrojrom1','pepe12345',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'josrojrom1','dean');
 
 INSERT INTO users(username,password,enabled) VALUES ('luis','luis',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (6,'luis','owner');
+
 -- One vet user, named vet1 with passwor v3t
 INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (3,'vet1','veterinarian');
+
 
 INSERT INTO users(username,password,enabled) VALUES ('juapormon','juapormon',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (7,'juapormon','owner');
@@ -52,4 +55,5 @@ INSERT INTO personalexperiences(id,res_experience_id,tea_experience_id,pro_exper
 INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 
 
+INSERT INTO students(id,first_name,last_name,email) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomrodrod@alum.us.es');
 
