@@ -16,9 +16,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@Data
 @Entity
 @Table(name = "teachers")
 @AllArgsConstructor @NoArgsConstructor
@@ -35,6 +36,7 @@ public class Teacher extends Person{
 	inverseJoinColumns = @JoinColumn(name = "scores_id"))
 	private Set<Score> scores;
 	
+	
 	@ManyToMany (fetch = FetchType.EAGER)
 	@JoinTable(name = "teacher_colleges", joinColumns = @JoinColumn(name = "teachers_id"),
 	inverseJoinColumns = @JoinColumn(name = "colleges_id"))
@@ -43,14 +45,11 @@ public class Teacher extends Person{
 	@OneToOne (optional = true)
 	private PersonalExperience personalExperience;
 	
+//	@ManyToMany(fetch = FetchType.EAGER)
+//	private List<Subject> subjects; 
+//	
 	
-	public User getUser() {
-		return user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
 	
 	protected Set<Score> getScoresInternal() {
 		if (this.scores == null) {
@@ -63,6 +62,12 @@ public class Teacher extends Person{
 		getScoresInternal().add(score);
 		score.setTeacher(this);
 	}
+
+//	
+//	public void addSubject(List<Subject> subject) {
+//		getSubjects().addAll(subject);
+//		
+//	}
 	
 
 
