@@ -31,6 +31,9 @@ INSERT INTO authorities(id,username,authority) VALUES (8,'juloga1','teacher');
 INSERT INTO users(username,password,enabled) VALUES ('mamapon1','mamapon1',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (9,'mamapon1','teacher');
 
+INSERT INTO users(username,password,enabled) VALUES ('tomas','tomas12345',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (10,'tomas','student');
+
 INSERT INTO scores(id,point,comment) VALUES (1, 1, 'Comentario del score 1');
 INSERT INTO scores(id,point,comment) VALUES (2, 3, 'Comentario del score 2');
 
@@ -58,5 +61,7 @@ INSERT INTO personalexperiences(id,res_experience_id,tea_experience_id,pro_exper
 INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 
 
+
 INSERT INTO students(id,first_name,last_name,email) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomrodrod@alum.us.es');
+
 
