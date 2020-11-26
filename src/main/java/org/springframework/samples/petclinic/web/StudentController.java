@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Students;
+import org.springframework.samples.petclinic.model.Teachers;
 import org.springframework.samples.petclinic.repository.StudentRepository;
 import org.springframework.samples.petclinic.repository.TeacherRepository;
 import org.springframework.samples.petclinic.service.StudentService;
@@ -17,14 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 //@RequestMapping(name = "students")
 public class StudentController {
 
-	private final StudentRepository students;
-	private final TeacherRepository teachers;
+
+
 	private final StudentService studentService;
 
 	@Autowired
-	public StudentController(StudentRepository students, TeacherRepository teachers, StudentService studentService) {
-		this.students = students;
-		this.teachers = teachers;
+	public StudentController(StudentService studentService) {
+
 		this.studentService = studentService;
 	}
 
@@ -41,7 +41,7 @@ public class StudentController {
 	 */
 
 	@GetMapping(value = { "/students" })
-	public String showTeacherList(Map<String, Object> model) {
+	public String showStudentsList(Map<String, Object> model) {
 
 		Students students = new Students();
 		students.getStudentList().addAll(this.studentService.studentWithScore());
@@ -49,13 +49,15 @@ public class StudentController {
 		return "students/studentsList";
 
 	}
-
-	@GetMapping(value = { "/students.xml" })
-	public @ResponseBody Students showResourcesTeacherList() {
-
-		Students students = new Students();
-		students.getStudentList().addAll(this.studentService.studentWithScore());
-		return students;
-	}
+	
+	
+//
+//	@GetMapping(value = { "/students.xml" })
+//	public @ResponseBody Students showResourcesTeacherList() {
+//
+//		Students students = new Students();
+//		students.getStudentList().addAll(this.studentService.studentWithScore());
+//		return students;
+//	}
 
 }

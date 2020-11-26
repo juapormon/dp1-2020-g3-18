@@ -17,17 +17,18 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${students.studentsList}" var="student">
+        <c:forEach items="${students.studentList}" var="student">
              <tr>
                 <td>
                     <spring:url value="/students/{studentId}" var="studentUrl">
                     <spring:param name="studentId" value="${student.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(studentUrl)}"><c:out value="${student.firstName}"/></a>
+                    <c:out value="${student.firstName}"/>
                 </td>
                 <td>
                     <c:out value=" ${student.lastName}"/>
                 </td>
+
                
             </tr> 
         </c:forEach>
