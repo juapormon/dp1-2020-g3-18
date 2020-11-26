@@ -20,6 +20,7 @@ public interface StudentRepository extends Repository<Student, Integer>{
 	
 	//@Query("select t from Teacher t where t.subjects in (select s from Student s where s.subjects)")
 	//Collection<Teacher> teachersWithSameSubject();
-	
+	@Query("select s from Student s where s.id!=null")
+	Collection<Student> studentWithScore();
 
 }

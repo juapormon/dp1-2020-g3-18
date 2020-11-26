@@ -34,6 +34,9 @@ INSERT INTO authorities(id,username,authority) VALUES (9,'mamapon1','teacher');
 INSERT INTO users(username,password,enabled) VALUES ('tomas','tomas12345',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (10,'tomas','student');
 
+INSERT INTO users(username,password,enabled) VALUES ('fran','fran12345',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (11,'fran','student');
+
 INSERT INTO scores(id,point,comment) VALUES (1, 1, 'Comentario del score 1');
 INSERT INTO scores(id,point,comment) VALUES (2, 3, 'Comentario del score 2');
 
@@ -62,6 +65,7 @@ INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 
 
 
-INSERT INTO students(id,first_name,last_name,email) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomrodrod@alum.us.es');
+INSERT INTO students(id,first_name,last_name,username,scores_id) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas',1);
+INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', 'Fernández', 'fran');
 
 
