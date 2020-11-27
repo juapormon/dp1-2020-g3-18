@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "externalevaluations")
 @AllArgsConstructor @NoArgsConstructor
-public class ExternalEvaluation extends Person{
+public class ExternalEvaluation extends BaseEntity{
 
 	@Column(name = "note")
 	@NotNull

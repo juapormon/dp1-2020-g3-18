@@ -63,6 +63,15 @@ public class TeacherController {
 		return mav;
 	}
 
+	@GetMapping(value = { "/teachersWithScore" })
+	public String showTeacherWithScore(Map<String, Object> model) {
+
+		Teachers teachers = new Teachers();
+		teachers.getTeachersList().addAll(this.teacherService.showTeacherWithScore());
+		model.put("teachers", teachers);
+		return "teachers/teachersWithScore";
+		
+	}
 	
 }
 

@@ -1,22 +1,25 @@
 package org.springframework.samples.petclinic.model;
 
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@Data
 @Entity
 @Table(name = "teachers")
 @AllArgsConstructor @NoArgsConstructor
@@ -28,25 +31,26 @@ public class Teacher extends Person{
 
 	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
-	private Set<Score> scores;
+	@ManyToMany//(fetch = FetchType.EAGER)
+	//@JoinTable(name = "teacher_scores", joinColumns = @JoinColumn(name = "teachers_id"),
+	//inverseJoinColumns = @JoinColumn(name = "scores_id"))
+	@JoinColumn(name = "scores_id")
+	private Collection<Score> scores;
 	
 	@ManyToMany
-	private List<College> colleges;
+	@JoinColumn(name = "colleges_id")
+	private Collection<College> colleges;
 	
-	@OneToOne
+	@OneToOne (optional = true)
 	private PersonalExperience personalExperience;
 	
+//	@ManyToMany(fetch = FetchType.EAGER)
+//	private List<Subject> subjects; 
+//	
 	
-	public User getUser() {
-		return user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
 	
-	protected Set<Score> getScoresInternal() {
+	protected Collection<Score> getScoresInternal() {
 		if (this.scores == null) {
 			this.scores = new HashSet<>();
 		}
@@ -57,6 +61,12 @@ public class Teacher extends Person{
 		getScoresInternal().add(score);
 		score.setTeacher(this);
 	}
+
+//	
+//	public void addSubject(List<Subject> subject) {
+//		getSubjects().addAll(subject);
+//		
+//	}
 	
 
 

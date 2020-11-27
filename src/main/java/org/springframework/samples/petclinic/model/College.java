@@ -16,7 +16,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "colleges")
 @AllArgsConstructor @NoArgsConstructor
-public class College extends NamedEntity{
+public class College extends BaseEntity{
+	
+	@Column(name = "name")
+	@NotEmpty
+	private String name;
 	
 	@Column(name = "ciudad")
 	@NotEmpty

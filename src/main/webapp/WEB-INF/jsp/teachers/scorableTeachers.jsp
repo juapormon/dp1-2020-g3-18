@@ -33,9 +33,5 @@
         </c:forEach>
         </tbody>
     </table>
-    
-    <spring:url value="/teachersWithScore" var="addUrl">
-    </spring:url>
-    <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Teachers With Score</a>
 </petclinic:layout>
 
