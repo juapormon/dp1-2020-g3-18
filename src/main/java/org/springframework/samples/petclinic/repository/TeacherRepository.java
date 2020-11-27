@@ -16,7 +16,11 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	
 	void save(Teacher teacher) throws DataAccessException;
 
-	Collection<Teacher> findBySubject(Subject subject) throws DataAccessException;
+	@Query("select t from Teacher t where t.subjects.contains.id=?1")
+	Collection<Teacher> findBySubject(int i);
+	
+//	@Query("select t from Teacher t where t.id=?1")
+//	Collection<Teacher> findBySubject(int i);
 	
 	//@Query("")
 	//Collection<Teacher> showTeacherWithScore();

@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import net.bytebuddy.asm.Advice.This;
 
 @Controller
 //@RequestMapping(name = "students")
@@ -67,15 +70,22 @@ public class StudentController {
 
 	}
 	
-	@GetMapping(value = { "/MyTeachers" })
-	public String showMyScorableTeachersList(Map<String, Object> model, @PathVariable("subject") Subject subject) {
-
-		Teachers teachers = new Teachers();
-		teachers.getTeachersList().addAll(this.teacherService.findTeacherBySubject(subject));
-		model.put("teachers", teachers);
-		return "teachers/scorableTeachers";
-		
-	} 
+//	@GetMapping(value = { "/myTeachers/{subjectid}" })
+//	public String showMyScorableTeachersList(Map<String, Object> model, @PathVariable("subjectid") int i) {
+//
+//		Teachers teachers = new Teachers();
+//		teachers.getTeachersList().addAll(this.teacherService.findTeacherBySubject(i));
+//		model.put("teachers", teachers);
+//		return "teachers/scorableTeachers";
+//		
+//	} 
+	
+	@GetMapping("/myTeachers/{teacherId}")
+	public ModelAndView showOwner(@PathVariable("teacherId") int teacherId) {
+		ModelAndView mav = new ModelAndView("teachers/scorableTeachers");
+		mav.addObject(this.teacherService.findTeacherBySubject(teacherId));
+		return mav;
+	}
 	
 //
 //	@GetMapping(value = { "/students.xml" })
