@@ -37,7 +37,9 @@ public class TeacherService {
 	public Collection<Teacher> findTeachers() throws DataAccessException {
 		return teacherRepository.findAll();
 	}
-	
+	public Collection<Teacher> showTeacherWithScore() throws DataAccessException{
+		return teacherRepository.showTeacherWithScore();
+	}
 
 	@Transactional
 	public void saveTeacher(Teacher teacher) throws DataAccessException {

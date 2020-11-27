@@ -15,6 +15,15 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	
 	void save(Teacher teacher) throws DataAccessException;
 
-	//@Query("")
-	//Collection<Teacher> showTeacherWithScore();
+//	@Query("SELECT T.FIRST_NAME, T.LAST_NAME FROM TEACHERS T WHERE T.ID IN (SELECT S.TEACHERS_ID FROM TEACHER_SCORES  S)")
+//	@Query("select t from Teacher t where t.id in (select t1 from Teacher t1 where t1.scores is not null)") 
+//	Collection<Teacher> showTeacherWithScore(); 
+	
+
+//	Query("select a from Authenticated a where a in 
+	//(select p.authenticated from Participation p where p.thread.id = ?1) 
+	//or a in (select thr.authenticated from Thread thr where thr.id = ?1)
+	//select s from Student s where scores_id is not null
+	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null )")
+	Collection<Teacher> showTeacherWithScore();
 }

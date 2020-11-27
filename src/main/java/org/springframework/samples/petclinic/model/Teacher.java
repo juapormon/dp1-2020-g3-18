@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,16 +31,15 @@ public class Teacher extends Person{
 
 	private User user;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "teacher_scores", joinColumns = @JoinColumn(name = "teachers_id"),
-	inverseJoinColumns = @JoinColumn(name = "scores_id"))
-	private Set<Score> scores;
+	@ManyToMany//(fetch = FetchType.EAGER)
+	//@JoinTable(name = "teacher_scores", joinColumns = @JoinColumn(name = "teachers_id"),
+	//inverseJoinColumns = @JoinColumn(name = "scores_id"))
+	@JoinColumn(name = "scores_id")
+	private Collection<Score> scores;
 	
-	
-	@ManyToMany (fetch = FetchType.EAGER)
-	@JoinTable(name = "teacher_colleges", joinColumns = @JoinColumn(name = "teachers_id"),
-	inverseJoinColumns = @JoinColumn(name = "colleges_id"))
-	private List<College> colleges;
+	@ManyToMany
+	@JoinColumn(name = "colleges_id")
+	private Collection<College> colleges;
 	
 	@OneToOne (optional = true)
 	private PersonalExperience personalExperience;
@@ -51,7 +50,7 @@ public class Teacher extends Person{
 	
 
 	
-	protected Set<Score> getScoresInternal() {
+	protected Collection<Score> getScoresInternal() {
 		if (this.scores == null) {
 			this.scores = new HashSet<>();
 		}
