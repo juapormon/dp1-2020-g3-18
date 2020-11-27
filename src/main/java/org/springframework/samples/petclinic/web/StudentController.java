@@ -44,12 +44,21 @@ public class StudentController {
 	public String showStudentsList(Map<String, Object> model) {
 
 		Students students = new Students();
-		students.getStudentList().addAll(this.studentService.studentWithScore());
+		students.getStudentList().addAll(this.studentService.findStudents());
 		model.put("students", students);
 		return "students/studentsList";
 
 	}
 	
+	@GetMapping(value = { "/studentsWithScore" })
+	public String showStudentsWithScore(Map<String, Object> model) {
+
+		Students students = new Students();
+		students.getStudentList().addAll(this.studentService.studentWithScore());
+		model.put("students", students);
+		return "students/studentsWithScore";
+
+	}
 	
 //
 //	@GetMapping(value = { "/students.xml" })
