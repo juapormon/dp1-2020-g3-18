@@ -6,10 +6,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="teachers">
-    <h2>Teachers</h2>
+<petclinic:layout pageName="studentsWithScore">
+     <h2>Students Whit Score</h2>
 
-   <table id="teachersTable" class="table table-striped">
+    <table id="studentsTable" class="table table-striped">
         <thead>
         <tr>
             <th>First name</th>
@@ -17,25 +17,24 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${teachers.teachersList}" var="teacher">
+        <c:forEach items="${students.studentList}" var="student">
              <tr>
                 <td>
-                    <spring:url value="/teachers/{teacherId}" var="teacherUrl">
-                    <spring:param name="teacherId" value="${teacher.id}"/>
+                    <spring:url value="/students/{studentId}" var="studentUrl">
+                    <spring:param name="studentId" value="${student.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(teacherUrl)}"><c:out value="${teacher.firstName}"/></a>
+                    <c:out value="${student.firstName}"/>
                 </td>
                 <td>
-                    <c:out value=" ${teacher.lastName}"/>
+                    <c:out value=" ${student.lastName}"/>
                 </td>
+
                
             </tr> 
         </c:forEach>
         </tbody>
-    </table>
+    </table> 
     
-    <spring:url value="/teachersWithScore" var="addUrl">
-    </spring:url>
-    <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Teachers With Score</a>
+    
 </petclinic:layout>
 
