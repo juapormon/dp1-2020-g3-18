@@ -28,6 +28,9 @@
                 <td>
                     <c:out value=" ${teacher.lastName}"/>
                 </td>
+                <td>
+                    <c:out value=" ${teacher.subjects}"/>
+                </td>
                
             </tr> 
         </c:forEach>

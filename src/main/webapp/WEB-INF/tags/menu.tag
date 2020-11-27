@@ -53,6 +53,13 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Add new Teacher</span>
 				</petclinic:menuItem>
+				
+					
+				<petclinic:menuItem active="${name eq 'teachers'}" url="/myTeachers"
+					title="teachers">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>My scorable Teachers</span>
+				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers"
 					title="teachers">
