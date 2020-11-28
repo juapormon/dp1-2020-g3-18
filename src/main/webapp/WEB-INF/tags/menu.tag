@@ -55,8 +55,8 @@
 				</petclinic:menuItem>
 				
 					
-				<petclinic:menuItem  url="/myTeachers/{teacherId}"
-					title="teachers" path="teacher.id">
+				<petclinic:menuItem  active="${name eq 'teachers'}" url="/myTeachers/{teacherId}"
+					title="teachers" >
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>My scorable Teachers</span>
 				</petclinic:menuItem>
