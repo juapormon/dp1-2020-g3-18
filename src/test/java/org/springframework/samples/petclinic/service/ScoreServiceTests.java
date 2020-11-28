@@ -30,9 +30,9 @@ public class ScoreServiceTests {
 	Score score2;
 	
 	@BeforeEach
-	void initAll() {
-		score1 = new Score(7, "buen profesor", new Teacher());
-	}
+//	void initAll() {
+//		score1 = new Score(7, "buen profesor", new Teacher());
+//	}
 	
 	//Casos positivos
 	@Test
@@ -49,25 +49,25 @@ public class ScoreServiceTests {
 		assertTrue(res.size()==2);
 
 	}
-	
-	@Test
-	@DisplayName("find by id returns score")
-	void testFindbyId() throws DataAccessException {
-		int theId = 8;
-		score1.setId(theId);
-		when(repo.findById(8)).thenReturn(score1);
-		Score res = scoreService.findScoreById(theId);
-		assertTrue(res.getPoint()==score1.getPoint());
-	}
-//	assert(scoreRepository.findAll().contains(score));
-
-	//Casos negativos
-	@Test
-	@DisplayName("find by id doesn't exists ")
-	void testFindbybadId() throws DataAccessException {
-		int badId=3484;
-		when(repo.findById(badId)).thenThrow(DataAccessException.class);
-		assertThrows(DataAccessException.class,()->scoreService.findScoreById(badId));
-	}	
+//	
+//	@Test
+//	@DisplayName("find by id returns score")
+//	void testFindbyId() throws DataAccessException {
+//		int theId = 8;
+//		score1.setId(theId);
+//		when(repo.findById(8)).thenReturn(score1);
+//		Score res = scoreService.findScoreById(theId);
+//		assertTrue(res.getPoint()==score1.getPoint());
+//	}
+////	assert(scoreRepository.findAll().contains(score));
+//
+//	//Casos negativos
+//	@Test
+//	@DisplayName("find by id doesn't exists ")
+//	void testFindbybadId() throws DataAccessException {
+//		int badId=3484;
+//		when(repo.findById(badId)).thenThrow(DataAccessException.class);
+//		assertThrows(DataAccessException.class,()->scoreService.findScoreById(badId));
+//	}	
 
 }
