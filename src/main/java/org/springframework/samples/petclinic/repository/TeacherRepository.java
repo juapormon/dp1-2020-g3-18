@@ -27,11 +27,13 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null )")
 	Collection<Teacher> showTeacherWithScore();
 
-	@Query("select t from Teacher t where t.subjects.contains.id=?1")
-	Collection<Teacher> findBySubject(int i);
-	
-//	@Query("select t from Teacher t where t.id=?1")
+//	@Query("select t from Teacher t where t.subjects.contains.id=?1")
 //	Collection<Teacher> findBySubject(int i);
+	//TODO: Esta query hay que ponerla bien, solo borrar la de aqui abajo y poner la query bien
+	//La query de abajo esta solo para que no pete.
+	
+	@Query("select t from Teacher t where t.id=?1")
+	Collection<Teacher> findBySubject(int i);
 	
 	//@Query("")
 	//Collection<Teacher> showTeacherWithScore();
