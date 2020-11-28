@@ -49,11 +49,10 @@ public class ScoreController {
 	
 	@GetMapping(value = { "/scores" }) 
 	public String showTeacherScoreList(Map<String, Object> model) {
-		
 		Scores scores = new Scores();
 		scores.getScoreList().addAll(this.scoreService.findScores());
 		model.put("scores", scores);
-		return "scores/scoresList"; 
+		return "scores/scoresList";
 	}
 	
 	
