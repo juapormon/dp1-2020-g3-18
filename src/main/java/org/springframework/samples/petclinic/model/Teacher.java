@@ -12,7 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,8 +34,15 @@ public class Teacher extends Person{
 
 	private User user;
 	
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
-	private Collection<Score> scores;
+
+	//@ManyToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+	//private Collection<Score> scores;
+
+	@ManyToMany()
+//	@JoinTable(name = "teacher_scores", joinColumns = @JoinColumn(name = "teachers_id"),
+//	inverseJoinColumns = @JoinColumn(name = "scores_id"))
+	private Set<Score> scores;
+
 	
 	
 	@ManyToMany (cascade = CascadeType.ALL)
@@ -48,7 +55,7 @@ public class Teacher extends Person{
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Collection<Subject> subjects; 
-	
+
 	
 	protected Collection<Score> getScoresInternal() {
 		if (this.scores == null) {
