@@ -28,19 +28,38 @@
 
     <br/>
     <br/>
-    <br/>
     <h2>Scores</h2>
  
+    <table class="table table-striped">
+   	 <tr>
+		<c:forEach items="${teacher.scores}" var="scor">
+		<th>Point</th>
+		<th><b><c:out value="${scor.point}"/></b></th>
+		<td>Comment</td>
+		<td><b><c:out value="${scor.comment}"/></b></td>
+		</c:forEach>
+	</tr>
+    </table>
     <spring:url value="{teacherId}/scores" var="showScoresUrl">
         <spring:param name="teacherId" value="${teacher.id}"/>
     </spring:url>
     <a href="${fn:escapeXml(showScoresUrl)}" class="btn btn-default">Show Scores</a>
+    
+    <br/>
+    <br/>
+    <br/>
+    <h2>Comments</h2>
     <table class="table table-striped">
-
-	<c:forEach items="${scores}" var="scor">
-   		<h1>${scor.point} ${scor.comment}</h1>
-	</c:forEach>
+   	 <tr>
+   	 	<th><b>Ejemplo de comentario:</b></th>
+		<td><b><c:out value="${teacher.scores[0].comment}"/></b></td>
+	</tr>
     </table>
+    <br/>
+    <spring:url value="{teacherId}/scores/comments" var="showCommentsUrl">
+        <spring:param name="teacherId" value="${teacher.id}"/>
+    </spring:url>
+    <a href="${fn:escapeXml(showCommentsUrl)}" class="btn btn-default">Show Comments</a>
     
     <h2>Personal experience</h2>
     

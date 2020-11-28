@@ -12,8 +12,11 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.core.style.ToStringCreator;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,10 +34,15 @@ public class Teacher extends Person{
 
 	private User user;
 	
+
+	//@ManyToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+	//private Collection<Score> scores;
+
 	@ManyToMany()
 //	@JoinTable(name = "teacher_scores", joinColumns = @JoinColumn(name = "teachers_id"),
 //	inverseJoinColumns = @JoinColumn(name = "scores_id"))
 	private Set<Score> scores;
+
 	
 	
 	@ManyToMany (cascade = CascadeType.ALL)
@@ -47,11 +55,9 @@ public class Teacher extends Person{
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Collection<Subject> subjects; 
-	
-	
 
 	
-	protected Set<Score> getScoresInternal() {
+	protected Collection<Score> getScoresInternal() {
 		if (this.scores == null) {
 			this.scores = new HashSet<>();
 		}
@@ -62,13 +68,6 @@ public class Teacher extends Person{
 		getScoresInternal().add(score);
 		score.setTeacher(this);
 	}
-
-//	
-//	public void addSubject(List<Subject> subject) {
-//		getSubjects().addAll(subject);
-//		
-//	}
-	
 
 
 

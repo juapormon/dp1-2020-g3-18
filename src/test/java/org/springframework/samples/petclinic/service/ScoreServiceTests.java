@@ -5,7 +5,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.repository.ScoreRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,7 +31,7 @@ public class ScoreServiceTests {
 	
 	@BeforeEach
 	void initAll() {
-		score1 = new Score(5, "buen profesor", new Teacher());
+		score1 = new Score(7, "buen profesor", new Teacher());
 	}
 	
 	//Casos positivos
@@ -54,9 +53,9 @@ public class ScoreServiceTests {
 	@Test
 	@DisplayName("find by id returns score")
 	void testFindbyId() throws DataAccessException {
-		int theId = 7;
+		int theId = 8;
 		score1.setId(theId);
-		when(repo.findById(7)).thenReturn(score1);
+		when(repo.findById(8)).thenReturn(score1);
 		Score res = scoreService.findScoreById(theId);
 		assertTrue(res.getPoint()==score1.getPoint());
 	}
