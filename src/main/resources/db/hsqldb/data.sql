@@ -41,17 +41,14 @@ INSERT INTO scores(id,value,comment,student_id,teacher_id) VALUES (1, 1, 'Coment
 
 INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
 
-INSERT INTO colleges(id,name, city) VALUES (1,'etsii', 'Sevilla');
+INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
 
 
---INSERT INTO teacher_scores VALUES (2, 1);
---INSERT INTO teacher_scores VALUES (2, 2);
 
 -- INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
 -- INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
 -- 
--- INSERT INTO teacher_scores VALUES (2, 1);
--- INSERT INTO teacher_scores VALUES (2, 2);
+
 
 
 INSERT INTO professionalexperiences(id,university,comment) VALUES (1, 'Universidad de Sevilla', 'Comentario de prueba 1.');
