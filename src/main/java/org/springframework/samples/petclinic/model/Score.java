@@ -1,52 +1,34 @@
 package org.springframework.samples.petclinic.model;
 
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "scores")
-@AllArgsConstructor @NoArgsConstructor
 public class Score extends BaseEntity {
 
-	@Column(name = "point")
-	private Integer point;
+	//Attributes
 
-	@Column(name = "comment")
+	private Integer value;
+
+	@NotBlank
 	private String comment;
 	
-	@ManyToOne
-	@JoinColumn(name = "teacher_id")
+	//Relationships
+	@ManyToOne(optional=true) 
+	private Student student;
+	
+	@ManyToOne(optional=true)
 	private Teacher teacher;
+	
 
-	public Integer getPoint() {
-		return point;
-	}
 
-	public void setPoint(Integer point) {
-		this.point = point;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
 
 }
