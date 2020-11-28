@@ -33,9 +33,12 @@
         </c:forEach>
         </tbody>
     </table>
-    
+        
+	
     <spring:url value="/teachersWithScore" var="addUrl">
     </spring:url>
+    <sec:authorize access="hasAuthority('admin')">
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Teachers With Score</a>
+    </sec:authorize>
 </petclinic:layout>
 

@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.core.style.ToStringCreator;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -59,7 +61,6 @@ public class Teacher extends Person{
 		getScoresInternal().add(score);
 		score.setTeacher(this);
 	}
-
 
 
 
