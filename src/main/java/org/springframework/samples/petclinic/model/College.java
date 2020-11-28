@@ -1,39 +1,31 @@
 package org.springframework.samples.petclinic.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "colleges")
-@AllArgsConstructor @NoArgsConstructor
 public class College extends BaseEntity{
 	
-	@Column(name = "name")
-	@NotEmpty
+	//Attributes 
+	
+	@NotBlank
 	private String name;
 	
-	@Column(name = "ciudad")
-	@NotEmpty
-	private String ciudad;
+	@NotBlank
+	private String city;
 	
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "dean_id")
-	private Dean dean;
+	//Relationships
+	
+	//TODO: Esta relación no deberia estar
+//	@ManyToOne(optional = true) 
+//	private Dean dean;
 
-	public String getCiudad() {
-		return ciudad;
-	}
-
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
+	
 	
 
 }

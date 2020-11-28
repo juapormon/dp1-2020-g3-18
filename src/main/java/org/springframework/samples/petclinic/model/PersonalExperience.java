@@ -1,36 +1,35 @@
 package org.springframework.samples.petclinic.model;
 
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "personalexperiences")
-@AllArgsConstructor @NoArgsConstructor
 public class PersonalExperience extends BaseEntity{
 
+	//Attributes
 	
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "res_experience_id")
+	
+	//Relationships
+	@OneToOne(optional = true)
+	@JoinColumn(name = "res_experience")
 	private ResearchExperience researchExperience;
 	
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "tea_experience_id")
+	@OneToOne(optional = true)
+	@JoinColumn(name = "tea_experience")
 	private TeachingExperience teachingExperience;
 	
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "pro_experience_id")
+	@OneToOne(optional = true)
+	@JoinColumn(name = "pro_experience")
 	private ProfessionalExperience professionalExperience;
 	
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "ext_evaluation_id")
+	@OneToOne(optional = true)
+	@JoinColumn(name = "ext_evaluation")
 	private ExternalEvaluation externalEvaluation;
 
 }
