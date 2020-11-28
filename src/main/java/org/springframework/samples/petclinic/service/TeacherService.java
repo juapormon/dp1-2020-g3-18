@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Score;
+import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
@@ -33,11 +34,22 @@ public class TeacherService {
 		return teacherRepository.findById(id);
 	}
 	
+	@Transactional(readOnly = true)
+	public Collection<Teacher> findTeacherBySubject(int i) throws DataAccessException {
+		return teacherRepository.findBySubject(i);
+	}
+	
 	@Transactional(readOnly = true)	
 	public Collection<Teacher> findTeachers() throws DataAccessException {
 		return teacherRepository.findAll();
 	}
-	
+	public Collection<Teacher> showTeacherWithScore() throws DataAccessException{
+		return teacherRepository.showTeacherWithScore();
+	}
+	@Transactional(readOnly = true)
+	public Collection<Teacher> findOwnerByLastName(String lastName) throws DataAccessException {
+		return teacherRepository.findByLastName(lastName);
+	}
 
 	@Transactional
 	public void saveTeacher(Teacher teacher) throws DataAccessException {

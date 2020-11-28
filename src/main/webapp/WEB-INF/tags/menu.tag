@@ -48,16 +48,33 @@
 				
 				
 				
-				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers/new"
+				<petclinic:menuItem active="${name eq 'teachersNew'}" url="/teachers/new"
 					title="teachers">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Add new Teacher</span>
+				</petclinic:menuItem>
+				
+					
+				<petclinic:menuItem  url="/myTeachers/{teacherId}"
+					title="teachers" path="teacher.id">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>My scorable Teachers</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers"
 					title="teachers">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Teachers</span>
+				</petclinic:menuItem>
+				<petclinic:menuItem active="${name eq 'students'}" url="/students"
+					title="students">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Students</span>
+				</petclinic:menuItem>
+				<petclinic:menuItem active="${name eq 'findteachers'}" url="/findTeachers"
+					title="teachers">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Find Teachers</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"

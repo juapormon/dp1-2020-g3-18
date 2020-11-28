@@ -32,6 +32,11 @@ public class ScoreService {
 	}
 	
 	@Transactional(readOnly = true)	
+	public Collection<String> findTeacherCommentById(int id) throws DataAccessException {
+		return scoreRepository.findCommentById(id);
+	}
+	
+	@Transactional(readOnly = true)	
 	public void saveScore(@Valid Score score) throws DataAccessException  {
 		scoreRepository.save(score);
 	}	

@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.web;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -45,14 +47,25 @@ public class ScoreController {
 		return this.teacherService.findTeacherById(teacherId);
 	}
 	
-	@GetMapping(value = { "/scores" })
+	@GetMapping(value = { "/scores" }) 
 	public String showTeacherScoreList(Map<String, Object> model) {
 		
 		Scores scores = new Scores();
 		scores.getScoreList().addAll(this.scoreService.findScores());
 		model.put("scores", scores);
-		return "scores/scoresList";
+		return "scores/scoresList"; 
+	} 
+	 
+	@GetMapping(value = { "/scores/comments" }) 
+	public String showTeacherCommentList(Teacher teacher, Map<String, Object> model) {
+		List<String> comments = new ArrayList<>();
+		Scores scores = new Scores();
+		comments.addAll(this.scoreService.findTeacherCommentById(teacher.getId()));
+		model.put("comments", comments);
+		model.put("scores", scores);
+		return "scores/teacherCommentList";
 	}
+	
 	
 	@GetMapping(value = { "/scores/new"})
 	public String initCreationForm(Teacher teacher, ModelMap model) { //para crear el modelo que va a la vista.

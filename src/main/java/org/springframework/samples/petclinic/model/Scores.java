@@ -17,7 +17,20 @@ public class Scores {
 				scores = new ArrayList<>();
 			}
 			return scores;
+		}
 		
+		@XmlElement
+		public List<String> getCommentList() {
+			List<String> res = new ArrayList<>();
+			if (scores == null) {
+				scores = new ArrayList<>();
+			}else {
+				for (Score r : scores) {
+					res.add(r.getComment());
+				}
+			}
+			return res;
+			
 
 	}
 }
