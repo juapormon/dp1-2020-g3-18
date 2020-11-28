@@ -52,8 +52,6 @@ INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javiele
 
 INSERT INTO colleges(id,name, ciudad,dean_id) VALUES (1,'etsii', 'Sevilla', 1);
 
-
-
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
 
@@ -82,11 +80,11 @@ INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 --Si quieres una collection de algo tienes que hacer lo siguient
 --Lo voy haciendo mejor
 
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (98, 'test', 'test', 'test');
+--INSERT INTO teachers(id,first_name,last_name,username) VALUES (98, 'test', 'test', 'test');
 --Las demas cosas me dan igual porque no tienen ahora mismo NotNull o NotBlank
 --INSERT INTO scores(id,point,comment) VALUES (1, 1, 'Comentario del score 1');
-INSERT INTO scores(id,point,comment,teacher_id) VALUES (8, 5, 'test',98);
-INSERT INTO scores(id,point,comment,teacher_id) VALUES (54, 5, 'test',98);
+--INSERT INTO scores(id,point,comment,teacher_id) VALUES (8, 5, 'test',98);
+--INSERT INTO scores(id,point,comment,teacher_id) VALUES (54, 5, 'test',98);
 --El id de teacher es el 98 que hemos creado, entonces
 --INSERT INTO scores(id,point,comment,teacher_id) VALUES (2,5, 'test',98) --Todas estas scores se le estan añadiendo tb a su collection
 --INSERT INTO scores(id,point,comment,teacher_id) VALUES (3,5, 'test',98) --de scores, entiendes? aaaaaa esto es lo que nosabia coño, va va
