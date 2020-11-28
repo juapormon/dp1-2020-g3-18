@@ -2,11 +2,15 @@
 package org.springframework.samples.petclinic.web;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Scores;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.Teachers;
+import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.TeacherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +27,12 @@ public class TeacherController {
 
 	
 	private final TeacherService teacherService;
-
+	private final ScoreService scoreService;
+	
 	@Autowired
-	public TeacherController(TeacherService teacherService) {
+	public TeacherController(TeacherService teacherService, ScoreService scoreService) {
 		this.teacherService = teacherService;
+		this.scoreService = scoreService;
 	}
 	
 	@InitBinder
@@ -61,6 +67,16 @@ public class TeacherController {
 		ModelAndView mav = new ModelAndView("teachers/teacherDetails");
 		mav.addObject(this.teacherService.findTeacherById(teacherId));
 		return mav;
+	}
+	
+	@GetMapping(value = { "/teachers/{teacherId}/comments" }) 
+	public String showTeacherCommentList(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
+		List<String> comments = new ArrayList<>();
+//		Scores scores = new Scores();
+		comments.addAll(this.teacherService.findTeacherCommentById(teacherId));
+		model.put("comments", comments);
+//		model.put("scores", scores);
+		return "scores/teacherCommentList";
 	}
 
 	@GetMapping(value = { "/teachersWithScore" })

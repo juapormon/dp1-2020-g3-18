@@ -31,14 +31,14 @@
     <h2>Scores</h2>
  
     <table class="table table-striped">
-   	 <tr>
 		<c:forEach items="${teacher.scores}" var="scor">
+		<tr>
 		<th>Point</th>
 		<th><b><c:out value="${scor.point}"/></b></th>
 		<td>Comment</td>
 		<td><b><c:out value="${scor.comment}"/></b></td>
+		</tr>
 		</c:forEach>
-	</tr>
     </table>
     <spring:url value="{teacherId}/scores" var="showScoresUrl">
         <spring:param name="teacherId" value="${teacher.id}"/>
@@ -50,17 +50,26 @@
     <br/>
     <h2>Comments</h2>
     <table class="table table-striped">
-   	 <tr>
+	
+	<c:forEach items="${teacher.scores}" var="scor">
+		<tr>
+		<td><b><c:out value="${scor.comment}"/></b></td>
+		</tr>
+		</c:forEach>
+    </table>
+
+<!--   <table class="table table-striped"> 
+	 <tr>
    	 	<th><b>Ejemplo de comentario:</b></th>
 		<td><b><c:out value="${teacher.scores[0].comment}"/></b></td>
 	</tr>
     </table>
     <br/>
-    <spring:url value="{teacherId}/scores/comments" var="showCommentsUrl">
+    <spring:url value="{teacherId}/comments" var="showCommentsUrl">
         <spring:param name="teacherId" value="${teacher.id}"/>
     </spring:url>
     <a href="${fn:escapeXml(showCommentsUrl)}" class="btn btn-default">Show Comments</a>
-    
+    -->  
     <h2>Personal experience</h2>
     
     <!--  Dentro de personal experience pondremos un boton o varios, hay que decidirlo -->

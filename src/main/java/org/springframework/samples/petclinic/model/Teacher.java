@@ -31,7 +31,7 @@ public class Teacher extends Person{
     @JoinColumn(name = "username", referencedColumnName = "username")
 
 	private User user;
-	
+	 
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
 	private Collection<Score> scores;
 	

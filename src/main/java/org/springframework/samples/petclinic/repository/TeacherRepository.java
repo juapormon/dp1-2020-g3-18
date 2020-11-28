@@ -26,4 +26,7 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	//select s from Student s where scores_id is not null
 	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null )")
 	Collection<Teacher> showTeacherWithScore();
+
+	@Query("select comment from Score s where s.teacher.id= ?1 ")
+	Collection<String> findCommentById(int id) throws DataAccessException;
 }

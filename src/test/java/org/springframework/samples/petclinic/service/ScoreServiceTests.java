@@ -16,6 +16,8 @@ import java.util.Collection;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -31,9 +33,7 @@ public class ScoreServiceTests {
 	
 	@BeforeEach
 	void initAll() {
-		score1 = new Score(7, "buen profesor", new Teacher());
 	}
-	
 	//Casos positivos
 	@Test
 	@DisplayName("Finding all scores")
@@ -51,23 +51,23 @@ public class ScoreServiceTests {
 	}
 	
 	@Test
-	@DisplayName("find by id returns score")
+	@DisplayName("Find by id returns score")
 	void testFindbyId() throws DataAccessException {
+		score1 = new Score(7, "buen profesor", new Teacher());
 		int theId = 8;
 		score1.setId(theId);
-		when(repo.findById(8)).thenReturn(score1);
+		when(repo.findById(theId)).thenReturn(score1);
 		Score res = scoreService.findScoreById(theId);
 		assertTrue(res.getPoint()==score1.getPoint());
 	}
-//	assert(scoreRepository.findAll().contains(score));
 
 	//Casos negativos
 	@Test
-	@DisplayName("find by id doesn't exists ")
+	@DisplayName("Find by id doesn't exists ")
 	void testFindbybadId() throws DataAccessException {
-		int badId=3484;
-		when(repo.findById(badId)).thenThrow(DataAccessException.class);
-		assertThrows(DataAccessException.class,()->scoreService.findScoreById(badId));
+		int badId=5;
+		when(repo.findById(badId)).thenThrow(IllegalArgumentException.class);
+		assertThrows(IllegalArgumentException.class,()->scoreService.findScoreById(badId));
 	}	
 
 }

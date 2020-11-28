@@ -39,7 +39,7 @@ public class ScoreController {
 	
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id");
+		dataBinder.setDisallowedFields("id"); 
 	}
 	
 	@ModelAttribute("teacher")
@@ -54,16 +54,6 @@ public class ScoreController {
 		scores.getScoreList().addAll(this.scoreService.findScores());
 		model.put("scores", scores);
 		return "scores/scoresList"; 
-	} 
-	 
-	@GetMapping(value = { "/scores/comments" }) 
-	public String showTeacherCommentList(Teacher teacher, Map<String, Object> model) {
-		List<String> comments = new ArrayList<>();
-		Scores scores = new Scores();
-		comments.addAll(this.scoreService.findTeacherCommentById(teacher.getId()));
-		model.put("comments", comments);
-		model.put("scores", scores);
-		return "scores/teacherCommentList";
 	}
 	
 	

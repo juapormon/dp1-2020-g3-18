@@ -29,20 +29,21 @@ public class TeacherService {
 	}	
 
 	@Transactional(readOnly = true)
-	public Teacher findTeacherById(int id) throws DataAccessException {
+	public Teacher findTeacherById(int id) throws IllegalArgumentException {
 		return teacherRepository.findById(id);
 	}
 	
 	@Transactional(readOnly = true)	
-	public Collection<Teacher> findTeachers() throws DataAccessException {
+	public Collection<Teacher> findTeachers() throws IllegalArgumentException {
 		return teacherRepository.findAll();
 	}
-	public Collection<Teacher> showTeacherWithScore() throws DataAccessException{
+	@Transactional(readOnly = true)
+	public Collection<Teacher> showTeacherWithScore() throws IllegalArgumentException{
 		return teacherRepository.showTeacherWithScore();
 	}
 
 	@Transactional
-	public void saveTeacher(Teacher teacher) throws DataAccessException {
+	public void saveTeacher(Teacher teacher) throws IllegalArgumentException {
 		//creating teacher
 		teacherRepository.save(teacher);		
 		//creating user
@@ -50,6 +51,11 @@ public class TeacherService {
 		//creating authorities
 		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
 	}	
+	
+	@Transactional(readOnly = true)	
+	public Collection<String> findTeacherCommentById(int id) throws IllegalArgumentException {
+		return teacherRepository.findCommentById(id);
+	}
 	
 }
 
