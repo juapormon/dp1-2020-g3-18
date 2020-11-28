@@ -9,7 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Score;
-import org.springframework.samples.petclinic.model.Scores;
+//import org.springframework.samples.petclinic.model.Scores;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.TeacherService;
@@ -28,64 +28,64 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/teachers/{teacherId}")
 public class ScoreController {
 
-	private final ScoreService scoreService;
-	private final TeacherService teacherService;
-
-	@Autowired
-	public ScoreController(ScoreService clinicService, TeacherService teacherService) {
-		this.scoreService = clinicService;
-		this.teacherService = teacherService;
-	}
-	
-	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id");
-	}
-	
-	@ModelAttribute("teacher")
-	public Teacher findTeacher(@PathVariable("teacherId") int teacherId) {
-		return this.teacherService.findTeacherById(teacherId);
-	}
-	
-	@GetMapping(value = { "/scores" }) 
-	public String showTeacherScoreList(Map<String, Object> model) {
-		
-		Scores scores = new Scores();
-		scores.getScoreList().addAll(this.scoreService.findScores());
-		model.put("scores", scores);
-		return "scores/scoresList"; 
-	} 
-	 
-	@GetMapping(value = { "/scores/comments" }) 
-	public String showTeacherCommentList(Teacher teacher, Map<String, Object> model) {
-		List<String> comments = new ArrayList<>();
-		Scores scores = new Scores();
-		comments.addAll(this.scoreService.findTeacherCommentById(teacher.getId()));
-		model.put("comments", comments);
-		model.put("scores", scores);
-		return "scores/teacherCommentList";
-	}
-	
-	
-	@GetMapping(value = { "/scores/new"})
-	public String initCreationForm(Teacher teacher, ModelMap model) { //para crear el modelo que va a la vista.
-		Score score = new Score();
-		teacher.addScore(score);
-		model.put("score", score);
-		return "scores/createForm";		
-	}
-	
-	@PostMapping(value = "/scores/new")
-	public String processCreationForm(Teacher teacher, @Valid Score score, BindingResult result, ModelMap model) {		
-		if (result.hasErrors()) {
-			model.put("score", score);
-			return "scores/createForm";
-		}
-		else {
-            teacher.addScore(score);
-            this.scoreService.saveScore(score);
-
-            return "redirect:/teachers/{teacherId}";
-		}
-	}	
+//	private final ScoreService scoreService;
+//	private final TeacherService teacherService;
+//
+//	@Autowired
+//	public ScoreController(ScoreService clinicService, TeacherService teacherService) {
+//		this.scoreService = clinicService;
+//		this.teacherService = teacherService;
+//	}
+//	
+//	@InitBinder
+//	public void setAllowedFields(WebDataBinder dataBinder) {
+//		dataBinder.setDisallowedFields("id");
+//	}
+//	
+//	@ModelAttribute("teacher")
+//	public Teacher findTeacher(@PathVariable("teacherId") int teacherId) {
+//		return this.teacherService.findTeacherById(teacherId);
+//	}
+//	
+//	@GetMapping(value = { "/scores" }) 
+//	public String showTeacherScoreList(Map<String, Object> model) {
+//		
+//		Scores scores = new Scores();
+//		scores.getScoreList().addAll(this.scoreService.findScores());
+//		model.put("scores", scores);
+//		return "scores/scoresList"; 
+//	} 
+//	 
+//	@GetMapping(value = { "/scores/comments" }) 
+//	public String showTeacherCommentList(Teacher teacher, Map<String, Object> model) {
+//		List<String> comments = new ArrayList<>();
+//		Scores scores = new Scores();
+//		comments.addAll(this.scoreService.findTeacherCommentById(teacher.getId()));
+//		model.put("comments", comments);
+//		model.put("scores", scores);
+//		return "scores/teacherCommentList";
+//	}
+//	
+//	
+//	@GetMapping(value = { "/scores/new"})
+//	public String initCreationForm(Teacher teacher, ModelMap model) { //para crear el modelo que va a la vista.
+//		Score score = new Score();
+//		teacher.addScore(score);
+//		model.put("score", score);
+//		return "scores/createForm";		
+//	}
+//	
+//	@PostMapping(value = "/scores/new")
+//	public String processCreationForm(Teacher teacher, @Valid Score score, BindingResult result, ModelMap model) {		
+//		if (result.hasErrors()) {
+//			model.put("score", score);
+//			return "scores/createForm";
+//		}
+//		else {
+//            teacher.addScore(score);
+//            this.scoreService.saveScore(score);
+//
+//            return "redirect:/teachers/{teacherId}";
+//		}
+//	}	
 }

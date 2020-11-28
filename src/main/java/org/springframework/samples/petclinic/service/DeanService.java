@@ -33,6 +33,7 @@ public class DeanService {
 	@Transactional(readOnly = true)
 	public void saveTeacher(Teacher teacher) throws DataAccessException{
 		teacherRepository.save(teacher);
+		
 	}
 	
 	@Transactional(readOnly = true)
