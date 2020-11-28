@@ -10,8 +10,6 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-
-
 @Entity
 @Table(name = "scores")
 @AllArgsConstructor @NoArgsConstructor

@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,24 +32,21 @@ public class Teacher extends Person{
 
 	private User user;
 	
-	@ManyToMany//(fetch = FetchType.EAGER)
-	//@JoinTable(name = "teacher_scores", joinColumns = @JoinColumn(name = "teachers_id"),
-	//inverseJoinColumns = @JoinColumn(name = "scores_id"))
-	@JoinColumn(name = "scores_id")
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
 	private Collection<Score> scores;
 	
-	@ManyToMany
-	@JoinColumn(name = "colleges_id")
-	private Collection<College> colleges;
+	
+	@ManyToMany (cascade = CascadeType.ALL)
+//	@JoinTable(name = "teacher_colleges", joinColumns = @JoinColumn(name = "teachers_id"),
+//	inverseJoinColumns = @JoinColumn(name = "colleges_id"))
+	private List<College> colleges;
 	
 	@OneToOne (optional = true)
 	private PersonalExperience personalExperience;
 	
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	private List<Subject> subjects; 
-//	
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Collection<Subject> subjects; 
 	
-
 	
 	protected Collection<Score> getScoresInternal() {
 		if (this.scores == null) {
@@ -62,12 +60,6 @@ public class Teacher extends Person{
 		score.setTeacher(this);
 	}
 
-//	
-//	public void addSubject(List<Subject> subject) {
-//		getSubjects().addAll(subject);
-//		
-//	}
-	
 
 
 

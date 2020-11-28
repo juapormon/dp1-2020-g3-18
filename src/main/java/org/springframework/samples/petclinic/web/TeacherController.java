@@ -56,7 +56,7 @@ public class TeacherController {
 	}
 	
 	
-	@GetMapping(value = "/teachers/{teacherId}")
+	@GetMapping(value = "/teachers/{teacherId}") 
 	public ModelAndView showTeacher(@PathVariable("teacherId") int teacherId) {
 		ModelAndView mav = new ModelAndView("teachers/teacherDetails");
 		mav.addObject(this.teacherService.findTeacherById(teacherId));
