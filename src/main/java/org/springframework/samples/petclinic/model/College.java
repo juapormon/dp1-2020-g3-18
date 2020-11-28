@@ -1,8 +1,5 @@
 package org.springframework.samples.petclinic.model;
 
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;

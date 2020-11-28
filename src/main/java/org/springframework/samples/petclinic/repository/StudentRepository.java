@@ -18,9 +18,18 @@ public interface StudentRepository extends Repository<Student, Integer>{
 
 	void save(@Valid Student student) throws DataAccessException;
 	
+
 	//@Query("select t from Teacher t where t.subjects in (select s from Student s where s.subjects)")
 	//Collection<Teacher> teachersWithSameSubject();
-	@Query("select s from Student s where scores_id is not null") 
+	//@Query("select s from Student s where scores_id is not null") 
+
+//	@Query("select t from Teacher t where t.subjects in (select s from Student s where s.subjects)")
+//	Collection<Teacher> teachersWithSameSubject();
+	
+	@Query("select t from Teacher t")
+	Collection<Teacher> teachersWithSameSubject();
+	
+	@Query("select s from Student s where scores_id is not null")
 	Collection<Student> studentWithScore();
 
 }

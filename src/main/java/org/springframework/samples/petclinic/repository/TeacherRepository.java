@@ -5,6 +5,11 @@ import java.util.Collection;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+
+import org.springframework.data.repository.query.Param;
+
+import org.springframework.samples.petclinic.model.Subject;
+
 import org.springframework.samples.petclinic.model.Teacher;
 
 public interface TeacherRepository extends Repository<Teacher, Integer>{
@@ -14,16 +19,21 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	Collection<Teacher> findAll() throws DataAccessException;
 	
 	void save(Teacher teacher) throws DataAccessException;
+	//"SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.lastName LIKE :lastName%"
+	@Query("SELECT t FROM Teacher t  WHERE t.lastName LIKE :lastName%")
+	public Collection<Teacher> findByLastName(@Param("lastName") String lastName);
 
-//	@Query("SELECT T.FIRST_NAME, T.LAST_NAME FROM TEACHERS T WHERE T.ID IN (SELECT S.TEACHERS_ID FROM TEACHER_SCORES  S)")
-//	@Query("select t from Teacher t where t.id in (select t1 from Teacher t1 where t1.scores is not null)") 
-//	Collection<Teacher> showTeacherWithScore(); 
-	
 
-//	Query("select a from Authenticated a where a in 
-	//(select p.authenticated from Participation p where p.thread.id = ?1) 
-	//or a in (select thr.authenticated from Thread thr where thr.id = ?1)
-	//select s from Student s where scores_id is not null
 	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null )")
 	Collection<Teacher> showTeacherWithScore();
+
+	@Query("select t from Teacher t where t.subjects.contains.id=?1")
+	Collection<Teacher> findBySubject(int i);
+	
+//	@Query("select t from Teacher t where t.id=?1")
+//	Collection<Teacher> findBySubject(int i);
+	
+	//@Query("")
+	//Collection<Teacher> showTeacherWithScore();
+
 }
