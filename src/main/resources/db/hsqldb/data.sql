@@ -31,24 +31,24 @@ INSERT INTO users(username,password,enabled) VALUES ('s','s',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (12,'s','student');
 
 
---INSERT INTO scores(id,value,comment,student) VALUES (1, 1, 'Comentario del score 1',10);
---INSERT INTO scores(id,value,comment,student,teacher) VALUES (2, 3, 'Comentario del score 2',9,11);
-
-INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
-
-INSERT INTO colleges(id,name, city) VALUES (1,'etsii', 'Sevilla');
+INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas');
+INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', 'Fernández', 'fran');
 
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
 
---INSERT INTO teacher_scores VALUES (2, 1);
---INSERT INTO teacher_scores VALUES (2, 2);
+INSERT INTO scores(id,value,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
+
+INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
+
+INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
+
+
 
 -- INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
 -- INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
 -- 
--- INSERT INTO teacher_scores VALUES (2, 1);
--- INSERT INTO teacher_scores VALUES (2, 2);
+
 
 
 INSERT INTO professionalexperiences(id,university,comment) VALUES (1, 'Universidad de Sevilla', 'Comentario de prueba 1.');
@@ -77,7 +77,6 @@ INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 --INSERT INTO scores(id,point,comment,teacher_id) VALUES (3,5, 'test',98) -- entonces creo que puedo continuar con esto, y te pregunto a la 
 --tarde si me quedo pillado otra vez, vava perfe, me dices lo que sea, de todos modos prueba que no pete este data xd
 
-INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas');
-INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', 'Fernández', 'fran');
+
 
 
