@@ -65,15 +65,6 @@ INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javiele
 
 INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
 
---INSERT INTO subjects(id,name,curso) VALUES (1, 'Diseño y Pruebas 1', 3);
-
-
-
--- INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
--- INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
--- 
-
-
 
 INSERT INTO professionalexperiences(id,university,comment) VALUES (1, 'Universidad de Sevilla', 'Comentario de prueba 1.');
 
@@ -96,20 +87,3 @@ INSERT INTO subjects(id,name,curso) VALUES (115,'Sistemas Operativos', 2);
 INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
 INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
 INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
---Si quieres una collection de algo tienes que hacer lo siguient
---Lo voy haciendo mejor
-
---INSERT INTO teachers(id,first_name,last_name,username) VALUES (98, 'test', 'test', 'test');
---Las demas cosas me dan igual porque no tienen ahora mismo NotNull o NotBlank
---INSERT INTO scores(id,point,comment) VALUES (1, 1, 'Comentario del score 1');
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (8, 5, 'test',98);
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (54, 5, 'test',98);
---El id de teacher es el 98 que hemos creado, entonces
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (2,5, 'test',98) --Todas estas scores se le estan añadiendo tb a su collection
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (3,5, 'test',98) --de scores, entiendes? aaaaaa esto es lo que nosabia coño, va va
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (3,5, 'test',98) -- entonces creo que puedo continuar con esto, y te pregunto a la 
---tarde si me quedo pillado otra vez, vava perfe, me dices lo que sea, de todos modos prueba que no pete este data xd
-
-
-
-
