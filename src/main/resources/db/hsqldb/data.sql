@@ -38,13 +38,17 @@ INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', '
 
 
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
+--INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
+
 
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
+
 
 INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
 
 INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
+
+--INSERT INTO subjects(id,name,curso) VALUES (1, 'Diseño y Pruebas 1', 3);
 
 
 
@@ -66,6 +70,15 @@ INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience,
 
 INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 
+
+INSERT INTO subjects(id,name,curso) VALUES (111,'Diseño y pruebas', 3);
+INSERT INTO subjects(id,name,curso) VALUES (112,'Fundamentos Fisicos de la Informatica', 1);
+INSERT INTO subjects(id,name,curso) VALUES (113,'Matematica Discreta', 2);
+INSERT INTO subjects(id,name,curso) VALUES (114,'Circuitos Electronicos Digitales', 1);
+INSERT INTO subjects(id,name,curso) VALUES (115,'Sistemas Operativos', 2);
+INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
+INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
+INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
 --Si quieres una collection de algo tienes que hacer lo siguient
 --Lo voy haciendo mejor
 
