@@ -22,10 +22,12 @@ public class Score extends BaseEntity {
 	private String comment;
 	
 	//Relationships
-	@ManyToOne(optional=true) 
+	@ManyToOne
+	@JoinColumn(name = "student_id")
 	private Student student;
 	
-	@ManyToOne(optional=true)
+	@ManyToOne
+	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
 	
 

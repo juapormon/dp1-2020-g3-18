@@ -39,6 +39,9 @@ public class Teacher extends Person{
 	@ManyToMany
 	private Collection<Department> departments;
 	
+	@ManyToMany
+	private Collection<Subject> subjects;
+	
 	
 
 
