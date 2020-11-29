@@ -30,6 +30,20 @@ INSERT INTO authorities(id,username,authority) VALUES (11,'fran','student');
 INSERT INTO users(username,password,enabled) VALUES ('s','s',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (12,'s','student');
 
+INSERT INTO users(username,password,enabled) VALUES ('julian','julian',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (13,'julian','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('pop','pop',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (14,'pop','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('macarron32','macarron32',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (15,'macarron32','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('ambrella','ambrella',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (16,'ambrella','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('abe','abe',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (17,'abe','teacher');
 
 INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas');
 INSERT INTO students(id,first_name,last_name,username) VALUES (66, 'administrador', 'Rodríguez Rodríguez', 'a');
@@ -37,8 +51,11 @@ INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', '
 INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', 'Surmano', 's');
 
 
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
---INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'julian');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'Arejo Pínchez', 'macarron32');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lambert Ginni', 'abe');
 
 
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
