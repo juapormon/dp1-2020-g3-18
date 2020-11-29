@@ -34,10 +34,10 @@ public class TeacherService {
 		return teacherRepository.findById(id);
 	}
 	
-	@Transactional(readOnly = true)
-	public Collection<Teacher> findTeacherBySubject(int i) throws DataAccessException {
-		return teacherRepository.findBySubject(i);
-	}
+//	@Transactional(readOnly = true)
+//	public Collection<Teacher> findTeacherBySubject(int i) throws DataAccessException {
+//		return teacherRepository.findBySubject(i);
+//	}
 	
 	@Transactional(readOnly = true)	
 	public Collection<Teacher> findTeachers() throws DataAccessException {

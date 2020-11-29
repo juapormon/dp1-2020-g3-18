@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,9 @@ public class TeacherServiceTest {
 	
 	@Autowired
 	protected TeacherService teacherService; //= new TeacherService(repo);
+	
+	@Autowired
+	protected StudentService studentService; //= new TeacherService(repo);
 
 
 	
@@ -71,6 +75,7 @@ public class TeacherServiceTest {
 		assertThat(teachers.size()).isEqualTo(found + 1);
 	}
 	
+
 	
 	// Negative test
 	/*@Test

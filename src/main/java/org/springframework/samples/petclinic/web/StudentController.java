@@ -112,12 +112,12 @@ public class StudentController {
 //		
 //	} 
 	
-	@GetMapping("/myTeachers/{teacherId}")
-	public ModelAndView showStudent(@PathVariable("teacherId") int teacherId) {
-		ModelAndView mav = new ModelAndView("teachers/scorableTeachers");
-		mav.addObject(this.teacherService.findTeacherBySubject(teacherId));
-		return mav;
-	}
+//	@GetMapping("/myTeachers/{teacherId}")
+//	public ModelAndView showStudent(@PathVariable("teacherId") int teacherId) {
+//		ModelAndView mav = new ModelAndView("teachers/scorableTeachers");
+//		mav.addObject(this.teacherService.findTeacherBySubject(teacherId));
+//		return mav;
+//	}
 	
 //
 //	@GetMapping(value = { "/students.xml" })
