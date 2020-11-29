@@ -3,11 +3,9 @@ package org.springframework.samples.petclinic.web;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Students;
-import org.springframework.samples.petclinic.model.Subject;
-import org.springframework.samples.petclinic.model.Teachers;
-import org.springframework.samples.petclinic.repository.StudentRepository;
-import org.springframework.samples.petclinic.repository.TeacherRepository;
+import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
 import org.springframework.stereotype.Controller;
@@ -15,10 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import net.bytebuddy.asm.Advice.This;
 
 @Controller
 //@RequestMapping(name = "students")
@@ -69,6 +64,12 @@ public class StudentController {
 		return "students/studentsWithScore";
 
 	}
+	
+//	@GetMapping(value = "/studentsForm")
+//	public String studentsForm(Map<String, Object> model) {
+//		model.put("Students", new Student());
+//		return "students/studentsForm";
+//	}
 	
 //	@GetMapping(value = { "/myTeachers/{subjectid}" })
 //	public String showMyScorableTeachersList(Map<String, Object> model, @PathVariable("subjectid") int i) {
