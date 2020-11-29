@@ -16,7 +16,7 @@ public class Score extends BaseEntity {
 
 	//Attributes
 
-	private Integer value;
+	private Integer valu;
 
 	@NotBlank
 	private String comment;
@@ -29,6 +29,9 @@ public class Score extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
+	
+	
+	
 	
 
 

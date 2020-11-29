@@ -25,8 +25,8 @@ import lombok.Data;
 public class Student extends Person{
 	
 	//Attributes
-	@NotBlank
-	private String name;
+//	@NotBlank
+//	private String name;
 	
 //	@Email
 	private String email;
