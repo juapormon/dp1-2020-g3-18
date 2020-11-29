@@ -81,7 +81,7 @@ public class StudentController {
 //	} 
 	
 	@GetMapping("/myTeachers/{teacherId}")
-	public ModelAndView showOwner(@PathVariable("teacherId") int teacherId) {
+	public ModelAndView showMyTeachers(@PathVariable("teacherId") Integer teacherId) {
 		ModelAndView mav = new ModelAndView("teachers/scorableTeachers");
 		mav.addObject(this.teacherService.findTeacherBySubject(teacherId));
 		return mav;

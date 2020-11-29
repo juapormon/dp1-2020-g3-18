@@ -30,6 +30,17 @@ INSERT INTO authorities(id,username,authority) VALUES (11,'fran','student');
 INSERT INTO users(username,password,enabled) VALUES ('s','s',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (12,'s','student');
 
+INSERT INTO users(username,password,enabled) VALUES ('Paco','paco',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (14,'Paco','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('Mariano','mariano',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (15,'Mariano','teacher');
+
+--INSERT INTO users(username,password,enabled) VALUES ('john','john',TRUE);
+--INSERT INTO authorities(id,username,authority) VALUES (15,'john','student');
+
+
+
 
 INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas');
 INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', 'Fernández', 'fran');
@@ -42,6 +53,31 @@ INSERT INTO scores(id,value,comment,student_id,teacher_id) VALUES (1, 1, 'Coment
 INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
 
 INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
+
+INSERT INTO subjects(id,name,curso) VALUES (111,'Diseño y pruebas', 3);
+INSERT INTO subjects(id,name,curso) VALUES (112,'Fundamentos Fisicos de la Informatica', 1);
+INSERT INTO subjects(id,name,curso) VALUES (113,'Matematica Discreta', 2);
+INSERT INTO subjects(id,name,curso) VALUES (114,'Circuitos Electronicos Digitales', 1);
+INSERT INTO subjects(id,name,curso) VALUES (115,'Sistemas Operativos', 2);
+INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
+INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
+INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
+
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (223, 'Paco', 'Car Pediem', 'Paco');
+
+--INSERT INTO teachers(id,first_name,last_name,username,ABC) VALUES (230, 'Mariano', 'Sin Manos', 'Mariano', 111);
+--INSERT INTO students(id,first_name,last_name,username,subject) VALUES (331, 'John', 'Week Bwoy', 'john','Diseño y pruebas');
+
+
+
+--INSERT INTO teachers(id,first_name,last_name,username) VALUES (224, 'Juan', 'Gutierrez Manco', 'juan123');
+--INSERT INTO teachers(id,first_name,last_name,username) VALUES (225, 'Lola', 'Romero Torres', 'lola1');
+--INSERT INTO teachers(id,first_name,last_name,username) VALUES (226, 'Abelle', 'Lambert Ginni', 'abelle123');
+--INSERT INTO teachers(id,first_name,last_name,username) VALUES (227, 'Agate', 'Girard Blanc', 'agate1');
+--INSERT INTO teachers(id,first_name,last_name,username) VALUES (228, 'Ambrosio', 'Ansiado Augusto', 'ambrosio123');
+
+
+
 
 
 

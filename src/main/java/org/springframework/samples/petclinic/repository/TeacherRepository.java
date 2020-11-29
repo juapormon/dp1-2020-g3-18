@@ -33,7 +33,7 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	//La query de abajo esta solo para que no pete.
 	
 	@Query("select t from Teacher t where t.id=?1")
-	Collection<Teacher> findBySubject(int i);
+	Collection<Teacher> findBySubject(Integer i);
 	
 	//@Query("")
 	//Collection<Teacher> showTeacherWithScore();

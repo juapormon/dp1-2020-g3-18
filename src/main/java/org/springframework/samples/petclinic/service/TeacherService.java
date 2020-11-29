@@ -35,7 +35,7 @@ public class TeacherService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Teacher> findTeacherBySubject(int i) throws DataAccessException {
+	public Collection<Teacher> findTeacherBySubject(Integer i) throws DataAccessException {
 		return teacherRepository.findBySubject(i);
 	}
 	
