@@ -18,6 +18,5 @@ public class Subject extends BaseEntity{
 	
 	private Integer		curso;
 	
-	//Relationships
 	
 }

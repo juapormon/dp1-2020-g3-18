@@ -25,25 +25,27 @@
     </spring:url>
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add New Score</a>
 
-
-    <br/>
-    <br/>
+	<br/>
     <br/>
     <h2>Scores</h2>
- 
+
+ <!-- 	
+    <table class="table table-striped">
+	 	 <tr>
+		<c:forEach items="${scores}" var="scor">
+		<th>Point</th>
+		<th><b><c:out value="${scor.point}"/></b></th>
+		<td>Comment</td>
+		<td><b><c:out value="${scor.comment}"/></b></td>
+		</c:forEach>
+	</tr>
+    </table>
+         -->
+   
     <spring:url value="{teacherId}/scores" var="showScoresUrl">
         <spring:param name="teacherId" value="${teacher.id}"/>
     </spring:url>
-    <a href="${fn:escapeXml(showScoresUrl)}" class="btn btn-default">Show Scores</a>
-    <table class="table table-striped">
+    <a href="${fn:escapeXml(showScoresUrl)}" class="btn btn-default">Show Score and Comment List</a>
 
-	<c:forEach items="${scores}" var="scor">
-   		<h1>${scor.point} ${scor.comment}</h1>
-	</c:forEach>
-    </table>
-    
-    <h2>Personal experience</h2>
-    
-    <!--  Dentro de personal experience pondremos un boton o varios, hay que decidirlo -->
 
 </petclinic:layout>

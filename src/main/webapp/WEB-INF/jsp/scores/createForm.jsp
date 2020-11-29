@@ -20,7 +20,7 @@
                         <c:out value="${teacher.firstName} ${teacher.lastName}"/>
                     </div>
                 </div>
-                <petclinic:inputField label="Point" name="point"/>
+                <petclinic:inputField label="Value" name="valu"/>
                 <petclinic:inputField label="Comment" name="comment"/>
             </div>
             <div class="form-group">

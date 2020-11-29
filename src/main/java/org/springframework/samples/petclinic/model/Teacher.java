@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,54 +10,38 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-
+@Data
 @Entity
 @Table(name = "teachers")
-@AllArgsConstructor @NoArgsConstructor
 public class Teacher extends Person{
 	
-
+	//Attributes
+	@NotBlank
+	private String name;
+	
+	//Relationships
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username", referencedColumnName = "username")
-
+    @JoinColumn(name = "username")
 	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
-	private Set<Score> scores;
-	
 	@ManyToMany
-	private List<College> colleges;
+	private Collection<College> colleges;
 	
-	@OneToOne
+	@OneToOne (optional = true)
 	private PersonalExperience personalExperience;
 	
+	@ManyToMany
+	private Collection<Department> departments;
 	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	@ManyToMany
+	private Collection<Subject> subjects;
 	
-	protected Set<Score> getScoresInternal() {
-		if (this.scores == null) {
-			this.scores = new HashSet<>();
-		}
-		return this.scores;
-	}
-	
-	public void addScore(Score score) {
-		getScoresInternal().add(score);
-		score.setTeacher(this);
-	}
 	
 
 
