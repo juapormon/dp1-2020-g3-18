@@ -33,5 +33,10 @@ public class Scores {
 			return res;
 			
 
-	}
+		}
+		
+		@XmlElement
+		public Integer getTotalScores() {
+			return getScoreList().size();
+		}
 }
