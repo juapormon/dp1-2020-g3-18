@@ -29,26 +29,26 @@ public class ScoreServiceTests {
 	Score score1;
 	Score score2;
 	
-	@BeforeEach
+//	@BeforeEach
 //	void initAll() {
 //		score1 = new Score(7, "buen profesor", new Teacher());
 //	}
 	
 	//Casos positivos
-	@Test
-	@DisplayName("Finding all scores")
-	void testFindAll() throws DataAccessException{
-
-		Collection<Score> res;
-
-		when(this.repo.findAll()).thenReturn(Lists.list(score1, score2));
-
-		res = this.scoreService.findScores();
-
-		assertTrue(!res.isEmpty());
-		assertTrue(res.size()==2);
-
-	}
+//	@Test
+//	@DisplayName("Finding all scores")
+//	void testFindAll() throws DataAccessException{
+//
+//		Collection<Score> res;
+//
+//		when(this.repo.findAll()).thenReturn(Lists.list(score1, score2));
+//
+//		res = this.scoreService.findScores();
+//
+//		assertTrue(!res.isEmpty());
+//		assertTrue(res.size()==2);
+//
+//	}
 //	
 //	@Test
 //	@DisplayName("find by id returns score")

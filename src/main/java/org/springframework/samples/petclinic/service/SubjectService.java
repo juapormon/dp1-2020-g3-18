@@ -26,7 +26,7 @@ public class SubjectService {
 	}
 	
 	@Transactional(readOnly = true)	
-	public Collection<Subject> findSubject() throws DataAccessException {
+	public Collection<Subject> findSubjects() throws DataAccessException {
 		return subjectRepository.findAll();
 	}
 	
