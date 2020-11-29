@@ -13,9 +13,9 @@
  */
 @icon-font-path:    "../../webjars/bootstrap/fonts/";
 
-@spring-green:      #6db33f;
-@spring-dark-green: #5fa134;
-@spring-brown:      #34302D;
+@spring-green:      #5882FA;
+@spring-dark-green: #013ADF;
+@spring-brown:      #013ADF;
 @spring-grey:       #838789;
 @spring-light-grey: #f1f1f1;
 
@@ -28,7 +28,7 @@
 @navbar-default-link-active-color:  @spring-light-grey;
 @navbar-default-link-hover-color:   @spring-light-grey;
 @navbar-default-link-hover-bg:      @spring-green;
-@navbar-default-toggle-icon-bar-bg: @spring-light-grey;
+//@navbar-default-toggle-icon-bar-bg: @spring-light-grey;
 @navbar-default-toggle-hover-bg:    transparent;
 @navbar-default-link-active-bg:     @spring-green;
 
@@ -52,6 +52,8 @@
 .table > thead > tr > th {
   background-color: lighten(@spring-brown, 3%);
   color: @spring-light-grey;
+  list-style:none;
+
 }
 
 .table-filter {
@@ -61,10 +63,12 @@
 
 .nav > li > a {
   color: @spring-grey;
+  list-style:none;
 }
 
 .btn-default {
   border-width: 2px;
+  
   transition: border 0.15s;
   -webkit-transition: border 0.15s;
   -moz-transition: border 0.15s;
@@ -99,6 +103,12 @@ code {
 
 h1 {
   margin-bottom: 15px
+}
+h2 {
+  margin-bottom: 15px;
+  text-align: center;
+  font-family: "Lucidatypewriter", sans-serif;
+
 }
 
 .index-page--subtitle {
@@ -197,7 +207,7 @@ table td.action-column {
 
 .container-details-table th {
   background-color: lighten(@spring-brown, 3%);
-  color: @spring-light-grey;
+  color: @spring-green;
 }
 
 .status-help-content-table td {
