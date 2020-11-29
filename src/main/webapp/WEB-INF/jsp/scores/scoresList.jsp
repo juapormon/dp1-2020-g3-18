@@ -28,27 +28,30 @@
         </c:forEach>
         </tbody>
     </table>
-	<h2>Comments</h2>
+    
+    <h2>Comments</h2> 
 
-    <table class="table table-striped">
+	    <table class="table table-striped">
 	
-	<c:forEach items="${scores.scoreList}" var="scor">
-		<tr>
-		<td><b><c:out value="${scor.comment}"/></b></td>
-		</tr>
-		</c:forEach>
+		<thead>
+        <tr>
+            <th>Comment</th>
+            <th>Student who made it</th>
+        </tr>
+        </thead>
+        <tbody>
+      		<c:forEach items="${scores.scoreList}" var="scor">
+				<tr>
+					<td><b><c:out value="${scor.comment}"/></b></td>
+					<td><b><c:out value="${scor.student.firstName} ${scor.student.lastName}"/></b></td>
+				</tr>
+			</c:forEach>
+        </tbody>
     </table>
     
-    <h2>Alumnos</h2>
+    <h2>Total amount of scores:</h2>
+    <c:out value="${scores.totalScores}"> </c:out> 
 
-    <table class="table table-striped">
-	
-	<c:forEach items="${scores.scoreList}" var="scor">
-		<tr>
-		<td><b><c:out value="${scor.student.firstName}"/></b></td>
-		</tr>
-		</c:forEach>
-    </table>
      <!--
     <table class="table table-striped">
       	 <tr>
