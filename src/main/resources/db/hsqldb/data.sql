@@ -68,6 +68,15 @@ INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience,
 
 INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 
+
+INSERT INTO subjects(id,name,curso) VALUES (111,'Diseño y pruebas', 3);
+INSERT INTO subjects(id,name,curso) VALUES (112,'Fundamentos Fisicos de la Informatica', 1);
+INSERT INTO subjects(id,name,curso) VALUES (113,'Matematica Discreta', 2);
+INSERT INTO subjects(id,name,curso) VALUES (114,'Circuitos Electronicos Digitales', 1);
+INSERT INTO subjects(id,name,curso) VALUES (115,'Sistemas Operativos', 2);
+INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
+INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
+INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
 --Si quieres una collection de algo tienes que hacer lo siguient
 --Lo voy haciendo mejor
 
