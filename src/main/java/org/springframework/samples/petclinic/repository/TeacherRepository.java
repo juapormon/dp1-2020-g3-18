@@ -41,5 +41,6 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	
 	@Query("select s from Score s where s.teacher.id = ?1") 
 	Collection<Score> findScoresByTeacherId(int id);
+	
 
 }

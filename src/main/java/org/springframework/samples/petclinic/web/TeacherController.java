@@ -2,9 +2,12 @@
 package org.springframework.samples.petclinic.web;
 
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Score;
@@ -12,6 +15,7 @@ import org.springframework.samples.petclinic.model.Scores;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.Teachers;
+import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,11 +38,13 @@ public class TeacherController {
 	
 	private final TeacherService teacherService;
 	private final StudentService studentService;
+	private final ScoreService scoreService;
 
 	@Autowired
-	public TeacherController(TeacherService teacherService, StudentService studentService) {
+	public TeacherController(TeacherService teacherService, StudentService studentService, ScoreService scoreService) {
 		this.teacherService = teacherService;
 		this.studentService = studentService;
+		this.scoreService = scoreService;
 	}
 	
 	@InitBinder
@@ -133,35 +140,31 @@ public class TeacherController {
 //		return "scores/teacherCommentList";
 //	}
 	
-	@GetMapping(value = { "/teachers/{teacherId}//scores/new"})
-	public String initCreationForm(@PathVariable int teacherId, ModelMap model) { //para crear el modelo que va a la vista.
+	@GetMapping(value = { "/teachers/{teacherId}/scores/new"})
+	public String initCreationForm(@PathVariable int teacherId, ModelMap model) throws NoSuchFieldException, SecurityException { //para crear el modelo que va a la vista.
 		Score score = new Score();
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getCredentials(); 
-		Object principal1 = SecurityContextHolder.getContext().getAuthentication().getDetails(); 
-		Object principal2 = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-		Integer userId = Integer.parseInt(principal.toString());
-		Student student = this.studentService.findStudentById(userId);
-		score.setStudent(student);
 		Teacher teacher = teacherService.findTeacherById(teacherId);
-		score.setTeacher(teacher);
 		model.put("teacher", teacher);
 		model.put("score", score);
 		return "scores/createForm";		
 	}
 	
-//	@PostMapping(value = "/scores/new")
-//	public String processCreationForm(Teacher teacher, @Valid Score score, BindingResult result, ModelMap model) {		
-//		if (result.hasErrors()) {
-//			model.put("score", score);
-//			return "scores/createForm";
-//		}
-//		else {
-//            teacher.addScore(score);
-//            this.scoreService.saveScore(score);
-//
-//            return "redirect:/teachers/{teacherId}";
-//		}
-//	}	
+	@PostMapping(value = "/teachers/{teacherId}/scores/new")
+	public String processCreationForm(@PathVariable int teacherId, @Valid Score score, BindingResult result, ModelMap model) {		
+		if (result.hasErrors()) {
+			model.put("score", score);
+			return "scores/createForm";
+		}
+		else {
+			String principal = SecurityContextHolder.getContext().getAuthentication().getName(); 
+			Student student = this.studentService.findStudentByUsername(principal);
+			score.setStudent(student);
+			Teacher teacher = teacherService.findTeacherById(teacherId);
+			score.setTeacher(teacher);
+            this.scoreService.saveScore(score);
+            return "redirect:/teachers/{teacherId}";
+		}
+	}	
 	
 }
 

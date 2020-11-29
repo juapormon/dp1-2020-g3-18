@@ -60,6 +60,11 @@ public class StudentService {
 	public Collection<Teacher> findTeachersBySubject(int i) throws DataAccessException {
 		return teacherRepository.findBySubject(i);
 	}
+	
+	@Transactional(readOnly = true)
+	public Student findStudentByUsername(String username) throws DataAccessException {
+		return studentRepository.findStudentByUsername(username);
+	}
 
 	
 }
