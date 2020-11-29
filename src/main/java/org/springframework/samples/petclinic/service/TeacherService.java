@@ -46,6 +46,9 @@ public class TeacherService {
 	public Collection<Teacher> showTeacherWithScore() throws DataAccessException{
 		return teacherRepository.showTeacherWithScore();
 	}
+	public Collection<Score> findScoresByTeacherId(int teacherId) throws DataAccessException{
+		return teacherRepository.findScoresByTeacherId(teacherId);
+	}
 	@Transactional(readOnly = true)
 	public Collection<Teacher> findOwnerByLastName(String lastName) throws DataAccessException {
 		return teacherRepository.findByLastName(lastName);
