@@ -37,11 +37,13 @@ INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', '
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
 
-INSERT INTO scores(id,value,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
+--INSERT INTO scores(id,value,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
 
 INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
 
 INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
+
+--INSERT INTO subjects(id,name,curso) VALUES (1, 'Diseño y Pruebas 1', 3);
 
 
 
