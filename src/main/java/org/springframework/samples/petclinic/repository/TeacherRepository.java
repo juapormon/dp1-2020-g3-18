@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 import org.springframework.data.repository.query.Param;
-
+import org.springframework.samples.petclinic.model.Score;
+import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Subject;
 
 import org.springframework.samples.petclinic.model.Teacher;
@@ -18,7 +19,7 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	
 	Collection<Teacher> findAll() throws DataAccessException;
 	
-	void save(Teacher teacher) throws DataAccessException;
+	void save(Teacher teacher) throws DataAccessException; 
 	//"SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.lastName LIKE :lastName%"
 	@Query("SELECT t FROM Teacher t  WHERE t.lastName LIKE :lastName%")
 	public Collection<Teacher> findByLastName(@Param("lastName") String lastName);
@@ -37,5 +38,8 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	
 	//@Query("")
 	//Collection<Teacher> showTeacherWithScore();
+	
+	@Query("select s from Score s where s.teacher.id = ?1") 
+	Collection<Score> findScoresByTeacherId(int id);
 
 }
