@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -40,7 +41,6 @@ public class TeacherServiceTest {
 		Collection<Teacher> res = this.teacherService.findTeachers();
 
 		assertTrue(!res.isEmpty());
-		assertTrue(res.size()==2);
 
 	}
 	@Test
@@ -60,6 +60,7 @@ public class TeacherServiceTest {
 		int found = teachers.size();
 
 		Teacher teacher = new Teacher();
+		teacher.setName("Francisco");
 		teacher.setFirstName("Francisco");
 		teacher.setLastName("Fernández");
                 User user=new User();
@@ -78,6 +79,13 @@ public class TeacherServiceTest {
 
 	
 	// Negative test
+	
+	@Test
+	@DisplayName("Finding a Teacher by bad id")
+	void testFindTeacherByBadId(){
+		int badId = 234234;
+		assertThrows(AssertionError.class,()->this.teacherService.findTeacherById(badId));
+	}
 	/*@Test
 	@Transactional
 	public void shouldSaveTeacherNegative() {
