@@ -54,13 +54,13 @@
 					<span>Add new Teacher</span>
 				</petclinic:menuItem>
 				
-					
+			<!--  	
 				<petclinic:menuItem  active="${name eq 'teachers'}" url="/myTeachers/{teacherId}"
 					title="teachers" >
 					<span aria-hidden="true"></span>
 					<span>My scorable Teachers</span>
 				</petclinic:menuItem>
-
+			 -->	
 				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers"
 					title="teachers">
 					<span aria-hidden="true"></span>

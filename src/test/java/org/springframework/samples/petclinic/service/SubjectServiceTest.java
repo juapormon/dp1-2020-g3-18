@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collection;
 
@@ -40,6 +41,13 @@ public class SubjectServiceTest {
 			Subject subject = this.subjectService.findSubjectById(111);
 			System.out.println(subject.getName());
 			assertThat(subject.getName()).startsWith("Diseño y pruebas");
+		}
+	//casos negativos	
+		@Test
+		@DisplayName("Finding a subject by bad id")
+		void testFindSubjectByBadId(){
+			int badId = 234234;
+			assertThrows(AssertionError.class,()->this.subjectService.findSubjectById(badId));
 		}
 		
 		

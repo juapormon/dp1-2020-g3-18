@@ -2,16 +2,20 @@ package org.springframework.samples.petclinic.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Collection;
+
+import javax.validation.ConstraintViolationException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.stereotype.Service;
@@ -36,7 +40,6 @@ public class StudentServiceTest {
 		Collection<Student> res = this.studentService.findStudents();
 
 		assertTrue(!res.isEmpty());
-		assertTrue(res.size()==2);
 
 	}
 	@Test
@@ -51,11 +54,14 @@ public class StudentServiceTest {
 	//Positive test
 	@Test
 	@Transactional
+	@DisplayName("Saving a student works fine")
 	public void shouldSaveStudent() {
+	
 		Collection<Student> students = this.studentService.findStudents();
 		int found = students.size();
 
 		Student student = new Student();
+		student.setName("Paco");
 		student.setFirstName("Paco");
 		student.setLastName("Perez");
                 User user=new User();
@@ -70,28 +76,35 @@ public class StudentServiceTest {
 		students = this.studentService.findStudents();
 		assertThat(students.size()).isEqualTo(found + 1);
 	}
-	
+
 	
 	// Negative test
-	/*@Test
+	@Test
+	@DisplayName("Finding a student by bad id")
+	void testFindStudentByBadId(){
+		int badId = 234234;
+		assertThrows(AssertionError.class,()->this.studentService.findStudentById(badId));
+	}
+	
+	@Test
 	@Transactional
-	public void shouldSaveStudentNegative() {
-		Collection<Student> students = this.studentService.findStudents();
-		int found = students.size();
+	@DisplayName("Saving student without name")
+	public void SavingStudentBadTest() {
+	
 
 		Student student = new Student();
-		student.setFirstName("Pepe");
-		student.setLastName("García");
+		student.setName(null);//valor null obligatorio
+		student.setFirstName("Paco");
+		student.setLastName("Perez");
                 User user=new User();
-                user.setUsername("pepe");
-                user.setPassword("pepe1");
+                user.setUsername("paco");
+                user.setPassword("paco1");
                 user.setEnabled(true);
                 student.setUser(user);                
                 
-			assertThat(student.getId().longValue()).isEqualTo(0);
-		students = this.studentService.findStudents();
-		assertThat(students.size()).isEqualTo(found + 1);
-	}*/
+		assertThrows(ConstraintViolationException.class,()->this.studentService.saveStudent(student));
+	}
+	
 
 
 }
