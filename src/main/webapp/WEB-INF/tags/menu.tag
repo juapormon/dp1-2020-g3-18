@@ -71,11 +71,6 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Students</span>
 				</petclinic:menuItem>
-				<petclinic:menuItem active="${name eq 'studentsNew'}" url="/students/new"
-					title="students">
-					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Add new Student</span>
-				</petclinic:menuItem>
 				<petclinic:menuItem active="${name eq 'findteachers'}" url="/findTeachers"
 					title="teachers">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
