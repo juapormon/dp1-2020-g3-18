@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.web;
 
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -11,26 +12,25 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Score;
-import org.springframework.samples.petclinic.model.Scores;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.Teachers;
+import org.springframework.samples.petclinic.repository.ScoreRepository;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.BeanUtils;
 
 @Controller
 public class TeacherController {
@@ -52,7 +52,7 @@ public class TeacherController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
-	@GetMapping(value = { "/teachers" })
+	@GetMapping(value = { "teachers" })
 	public String showTeacherList(Map<String, Object> model) {
 		
 		Teachers teachers = new Teachers();
@@ -71,7 +71,7 @@ public class TeacherController {
 	}
 	
 	
-	@GetMapping(value = "/teachers/{teacherId}") 
+	@GetMapping(value = "teachers/{teacherId}") 
 	public ModelAndView showTeacher(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
 		ModelAndView mav = new ModelAndView("teachers/teacherDetails");
 		mav.addObject(this.teacherService.findTeacherById(teacherId));
@@ -122,10 +122,9 @@ public class TeacherController {
 		}
 	}
 	
-	@GetMapping(value = { "/teachers/{teacherId}/scores" }) 
+	@GetMapping(value = { "teachers/{teacherId}/scores" }) 
 	public String showTeacherScoreList(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
-		Scores scores = new Scores();
-		scores.getScoreList().addAll(this.teacherService.findScoresByTeacherId(teacherId));
+		Collection<Score> scores = this.teacherService.findScoresByTeacherId(teacherId);
 		model.put("scores", scores);
 		return "scores/scoresList"; 
 	} 
@@ -140,16 +139,14 @@ public class TeacherController {
 //		return "scores/teacherCommentList";
 //	}
 	
-	@GetMapping(value = { "/teachers/{teacherId}/scores/new"})
+	@GetMapping(value = { "teachers/{teacherId}/scores/new"})
 	public String initCreationForm(@PathVariable int teacherId, ModelMap model) throws NoSuchFieldException, SecurityException { //para crear el modelo que va a la vista.
 		Score score = new Score();
-		Teacher teacher = teacherService.findTeacherById(teacherId);
-		model.put("teacher", teacher);
 		model.put("score", score);
 		return "scores/createForm";		
 	}
 	
-	@PostMapping(value = "/teachers/{teacherId}/scores/new")
+	@PostMapping(value = "teachers/{teacherId}/scores/new")
 	public String processCreationForm(@PathVariable int teacherId, @Valid Score score, BindingResult result, ModelMap model) {		
 		if (result.hasErrors()) {
 			model.put("score", score);
@@ -159,11 +156,27 @@ public class TeacherController {
 			String principal = SecurityContextHolder.getContext().getAuthentication().getName(); 
 			Student student = this.studentService.findStudentByUsername(principal);
 			score.setStudent(student);
-			Teacher teacher = teacherService.findTeacherById(teacherId);
+			Teacher teacher = this.teacherService.findTeacherById(teacherId);
 			score.setTeacher(teacher);
             this.scoreService.saveScore(score);
-            return "redirect:/teachers/{teacherId}";
+            return "redirect:/teachers/{teacherId}/scores";
 		}
+	}	
+	
+	@GetMapping(value = "teachers/{teacherId}/scores/{scoreId}/edit")
+	public String initEditForm(@PathVariable int teacherId, @PathVariable int scoreId, ModelMap model) {	
+			Score score = this.scoreService.findScoreById(scoreId);
+            model.put("score", score);
+            return "scores/createForm";		
+	}	
+	
+	@PostMapping(value = "teachers/{teacherId}/scores/{scoreId}/edit")
+	public String processEditForm(@PathVariable int teacherId,@PathVariable int scoreId, @Valid Score score, BindingResult result, ModelMap model) {		
+			Score uno = this.scoreService.findScoreById(scoreId);
+			BeanUtils.copyProperties(score, uno, "id", "teacher", "student");
+			this.scoreService.saveScore(uno);
+            return "redirect:/teachers/{teacherId}/scores";
+		
 	}	
 	
 }

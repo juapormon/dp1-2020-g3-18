@@ -8,7 +8,7 @@
 
 <petclinic:layout pageName="teachers">
     <h2>Teachers</h2>
-
+ 
    <table id="teachersTable" class="table table-striped">
         <thead>
         <tr>

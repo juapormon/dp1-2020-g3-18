@@ -16,20 +16,23 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${scores.scoreList}" var="score">
+        <c:forEach items="${scores}" var="score"> 
             <tr>
                 <td>
-                    <c:out value="${score.valu}"/>
+                    <spring:url value="/teachers/{teacherId}/scores/{scoreId}/edit" var="editScoreUrl">
+                    <spring:param name="teacherId" value="${score.teacher.id}"/>
+                    <spring:param name="scoreId" value="${score.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(editScoreUrl)}"><c:out value="${score.valu}"/></a>
                 </td>
                 <td>
                     <c:out value=" ${score.comment}"/>
                 </td>
             </tr>
-        </c:forEach>
+        </c:forEach> 
         </tbody>
     </table>
-    
-    <h2>Comments</h2> 
+        <h2>Comments</h2> 
 
 	    <table class="table table-striped">
 	
@@ -40,7 +43,7 @@
         </tr>
         </thead>
         <tbody>
-      		<c:forEach items="${scores.scoreList}" var="scor">
+      		<c:forEach items="${scores}" var="scor"> <!-- -->
 				<tr>
 					<td><b><c:out value="${scor.comment}"/></b></td>
 					<td><b><c:out value="${scor.student.firstName} ${scor.student.lastName}"/></b></td>
@@ -48,9 +51,6 @@
 			</c:forEach>
         </tbody>
     </table>
-    
-    <h2>Total amount of scores:</h2>
-    <c:out value="${scores.totalScores}"> </c:out> 
 
      <!--
     <table class="table table-striped">
