@@ -55,7 +55,7 @@ public class TeacherService {
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Teacher> findOwnerByLastName(String lastName) throws DataAccessException {
+	public Collection<Teacher> findTeacherByLastName(String lastName) throws DataAccessException {
 		return teacherRepository.findByLastName(lastName);
 	}
 	

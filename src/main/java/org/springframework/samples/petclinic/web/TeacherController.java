@@ -103,21 +103,21 @@ public class TeacherController {
 			teacher.setLastName(""); // empty string signifies broadest possible search
 		}
 
-		// find owners by last name
-		Collection<Teacher> results = this.teacherService.findOwnerByLastName(teacher.getLastName());
+		// find teachers by last name
+		Collection<Teacher> results = this.teacherService.findTeacherByLastName(teacher.getLastName());
 		if (results.isEmpty()) {
-			// no owners found
+			// no teacher found
 			result.rejectValue("lastName", "notFound", "not found");
 			return "teachers/findTeachers";
 		}
 		else if (results.size() == 1) {
-			// 1 owner found
+			// 1 teacher found
 			teacher = results.iterator().next();
 			return "redirect:/teachers/" + teacher.getId();
 		}
 		else {
-			// multiple owners found
-			model.put("selections", results);
+			// multiple teachers found
+			model.put("teachers", results);
 			return "teachers/teachersList";
 		}
 	}
