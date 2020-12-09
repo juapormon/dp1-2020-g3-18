@@ -8,7 +8,9 @@ import javax.persistence.CascadeType;
 //import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -38,10 +40,12 @@ public class Student extends Person{
     @JoinColumn(name = "username")
 	private User user;
 	
-	@ManyToMany
+	@ManyToMany (fetch = FetchType.LAZY)
+	@JoinTable(name = "students_subjects", joinColumns = @JoinColumn(name = "student_id"),
+	inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Collection<Subject> subjects;
 	
-	@ManyToMany
+	@ManyToMany 
 	private Collection<Teacher> teachers;
 
 

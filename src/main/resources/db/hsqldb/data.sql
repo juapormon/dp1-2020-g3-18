@@ -87,3 +87,15 @@ INSERT INTO subjects(id,name,curso) VALUES (115,'Sistemas Operativos', 2);
 INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
 INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
 INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
+
+
+
+INSERT INTO teachers_subjects VALUES (1,111);
+INSERT INTO teachers_subjects VALUES (2,112);
+INSERT INTO teachers_subjects VALUES (1,113);
+INSERT INTO teachers_subjects VALUES (3,114);
+
+
+INSERT INTO students_subjects VALUES (2,111);
+INSERT INTO students_subjects VALUES (2,112);
+INSERT INTO students_subjects VALUES (2,113);

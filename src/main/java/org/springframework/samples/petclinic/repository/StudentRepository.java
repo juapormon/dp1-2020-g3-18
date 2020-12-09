@@ -35,4 +35,12 @@ public interface StudentRepository extends Repository<Student, Integer>{
 	@Query("select s from Student s where s.user.username = ?1")
 	Student findStudentByUsername(String username);
 
+	//SELECT * FROM TEACHERS T WHERE T.ID IN 
+	//( SELECT TEACHER_ID FROM TEACHERS_SUBJECTS TS WHERE TS.SUBJECT_ID IN 
+	//(SELECT Subject_id from students_subjects ))
+	
+	@Query("select t from Teacher t where t.id in t.subjects AND t.subjects in"
+			+ "(select s.subjects from Student s where s.id =?1)")
+	Collection<Student> myTeachers(int id);
+	
 }
