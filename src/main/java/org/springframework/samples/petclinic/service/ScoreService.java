@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.Collection;
 
 import javax.validation.Valid;
 
@@ -22,13 +21,18 @@ public class ScoreService {
 	}
 	
 	@Transactional(readOnly = true)	
-	public Score findScoreById(int id) throws DataAccessException {
+	public Score findScoreById(int id){
 		return scoreRepository.findById(id);
 	}
 	
 	
-	@Transactional(readOnly = true)	
-	public void saveScore(@Valid Score score) throws DataAccessException  {
+	@Transactional()	
+	public void saveScore(@Valid Score score)  {
 		scoreRepository.save(score);
 	}	
+	
+	@Transactional(readOnly = true)	
+	public void removeScore(@Valid Score score){
+		scoreRepository.delete(score);
+	}
 }
