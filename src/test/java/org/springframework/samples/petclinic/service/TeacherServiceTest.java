@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class TeacherServiceTest {
 	
 	@Autowired
 	protected TeacherService teacherService; //= new TeacherService(repo);
+	
+	@Autowired
+	protected StudentService studentService; //= new TeacherService(repo);
 
 
 	
@@ -36,7 +41,6 @@ public class TeacherServiceTest {
 		Collection<Teacher> res = this.teacherService.findTeachers();
 
 		assertTrue(!res.isEmpty());
-		assertTrue(res.size()==2);
 
 	}
 	@Test
@@ -56,6 +60,7 @@ public class TeacherServiceTest {
 		int found = teachers.size();
 
 		Teacher teacher = new Teacher();
+		teacher.setName("Francisco");
 		teacher.setFirstName("Francisco");
 		teacher.setLastName("Fernández");
                 User user=new User();
@@ -71,8 +76,16 @@ public class TeacherServiceTest {
 		assertThat(teachers.size()).isEqualTo(found + 1);
 	}
 	
+
 	
 	// Negative test
+	
+	@Test
+	@DisplayName("Finding a Teacher by bad id")
+	void testFindTeacherByBadId(){
+		int badId = 234234;
+		assertThrows(AssertionError.class,()->this.teacherService.findTeacherById(badId));
+	}
 	/*@Test
 	@Transactional
 	public void shouldSaveTeacherNegative() {

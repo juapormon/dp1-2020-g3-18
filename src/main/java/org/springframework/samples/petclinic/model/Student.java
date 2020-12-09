@@ -18,10 +18,12 @@ import javax.validation.constraints.NotBlank;
 //import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.Setter;
 
 @Data
 @Entity
 @Table(name = "students")
+@Setter
 public class Student extends Person{
 	
 	//Attributes

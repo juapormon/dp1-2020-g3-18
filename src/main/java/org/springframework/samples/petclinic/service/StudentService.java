@@ -34,7 +34,9 @@ public class StudentService {
 
 	@Transactional(readOnly = true)
 	public Student findStudentById(int id) throws DataAccessException {
-		return studentRepository.findById(id);
+		Student student = studentRepository.findById(id);
+		assert student != null;
+		return student;
 	}
 
 	@Transactional(readOnly = true)

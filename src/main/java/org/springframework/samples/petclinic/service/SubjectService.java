@@ -22,7 +22,9 @@ public class SubjectService {
 	
 	@Transactional(readOnly = true)	
 	public Subject findSubjectById(int id) throws DataAccessException {
-		return subjectRepository.findById(id);
+		Subject subject = subjectRepository.findById(id);
+		assert subject != null;
+		return subject;
 	}
 	
 	@Transactional(readOnly = true)	
