@@ -37,10 +37,10 @@ public interface StudentRepository extends Repository<Student, Integer>{
 
 	//SELECT * FROM TEACHERS T WHERE T.ID IN 
 	//( SELECT TEACHER_ID FROM TEACHERS_SUBJECTS TS WHERE TS.SUBJECT_ID IN 
-	//(SELECT Subject_id from students_subjects ))
+	//(SELECT Subject_id from students_subjects ))   where s.id =?1
 	
-	@Query("select t from Teacher t where t.id in t.subjects AND t.subjects in"
-			+ "(select s.subjects from Student s where s.id =?1)")
-	Collection<Student> myTeachers(int id);
+	@Query("select t from Teacher t where t.subjects in"
+			+ "(select s.subjects from Student s )")
+	Collection<Teacher> myTeachers();
 	
 }

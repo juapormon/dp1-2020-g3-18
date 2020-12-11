@@ -7,8 +7,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Students;
+import org.springframework.samples.petclinic.model.Teachers;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -87,6 +89,17 @@ public class StudentController {
 			
 			return "redirect:/students/" + student.getId();
 		}
+	}
+	
+	@GetMapping(value = { "/myTeachers" })
+	public String showTeacherList(Map<String, Object> model) {
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		Student student = this.studentService.findStudentByUsername(principal);
+		Teachers teachers = new Teachers();
+		teachers.getTeachersList().addAll(this.studentService.myTeachers());
+		model.put("teachers", teachers);
+		return "teachers/teachersList";
+
 	}
 	
 //	@GetMapping(value = "/studentsForm")

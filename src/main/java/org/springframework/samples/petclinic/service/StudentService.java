@@ -67,8 +67,8 @@ public class StudentService {
 	public Student findStudentByUsername(String username) throws DataAccessException {
 		return studentRepository.findStudentByUsername(username);
 	}
-	public Collection<Student> myTeachers(int id) throws DataAccessException{
-		return studentRepository.myTeachers(id);
+	public Collection<Teacher> myTeachers() throws DataAccessException{
+		return studentRepository.myTeachers();
 	}
 	
 }

@@ -55,6 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/findTeachers").permitAll()
 				.antMatchers("/teachersFound").permitAll()
 				.antMatchers("/teachers/new").permitAll()
+				.antMatchers("/myTeachers").permitAll()
 				.anyRequest().denyAll()
 				.and()
 				 	.formLogin()
