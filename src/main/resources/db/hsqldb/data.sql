@@ -94,6 +94,9 @@ INSERT INTO teachers_subjects VALUES (1,111);
 INSERT INTO teachers_subjects VALUES (2,112);
 INSERT INTO teachers_subjects VALUES (1,113);
 INSERT INTO teachers_subjects VALUES (3,114);
+INSERT INTO teachers_subjects VALUES (2,118);
+INSERT INTO teachers_subjects VALUES (4,115);
+INSERT INTO teachers_subjects VALUES (5,117);
 
 
 INSERT INTO students_subjects VALUES (2,111);

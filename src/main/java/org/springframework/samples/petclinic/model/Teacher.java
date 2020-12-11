@@ -46,6 +46,9 @@ public class Teacher extends Person{
 	inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Collection<Subject> subjects;
 	
+	public Collection<Subject> getSubjects(){
+		return this.subjects;
+	}
 	
 
 
