@@ -14,7 +14,9 @@
         <tr>
             <th>First name</th>
             <th>Last name</th>
-            <th>Subject(s)</th>
+
+            <th>Subjects</th>
+
         </tr>
         </thead>
         <tbody>
@@ -29,6 +31,7 @@
                 <td>
                     <c:out value=" ${teacher.lastName}"/>
                 </td>
+
                 <td>
                 
                 	<c:forEach items="${teacher.subjects}" var="subject">
@@ -40,9 +43,11 @@
 	                </c:forEach>
 	                    
                 </td>
+
                
             </tr> 
-        </c:forEach>
+        </c:forEach>                   
+        
         </tbody>
     </table>
         
