@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Teacher;
 
@@ -38,6 +39,9 @@ public interface StudentRepository extends Repository<Student, Integer>{
 	//SELECT * FROM TEACHERS T WHERE T.ID IN 
 	//( SELECT TEACHER_ID FROM TEACHERS_SUBJECTS TS WHERE TS.SUBJECT_ID IN 
 	//(SELECT Subject_id from students_subjects ))
+	
+	@Query("SELECT t FROM Teacher t  WHERE t.lastName || t.name LIKE :word%")
+	public Collection<Teacher> findByWord(@Param("word")String word); 
 	
 	@Query("select t from Teacher t where t.id in t.subjects AND t.subjects in"
 			+ "(select s.subjects from Student s where s.id =?1)")

@@ -23,6 +23,10 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	//"SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.lastName LIKE :lastName%"
 	@Query("SELECT t FROM Teacher t  WHERE t.lastName LIKE :lastName%")
 	public Collection<Teacher> findByLastName(@Param("lastName") String lastName);
+	
+	
+	
+	
 
 
 	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null )")
