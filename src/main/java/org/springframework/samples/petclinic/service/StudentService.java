@@ -34,7 +34,9 @@ public class StudentService {
 
 	@Transactional(readOnly = true)
 	public Student findStudentById(int id) throws DataAccessException {
-		return studentRepository.findById(id);
+		Student student = studentRepository.findById(id);
+		assert student != null;
+		return student;
 	}
 
 	@Transactional(readOnly = true)
@@ -59,6 +61,11 @@ public class StudentService {
 	@Transactional(readOnly = true)	
 	public Collection<Teacher> findTeachersBySubject(int i) throws DataAccessException {
 		return teacherRepository.findBySubject(i);
+	}
+	
+	@Transactional(readOnly = true)
+	public Student findStudentByUsername(String username) throws DataAccessException {
+		return studentRepository.findStudentByUsername(username);
 	}
 
 	

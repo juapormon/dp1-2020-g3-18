@@ -26,7 +26,7 @@ public class Teacher extends Person{
 	private String name;
 	
 	//Relationships
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username")
 	private User user;
 	

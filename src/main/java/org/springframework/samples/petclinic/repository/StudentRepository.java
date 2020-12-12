@@ -31,5 +31,8 @@ public interface StudentRepository extends Repository<Student, Integer>{
 	
 	@Query("select s from Student s where scores_id is not null")
 	Collection<Student> studentWithScore();
+	
+	@Query("select s from Student s where s.user.username = ?1")
+	Student findStudentByUsername(String username);
 
 }

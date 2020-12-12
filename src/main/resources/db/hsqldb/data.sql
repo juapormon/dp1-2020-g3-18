@@ -30,28 +30,40 @@ INSERT INTO authorities(id,username,authority) VALUES (11,'fran','student');
 INSERT INTO users(username,password,enabled) VALUES ('s','s',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (12,'s','student');
 
+INSERT INTO users(username,password,enabled) VALUES ('julian','julian',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (13,'julian','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('pop','pop',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (14,'pop','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('macarron32','macarron32',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (15,'macarron32','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('ambrella','ambrella',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (16,'ambrella','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('abe','abe',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (17,'abe','teacher');
 
 INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas');
+INSERT INTO students(id,first_name,last_name,username) VALUES (66, 'administrador', 'Rodríguez Rodríguez', 'a');
 INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', 'Fernández', 'fran');
+INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', 'Surmano', 's');
 
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
 
-INSERT INTO scores(id,value,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'julian');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'Arejo Pínchez', 'macarron32');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lambert Ginni', 'abe');
+
+
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
+
 
 INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
 
-INSERT INTO colleges(id,name, city) VALUES (1,'etsii', 'Sevilla');
-
-
---INSERT INTO teacher_scores VALUES (2, 1);
---INSERT INTO teacher_scores VALUES (2, 2);
-
--- INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
--- INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
--- 
--- INSERT INTO teacher_scores VALUES (2, 1);
--- INSERT INTO teacher_scores VALUES (2, 2);
+INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
 
 
 INSERT INTO professionalexperiences(id,university,comment) VALUES (1, 'Universidad de Sevilla', 'Comentario de prueba 1.');
@@ -66,20 +78,12 @@ INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience,
 
 INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
 
---Si quieres una collection de algo tienes que hacer lo siguient
---Lo voy haciendo mejor
 
---INSERT INTO teachers(id,first_name,last_name,username) VALUES (98, 'test', 'test', 'test');
---Las demas cosas me dan igual porque no tienen ahora mismo NotNull o NotBlank
---INSERT INTO scores(id,point,comment) VALUES (1, 1, 'Comentario del score 1');
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (8, 5, 'test',98);
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (54, 5, 'test',98);
---El id de teacher es el 98 que hemos creado, entonces
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (2,5, 'test',98) --Todas estas scores se le estan añadiendo tb a su collection
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (3,5, 'test',98) --de scores, entiendes? aaaaaa esto es lo que nosabia coño, va va
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (3,5, 'test',98) -- entonces creo que puedo continuar con esto, y te pregunto a la 
---tarde si me quedo pillado otra vez, vava perfe, me dices lo que sea, de todos modos prueba que no pete este data xd
-
-
-
-
+INSERT INTO subjects(id,name,curso) VALUES (111,'Diseño y pruebas', 3);
+INSERT INTO subjects(id,name,curso) VALUES (112,'Fundamentos Fisicos de la Informatica', 1);
+INSERT INTO subjects(id,name,curso) VALUES (113,'Matematica Discreta', 2);
+INSERT INTO subjects(id,name,curso) VALUES (114,'Circuitos Electronicos Digitales', 1);
+INSERT INTO subjects(id,name,curso) VALUES (115,'Sistemas Operativos', 2);
+INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
+INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
+INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);

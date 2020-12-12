@@ -22,19 +22,10 @@ public class ScoreService {
 	}
 	
 	@Transactional(readOnly = true)	
-	public Collection<Score> findScores() throws DataAccessException {
-		return scoreRepository.findAll();
-	}
-	
-	@Transactional(readOnly = true)	
 	public Score findScoreById(int id) throws DataAccessException {
 		return scoreRepository.findById(id);
 	}
 	
-//	@Transactional(readOnly = true)	
-//	public Collection<String> findTeacherCommentById(int id) throws DataAccessException {
-//		return scoreRepository.findCommentById(id);
-//	}
 	
 	@Transactional(readOnly = true)	
 	public void saveScore(@Valid Score score) throws DataAccessException  {

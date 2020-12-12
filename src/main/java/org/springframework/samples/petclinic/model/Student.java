@@ -3,36 +3,38 @@ package org.springframework.samples.petclinic.model;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+
 //import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 //import javax.validation.constraints.Pattern;
 
 //import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import lombok.Setter;
 
 @Data
 @Entity
 @Table(name = "students")
+@Setter
 public class Student extends Person{
 	
 	//Attributes
 	@NotBlank
 	private String name;
 	
-	@Email
+//	@Email
 	private String email;
 	
 	//Relationships
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username")
 	private User user;
 	

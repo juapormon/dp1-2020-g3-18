@@ -35,8 +35,12 @@
         </tbody>
     </table> 
     
-   <spring:url value="/studentsWithScore" var="addUrl">
+  <!-- <spring:url value="/studentsWithScore" var="addUrl">
     </spring:url>
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">students With Score</a>
+      -->
+    <%-- <spring:url value="/students/new" var="addUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add New Student</a> --%>
 </petclinic:layout>
 
