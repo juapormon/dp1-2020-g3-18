@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -38,7 +39,9 @@ public class Teacher extends Person{
 	@OneToOne (optional = true)
 	private PersonalExperience personalExperience;
 	
-	@ManyToMany
+	@ManyToMany (fetch = FetchType.LAZY)
+	@JoinTable(name = "teachers_departments", joinColumns = @JoinColumn(name = "teacher_id"),
+	inverseJoinColumns = @JoinColumn(name = "department_id"))
 	private Collection<Department> departments;
 	
 	@ManyToMany (fetch = FetchType.EAGER)

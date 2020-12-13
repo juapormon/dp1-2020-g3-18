@@ -69,5 +69,9 @@ public class TeacherService {
 		// creating authorities
 		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
 	}
+	
+	public Collection<Teacher> findTeachersByDepartment(String departmentName) throws DataAccessException {
+		return teacherRepository.findTeachersByDepartment(departmentName);
+	}
 
 }

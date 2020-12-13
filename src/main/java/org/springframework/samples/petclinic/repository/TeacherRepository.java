@@ -46,5 +46,7 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	@Query("select s from Score s where s.teacher.id = ?1") 
 	Collection<Score> findScoresByTeacherId(int id);
 	
-
+	@Query("select t from Teacher t where (select d from Department d where d.name = ?1) in t.departments")
+	Collection<Teacher> findTeachersByDepartment(String departmentName);
+	
 }

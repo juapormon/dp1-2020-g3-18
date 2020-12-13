@@ -65,6 +65,28 @@
     </sec:authorize>
       -->
     
+    <br>
+    <br>
+    
+    <table id="teachersTable" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Departments</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${departments}" var="department">
+             <tr>
+                <td>
+                    <spring:url value="/teachers/teachersByDepartment/{departmentName}" var="teacherUrl">
+                    <spring:param name="departmentName" value="${department.name}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(teacherUrl)}"><c:out value="${department.name}"/></a>
+                </td>
+            </tr> 
+        </c:forEach>
+        </tbody>
+    </table>
     
 </petclinic:layout>
 
