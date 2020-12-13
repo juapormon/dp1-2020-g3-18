@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
@@ -46,7 +47,7 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	@Query("select s from Score s where s.teacher.id = ?1") 
 	Collection<Score> findScoresByTeacherId(int id);
 	
-	@Query("select t from Teacher t where (select d from Department d where d.name = ?1) in t.departments")
-	Collection<Teacher> findTeachersByDepartment(String departmentName);
+	@Query("select t from Teacher t")
+	List<Teacher> findTeachersFromDepartment(int departmentId);
 	
 }
