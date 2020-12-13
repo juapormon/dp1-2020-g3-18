@@ -39,12 +39,10 @@ public class Teacher extends Person{
 	@OneToOne (optional = true)
 	private PersonalExperience personalExperience;
 	
-	@ManyToMany (fetch = FetchType.LAZY)
-	@JoinTable(name = "teachers_departments", joinColumns = @JoinColumn(name = "teacher_id"),
-	inverseJoinColumns = @JoinColumn(name = "department_id"))
+	@ManyToMany(fetch = FetchType.EAGER) 
 	private Collection<Department> departments;
 	
-	@ManyToMany (fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "teachers_subjects", joinColumns = @JoinColumn(name = "teacher_id"),
 	inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Collection<Subject> subjects;

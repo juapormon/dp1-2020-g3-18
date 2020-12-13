@@ -1,14 +1,18 @@
 
 package org.springframework.samples.petclinic.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Department;
 import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
+import org.springframework.samples.petclinic.repository.DepartmentRepository;
 import org.springframework.samples.petclinic.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TeacherService {
 
 	private TeacherRepository teacherRepository;
+	private DepartmentRepository departmentRepository;
 
 	@Autowired
 	private UserService userService;
@@ -68,6 +73,17 @@ public class TeacherService {
 		userService.saveUser(teacher.getUser());
 		// creating authorities
 		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
+	}
+	
+	@Transactional	
+	public List<Teacher> findTeachersFromDepartment(int departmentId) throws DataAccessException {
+		//Tengo un departament mame y quiero obtener la lista de teachers que tienen este department
+		Department d = departmentRepository.findById(departmentId); 
+		List<Teacher> result = new ArrayList<Teacher>();
+		for(Teacher t2 : teacherRepository.findAll()) {
+			if(t2.getDepartments().contains(d)) result.add(t2);
+		}
+		return result;
 	}
 
 }

@@ -14,6 +14,7 @@
         <tr>
             <th>Name</th>
             <th>Related Subjects</th>
+            <th>Related Teachers</th>
         </tr>
         </thead>
         <tbody>
@@ -31,8 +32,13 @@
                      </spring:url>
                     <a href="${fn:escapeXml(departmentUrl)}"><c:out value="Related Subjects"/></a>
                 </td>
-
-               
+                
+                 <td>
+                     <spring:url value="/departments/{departmentId}/relatedTeachers" var="departmentUrl">
+                     <spring:param name="departmentId" value="${department.id}"/>
+                     </spring:url>
+                    <a href="${fn:escapeXml(departmentUrl)}"><c:out value="Related Teachers"/></a>
+                </td>
             </tr> 
         </c:forEach>
         </tbody>

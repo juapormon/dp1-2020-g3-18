@@ -57,7 +57,6 @@ INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'A
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lambert Ginni', 'abe');
 
-
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
 
 
@@ -103,6 +102,14 @@ INSERT INTO teachers_subjects VALUES (3,114);
 INSERT INTO teachers_subjects VALUES (2,118);
 INSERT INTO teachers_subjects VALUES (4,115);
 INSERT INTO teachers_subjects VALUES (5,117);
+
+INSERT INTO teachers_departments VALUES (1,1);
+INSERT INTO teachers_departments VALUES (2,2);
+INSERT INTO teachers_departments VALUES (1,3);
+INSERT INTO teachers_departments VALUES (3,2);
+INSERT INTO teachers_departments VALUES (2,5);
+INSERT INTO teachers_departments VALUES (4,4);
+INSERT INTO teachers_departments VALUES (5,3);
 
 
 INSERT INTO students_subjects VALUES (2,111);
