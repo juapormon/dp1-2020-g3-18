@@ -170,9 +170,8 @@ public class TeacherController {
 			this.scoreService.saveScore(score);
 			return "redirect:/teachers/{teacherId}/scores";
 		}
-<<<<<< develop
 	}
-	}	
+
 	
 	@GetMapping(value = { "/teachers/teachersByDepartment/{departmentName}" })
 	public String showTeachersByDepartment(@PathVariable("departmentName") String departmentName, Map<String, Object> model) {
@@ -183,7 +182,6 @@ public class TeacherController {
 		return "teachers/teachersByDepartment/{departmentName}";
 		
 	}
-}
 
 	@GetMapping(value = "teachers/{teacherId}/scores/{scoreId}/edit")
 	public String initEditForm(@PathVariable int teacherId, @PathVariable int scoreId, ModelMap model) {
