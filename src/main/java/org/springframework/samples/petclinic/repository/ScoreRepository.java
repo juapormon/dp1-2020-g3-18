@@ -16,5 +16,7 @@ public interface ScoreRepository extends Repository<Score, Integer>{
 	Collection<Score> findAll() throws DataAccessException;
 
 	void save(@Valid Score score) throws DataAccessException;
+	
+	void delete(@Valid Score score);
 
 }
