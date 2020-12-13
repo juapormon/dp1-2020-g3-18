@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="teachers">
+<petclinic:layout pageName="teachersByDepartment">
     <h2>Teachers</h2>
 
    <table id="teachersTable" class="table table-striped">
@@ -33,36 +33,6 @@
         </c:forEach>
         </tbody>
     </table>
-        
-	
-    <spring:url value="/teachersWithScore" var="addUrl">
-    </spring:url>
-    <sec:authorize access="hasAuthority('admin')">
-    <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Teachers With Score</a>
-    </sec:authorize>
-    
-    <br>
-    <br>
-    
-    <table id="teachersTable" class="table table-striped">
-        <thead>
-        <tr>
-            <th>Departments</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${departments}" var="department">
-             <tr>
-                <td>
-                    <spring:url value="/teachers/teachersByDepartment/{departmentName}" var="teacherUrl">
-                    <spring:param name="departmentName" value="${department.name}"/>
-                    </spring:url>
-                    <a href="${fn:escapeXml(teacherUrl)}"><c:out value="${department.name}"/></a>
-                </td>
-            </tr> 
-        </c:forEach>
-        </tbody>
-    </table>
-    
+
 </petclinic:layout>
 

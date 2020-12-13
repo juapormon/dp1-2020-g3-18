@@ -166,6 +166,15 @@ public class TeacherController {
 		}
 	}	
 	
+	@GetMapping(value = { "/teachers/teachersByDepartment/{departmentName}" })
+	public String showTeachersByDepartment(@PathVariable("departmentName") String departmentName, Map<String, Object> model) {
+		
+		Teachers teachers = new Teachers();
+		teachers.getTeachersList().addAll(this.teacherService.findTeachersByDepartment(departmentName));
+		model.put("teachers", teachers);
+		return "teachers/teachersByDepartment/{departmentName}";
+		
+	}
 }
 
 
