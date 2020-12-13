@@ -33,7 +33,7 @@ public class Teacher extends Person{
     @JoinColumn(name = "username")
 	private User user;
 	
-	@ManyToMany
+	@ManyToMany 
 	private Collection<College> colleges;
 	
 	@OneToOne (optional = true)
@@ -44,9 +44,16 @@ public class Teacher extends Person{
 	inverseJoinColumns = @JoinColumn(name = "department_id"))
 	private Collection<Department> departments;
 	
-	@ManyToMany
+	@ManyToMany (fetch = FetchType.EAGER)
+	@JoinTable(name = "teachers_subjects", joinColumns = @JoinColumn(name = "teacher_id"),
+	inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Collection<Subject> subjects;
 	
+
+	public Collection<Subject> getSubjects(){
+		return this.subjects;
+	}
+
 	
 
 

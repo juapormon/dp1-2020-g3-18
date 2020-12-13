@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Score;
+import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.repository.TeacherRepository;
@@ -54,9 +55,10 @@ public class TeacherService {
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Teacher> findOwnerByLastName(String lastName) throws DataAccessException {
+	public Teacher findTeacherByLastName(String lastName) throws DataAccessException {
 		return teacherRepository.findByLastName(lastName);
 	}
+	
 
 	@Transactional
 	public void saveTeacher(Teacher teacher) throws DataAccessException {

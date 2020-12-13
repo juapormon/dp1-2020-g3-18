@@ -19,7 +19,7 @@ public class Score extends BaseEntity {
 	private Integer valu;
 
 	@NotBlank
-	private String comment;
+	private String comment; 
 	
 	//Relationships
 	@ManyToOne
