@@ -1,6 +1,7 @@
 
 package org.springframework.samples.petclinic.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
+import org.springframework.samples.petclinic.model.Teachers;
+import org.springframework.samples.petclinic.repository.ScoreRepository;
 import org.springframework.samples.petclinic.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class TeacherService {
 
 	private TeacherRepository teacherRepository;
+	private ScoreRepository scoreRepository;
+
 
 	@Autowired
 	private UserService userService;
@@ -59,6 +64,8 @@ public class TeacherService {
 		return teacherRepository.findByLastName(lastName);
 	}
 	
+	
+	
 
 	@Transactional
 	public void saveTeacher(Teacher teacher) throws DataAccessException {
@@ -69,5 +76,8 @@ public class TeacherService {
 		// creating authorities
 		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
 	}
+	
+	
+	
 
 }

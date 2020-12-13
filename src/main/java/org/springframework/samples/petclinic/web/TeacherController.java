@@ -102,6 +102,8 @@ public class TeacherController {
 		Teacher res = teacherService.findTeacherByLastName(teacher.getLastName());
 		return "redirect:/teachers/" + res.getId();
 	}
+	
+
 
 //	@GetMapping(value = "/teachersFound")
 //	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {

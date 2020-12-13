@@ -58,12 +58,12 @@
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Teachers With Score</a>
     </sec:authorize>
     
-<!--<spring:url value="/myTeachersWithScore" var="addUrl">
+    <spring:url value="/students/{studentId}/showRatedTeachers" var="addUrl">
     </spring:url>
     <sec:authorize access="hasAuthority('student')">
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">My rated teachers</a>
     </sec:authorize>
-      -->
+      
     
     
 </petclinic:layout>
