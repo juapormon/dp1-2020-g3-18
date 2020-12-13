@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -8,10 +9,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.samples.petclinic.model.Student;
+import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
 
 public interface StudentRepository extends Repository<Student, Integer>{
 
+	@Query("select s from Student s where s.id=?1")
 	Student findById(int id) throws DataAccessException;
 
 	Collection<Student> findAll() throws DataAccessException;
@@ -34,5 +37,8 @@ public interface StudentRepository extends Repository<Student, Integer>{
 	
 	@Query("select s from Student s where s.user.username = ?1")
 	Student findStudentByUsername(String username);
+	
+	@Query("select s.subjects from Student s where s.id=?1")
+	List<Subject> findMySubjects(int i);
 
 }

@@ -28,24 +28,6 @@
 					<span>Home</span>
 				</petclinic:menuItem>
 				
-				<%-- <petclinic:menuItem active="${name eq 'scores'}" url="/scores"
-					title="Scores">
-					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Scores</span>
-				</petclinic:menuItem> --%>
-<%-- 
-				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
-					title="find owners">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Find owners</span>
-				</petclinic:menuItem>
- --%>
-				<%-- <petclinic:menuItem active="${name eq 'vets'}" url="/vets"
-					title="veterinarians">
-					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Veterinarians</span>
-				</petclinic:menuItem> --%>
-				
 				
 				
 				<petclinic:menuItem active="${name eq 'teachersNew'}" url="/teachers/new"
@@ -54,17 +36,16 @@
 					<span>Add new Teacher</span>
 				</petclinic:menuItem>
 				
-			<!--  	
-				<petclinic:menuItem  active="${name eq 'teachers'}" url="/myTeachers/{teacherId}"
-					title="teachers" >
-					<span aria-hidden="true"></span>
-					<span>My scorable Teachers</span>
-				</petclinic:menuItem>
-			 -->	
+		
 				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers"
 					title="teachers">
 					<span aria-hidden="true"></span>
 					<span>Teachers</span>
+				</petclinic:menuItem>
+				<petclinic:menuItem active="${name eq 'departments'}" url="/departments"
+					title="departments">
+					<span aria-hidden="true"></span>
+					<span>Departments</span>
 				</petclinic:menuItem>
 				<petclinic:menuItem active="${name eq 'students'}" url="/students"
 					title="students">
@@ -80,6 +61,12 @@
 					title="subjects">
 					<span aria-hidden="true"></span>
 					<span>Subjects</span>
+				</petclinic:menuItem>
+				<petclinic:menuItem active="${name eq 'subject'}" url="/subjects/mySubjects/{studentId}"
+					title="mySubjects">
+					 <%-- <spring:param name="studentId" value="${principal.id}"/> --%> 				
+					<span aria-hidden="true"></span>
+					<span>My Subjects</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
