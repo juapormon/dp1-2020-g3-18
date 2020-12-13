@@ -35,27 +35,27 @@ public class DeanController {
         dataBinder.setDisallowedFields("id");
     }
 
-
-	@GetMapping(value = {"/teachers/new"})
-	public String newTeacherCreationForm(ModelMap model) {
-
-		Teacher teacher = new Teacher();
-		model.put("teachers", teacher);
-		return VIEW_TEACHER_CREATE_FORM;
-
-	}
-	
-	@PostMapping("/teachers/new")
-	public String processCreationForm(@Valid Teacher teacher, BindingResult result) {
-		if (result.hasErrors()) {
-			return VIEW_TEACHER_CREATE_FORM;
-		}
-		else {
-			this.teachers.save(teacher);
-			return "redirect:/teachers";
-		}
-	}
-	
+//
+//	@GetMapping(value = {"/teachers/new"})
+//	public String newTeacherCreationForm(ModelMap model) {
+//
+//		Teacher teacher = new Teacher();
+//		model.put("teachers", teacher);
+//		return VIEW_TEACHER_CREATE_FORM;
+//
+//	}
+//	
+//	@PostMapping("/teachers/new")
+//	public String processCreationForm(@Valid Teacher teacher, BindingResult result) {
+//		if (result.hasErrors()) {
+//			return VIEW_TEACHER_CREATE_FORM;
+//		}
+//		else {
+//			this.teachers.save(teacher);
+//			return "redirect:/teachers";
+//		}
+//	}
+//	
 	
 
 

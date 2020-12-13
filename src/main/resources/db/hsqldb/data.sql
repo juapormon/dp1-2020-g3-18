@@ -88,11 +88,22 @@ INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
 INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
 INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
 
+
 INSERT INTO departments(id,name) VALUES (1,'Lenguaje y sistemas informaticos');
 INSERT INTO departments(id,name) VALUES (2,'Tecnologia electronica');
 INSERT INTO departments(id,name) VALUES (3,'Matematicas aplicadas');
 INSERT INTO departments(id,name) VALUES (4,'Ingenieria del diseño');
 INSERT INTO departments(id,name) VALUES (5,'Electronica y magnetismo');
+
+
+INSERT INTO teachers_subjects VALUES (1,111);
+INSERT INTO teachers_subjects VALUES (2,112);
+INSERT INTO teachers_subjects VALUES (1,113);
+INSERT INTO teachers_subjects VALUES (3,114);
+INSERT INTO teachers_subjects VALUES (2,118);
+INSERT INTO teachers_subjects VALUES (4,115);
+INSERT INTO teachers_subjects VALUES (5,117);
+
 
 INSERT INTO students_subjects VALUES (2,111);
 INSERT INTO students_subjects VALUES (2,112);
@@ -105,4 +116,5 @@ INSERT INTO subjects_departments VALUES(111,1);
 INSERT INTO subjects_departments VALUES(112,2);
 INSERT INTO subjects_departments VALUES(113,1);
 INSERT INTO subjects_departments VALUES(114,2);
+
 
