@@ -34,7 +34,6 @@ import org.springframework.beans.BeanUtils;
 @Controller
 public class TeacherController {
 
-	private static final String VIEWS_TEACHER_CREATE_OR_UPDATE_FORM = "teachers/createOrUpdateTeacherForm";
 	private final TeacherService teacherService;
 	private final StudentService studentService;
 	private final ScoreService scoreService;
@@ -189,24 +188,5 @@ public class TeacherController {
 
 	}
 	
-	@GetMapping(value = "/teachers/new")
-	public String initCreationForm(Map<String, Object> model) {
-		Teacher teacher = new Teacher();
-		model.put("teacher", teacher);
-		return VIEWS_TEACHER_CREATE_OR_UPDATE_FORM;
-	}
-
-	@PostMapping(value = "/teachers/new")
-	public String processCreationForm(@Valid Teacher teacher, BindingResult result) {
-		if (result.hasErrors()) {
-			return VIEWS_TEACHER_CREATE_OR_UPDATE_FORM;
-		}
-		else {
-			//creating teacher, user and authorities
-			this.teacherService.saveTeacher(teacher);
-			
-			return "redirect:/teachers/" + teacher.getId();
-		}
-	}
-
+	
 }
