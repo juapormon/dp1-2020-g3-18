@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Students;
 import org.springframework.samples.petclinic.model.Subject;
+import org.springframework.samples.petclinic.model.Teachers;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -100,6 +101,7 @@ public class StudentController {
 		Student student = studentService.findStudentById(studentId);
 		model.put("student", student);
 		return "/students/mySubjects";
+
 	}
 	
 //	@GetMapping(value = "/studentsForm")

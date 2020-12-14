@@ -77,6 +77,7 @@ public class StudentService {
 
 	public Collection<Student> myTeachers(int id) throws DataAccessException{
 		return studentRepository.myTeachers(id);
+
 	}
 
 	

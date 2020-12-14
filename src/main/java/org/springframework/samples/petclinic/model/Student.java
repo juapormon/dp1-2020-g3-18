@@ -42,6 +42,8 @@ public class Student extends Person{
 	private Collection<Subject> subjects;
 	
 	@ManyToMany 
+	@JoinTable(name = "students_teachers", joinColumns = @JoinColumn(name = "student_id"),
+	inverseJoinColumns = @JoinColumn(name = "teacher_id"))
 	private Collection<Teacher> teachers;
 
 
