@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
@@ -21,9 +22,13 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	
 	void save(Teacher teacher) throws DataAccessException; 
 	//"SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.lastName LIKE :lastName%"
-	@Query("SELECT t FROM Teacher t  WHERE t.lastName LIKE :lastName%")
-	public Collection<Teacher> findByLastName(@Param("lastName") String lastName);
 
+//	@Query("SELECT t FROM Teacher t  WHERE t.lastName LIKE :lastName%")
+//	public Collection<Teacher> findByLastName(@Param("lastName") String lastName);
+
+
+	@Query("select t from Teacher t where t.lastName =?1")
+	public Teacher findByLastName(@Param("lastName") String lastName);
 
 	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null )")
 	Collection<Teacher> showTeacherWithScore();
@@ -42,5 +47,7 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	@Query("select s from Score s where s.teacher.id = ?1") 
 	Collection<Score> findScoresByTeacherId(int id);
 	
-
+	@Query("select t from Teacher t")
+	List<Teacher> findTeachersFromDepartment(int departmentId);
+	
 }

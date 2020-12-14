@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -7,8 +8,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Students;
+import org.springframework.samples.petclinic.model.Subject;
+import org.springframework.samples.petclinic.model.Teachers;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 
@@ -87,6 +90,18 @@ public class StudentController {
 			
 			return "redirect:/students/" + student.getId();
 		}
+	}
+	
+	@GetMapping(value = "/subjects/mySubjects/{studentId}")
+	public String listMySubjects(@PathVariable("studentId") int studentId, Map<String, Object> model ) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.put("principal", principal);
+		List<Subject> subjects = studentService.findMySubjects(studentId);
+		model.put("subjects", subjects);
+		Student student = studentService.findStudentById(studentId);
+		model.put("student", student);
+		return "/students/mySubjects";
+
 	}
 	
 //	@GetMapping(value = "/studentsForm")

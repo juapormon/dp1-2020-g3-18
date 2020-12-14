@@ -57,7 +57,6 @@ INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'A
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lambert Ginni', 'abe');
 
-
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
 
 
@@ -87,3 +86,42 @@ INSERT INTO subjects(id,name,curso) VALUES (115,'Sistemas Operativos', 2);
 INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
 INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
 INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
+
+
+INSERT INTO departments(id,name) VALUES (1,'Lenguaje y sistemas informaticos');
+INSERT INTO departments(id,name) VALUES (2,'Tecnologia electronica');
+INSERT INTO departments(id,name) VALUES (3,'Matematicas aplicadas');
+INSERT INTO departments(id,name) VALUES (4,'Ingenieria del diseño');
+INSERT INTO departments(id,name) VALUES (5,'Electronica y magnetismo');
+
+
+INSERT INTO teachers_subjects VALUES (1,111);
+INSERT INTO teachers_subjects VALUES (2,112);
+INSERT INTO teachers_subjects VALUES (1,113);
+INSERT INTO teachers_subjects VALUES (3,114);
+INSERT INTO teachers_subjects VALUES (2,118);
+INSERT INTO teachers_subjects VALUES (4,115);
+INSERT INTO teachers_subjects VALUES (5,117);
+
+INSERT INTO teachers_departments VALUES (1,1);
+INSERT INTO teachers_departments VALUES (2,2);
+INSERT INTO teachers_departments VALUES (1,3);
+INSERT INTO teachers_departments VALUES (3,2);
+INSERT INTO teachers_departments VALUES (2,5);
+INSERT INTO teachers_departments VALUES (4,4);
+INSERT INTO teachers_departments VALUES (5,3);
+
+
+INSERT INTO students_subjects VALUES (2,111);
+INSERT INTO students_subjects VALUES (2,112);
+INSERT INTO students_subjects VALUES (2,113);
+INSERT INTO students_subjects VALUES (1,114);
+INSERT INTO students_subjects VALUES (1,115);
+INSERT INTO students_subjects VALUES (3,116);
+
+INSERT INTO subjects_departments VALUES(111,1);
+INSERT INTO subjects_departments VALUES(112,2);
+INSERT INTO subjects_departments VALUES(113,1);
+INSERT INTO subjects_departments VALUES(114,2);
+
+
