@@ -69,7 +69,7 @@
 						<li>
 							<div class="row">
 								<div class="text-center">																					
-									<a href="<c:url value="/students/{studentId}/showRatedTeachers" />">My rated teachers</a>
+									<a href="<c:url value="/students/${student.id}/showRatedTeachers" />">My rated teachers</a>
 								</div>																					
 							</div>	
 						</li>

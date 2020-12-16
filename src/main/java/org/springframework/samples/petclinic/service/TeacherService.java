@@ -77,6 +77,13 @@ public class TeacherService {
 		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
 	}
 	
+	//Buscar profesor por id de estudiante
+	@Transactional(readOnly = true)
+	public Collection<Teacher> findTeacherByStudentId(int studentId) throws DataAccessException {
+		return teacherRepository.findByStudentId(studentId);
+	}
+	
+	
 	
 	
 

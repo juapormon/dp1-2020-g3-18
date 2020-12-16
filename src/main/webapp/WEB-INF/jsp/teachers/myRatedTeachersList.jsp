@@ -6,25 +6,33 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="teachers">
+   
     <h2>My rated teachers</h2>
- 
-   <table id="teachersTable" class="table table-striped">
+
+    <table id="teachersTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Full name</th>
-            <td><b><c:out value="${teacher.firstName} ${teacher.lastName} "></c:out></b></td>
-            <th>Subjects</th>
-			<td><b>
-                <c:forEach items="${teacher.subjects}" var="subject">
-                
-	                <c:out value="${subject.name} "/>
-	                   
-	                    
-	                    
-	            </c:forEach>
-			</b></td>
+            <th>First name</th>
+            <th>Subject</th>
         </tr>
         </thead>
-    </table>
-</petclinic:layout>
+        <tbody>
+        <c:forEach items="${teachers}" var="teacher">
+             <tr>
+                <td>
+                    <c:out value="${teacher.firstName}"/>
+                </td>
+               <!-- <td>
+                    <c:out value="${subject.curso}"/>
+                </td> --> 
+                <td>
+                    
+                </td>
 
+               
+            </tr> 
+        </c:forEach>
+        </tbody>
+    </table> 
+    
+</petclinic:layout>

@@ -100,10 +100,10 @@ public class StudentController {
 	public ModelAndView showMyRatedTeachers(@PathVariable("studentId") int studentId) {
 		ModelAndView mav = new ModelAndView("teachers/myRatedTeachersList");
 		Student student = studentService.findStudentById(studentId);
-		Collection<Teacher> teachers = studentService.findTeacherByStudentId(student.getId());
+		Collection<Teacher> teachers = teacherService.findTeacherByStudentId(student.getId());
 		
-		
-		mav.addObject(teachers);
+		//"teachers" hace referencia a como se va a llamar en el .jsp
+		mav.addObject("teachers",teachers);
 		return mav;
 	}
 	

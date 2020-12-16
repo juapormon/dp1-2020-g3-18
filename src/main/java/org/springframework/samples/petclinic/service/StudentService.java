@@ -71,10 +71,5 @@ public class StudentService {
 		return studentRepository.myTeachers(id);
 	}
 	
-	//Buscar profesor por id de estudiante
-	@Transactional(readOnly = true)
-	public Collection<Teacher> findTeacherByStudentId(int studentId) throws DataAccessException {
-		return teacherRepository.findByStudentId(studentId);
-	}
-	
+
 }

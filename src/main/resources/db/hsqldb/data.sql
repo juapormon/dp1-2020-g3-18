@@ -62,6 +62,11 @@ INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Las cla
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (2, 5, 'Las clases de este profesor estan mejorando desde el ultimo trimestre, le falta confianza',1,1);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (3, 9, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,1);
 
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (4, 3, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (5, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 6, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,3);
+
+
 
 
 

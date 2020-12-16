@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -86,6 +87,19 @@ public class TeacherServiceTest {
 		int badId = 234234;
 		assertThrows(AssertionError.class,()->this.teacherService.findTeacherById(badId));
 	}
+	
+	@Test
+	@DisplayName("Finding teacher by id")
+	void testFindByStudentId(){
+		
+		List<Teacher> teacher = (List<Teacher>)this.teacherService.findTeacherByStudentId(1);
+		
+		//Comprobar tamaño de la lista
+		assertThat(teacher.get(0).getFirstName()).startsWith("Julián");
+		assertThat(teacher.get(1).getFirstName()).startsWith("Popench");
+	}
+	
+	
 	/*@Test
 	@Transactional
 	public void shouldSaveTeacherNegative() {
