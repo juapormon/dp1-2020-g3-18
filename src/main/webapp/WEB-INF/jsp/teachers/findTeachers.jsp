@@ -12,13 +12,13 @@
 
     <h2>Find Teachers</h2>
 
-    <form:form modelAttribute="teachers" action="/teachers" method="get" class="form-horizontal"
+    <form:form modelAttribute="teachers" action="/teachersFound" method="get" class="form-horizontal"
                id="search-teacher-form">
         <div class="form-group">
-            <div class="control-group" id="lastName">
-                <label>Last name </label>
+            <div class="control-group" id="firstName">
+                <label>First name </label>
                 <div>
-                     <form:input class="form-control" path="lastName" size="30" maxlength="80"/>
+                     <form:input class="form-control" path="firstName" size="30" maxlength="80"/>
                     <span class="help-inline"><form:errors path="*"/></span>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,7 +50,16 @@ public class TeacherServiceTest {
 		
 		Teacher teacher = this.teacherService.findTeacherById(1);
 		System.out.println(teacher.getFirstName());
-		assertThat(teacher.getFirstName()).startsWith("Julián");
+		assertThat(teacher.getFirstName()).startsWith("Julian");
+	}
+	
+	@Test
+	@DisplayName("Finding teacher by firstName")
+	void testFindTeacherByFirstName(){
+		
+		List<Teacher> teacher = this.teacherService.findTeacherByFirstName("Julian");
+		assertThat(teacher.size()==1);
+		assertThat(teacher.get(0).getId()==1);
 	}
 	
 	//Positive test
