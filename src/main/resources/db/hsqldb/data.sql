@@ -51,7 +51,7 @@ INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', '
 INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', 'Surmano', 's');
 
 
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'julian');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julian', 'Locuelo García', 'julian');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'Arejo Pínchez', 'macarron32');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');

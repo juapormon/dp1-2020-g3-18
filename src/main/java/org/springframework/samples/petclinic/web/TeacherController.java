@@ -34,7 +34,6 @@ import org.springframework.beans.BeanUtils;
 @Controller
 public class TeacherController {
 
-	private static final String VIEWS_TEACHER_CREATE_OR_UPDATE_FORM = "teachers/createOrUpdateTeacherForm";
 	private final TeacherService teacherService;
 	private final StudentService studentService;
 	private final ScoreService scoreService;
@@ -94,41 +93,24 @@ public class TeacherController {
 
 	@GetMapping(value = "/teachersFound")
 	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {
-//		Teacher results = teacherService.findTeacherByLastName(teacher.getLastName());
-//		model.put("selections", results);
-//		ModelAndView mav = new ModelAndView("teachers/teacherDetails");
-//		mav.addObject(this.teacherService.findTeacherByLastName(teacher.getLastName()));
-//		return mav;
-		Teacher res = teacherService.findTeacherByLastName(teacher.getLastName());
-		return "redirect:/teachers/" + res.getId();
-	}
 
-//	@GetMapping(value = "/teachersFound")
-//	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {
-//
-//		// allow parameterless GET request for /owners to return all records
-//		if (teacher.getLastName() == null) {
-//			teacher.setLastName(""); // empty string signifies broadest possible search
-//		}
-//
-//		// find teachers by last name
-//		Collection<Teacher> results = this.teacherService.findOwnerByLastName(teacher.getLastName());
-//		if (results.isEmpty()) {
-//			// no teachers found
-//			result.rejectValue("lastName", "notFound", "not found");
-//			return "teachers/findTeachers";
-//		}
-//		else if (results.size() == 1) {
-//			// 1 teacher found
-//			teacher = results.iterator().next();
-//			return "redirect:/teachers/" + teacher.getId();
-//		}
-//		else {
-//			// multiple teachers found
-//			model.put("selections", results);
-//			return "teachers/teachersList";
-//		}
-//	}
+
+		// find teachers by first name
+		List<Teacher> results = this.teacherService.findTeacherByFirstName(teacher.getFirstName());
+		if (results.isEmpty()) {
+			return "redirect:/teachers/findTeachers";
+		}
+		else if (results.size() == 1) {
+			// 1 teacher found
+			 teacher = results.iterator().next();
+			return "redirect:/teachers/" + teacher.getId();
+		}
+		else {
+			// multiple teachers found
+			model.put("selections", results);
+			return "teachers/teachersList";
+		}
+	}
 
 	@GetMapping(value = { "teachers/{teacherId}/scores" })
 	public String showTeacherScoreList(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
@@ -189,24 +171,5 @@ public class TeacherController {
 
 	}
 	
-	@GetMapping(value = "/teachers/new")
-	public String initCreationForm(Map<String, Object> model) {
-		Teacher teacher = new Teacher();
-		model.put("teacher", teacher);
-		return VIEWS_TEACHER_CREATE_OR_UPDATE_FORM;
-	}
-
-	@PostMapping(value = "/teachers/new")
-	public String processCreationForm(@Valid Teacher teacher, BindingResult result) {
-		if (result.hasErrors()) {
-			return VIEWS_TEACHER_CREATE_OR_UPDATE_FORM;
-		}
-		else {
-			//creating teacher, user and authorities
-			this.teacherService.saveTeacher(teacher);
-			
-			return "redirect:/teachers/" + teacher.getId();
-		}
-	}
-
+	
 }

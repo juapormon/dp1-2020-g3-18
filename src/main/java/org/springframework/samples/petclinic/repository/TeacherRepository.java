@@ -27,8 +27,8 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 //	public Collection<Teacher> findByLastName(@Param("lastName") String lastName);
 
 
-	@Query("select t from Teacher t where t.lastName =?1")
-	public Teacher findByLastName(@Param("lastName") String lastName);
+	@Query("select t from Teacher t where t.firstName LIKE %:firstName")
+	public List<Teacher> findByFirstName(@Param("firstName") String firstName);
 
 	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null )")
 	Collection<Teacher> showTeacherWithScore();

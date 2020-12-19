@@ -60,8 +60,8 @@ public class TeacherService {
 	}
 
 	@Transactional(readOnly = true)
-	public Teacher findTeacherByLastName(String lastName) throws DataAccessException {
-		return teacherRepository.findByLastName(lastName);
+	public List<Teacher> findTeacherByFirstName(String firstName) throws DataAccessException {
+		return teacherRepository.findByFirstName(firstName);
 	}
 	
 
