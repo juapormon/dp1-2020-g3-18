@@ -41,6 +41,8 @@ public class Student extends Person{
 	inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Collection<Subject> subjects;
 	
+	
+	//Profesores con misma asignatura
 	@ManyToMany 
 	@JoinTable(name = "students_teachers", joinColumns = @JoinColumn(name = "student_id"),
 	inverseJoinColumns = @JoinColumn(name = "teacher_id"))

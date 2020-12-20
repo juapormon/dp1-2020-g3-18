@@ -95,6 +95,19 @@ public class TeacherController {
 	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {
 
 
+//		Teacher results = teacherService.findTeacherByLastName(teacher.getLastName());
+//		model.put("selections", results);
+//		ModelAndView mav = new ModelAndView("teachers/teacherDetails");
+//		mav.addObject(this.teacherService.findTeacherByLastName(teacher.getLastName()));
+//		return mav;
+		Teacher res = teacherService.findTeacherByLastName(teacher.getLastName());
+		return "redirect:/teachers/" + res.getId();
+	}
+	
+
+
+
+
 		// find teachers by first name
 		List<Teacher> results = this.teacherService.findTeacherByFirstName(teacher.getFirstName());
 		if (results.isEmpty()) {

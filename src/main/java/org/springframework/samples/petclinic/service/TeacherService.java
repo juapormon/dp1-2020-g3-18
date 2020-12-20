@@ -12,7 +12,12 @@ import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
+
 import org.springframework.samples.petclinic.repository.DepartmentRepository;
+
+import org.springframework.samples.petclinic.model.Teachers;
+import org.springframework.samples.petclinic.repository.ScoreRepository;
+
 import org.springframework.samples.petclinic.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +26,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class TeacherService {
 
 	private TeacherRepository teacherRepository;
+
 	private DepartmentRepository departmentRepository;
+
+	private ScoreRepository scoreRepository;
+
+
 
 	@Autowired
 	private UserService userService;
@@ -64,6 +74,8 @@ public class TeacherService {
 		return teacherRepository.findByFirstName(firstName);
 	}
 	
+	
+	
 
 	@Transactional
 	public void saveTeacher(Teacher teacher) throws DataAccessException {
@@ -75,6 +87,7 @@ public class TeacherService {
 		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
 	}
 	
+
 	@Transactional	
 	public List<Teacher> findTeachersFromDepartment(int departmentId) throws DataAccessException {
 		//Tengo un departament mame y quiero obtener la lista de teachers que tienen este department
@@ -85,5 +98,15 @@ public class TeacherService {
 		}
 		return result;
 	}
+
+	//Buscar profesor por id de estudiante
+	@Transactional(readOnly = true)
+	public Collection<Teacher> findTeacherByStudentId(int studentId) throws DataAccessException {
+		return teacherRepository.findByStudentId(studentId);
+	}
+	
+	
+	
+	
 
 }

@@ -134,6 +134,40 @@ public class TeacherServiceTest {
 		assertThrows(AssertionError.class, () -> this.teacherService.findTeacherById(badId));
 	}
 
+	
+	@Test
+	@DisplayName("Finding teacher by id")
+	void testFindByStudentId(){
+		
+		List<Teacher> teacher = (List<Teacher>)this.teacherService.findTeacherByStudentId(1);
+		
+		//Comprobar tamaño de la lista
+		assertThat(teacher.get(0).getFirstName()).startsWith("Julián");
+		assertThat(teacher.get(1).getFirstName()).startsWith("Popench");
+	}
+	
+	
+	/*@Test
+	@Transactional
+	public void shouldSaveTeacherNegative() {
+		Collection<Teacher> teachers = this.teacherService.findTeachers();
+		int found = teachers.size();
+
+		Teacher teacher = new Teacher();
+		teacher.setFirstName("Pepe");
+		teacher.setLastName("García");
+                User user=new User();
+                user.setUsername("pepe");
+                user.setPassword("pepe1");
+                user.setEnabled(true);
+                teacher.setUser(user);                
+                
+			assertThat(teacher.getId().longValue()).isEqualTo(0);
+		teachers = this.teacherService.findTeachers();
+		assertThat(teachers.size()).isEqualTo(found + 1);
+	}*/
+
+
 	/*
 	 * @Test
 	 * 
