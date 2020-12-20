@@ -2,6 +2,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.springframework.samples.petclinic.repository.ScoreRepository;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
+import org.springframework.samples.petclinic.util.DuplicatedStudentScoreException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -146,6 +148,8 @@ public class TeacherController {
 	public String initCreationForm(@PathVariable int teacherId, ModelMap model)
 			throws NoSuchFieldException, SecurityException { // para crear el modelo que va a la vista.
 		Score score = new Score();
+		Teacher teacher = this.teacherService.findTeacherById(teacherId);
+		score.setTeacher(teacher);
 		model.put("score", score);
 		return "scores/createForm";
 	}
@@ -157,11 +161,23 @@ public class TeacherController {
 			model.put("score", score);
 			return "scores/createForm";
 		} else {
+			try{
+				score.getValu().equals(null);
+			}catch(NullPointerException ex) {
+				result.rejectValue("valu", "empty value", "value must not be empty");
+				return "scores/createForm";
+			}
 			String principal = SecurityContextHolder.getContext().getAuthentication().getName();
 			Student student = this.studentService.findStudentByUsername(principal);
 			score.setStudent(student);
 			Teacher teacher = this.teacherService.findTeacherById(teacherId);
 			score.setTeacher(teacher);
+//			try{
+//				Collection<Score> scores = this.scoreService.findAll();
+//			}catch(DuplicatedStudentScoreException ex) {
+//				result.rejectValue("valu", "empty value", "value must not be empty");
+//				return "scores/createForm";
+//			}
 			this.scoreService.saveScore(score);
 			return "redirect:/teachers/{teacherId}/scores";
 		}
@@ -177,12 +193,22 @@ public class TeacherController {
 	@PostMapping(value = "teachers/{teacherId}/scores/{scoreId}/edit")
 	public String processEditForm(@PathVariable int teacherId, @PathVariable int scoreId, @Valid Score score,
 			BindingResult result, ModelMap model) {
-		Score uno = this.scoreService.findScoreById(scoreId);
-		BeanUtils.copyProperties(score, uno, "id", "teacher", "student");
-		this.scoreService.saveScore(uno);
+		if (result.hasErrors()) {
+			model.put("score", score);
+			return "scores/createForm";
+		}else {
+			try{
+				score.getValu().equals(null);
+			}catch(NullPointerException ex) {
+				result.rejectValue("valu", "empty value", "value must not be empty");
+				return "scores/createForm";
+			}
+			Score uno = this.scoreService.findScoreById(scoreId);
+			BeanUtils.copyProperties(score, uno, "id", "teacher", "student");
+			this.scoreService.saveScore(score);
 		return "redirect:/teachers/{teacherId}/scores";
-
+		}
 	}
-	
+
 	
 }
