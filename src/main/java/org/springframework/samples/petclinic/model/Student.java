@@ -15,13 +15,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @Entity
 @Table(name = "students")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student extends Person{
 	
 	//Attributes

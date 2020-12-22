@@ -17,11 +17,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.boot.context.properties.ConstructorBinding;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "teachers")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Teacher extends Person{
 	
 	//Attributes

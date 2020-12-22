@@ -176,12 +176,15 @@ public class TeacherController {
 			score.setStudent(student);
 			Teacher teacher = this.teacherService.findTeacherById(teacherId);
 			score.setTeacher(teacher);
-//			try{
-//				Collection<Score> scores = this.scoreService.findAll();
-//			}catch(DuplicatedStudentScoreException ex) {
-//				result.rejectValue("valu", "empty value", "value must not be empty");
-//				return "scores/createForm";
-//			}
+			Collection<Score> scores = this.scoreService.findAll();
+			List<Student> students = new ArrayList<>(); 
+			for(Score s: scores) {
+				students.add(s.getStudent());
+			}
+			if(students.contains(score.getStudent())) {
+				result.rejectValue("comment", "duplicated score", "You already have a score on this teacher");
+				return "scores/createForm";
+			}
 			this.scoreService.saveScore(score);
 			return "redirect:/teachers/{teacherId}/scores";
 		}
