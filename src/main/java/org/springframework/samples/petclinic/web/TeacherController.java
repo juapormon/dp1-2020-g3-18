@@ -19,6 +19,7 @@ import org.springframework.samples.petclinic.repository.ScoreRepository;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
+import org.springframework.samples.petclinic.util.ScoreValidator;
 import org.springframework.samples.petclinic.util.DuplicatedStudentScoreException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,11 @@ public class TeacherController {
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
+	}
+	
+	@InitBinder("score")
+	public void initTeacherBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
 	}
 
 	@GetMapping(value = { "teachers" })
@@ -149,8 +155,7 @@ public class TeacherController {
 //	}
 
 	@GetMapping(value = { "teachers/{teacherId}/scores/new" })
-	public String initCreationForm(@PathVariable int teacherId, ModelMap model)
-			throws NoSuchFieldException, SecurityException { // para crear el modelo que va a la vista.
+	public String initCreationForm(@PathVariable int teacherId, ModelMap model){ // para crear el modelo que va a la vista.
 		Score score = new Score();
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		score.setTeacher(teacher);
@@ -165,25 +170,15 @@ public class TeacherController {
 			model.put("score", score);
 			return "scores/createForm";
 		} else {
-			try{
-				score.getValu().equals(null);
-			}catch(NullPointerException ex) {
-				result.rejectValue("valu", "empty value", "value must not be empty");
-				return "scores/createForm";
-			}
 			String principal = SecurityContextHolder.getContext().getAuthentication().getName();
 			Student student = this.studentService.findStudentByUsername(principal);
 			score.setStudent(student);
 			Teacher teacher = this.teacherService.findTeacherById(teacherId);
 			score.setTeacher(teacher);
-			Collection<Score> scores = this.scoreService.findAll();
-			List<Student> students = new ArrayList<>(); 
-			for(Score s: scores) {
-				students.add(s.getStudent());
-			}
-			if(students.contains(score.getStudent())) {
-				result.rejectValue("comment", "duplicated score", "You already have a score on this teacher");
-				return "scores/createForm";
+			try{
+				score.getValu().equals(null);
+			}catch(NullPointerException ex) {
+				result.rejectValue("valu", "empty value", "value must not be empty");
 			}
 			this.scoreService.saveScore(score);
 			return "redirect:/teachers/{teacherId}/scores";
