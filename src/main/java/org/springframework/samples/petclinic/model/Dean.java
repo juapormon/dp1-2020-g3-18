@@ -21,7 +21,8 @@ public class Dean extends Person {
     @JoinColumn(name = "username")
 	private User user;
 	
-	@ManyToOne(optional=true) //Es posible que no haga falta el optional
+	@JoinColumn(name = "college_id")
+	@OneToOne(optional=true) //Es posible que no haga falta el optional
 	private College college;
 	
 	

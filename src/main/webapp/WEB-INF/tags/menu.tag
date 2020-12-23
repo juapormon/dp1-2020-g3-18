@@ -68,6 +68,11 @@
 					<span aria-hidden="true"></span>
 					<span>My Subjects</span>
 				</petclinic:menuItem>
+				<petclinic:menuItem active="${name eq 'subject'}" url="/deans/colleges"
+					title="Colleges">
+					<span aria-hidden="true"></span>
+					<span>Colleges</span>
+				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">

@@ -59,10 +59,11 @@ INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lam
 
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
 
+INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
 
 INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
+INSERT INTO deans(id,first_name,last_name,username,college_id) VALUES (2, 'Paco', 'Administrador', 'a', 1);
 
-INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
 
 
 INSERT INTO professionalexperiences(id,university,comment) VALUES (1, 'Universidad de Sevilla', 'Comentario de prueba 1.');
