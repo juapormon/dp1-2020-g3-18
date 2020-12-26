@@ -95,10 +95,15 @@ public class TeacherController {
 	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {
 
 
+		if (teacher.getFirstName() == null) {
+			teacher.setFirstName(""); // empty string signifies broadest possible search
+		}
 		// find teachers by first name
 		List<Teacher> results = this.teacherService.findTeacherByFirstName(teacher.getFirstName());
 		if (results.isEmpty()) {
-			return "redirect:/teachers/findTeachers";
+			result.rejectValue("firstName", "notFound", "not found");
+			model.put("teachers", new Teacher());
+			return "teachers/findTeachers";
 		}
 		else if (results.size() == 1) {
 			// 1 teacher found
