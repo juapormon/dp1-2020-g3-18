@@ -19,7 +19,6 @@ import org.springframework.samples.petclinic.repository.ScoreRepository;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
-import org.springframework.samples.petclinic.util.DuplicatedStudentScoreException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -97,23 +96,15 @@ public class TeacherController {
 	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {
 
 
-//		Teacher results = teacherService.findTeacherByLastName(teacher.getLastName());
-//		model.put("selections", results);
-//		ModelAndView mav = new ModelAndView("teachers/teacherDetails");
-//		mav.addObject(this.teacherService.findTeacherByLastName(teacher.getLastName()));
-//		return mav;
-		Teacher res = teacherService.findTeacherByLastName(teacher.getLastName());
-		return "redirect:/teachers/" + res.getId();
-	}
-	
-
-
-
-
+		if (teacher.getFirstName() == null) {
+			teacher.setFirstName(""); // empty string signifies broadest possible search
+		}
 		// find teachers by first name
 		List<Teacher> results = this.teacherService.findTeacherByFirstName(teacher.getFirstName());
 		if (results.isEmpty()) {
-			return "redirect:/teachers/findTeachers";
+			result.rejectValue("firstName", "notFound", "not found");
+			model.put("teachers", new Teacher());
+			return "teachers/findTeachers";
 		}
 		else if (results.size() == 1) {
 			// 1 teacher found
