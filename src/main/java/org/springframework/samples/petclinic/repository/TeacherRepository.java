@@ -54,4 +54,7 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	@Query("select t from Teacher t")
 	List<Teacher> findTeachersFromDepartment(int departmentId);
 	
+	@Query("select t from Teacher t where t.id in (select s.teacher from Score s where s.teacher is null  AND s.student in (select e.id from Student e where e.id = ?1))")
+	Collection<Teacher> teachersToRate(int studentId);
+	
 }

@@ -106,6 +106,9 @@ public class TeacherService {
 		return teacherRepository.findByStudentId(studentId);
 	}
 	
+	public Collection<Teacher> teachersToRate(int studentId)throws DataAccessException{
+		return teacherRepository.teachersToRate(studentId);
+	}
 	
 	
 	
