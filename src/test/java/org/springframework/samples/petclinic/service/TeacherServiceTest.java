@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.assertj.core.util.Lists;
@@ -194,16 +195,16 @@ public class TeacherServiceTest {
 //	}
 
 	
-	@Test
-	@DisplayName("Finding teacher by id")
-	void testFindByStudentId(){
-		
-		List<Teacher> teacher = (List<Teacher>)this.teacherService.findTeacherByStudentId(1);
-		
-		//Comprobar tamaño de la lista
-		assertThat(teacher.get(0).getFirstName()).startsWith("Julián");
-		assertThat(teacher.get(1).getFirstName()).startsWith("Popench");
-	}
+//	@Test
+//	@DisplayName("Finding teacher by id")
+//	void testFindByStudentId(){
+//		
+//		List<Teacher> teacher = (List<Teacher>)this.teacherService.findTeacherByStudentId(1);
+//		
+//		//Comprobar tamaño de la lista
+//		assertThat(teacher.get(0).getFirstName()).startsWith("Julián");
+//		assertThat(teacher.get(1).getFirstName()).startsWith("Popench");
+//	}
 	
 	
 	/*@Test
