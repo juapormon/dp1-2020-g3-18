@@ -23,15 +23,15 @@ public class TeacherService {
 	private TeacherRepository teacherRepository;
 	private DepartmentRepository departmentRepository;
 
-	@Autowired
 	private UserService userService;
 
-	@Autowired
 	private AuthoritiesService authoritiesService;
 
 	@Autowired
-	public TeacherService(TeacherRepository teacherRepository) { 
+	public TeacherService(TeacherRepository teacherRepository, UserService userService, AuthoritiesService authoritiesService) { 
 		this.teacherRepository = teacherRepository;
+		this.userService = userService;
+		this.authoritiesService = authoritiesService;
 	}
 
 	@Transactional(readOnly = true)
