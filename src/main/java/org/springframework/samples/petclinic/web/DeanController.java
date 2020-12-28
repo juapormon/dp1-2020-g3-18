@@ -35,7 +35,7 @@ public class DeanController {
         dataBinder.setDisallowedFields("id");
     }
 
-//
+
 //	@GetMapping(value = {"/teachers/new"})
 //	public String newTeacherCreationForm(ModelMap model) {
 //
@@ -52,11 +52,11 @@ public class DeanController {
 //		}
 //		else {
 //			this.teachers.save(teacher);
-//			return "redirect:/teachers";
+//			return "redirect:/teachersList";
 //		}
 //	}
 //	
-	
+//	
 
 
 }

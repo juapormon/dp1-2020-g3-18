@@ -92,6 +92,32 @@ public class TeacherServiceTest {
 		
 		t1.setDepartments(departments);
 	}
+	//Test positivo 
+	@Test
+	@DisplayName("Finding teachers by student id")
+	void testFindTeacherByStudentId() {
+		
+		Collection<Teacher> ratedTeachers = this.teacherService.findTeacherByStudentId(2);
+		Student student = this.studentService.findStudentById(2);
+		Integer size = ratedTeachers.size();
+		
+		assertTrue(size >=1);
+		assertTrue(student.getTeachers() == ratedTeachers);
+	}
+	
+	//Test negativo
+	@Test
+	@DisplayName("Finding teachers by bad student id")
+
+	void testFindTeachersByBadStudentId() {
+		Integer wrongStudentId = 1991;
+		
+		//COMPROBAR findTeacher..
+		
+		assertTrue(teacherService.findTeacherByStudentId(wrongStudentId)==null);
+		
+		//assertThrows(AssertionError.class, () -> this.teacherService.findTeacherByStudentId(wrongStudentId));
+	}
 	
 //	@Test
 //	@DisplayName("Finding all teachers")
