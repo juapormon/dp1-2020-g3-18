@@ -22,13 +22,16 @@
                 <td>
                     <c:out value="${teacher.firstName}"/>
                 </td>
-               <!-- <td>
-                    <c:out value="${subject.curso}"/>
-                </td> --> 
                 <td>
-                    
-                </td>
-
+                    <c:forEach items="${teacher.subjects}" var="subject">
+                
+	                    <c:out value="${subject.name} "/>
+	                   
+	                    
+	                    
+	                </c:forEach>
+                </td> 
+                
                
             </tr> 
         </c:forEach>
