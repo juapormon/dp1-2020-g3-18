@@ -50,6 +50,13 @@
 								</div>																					
 							</div>	
 						</li>
+						<li>
+							<div class="row">
+								<div class="text-center">																					
+									<a href="<c:url value="/students/${student.id}/teacherToRate" />">My teachers to Rate</a>
+								</div>																					
+							</div>	
+						</li>
 					
 					
 					</ul>
