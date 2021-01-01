@@ -12,7 +12,12 @@ import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
+
 import org.springframework.samples.petclinic.repository.DepartmentRepository;
+
+import org.springframework.samples.petclinic.model.Teachers;
+import org.springframework.samples.petclinic.repository.ScoreRepository;
+
 import org.springframework.samples.petclinic.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,17 +26,23 @@ import org.springframework.transaction.annotation.Transactional;
 public class TeacherService {
 
 	private TeacherRepository teacherRepository;
+
 	private DepartmentRepository departmentRepository;
+
+	private ScoreRepository scoreRepository;
+
+
 
 	@Autowired
 	private UserService userService;
 
-	@Autowired
 	private AuthoritiesService authoritiesService;
 
 	@Autowired
-	public TeacherService(TeacherRepository teacherRepository) { 
+	public TeacherService(TeacherRepository teacherRepository, UserService userService, AuthoritiesService authoritiesService) { 
 		this.teacherRepository = teacherRepository;
+		this.userService = userService;
+		this.authoritiesService = authoritiesService;
 	}
 
 	@Transactional(readOnly = true)
@@ -55,10 +66,11 @@ public class TeacherService {
 	}
 
 	@Transactional(readOnly = true)
-	public Teacher findTeacherByLastName(String lastName) throws DataAccessException {
-		return teacherRepository.findByLastName(lastName);
+	public List<Teacher> findTeacherByFirstName(String firstName) throws DataAccessException {
+		return teacherRepository.findByFirstName(firstName);
 	}
 	
+
 	@Transactional(readOnly = true)
 	public List<Teacher> findTeacherByCollege(int id) throws DataAccessException {
 //		List<Teacher> teachers = new ArrayList<Teacher>();
@@ -76,6 +88,7 @@ public class TeacherService {
 		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
 	}
 	
+
 	@Transactional	
 	public List<Teacher> findTeachersFromDepartment(int departmentId) throws DataAccessException {
 		//Tengo un departament mame y quiero obtener la lista de teachers que tienen este department
@@ -86,5 +99,18 @@ public class TeacherService {
 		}
 		return result;
 	}
+
+	//Buscar profesor por id de estudiante
+	@Transactional(readOnly = true)
+	public Collection<Teacher> findTeacherByStudentId(int studentId) throws DataAccessException {
+		return teacherRepository.findByStudentId(studentId);
+	}
+	
+	public Collection<Teacher> teachersToRate(int studentId)throws DataAccessException{
+		return teacherRepository.teachersToRate(studentId);
+	}
+	
+	
+	
 
 }
