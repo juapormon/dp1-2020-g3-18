@@ -1,8 +1,6 @@
 
 package org.springframework.samples.petclinic.web;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +12,6 @@ import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.Teachers;
-import org.springframework.samples.petclinic.repository.ScoreRepository;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;

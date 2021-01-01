@@ -75,7 +75,7 @@ INSERT INTO externalevaluations(id,note,comment) VALUES (1, 8, 'Otro comentario 
 
 INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience, ext_evaluation) VALUES (1,1,1,1,1);
 
-INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
+INSERT INTO reports(id,reason, score_id) VALUES (5,'Comportamiento abusivo', 1);
 
 
 INSERT INTO subjects(id,name,curso) VALUES (111,'Diseño y pruebas', 3);
