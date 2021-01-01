@@ -14,6 +14,7 @@
             <th>Name</th>
             <th>City</th>
             <th>Teachers</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +22,11 @@
              <tr>
                 <td><c:out value="${college.name}"/>
                 <td><c:out value=" ${college.city}"/>
+                <td>
+                <c:forEach items="${college.teachers}" var="teacher">
+                <c:out value= "${teacher.firstName} "/> <c:out value= "${teacher.lastName}, "/>
+                </c:forEach>  
+                </td>
                 <td><spring:url value="/deans/colleges/{collegeId}/teachers" var="showTeachersUrl">
       				<spring:param name="collegeId" value="${college.id}"/>
   					</spring:url>

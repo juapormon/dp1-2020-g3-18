@@ -11,13 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "subjects")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Subject extends BaseEntity{
 
 	@NotBlank

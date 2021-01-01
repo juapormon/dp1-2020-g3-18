@@ -21,13 +21,16 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
 @Table(name = "teachers")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Teacher extends Person{
 	
 	//Attributes

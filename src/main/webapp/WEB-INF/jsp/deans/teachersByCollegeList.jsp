@@ -4,6 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 
 <petclinic:layout pageName="teachers">
     <h2>Teachers</h2>
@@ -13,8 +15,8 @@
         <tr>
             <th>First name</th>
             <th>Last name</th>
-
             <th>Subjects</th>
+            <th>Press to add</th>
 
         </tr>
         </thead>
@@ -25,28 +27,29 @@
                     <spring:url value="/teachers/{teacherId}" var="teacherUrl">
                     <spring:param name="teacherId" value="${teacher.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(teacherUrl)}"><c:out value="${teacher.firstName}"/></a>
+                    <c:out value="${teacher.firstName}"/>
                 </td>
                 <td>
                     <c:out value=" ${teacher.lastName}"/>
                 </td>
 
                 <td>
-                
                 	<c:forEach items="${teacher.subjects}" var="subject">
-                
 	                    <c:out value="${subject.name} "/>
-	                   
-	                    
-	                    
 	                </c:forEach>
-	                    
                 </td>
-
+				<td>
+				 <spring:url value="/deans/colleges/{collegeId}/teachers/{teacherId}/add" var="addTeacherToScoreUrl">
+                  	<spring:param name="collegeId" value="${collegeId}"/>
+                  	<spring:param name="teacherId" value="${teacher.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(addTeacherToScoreUrl)}"><c:out value="add to college"/></a> -->
+				</td>
                
             </tr> 
         </c:forEach>                   
         
         </tbody>
     </table>
+ 
 </petclinic:layout>
