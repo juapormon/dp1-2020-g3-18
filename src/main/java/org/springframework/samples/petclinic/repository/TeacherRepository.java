@@ -27,8 +27,8 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 //	public Collection<Teacher> findByLastName(@Param("lastName") String lastName);
 
 
-	@Query("select t from Teacher t where t.firstName LIKE %:firstName")
-	public List<Teacher> findByFirstName(@Param("firstName") String firstName);
+	//@Query("select t from Teacher t where t.firstName LIKE %:firstName")
+	public List<Teacher> findByFirstName( String firstName);
 
 	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null )")
 	Collection<Teacher> showTeacherWithScore();
@@ -54,7 +54,18 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	@Query("select t from Teacher t")
 	List<Teacher> findTeachersFromDepartment(int departmentId);
 	
-	@Query("select t from Teacher t where t.id in (select s.teacher from Score s where s.teacher is null  AND s.student in (select e.id from Student e where e.id = ?1))")
+//	@Query("select t from Teacher t where t.colleges in (select c from College c where c.id = ?1)")
+//	@Query("select t from Teacher t left join fetch t.colleges c where c.id =?1")
+	@Query("select t from Teacher t join t.colleges c where not c.id = ?1")
+	List<Teacher> findTeacherByCollegeId(int collegeId);
+  
+	//select * from teachers t where t.id in
+	//( select q.teacher_id from teachers_subjects q where q.subject_id in 
+	//(select s.subject_id from students_subjects s where s.student_id = 2 ))
+	
+	@Query(nativeQuery = true, value = "select * from teachers t where t.id in"
+			+ "( select q.teacher_id from teachers_subjects q where q.subject_id in "
+			+ "(select s.subject_id from students_subjects s where s.student_id =?1 ))")
 	Collection<Teacher> teachersToRate(int studentId);
 	
 }

@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.College;
+import org.springframework.samples.petclinic.model.Dean;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.repository.DeanRepository;
 import org.springframework.samples.petclinic.repository.TeacherRepository;
@@ -28,17 +30,19 @@ public class DeanService {
 		this.teacherRepository = teacherRepository;
 	}
 
-
-
 	@Transactional(readOnly = true)
 	public void saveTeacher(Teacher teacher) throws DataAccessException{
 		teacherRepository.save(teacher);
-		
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Teacher> findAll() throws DataAccessException {
-		return teacherRepository.findAll();
+	public Collection<Dean> findAll() throws DataAccessException {
+		return deanRepository.findAll();
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<College> findAllColleges() throws DataAccessException {
+		return deanRepository.findAllColleges();
 	}
 
 }

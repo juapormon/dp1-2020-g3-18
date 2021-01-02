@@ -32,6 +32,11 @@ public class ScoreService {
 		return scoreRepository.findAll();
 	}
 	
+	@Transactional(readOnly = true)	
+	public Collection<Score> findAllByTeacherId(int id){
+		return scoreRepository.findAllByTeacherId(id);
+	}
+	
 	
 	@Transactional()	
 	public void saveScore(@Valid Score score)  {

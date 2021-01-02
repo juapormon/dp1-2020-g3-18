@@ -52,11 +52,6 @@ public class TeacherService {
 		return teacher;
 	}
 
-//	@Transactional(readOnly = true)
-//	public Collection<Teacher> findTeacherBySubject(int i) throws DataAccessException {
-//		return teacherRepository.findBySubject(i);
-//	}
-
 	@Transactional(readOnly = true)
 	public Collection<Teacher> findTeachers() throws DataAccessException {
 		return teacherRepository.findAll();
@@ -75,9 +70,14 @@ public class TeacherService {
 		return teacherRepository.findByFirstName(firstName);
 	}
 	
-	
-	
 
+	@Transactional(readOnly = true)
+	public List<Teacher> findTeacherByCollege(int id) throws DataAccessException {
+//		List<Teacher> teachers = new ArrayList<Teacher>();
+//		teachers.addAll(teacherRepository.findAll());
+		return teacherRepository.findTeacherByCollegeId(id);
+	}
+	
 	@Transactional
 	public void saveTeacher(Teacher teacher) throws DataAccessException {
 		// creating teacher
