@@ -7,11 +7,18 @@ import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
 @Table(name = "externalevaluations")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class ExternalEvaluation extends BaseEntity{
 
 	//Attributes

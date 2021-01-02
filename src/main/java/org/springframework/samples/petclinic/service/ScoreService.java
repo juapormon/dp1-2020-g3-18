@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.service;
 
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,16 @@ public class ScoreService {
 	@Transactional(readOnly = true)	
 	public Score findScoreById(int id){
 		return scoreRepository.findById(id);
+	}
+	
+	@Transactional(readOnly = true)	
+	public Collection<Score> findAll(){
+		return scoreRepository.findAll();
+	}
+	
+	@Transactional(readOnly = true)	
+	public Collection<Score> findAllByTeacherId(int id){
+		return scoreRepository.findAllByTeacherId(id);
 	}
 	
 	

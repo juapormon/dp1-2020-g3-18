@@ -6,11 +6,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
 @Table(name = "deans")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Dean extends Person {
 	
 	//Attributes
@@ -21,7 +28,8 @@ public class Dean extends Person {
     @JoinColumn(name = "username")
 	private User user;
 	
-	@ManyToOne(optional=true) //Es posible que no haga falta el optional
+	@JoinColumn(name = "college_id")
+	@OneToOne(optional=true) //Es posible que no haga falta el optional
 	private College college;
 	
 	

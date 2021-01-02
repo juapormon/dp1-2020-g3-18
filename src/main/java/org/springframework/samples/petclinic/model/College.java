@@ -1,14 +1,26 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
 @Table(name = "colleges")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class College extends BaseEntity{
 	
 	//Attributes 
@@ -21,9 +33,10 @@ public class College extends BaseEntity{
 	
 	//Relationships
 	
-	//TODO: Esta relación no deberia estar
-//	@ManyToOne(optional = true) 
-//	private Dean dean;
+	@ManyToMany 
+	@JoinTable(name = "colleges_teachers", joinColumns = @JoinColumn(name = "college_id"),
+	inverseJoinColumns = @JoinColumn(name = "teacher_id"))
+	private List<Teacher> teachers;
 
 	
 	
