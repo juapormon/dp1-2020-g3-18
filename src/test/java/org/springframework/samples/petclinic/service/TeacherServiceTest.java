@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.assertj.core.util.Lists;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -93,31 +94,28 @@ public class TeacherServiceTest {
 		t1.setDepartments(departments);
 	}
 	//Test positivo 
-	@Test
-	@DisplayName("Finding teachers by student id")
-	void testFindTeacherByStudentId() {
+		@Test
+		@DisplayName("Finding teachers by student id")
+		void testFindTeacherByStudentId() {
+			
+			Collection<Teacher> ratedTeachers = this.teacherService.findTeacherByStudentId(1);
+			Student student = this.studentService.findStudentById(1);
+			Integer size = ratedTeachers.size();
+			
+			assertTrue(size != null);
+			assertTrue(ratedTeachers!= null);
+		}
 		
-		Collection<Teacher> ratedTeachers = this.teacherService.findTeacherByStudentId(2);
-		Student student = this.studentService.findStudentById(2);
-		Integer size = ratedTeachers.size();
-		
-		assertTrue(size >=1);
-		assertTrue(student.getTeachers() == ratedTeachers);
-	}
-	
-	//Test negativo
-	@Test
-	@DisplayName("Finding teachers by bad student id")
+		//Test negativo
+		@Test
+		@DisplayName("Finding teachers by bad student id")
 
-	void testFindTeachersByBadStudentId() {
-		Integer wrongStudentId = 1991;
-		
-		//COMPROBAR findTeacher..
-		
-		assertTrue(teacherService.findTeacherByStudentId(wrongStudentId)==null);
-		
-		//assertThrows(AssertionError.class, () -> this.teacherService.findTeacherByStudentId(wrongStudentId));
-	}
+		void testFindTeachersByBadStudentId() {
+			Integer wrongStudentId = 1991;
+			Collection<Teacher> emptyTeachers = new ArrayList<>();
+			Assertions.assertEquals(this.teacherService.findTeacherByStudentId(wrongStudentId), emptyTeachers);
+			//assertThrows(AssertionError.class, () -> this.teacherService.findTeacherByStudentId(wrongStudentId));
+		}
 	
 //	@Test
 //	@DisplayName("Finding all teachers")

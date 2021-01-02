@@ -64,4 +64,5 @@
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">My rated teachers</a>
     </sec:authorize>
 
+</petclinic:layout>
 
