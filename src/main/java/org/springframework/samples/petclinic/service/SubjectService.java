@@ -27,26 +27,15 @@ public class SubjectService {
 	}
 	
 	@Transactional(readOnly = true)	
-
-	public Optional<Subject> findSubjectById(int id) throws DataAccessException {
+	public Subject findSubjectById(int id) throws DataAccessException {
 		Subject subject = subjectRepository.findById(id);
 		assert subject != null;
 		return subject;
-
 	}
 	
 	@Transactional(readOnly = true)	
 	public Collection<Subject> findSubjects() throws DataAccessException {
 		return subjectRepository.findAll();
-	}
-	@Transactional
-	public void save(Subject subject) {
-		subjectRepository.save(subject);
-	}
-
-	public void delete(Subject subject) {
-		subjectRepository.delete(subject);
-		
 	}
 	
 	@Transactional

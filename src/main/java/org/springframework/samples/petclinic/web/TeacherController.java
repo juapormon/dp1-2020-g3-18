@@ -8,14 +8,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
-import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.Teachers;
 import org.springframework.samples.petclinic.service.ScoreService;
@@ -134,26 +132,8 @@ public class TeacherController {
 	public String showTeacherScoreList(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
 		Collection<Score> scores = this.teacherService.findScoresByTeacherId(teacherId);
 		model.put("scores", scores);
-		return "scores/scoresList"; 
-	} 
-	
-	@GetMapping(path="/teachers/{teacherId}/scores/delete/{scoreId}")
-	public String deleteScore(@PathVariable("teacherId") int teacherId, @PathVariable("scoreId") int scoreId, ModelMap modelMap){
-		String view = "scores/scoresList";
-		Optional<Score> score = scoreService.findScoreById(scoreId);
-		if(score.isPresent()) {
-			scoreService.delete(score.get());
-			modelMap.addAttribute("message", "Score successfully deleted!");
-			view = showTeacherScoreList(teacherId, modelMap);
-		} else {
-			modelMap.addAttribute("message", "Score not found!");
-			view = showTeacherScoreList(teacherId, modelMap);
-		}
-		return view;
+		return "scores/scoresList";
 	}
-	
-
-
 
 //	@GetMapping(value = { "/teachers/{teacherId}/scores/comments" })  
 //	public String showTeacherCommentList(Teacher teacher, Map<String, Object> model) {
