@@ -61,6 +61,9 @@ public class TeacherController {
 	@GetMapping(value = { "teachers" })
 	public String showTeacherList(Map<String, Object> model) {
 
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		Student student = this.studentService.findStudentByUsername(principal);
+		model.put("student", student);
 		Teachers teachers = new Teachers();
 		teachers.getTeachersList().addAll(this.teacherService.findTeachers());
 		model.put("teachers", teachers);
