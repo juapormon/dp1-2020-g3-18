@@ -134,8 +134,7 @@ public class StudentController {
 	@GetMapping("students/{studentId}/teacherToRate")
 	public ModelAndView teacherToRate(@PathVariable("studentId") int studentId) {
 		ModelAndView mav = new ModelAndView("teachers/teacherToRate");
-		Student student = studentService.findStudentById(studentId);
-		Collection<Teacher> teachers = teacherService.teachersToRate(student.getId());
+		Collection<Teacher> teachers = teacherService.teachersToRate(studentId);
 		mav.addObject("teachers",teachers);
 		return mav;
 	}
