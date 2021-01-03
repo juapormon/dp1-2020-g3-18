@@ -121,6 +121,9 @@ public class DeanController {
 			model.put("collegeId", collegeId);
 			Teacher teacherAdded = this.teacherService.findTeacherById(teacherId);
 			model.put("teacher", teacherAdded);
+			Collection<Teacher> teachers = this.teacherService.findTeachers();
+			model.put("teachers", teachers);
+			model.put("nono", "Error: No puedes añadir a ese profesor porque ya esta en la lista");
 			result.rejectValue("name", "This teacher is already in the college");
 			return "deans/teachersByCollegeList";
 		}else {
