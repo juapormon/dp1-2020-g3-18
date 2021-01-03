@@ -3,16 +3,18 @@ package org.springframework.samples.petclinic.service;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Score;
+import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.repository.ScoreRepository;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Collection;
-
+import java.util.Optional;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -28,6 +30,18 @@ public class ScoreServiceTests {
 	
 	Score score1;
 	Score score2;
+	
+	@SuppressWarnings("unlikely-arg-type")
+	@Test
+	@DisplayName("Delete scores")
+	void deleteSubject() {
+		Collection<Score> lista = this.scoreService.findScores();
+		Optional<Score> score = this.scoreService.findScoreById(1);
+		lista.remove(score);
+		assertThat(lista.size()-1);		
+		
+	}
+	
 	
 //	@BeforeEach
 //	void initAll() {

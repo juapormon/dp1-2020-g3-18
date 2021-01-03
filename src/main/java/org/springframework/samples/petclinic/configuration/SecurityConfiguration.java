@@ -38,21 +38,30 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users/new").permitAll()
 				.antMatchers("/admin/**").hasAnyAuthority("admin")
 				.antMatchers("/scores/**").permitAll()
-				.antMatchers("/deans/**").hasAnyAuthority("dean","admin")
+				.antMatchers("/deans/**").hasAnyAuthority("dean","admin") 
 				.antMatchers("/colleges/**").hasAnyAuthority("dean","admin") 
 				.antMatchers("/teachers").permitAll()
 				.antMatchers("/teachers/new").hasAnyAuthority("dean","admin")
 				.antMatchers("/myTeachers/**").hasAnyAuthority("student","admin")
 				.antMatchers("/teachers/*").permitAll()
+				.antMatchers("/teachers/**").permitAll()
 				.antMatchers("/teachers/*/scores").permitAll()
 				.antMatchers("/teachers/*/scores/new").hasAnyAuthority("admin", "student")
 				.antMatchers("/studentsWithScore").hasAnyAuthority("admin")
 				.antMatchers("/students/**").permitAll()
 				.antMatchers("/students/new").permitAll()
+				.antMatchers("/subjects/mySubjects/{studentId}").hasAnyAuthority("student")
+				.antMatchers("/teachers/*/scores/*/edit").hasAnyAuthority("admin")
 				.antMatchers("/subjects/**").permitAll()
 				.antMatchers("/teachersWithScore").hasAnyAuthority("admin")
 				.antMatchers("/findTeachers").permitAll()
 				.antMatchers("/teachersFound").permitAll()
+				.antMatchers("/departments/**").permitAll()
+				.antMatchers("/teachersByDepartment").permitAll()
+				.antMatchers("/teachersByDepartment/**").permitAll()
+				.antMatchers("/myTeachers").permitAll()
+				.antMatchers("/reports").hasAnyAuthority("teacher")
+				.antMatchers("/reports/**").hasAnyAuthority("teacher")
 				.anyRequest().denyAll()
 				.and()
 				 	.formLogin()
@@ -91,5 +100,3 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 }
-
-
