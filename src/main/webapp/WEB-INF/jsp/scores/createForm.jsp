@@ -28,6 +28,9 @@
                     <c:choose>
                         <c:when test="${score['new']}">
                             <button class="btn btn-default" type="submit">Add Score</button>
+                            <h2>
+                            You must keep in mind that if you already have a score on this teacher, the new score won't be saved.
+                            </h2>
                         </c:when>
                         <c:otherwise>
                             <button class="btn btn-default" type="submit">Update Score</button>
