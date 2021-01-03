@@ -51,5 +51,5 @@
         
         </tbody>
     </table>
-     <h4 style="color:red;"><c:out value="${nono}"></c:out></h4>
+ 
 </petclinic:layout>
