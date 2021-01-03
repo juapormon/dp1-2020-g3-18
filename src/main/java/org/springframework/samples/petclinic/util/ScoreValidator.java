@@ -30,21 +30,15 @@ public class ScoreValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		Score score = (Score) target;
-		Collection<Score> scores = this.scoreService.findAll();
-		List<Student> students = new ArrayList<>(); 
-		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
-		Student student = this.studentService.findStudentByUsername(principal);
-		score.setStudent(student);
-		for(Score s: scores) {
-			students.add(s.getStudent());
-		}
-		if(students.contains(score.getStudent())) {
-			errors.rejectValue("comment", "duplicated score", "You already have a score on this teacher");
-		}else if(score.getValu()==null) {
+
+		if(score.getValu()==null) {
 			errors.rejectValue("valu", "null score", "You cannot leave it blank");
-		}else if(score.getValu()>5) {
+		}else if(score.getValu()>5 || score.getValu()<0) {
 			errors.rejectValue("valu", "bad range", "Value must be between 0 and 5");
 		}
+		if(score.getComment().equals("")) {
+			errors.rejectValue("comment", "blank comment", "You cannot leave it blank");
+		} 
 
 	}
 	

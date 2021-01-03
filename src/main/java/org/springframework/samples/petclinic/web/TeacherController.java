@@ -151,6 +151,7 @@ public class TeacherController {
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		score.setTeacher(teacher);
 		model.put("score", score);
+		model.put("teacher", teacher);
 		return "scores/createForm";
 	}
 
@@ -159,6 +160,8 @@ public class TeacherController {
 			ModelMap model) {
 		if (result.hasErrors()) {
 			model.put("score", score);
+			Teacher teacher = teacherService.findTeacherById(teacherId);
+			model.put("teacher", teacher);
 			return "scores/createForm";
 		} else {
 			String principal = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -166,12 +169,7 @@ public class TeacherController {
 			score.setStudent(student);
 			Teacher teacher = this.teacherService.findTeacherById(teacherId);
 			score.setTeacher(teacher);
-			try{
-				score.getValu().equals(null);
-			}catch(NullPointerException ex) {
-				result.rejectValue("valu", "empty value", "value must not be empty");
-			}
-			this.scoreService.saveScore(score);
+			this.scoreService.saveScore2Create(score, teacherId);
 			return "redirect:/teachers/{teacherId}/scores";
 		}
 	}
@@ -180,6 +178,8 @@ public class TeacherController {
 	public String initEditForm(@PathVariable int teacherId, @PathVariable int scoreId, ModelMap model) {
 		Score score = this.scoreService.findScoreById(scoreId);
 		model.put("score", score);
+		Teacher teacher = this.teacherService.findTeacherById(teacherId);
+		model.put("teacher", teacher);
 		return "scores/createForm";
 	}
 
@@ -187,15 +187,11 @@ public class TeacherController {
 	public String processEditForm(@PathVariable int teacherId, @PathVariable int scoreId, @Valid Score score,
 			BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
+			Teacher teacher = this.teacherService.findTeacherById(teacherId);
+			model.put("teacher", teacher);
 			model.put("score", score);
 			return "scores/createForm";
 		}else {
-			try{
-				score.getValu().equals(null);
-			}catch(NullPointerException ex) {
-				result.rejectValue("valu", "empty value", "value must not be empty");
-				return "scores/createForm";
-			}
 			Score uno = this.scoreService.findScoreById(scoreId);
 			BeanUtils.copyProperties(score, uno, "id", "teacher", "student");
 			this.scoreService.saveScore(score);
