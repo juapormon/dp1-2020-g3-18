@@ -18,6 +18,9 @@ public interface ScoreRepository extends Repository<Score, Integer>{
 	@Query("select s from Teacher s where s.id = ?1")
 	Collection<Score> findAllByTeacherId(int id) throws DataAccessException;
 
+	@Query("select s from Score s where s.teacher.id = ?1")
+	Collection<Score> findAllScoreByTeacherId(int id) throws DataAccessException;	
+	
 	void save(@Valid Score score) throws DataAccessException;
 	
 	void delete(@Valid Score score);

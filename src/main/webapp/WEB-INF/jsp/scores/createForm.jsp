@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Teacher</label>
                     <div class="col-sm-10">
-                        <c:out value="${score.teacher.firstName} ${score.teacher.lastName}"/>
+                        <c:out value="${teacher.firstName} ${teacher.lastName}"/>
                     </div>
                 </div>
                 <petclinic:inputField label="Value" name="valu"/>

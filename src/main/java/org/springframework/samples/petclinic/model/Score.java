@@ -30,7 +30,6 @@ public class Score extends BaseEntity {
 	@Range(min=0, max=10)
 	private Integer valu;
 
-	@NotBlank
 	private String comment; 
 	
 	//Relationships
