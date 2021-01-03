@@ -27,7 +27,6 @@ import lombok.Setter;
 public class Score extends BaseEntity {
 
 	//Attributes
-	@Range(min=0, max=10)
 	private Integer valu;
 
 	private String comment; 
