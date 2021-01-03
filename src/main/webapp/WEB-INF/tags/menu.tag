@@ -40,28 +40,9 @@
 				
  
 				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers"
-					title="teachers" dropdown="${true}">
-	
-					<ul class="dropdown-menu">
-						<li>
-							<div class="row">
-								<div class="text-center">																					
-									<a href="<c:url value="/students/${student.id}/showRatedTeachers" />">My rated teachers</a>
-								</div>																					
-							</div>	
-						</li>
-						<li>
-							<div class="row">
-								<div class="text-center">																					
-									<a href="<c:url value="/students/${student.id}/teacherToRate" />">My teachers to Rate</a>
-								</div>																					
-							</div>	
-						</li>
-					
-					
-					</ul>
+					title="teachers">
 					<span aria-hidden="true"></span>
-					
+					<span>Teachers</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'departments'}" url="/departments"
