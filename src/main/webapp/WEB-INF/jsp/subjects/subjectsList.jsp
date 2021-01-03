@@ -39,10 +39,25 @@
                
             </tr> 
         </c:forEach>
+        
+             
         </tbody>
+
     </table>
     <spring:url value="/subjects/new" var="addUrl">
     </spring:url>
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add Subject</a> 
+
+    </table> 
+    <h3>
+         <spring:url value="/subjects/mySubjects/{studentId}" var="mySubjectsUrl">
+                     <spring:param name="studentId" value="${student.id}"/>
+                     </spring:url>
+                    <a href="${fn:escapeXml(mySubjectsUrl)}"><c:out value="My Subjects"/></a>
+                </h3>
+    
+                    
+    
+
 </petclinic:layout>
 

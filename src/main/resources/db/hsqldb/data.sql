@@ -30,6 +30,20 @@ INSERT INTO authorities(id,username,authority) VALUES (11,'fran','student');
 INSERT INTO users(username,password,enabled) VALUES ('s','s',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (12,'s','student');
 
+INSERT INTO users(username,password,enabled) VALUES ('julian','julian',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (13,'julian','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('pop','pop',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (14,'pop','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('macarron32','macarron32',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (15,'macarron32','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('ambrella','ambrella',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (16,'ambrella','teacher');
+
+INSERT INTO users(username,password,enabled) VALUES ('abe','abe',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (17,'abe','teacher');
 
 INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas');
 INSERT INTO students(id,first_name,last_name,username) VALUES (66, 'administrador', 'Rodríguez Rodríguez', 'a');
@@ -37,24 +51,30 @@ INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', '
 INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', 'Surmano', 's');
 
 
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
---INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julian', 'Locuelo García', 'julian');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'Arejo Pínchez', 'macarron32');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lambert Ginni', 'abe');
 
 
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
+
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Las clases de este profesor me parecen un autentico toston, creo que no debería deshaogarse tanto con nosotros',1,1);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (2, 5, 'Las clases de este profesor estan mejorando desde el ultimo trimestre, le falta confianza',1,1);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (3, 9, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,1);
+
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (4, 3, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (5, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 6, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,3);
 
 
-INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
+
+
 
 INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
 
---INSERT INTO subjects(id,name,curso) VALUES (1, 'Diseño y Pruebas 1', 3);
-
-
-
--- INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'juloga1');
--- INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'María', 'Mazorca Pontevedra', 'mamapon1');
--- 
+INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
+INSERT INTO deans(id,first_name,last_name,username,college_id) VALUES (2, 'Paco', 'Administrador', 'a', 1);
 
 
 
@@ -68,7 +88,7 @@ INSERT INTO externalevaluations(id,note,comment) VALUES (1, 8, 'Otro comentario 
 
 INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience, ext_evaluation) VALUES (1,1,1,1,1);
 
-INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
+INSERT INTO reports(id,reason, score_id) VALUES (5,'Comportamiento abusivo', 1);
 
 
 INSERT INTO subjects(id,name,curso) VALUES (111,'Diseño y pruebas', 3);
@@ -79,20 +99,42 @@ INSERT INTO subjects(id,name,curso) VALUES (115,'Sistemas Operativos', 2);
 INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
 INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
 INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
---Si quieres una collection de algo tienes que hacer lo siguient
---Lo voy haciendo mejor
-
---INSERT INTO teachers(id,first_name,last_name,username) VALUES (98, 'test', 'test', 'test');
---Las demas cosas me dan igual porque no tienen ahora mismo NotNull o NotBlank
---INSERT INTO scores(id,point,comment) VALUES (1, 1, 'Comentario del score 1');
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (8, 5, 'test',98);
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (54, 5, 'test',98);
---El id de teacher es el 98 que hemos creado, entonces
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (2,5, 'test',98) --Todas estas scores se le estan añadiendo tb a su collection
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (3,5, 'test',98) --de scores, entiendes? aaaaaa esto es lo que nosabia coño, va va
---INSERT INTO scores(id,point,comment,teacher_id) VALUES (3,5, 'test',98) -- entonces creo que puedo continuar con esto, y te pregunto a la 
---tarde si me quedo pillado otra vez, vava perfe, me dices lo que sea, de todos modos prueba que no pete este data xd
 
 
+INSERT INTO departments(id,name) VALUES (1,'Lenguaje y sistemas informaticos');
+INSERT INTO departments(id,name) VALUES (2,'Tecnologia electronica');
+INSERT INTO departments(id,name) VALUES (3,'Matematicas aplicadas');
+INSERT INTO departments(id,name) VALUES (4,'Ingenieria del diseño');
+INSERT INTO departments(id,name) VALUES (5,'Electronica y magnetismo');
+
+
+INSERT INTO teachers_subjects VALUES (1,111);
+INSERT INTO teachers_subjects VALUES (2,112);
+INSERT INTO teachers_subjects VALUES (1,113);
+INSERT INTO teachers_subjects VALUES (3,114);
+INSERT INTO teachers_subjects VALUES (2,118);
+INSERT INTO teachers_subjects VALUES (4,115);
+INSERT INTO teachers_subjects VALUES (5,117);
+
+INSERT INTO teachers_departments VALUES (1,1);
+INSERT INTO teachers_departments VALUES (2,2);
+INSERT INTO teachers_departments VALUES (1,3);
+INSERT INTO teachers_departments VALUES (3,2);
+INSERT INTO teachers_departments VALUES (2,5);
+INSERT INTO teachers_departments VALUES (4,4);
+INSERT INTO teachers_departments VALUES (5,3);
+
+
+INSERT INTO students_subjects VALUES (2,111);
+INSERT INTO students_subjects VALUES (2,112);
+INSERT INTO students_subjects VALUES (2,113);
+INSERT INTO students_subjects VALUES (1,114);
+INSERT INTO students_subjects VALUES (1,115);
+INSERT INTO students_subjects VALUES (3,116);
+
+INSERT INTO subjects_departments VALUES(111,1);
+INSERT INTO subjects_departments VALUES(112,2);
+INSERT INTO subjects_departments VALUES(113,1);
+INSERT INTO subjects_departments VALUES(114,2);
 
 

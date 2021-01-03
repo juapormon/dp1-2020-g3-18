@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -34,7 +35,9 @@ public class StudentService {
 
 	@Transactional(readOnly = true)
 	public Student findStudentById(int id) throws DataAccessException {
-		return studentRepository.findById(id);
+		Student student = studentRepository.findById(id);
+		assert student != null;
+		return student;
 	}
 
 	@Transactional(readOnly = true)
@@ -65,6 +68,18 @@ public class StudentService {
 	public Student findStudentByUsername(String username) throws DataAccessException {
 		return studentRepository.findStudentByUsername(username);
 	}
+	
+	@Transactional
+	public List<Subject> findMySubjects(int i){
+		return studentRepository.findMySubjects(i);
+	}
+
+
+	public Collection<Student> myTeachers(int id) throws DataAccessException{
+		return studentRepository.myTeachers(id);
+
+	}
 
 	
+
 }

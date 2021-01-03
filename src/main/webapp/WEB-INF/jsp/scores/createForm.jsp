@@ -8,7 +8,7 @@
 <petclinic:layout pageName="teachers">
     <jsp:body>
         <h2>
-            New Score
+          <c:choose><c:when test="${score['new']}">New </c:when><c:otherwise>Update </c:otherwise></c:choose>Score
         </h2>
          <form:form modelAttribute="score"
                    class="form-horizontal">
@@ -25,7 +25,17 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                	<button class="btn btn-default" type="submit">Add Score</button>
+                    <c:choose>
+                        <c:when test="${score['new']}">
+                            <button class="btn btn-default" type="submit">Add Score</button>
+                            <h2>
+                            You must keep in mind that if you already have a score on this teacher, the new score won't be saved.
+                            </h2>
+                        </c:when>
+                        <c:otherwise>
+                            <button class="btn btn-default" type="submit">Update Score</button>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </form:form>

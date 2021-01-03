@@ -7,19 +7,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import lombok.Data;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.boot.context.properties.ConstructorBinding;
 
-@Data
+import com.sun.istack.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "scores")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Score extends BaseEntity {
 
 	//Attributes
-
 	private Integer valu;
 
-	@NotBlank
-	private String comment;
+	private String comment; 
 	
 	//Relationships
 	@ManyToOne

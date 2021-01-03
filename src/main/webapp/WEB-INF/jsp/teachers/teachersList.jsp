@@ -8,12 +8,15 @@
 
 <petclinic:layout pageName="teachers">
     <h2>Teachers</h2>
-
+ 
    <table id="teachersTable" class="table table-striped">
         <thead>
         <tr>
             <th>First name</th>
             <th>Last name</th>
+
+            <th>Subjects</th>
+
         </tr>
         </thead>
         <tbody>
@@ -28,9 +31,23 @@
                 <td>
                     <c:out value=" ${teacher.lastName}"/>
                 </td>
+
+                <td>
+                
+                	<c:forEach items="${teacher.subjects}" var="subject">
+                
+	                    <c:out value="${subject.name} "/>
+	                   
+	                    
+	                    
+	                </c:forEach>
+	                    
+                </td>
+
                
             </tr> 
-        </c:forEach>
+        </c:forEach>                   
+        
         </tbody>
     </table>
         
@@ -40,5 +57,7 @@
     <sec:authorize access="hasAuthority('admin')">
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Teachers With Score</a>
     </sec:authorize>
-</petclinic:layout>
+    <a class="btn btn-default" href="<c:url value="/students/${student.id}/showRatedTeachers" />">My rated teachers</a>
+    <a class="btn btn-default"  href="<c:url value="/students/${student.id}/teacherToRate"  />">My teachers to Rate</a>
 
+</petclinic:layout>

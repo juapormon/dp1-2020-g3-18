@@ -1,14 +1,29 @@
 package org.springframework.samples.petclinic.web;
 
+
+import java.util.List;
+
+import java.util.Collection;
+
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Students;
+
+import org.springframework.samples.petclinic.model.Subject;
+import org.springframework.samples.petclinic.model.Teachers;
+
+import org.springframework.samples.petclinic.model.Teacher;
+import org.springframework.samples.petclinic.repository.TeacherRepository;
+import org.springframework.samples.petclinic.service.ScoreService;
+
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -27,13 +42,15 @@ public class StudentController {
 
 	private final StudentService studentService;
 	private final TeacherService teacherService;
+	private final ScoreService scoreService;
 
 
 	@Autowired
-	public StudentController(StudentService studentService, TeacherService teacherService) {
+	public StudentController(StudentService studentService, TeacherService teacherService, ScoreService scoreService) {
 
 		this.studentService = studentService;
 		this.teacherService = teacherService;
+		this.scoreService = scoreService;
 
 	}
 
@@ -89,43 +106,43 @@ public class StudentController {
 		}
 	}
 	
-//	@GetMapping(value = "/studentsForm")
-//	public String studentsForm(Map<String, Object> model) {
-//		model.put("Students", new Student());
-//		return "students/studentsForm";
-//	}
+
+	@GetMapping(value = "/subjects/mySubjects/{studentId}")
+	public String listMySubjects(@PathVariable("studentId") int studentId, Map<String, Object> model ) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.put("principal", principal);
+		List<Subject> subjects = studentService.findMySubjects(studentId);
+		model.put("subjects", subjects);
+		Student student = studentService.findStudentById(studentId);
+		model.put("student", student);
+		return "/students/mySubjects";
+
+	}
 	
-//	@GetMapping(value = "/students/new")
-//	public String initCreationForm(Map<String, Object> model) {
-//		Student student = new Student();
-//		model.put("student", student);
-//		return "student/createOrUpdateStudentForm";
-//	}
-	
-//	@GetMapping(value = { "/myTeachers/{subjectid}" })
-//	public String showMyScorableTeachersList(Map<String, Object> model, @PathVariable("subjectid") int i) {
-//
-//		Teachers teachers = new Teachers();
-//		teachers.getTeachersList().addAll(this.teacherService.findTeacherBySubject(i));
-//		model.put("teachers", teachers);
-//		return "teachers/scorableTeachers";
-//		
-//	} 
-	
-	@GetMapping("/myTeachers/{teacherId}")
-	public ModelAndView showStudent(@PathVariable("teacherId") int teacherId) {
-		ModelAndView mav = new ModelAndView("teachers/scorableTeachers");
-		mav.addObject(this.teacherService.findTeacherBySubject(teacherId));
+
+	@GetMapping("students/{studentId}/showRatedTeachers")
+	public ModelAndView showMyRatedTeachers(@PathVariable("studentId") int studentId) {
+		ModelAndView mav = new ModelAndView("teachers/myRatedTeachersList");
+		Student student = studentService.findStudentById(studentId);
+		Collection<Teacher> teachers = teacherService.findTeacherByStudentId(student.getId());
+		
+		//"teachers" hace referencia a como se va a llamar en el .jsp
+		mav.addObject("teachers",teachers);
 		return mav;
 	}
 	
-//
-//	@GetMapping(value = { "/students.xml" })
-//	public @ResponseBody Students showResourcesTeacherList() {
-//
-//		Students students = new Students();
-//		students.getStudentList().addAll(this.studentService.studentWithScore());
-//		return students;
-//	}
+	@GetMapping("students/{studentId}/teacherToRate")
+	public ModelAndView teacherToRate(@PathVariable("studentId") int studentId) {
+		ModelAndView mav = new ModelAndView("teachers/teacherToRate");
+		Collection<Teacher> teachers = teacherService.teachersToRate(studentId);
+		mav.addObject("teachers",teachers);
+		return mav;
+	}
+	
+	
+	
+	
+
+
 
 }

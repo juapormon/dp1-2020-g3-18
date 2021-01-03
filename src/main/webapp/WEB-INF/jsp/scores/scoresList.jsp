@@ -11,16 +11,20 @@
     <table id="scoresTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Point</th>
+            <th>Value</th>
             <th>Comment</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${scores.scoreList}" var="score">
+        <c:forEach items="${scores}" var="score"> 
             <tr>
                 <td>
-                    <c:out value="${score.valu}"/>
+                    <spring:url value="/teachers/{teacherId}/scores/{scoreId}/edit" var="editScoreUrl">
+                    <spring:param name="teacherId" value="${score.teacher.id}"/>
+                    <spring:param name="scoreId" value="${score.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(editScoreUrl)}"><c:out value="${score.valu}"/></a>
                 </td>
                 <td>
                     <c:out value=" ${score.comment}"/>
@@ -33,11 +37,10 @@
                     <a href="${fn:escapeXml(scoreUrl)}">Delete</a>
                 </td>
             </tr>
-        </c:forEach>
+        </c:forEach> 
         </tbody>
     </table>
-    
-    <h2>Comments</h2> 
+        <h2>Comments</h2> 
 
 	    <table class="table table-striped">
 	
@@ -45,27 +48,25 @@
         <tr>
             <th>Comment</th>
             <th>Student who made it</th>
-            <!-- <th>Actions</th> -->
+             <th>Report comment</th>
+
         </tr>
         </thead>
         <tbody>
-      		<c:forEach items="${scores.scoreList}" var="scor">
+      		<c:forEach items="${scores}" var="scor"> <!-- -->
 				<tr>
 					<td><b><c:out value="${scor.comment}"/></b></td>
 					<td><b><c:out value="${scor.student.firstName} ${scor.student.lastName}"/></b></td>
+					<td>
+                    <spring:url value="/reports/new/{scoreId}" var="reportUrl">
+                    <spring:param name="scoreId" value="${scor.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(reportUrl)}"><c:out value="Report"/></a>
+                	</td>
 				</tr>
-				<%-- <td>
-                	<spring:url value="scores/delete/{scoreId}" var="scoreUrl">
-                		<spring:param name="scoreId" value ="${score.id}"/>
-                	</spring:url>
-                    <a href="${fn:escapeXml(scoreUrl)}">Delete</a>
-                </td> --%>
 			</c:forEach>
         </tbody>
     </table>
-    
-    <h2>Total amount of scores:</h2>
-    <c:out value="${scores.totalScores}"> </c:out> 
 
      <!--
     <table class="table table-striped">
