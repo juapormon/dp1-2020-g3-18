@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Collection;
-
+import java.util.Optional;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -37,10 +37,19 @@ public class ScoreServiceTests {
 	Score score1;
 	Score score2;
 	
+
+	
+	
+//	@BeforeEach
+//	void initAll() {
+//		score1 = new Score(7, "buen profesor", new Teacher());
+//	}
+
 	@BeforeEach
 	void initAll() {
 		score1 = new Score(7, "buen profesor",new Student(), new Teacher());
 	}
+
 	
 	//Casos positivos
 	@Test
