@@ -15,6 +15,8 @@ import org.springframework.samples.petclinic.service.ReportService;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
+import org.springframework.samples.petclinic.util.ReportValidator;
+import org.springframework.samples.petclinic.util.ScoreValidator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,7 +46,11 @@ public class ReportController {
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
-
+	
+	@InitBinder("report")
+	public void initReportBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new ReportValidator(reportService));
+	}
 	
 	@GetMapping(value = {"/reports/new/{scoreId}"})
 	public String initCreationForm(@PathVariable int scoreId, ModelMap model) {

@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Report;
+import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.repository.ReportRepository;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,9 @@ public class ReportService {
 	
 	@Transactional(readOnly = true)	
 	public Report findReportById(int id){
-		return reportRepository.findById(id);
+		Report report = reportRepository.findById(id);
+		assert report != null;
+		return report;
 	}
 	
 	

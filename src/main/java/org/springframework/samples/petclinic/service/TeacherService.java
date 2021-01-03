@@ -9,15 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Department;
 import org.springframework.samples.petclinic.model.Score;
-import org.springframework.samples.petclinic.model.Student;
-import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Teacher;
-
 import org.springframework.samples.petclinic.repository.DepartmentRepository;
-
-import org.springframework.samples.petclinic.model.Teachers;
-import org.springframework.samples.petclinic.repository.ScoreRepository;
-
 import org.springframework.samples.petclinic.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,9 +21,6 @@ public class TeacherService {
 	private TeacherRepository teacherRepository;
 
 	private DepartmentRepository departmentRepository;
-
-	private ScoreRepository scoreRepository;
-
 
 
 	@Autowired
@@ -103,14 +93,19 @@ public class TeacherService {
 	//Buscar profesor por id de estudiante
 	@Transactional(readOnly = true)
 	public Collection<Teacher> findTeacherByStudentId(int studentId) throws DataAccessException {
-		return teacherRepository.findByStudentId(studentId);
+		Collection<Teacher> teachers = teacherRepository.findByStudentId(studentId);
+		assert !teachers.isEmpty();
+		return teachers;
 	}
 	
 	public Collection<Teacher> teachersToRate(int studentId)throws DataAccessException{
 		return teacherRepository.teachersToRate(studentId);
 	}
 	
-	
+	@Transactional(readOnly = true)
+	public Teacher findTeacherByUsername(String username) throws DataAccessException {
+		return teacherRepository.findTeacherByUsername(username);
+	}
 	
 
 }
