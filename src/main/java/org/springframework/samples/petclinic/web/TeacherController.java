@@ -53,7 +53,7 @@ public class TeacherController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
-	@InitBinder("report")
+	@InitBinder("score")
 	public void initTeacherBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
 	}
