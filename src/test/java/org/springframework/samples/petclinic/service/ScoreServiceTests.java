@@ -32,7 +32,7 @@ public class ScoreServiceTests {
 	
 	ScoreRepository repo = mock(ScoreRepository.class);
 	
-	ScoreService scoreService = new ScoreService(repo);
+	ScoreService scoreService = new ScoreService(repo, null);
 	
 	Score score1;
 	Score score2;
