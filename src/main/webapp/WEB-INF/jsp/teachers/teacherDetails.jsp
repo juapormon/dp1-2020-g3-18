@@ -46,11 +46,6 @@
         <spring:param name="teacherId" value="${teacher.id}"/>
     </spring:url>
     <a href="${fn:escapeXml(showScoresUrl)}" class="btn btn-default">Show Score and Comment List</a>
-    
-    <spring:url value="{teacherId}/studentsRated" var="studentsRatedUrl">
-        <spring:param name="teacherId" value="${teacher.id}"/>
-    </spring:url>
-    <a href="${fn:escapeXml(studentsRatedUrl)}" class="btn btn-default">Students Rated</a>
 
 
 </petclinic:layout>

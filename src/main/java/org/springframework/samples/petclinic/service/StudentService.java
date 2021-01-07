@@ -79,10 +79,7 @@ public class StudentService {
 		return studentRepository.myTeachers(id);
 
 	}
-	
-	public Collection<Student> StudentsRatedATeacher(int teacherId) throws DataAccessException{
-		return studentRepository.StudentsRatedATeacher(teacherId);
-	}
+
 	
 
 }

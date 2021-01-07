@@ -57,9 +57,7 @@
     <sec:authorize access="hasAuthority('admin')">
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Teachers With Score</a>
     </sec:authorize>
-  
     <a class="btn btn-default" href="<c:url value="/students/${student.id}/showRatedTeachers" />">My rated teachers</a>
     <a class="btn btn-default"  href="<c:url value="/students/${student.id}/teacherToRate"  />">My teachers to Rate</a>
-
 
 </petclinic:layout>
