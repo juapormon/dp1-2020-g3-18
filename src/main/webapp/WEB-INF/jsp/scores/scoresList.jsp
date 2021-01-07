@@ -13,6 +13,7 @@
         <tr>
             <th>Value</th>
             <th>Comment</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,13 @@
                 <td>
                     <c:out value=" ${score.comment}"/>
                 </td>
+                <td>
+                	<spring:url value="/teachers/{teacherId}/scores/delete/{scoreId}" var="scoreUrl">
+                		<spring:param name="teacherId" value ="${score.teacher.id}"/>
+                		<spring:param name="scoreId" value ="${score.id}"/>
+                	</spring:url>
+                    <a href="${fn:escapeXml(scoreUrl)}">Delete</a>
+                </td>
             </tr>
         </c:forEach> 
         </tbody>
@@ -41,6 +49,7 @@
             <th>Comment</th>
             <th>Student who made it</th>
              <th>Report comment</th>
+
         </tr>
         </thead>
         <tbody>

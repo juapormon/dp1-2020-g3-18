@@ -35,6 +35,16 @@ public class ReportServiceTest {
 	
 	@Autowired
 	protected ScoreService scoreService; 
+
+	
+	ScoreRepository scoreRepo = mock(ScoreRepository.class);
+	
+	ScoreService scoreService2 = new ScoreService(scoreRepo);
+	
+	ReportRepository reportRepo = mock(ReportRepository.class);
+	
+	ReportService reportService2 = new ReportService(reportRepo);
+
 	
 	//Casos positivos
 	@Test
