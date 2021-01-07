@@ -61,31 +61,22 @@
 					<span aria-hidden="true"></span>
 					<span>Find Teachers</span>
 				</petclinic:menuItem>
-				<petclinic:menuItem active="${name eq 'subject'}" url="/subjects"
+			<petclinic:menuItem active="${name eq 'subject'}" url="/subjects"
 					title="subjects">
 					<span aria-hidden="true"></span>
 					<span>Subjects</span>
-				</petclinic:menuItem>
-				<petclinic:menuItem active="${name eq 'subject'}" url="/subjects/mySubjects/{studentId}"
-					title="mySubjects">
-					 <%-- <spring:param name="studentId" value="${principal.id}"/> --%> 				
-					<span aria-hidden="true"></span>
-					<span>My Subjects</span>
 				</petclinic:menuItem>
 				<petclinic:menuItem active="${name eq 'subject'}" url="/deans/colleges"
 					title="Colleges">
 					<span aria-hidden="true"></span>
 					<span>Colleges</span>
 				</petclinic:menuItem>
-
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
 				</petclinic:menuItem>
-
 			</ul>
-
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">
 					<li><a href="<c:url value="/login" />">Login</a></li>

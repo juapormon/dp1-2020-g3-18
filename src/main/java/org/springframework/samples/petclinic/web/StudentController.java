@@ -15,6 +15,7 @@ import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Students;
 
 import org.springframework.samples.petclinic.model.Subject;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.model.Teachers;
 
 import org.springframework.samples.petclinic.model.Teacher;
@@ -23,6 +24,7 @@ import org.springframework.samples.petclinic.service.ScoreService;
 
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -108,18 +110,17 @@ public class StudentController {
 	
 
 	@GetMapping(value = "/subjects/mySubjects/{studentId}")
-	public String listMySubjects(@PathVariable("studentId") int studentId, Map<String, Object> model ) {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.put("principal", principal);
+	public ModelAndView listMySubjects(@PathVariable("studentId") int studentId) {
+		ModelAndView mav = new ModelAndView("students/mySubjects");
 		List<Subject> subjects = studentService.findMySubjects(studentId);
-		model.put("subjects", subjects);
-		Student student = studentService.findStudentById(studentId);
-		model.put("student", student);
-		return "/students/mySubjects";
-
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        Student student = this.studentService.findStudentByUsername(principal);
+        mav.addObject("student", student);
+		mav.addObject("subjects", subjects);
+		mav.addObject("studentId", studentId);
+		return mav;
 	}
 	
-
 	@GetMapping("students/{studentId}/showRatedTeachers")
 	public ModelAndView showMyRatedTeachers(@PathVariable("studentId") int studentId) {
 		ModelAndView mav = new ModelAndView("teachers/myRatedTeachersList");
@@ -139,10 +140,6 @@ public class StudentController {
 		return mav;
 	}
 	
-	
-	
-	
-
 
 
 }

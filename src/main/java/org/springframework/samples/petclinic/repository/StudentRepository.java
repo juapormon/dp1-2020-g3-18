@@ -52,7 +52,7 @@ public interface StudentRepository extends Repository<Student, Integer>{
 	@Query("select t from Teacher t where t.id in t.subjects AND t.subjects in"
 			+ "(select s.subjects from Student s where s.id =?1)")
 	Collection<Student> myTeachers(int id);
-	
+
 	@Query(nativeQuery = true, value = "SELECT * FROM STUDENTS s where s.id in "
 			+ "(select student_id from scores ss where ss.teacher_id in "
 			+ "(select t.id from teachers t where t.id=?1))")

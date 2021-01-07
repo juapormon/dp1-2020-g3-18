@@ -14,10 +14,13 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
+import org.springframework.samples.petclinic.model.Subject;
+import org.springframework.samples.petclinic.model.Subjects;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.Teachers;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
+import org.springframework.samples.petclinic.service.SubjectService;
 import org.springframework.samples.petclinic.service.TeacherService;
 import org.springframework.samples.petclinic.util.ScoreValidator;
 import org.springframework.samples.petclinic.util.DuplicatedStudentScoreException;
@@ -40,12 +43,14 @@ public class TeacherController {
 	private final TeacherService teacherService;
 	private final StudentService studentService;
 	private final ScoreService scoreService;
+	private final SubjectService subjectService;
 
 	@Autowired
-	public TeacherController(TeacherService teacherService, StudentService studentService, ScoreService scoreService) {
+	public TeacherController(TeacherService teacherService, StudentService studentService, ScoreService scoreService, SubjectService subjectService) {
 		this.teacherService = teacherService;
 		this.studentService = studentService;
 		this.scoreService = scoreService;
+		this.subjectService = subjectService;
 	}
 
 	@InitBinder
@@ -195,6 +200,23 @@ public class TeacherController {
 			this.scoreService.saveScore(score);
 			return "redirect:/teachers/{teacherId}/scores";
 		}
+	}
+	
+	
+	
+	
+	@GetMapping(value = {"teachers/{subjectId}/subjectsTeached"})
+	public ModelAndView listMySubjects(@PathVariable("subjectId") int subjectId) {
+		ModelAndView mav = new ModelAndView("teachers/subjectListTeached");
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		Subject s = this.subjectService.findSubjectById(subjectId);
+		for(Teacher t: this.teacherService.findTeachers()) {
+			if(t.getSubjects().contains(s)) {
+				teachers.add(t);
+			}
+		}
+		mav.addObject("teachers", teachers);
+		return mav;
 	}
 
 	@GetMapping(value ="teachers/{teacherId}/studentsRated")

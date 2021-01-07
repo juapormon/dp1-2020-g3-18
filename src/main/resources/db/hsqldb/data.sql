@@ -21,8 +21,8 @@ INSERT INTO authorities(id,username,authority) VALUES (8,'juloga1','teacher');
 INSERT INTO users(username,password,enabled) VALUES ('mamapon1','mamapon1',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (9,'mamapon1','teacher');
 
-INSERT INTO users(username,password,enabled) VALUES ('tomas','tomas12345',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (10,'tomas','student');
+INSERT INTO users(username,password,enabled) VALUES ('t','t',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (10,'t','student');
 
 INSERT INTO users(username,password,enabled) VALUES ('fran','fran12345',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (11,'fran','student');
@@ -45,7 +45,7 @@ INSERT INTO authorities(id,username,authority) VALUES (16,'ambrella','teacher');
 INSERT INTO users(username,password,enabled) VALUES ('abe','abe',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (17,'abe','teacher');
 
-INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas');
+INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 't');
 INSERT INTO students(id,first_name,last_name,username) VALUES (66, 'administrador', 'Rodríguez Rodríguez', 'a');
 INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', 'Fernández', 'fran');
 INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', 'Surmano', 's');
@@ -101,12 +101,17 @@ INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
 INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
 
 
+
 INSERT INTO departments(id,name) VALUES (1,'Lenguaje y sistemas informaticos');
 INSERT INTO departments(id,name) VALUES (2,'Tecnologia electronica');
 INSERT INTO departments(id,name) VALUES (3,'Matematicas aplicadas');
 INSERT INTO departments(id,name) VALUES (4,'Ingenieria del diseño');
 INSERT INTO departments(id,name) VALUES (5,'Electronica y magnetismo');
 
+INSERT INTO subjects(id,name,curso, department_id) VALUES (150,'Analisis y diseño de algoritmos', 2,1);
+INSERT INTO subjects(id,name,curso, department_id) VALUES (151,'Fundamentos de programación', 1,1);
+INSERT INTO subjects(id,name,curso, department_id) VALUES (152,'Criptografia', 4,3);
+INSERT INTO subjects(id,name,curso, department_id) VALUES (153,'Circuitos', 1,2);
 
 INSERT INTO teachers_subjects VALUES (1,111);
 INSERT INTO teachers_subjects VALUES (2,112);
@@ -132,9 +137,9 @@ INSERT INTO students_subjects VALUES (1,114);
 INSERT INTO students_subjects VALUES (1,115);
 INSERT INTO students_subjects VALUES (3,116);
 
-INSERT INTO subjects_departments VALUES(111,1);
-INSERT INTO subjects_departments VALUES(112,2);
-INSERT INTO subjects_departments VALUES(113,1);
-INSERT INTO subjects_departments VALUES(114,2);
+-- INSERT INTO subjects_departments VALUES(111,1);
+-- INSERT INTO subjects_departments VALUES(112,2);
+-- INSERT INTO subjects_departments VALUES(113,1);
+-- INSERT INTO subjects_departments VALUES(114,2);
 
 

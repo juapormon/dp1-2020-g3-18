@@ -6,34 +6,36 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="departments">
+<petclinic:layout pageName="teachers">
    
-    <h2><c:out value = "Subjects related to ${department.name}"></c:out></h2>
+    <h2>List of teachers who teach the subject</h2>
 
-    <table id="sssTable" class="table table-striped">
+    <table id="teachersTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Curso</th>
+            <th>First name</th>
+            <th>Last name</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${subjects}" var="subject">
+        <c:forEach items="${teachers}" var="teacher">
              <tr>
                 <td>
-                    <c:out value="${subject.name}"/>
+                    <c:out value="${teacher.firstName}"/>
                 </td>
                 <td>
-                    <c:out value="${subject.curso}"/>
+                    <c:out value="${teacher.lastName}"/>
                 </td>
-                <td>
-                    
-                </td>
-
-               
+                
+                
+     
             </tr> 
         </c:forEach>
         </tbody>
     </table> 
     
 </petclinic:layout>
+                    
+    
+
+
