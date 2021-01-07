@@ -7,13 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Report;
 import org.springframework.samples.petclinic.model.Score;
-import org.springframework.samples.petclinic.model.Student;
-import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.service.ReportService;
-import org.springframework.samples.petclinic.service.ScoreService;
-import org.springframework.samples.petclinic.service.StudentService;
-import org.springframework.samples.petclinic.service.TeacherService;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -53,7 +47,4 @@ public class ReportValidator implements Validator{
 	public boolean supports(Class<?> clazz) {
 		return Score.class.isAssignableFrom(clazz);
 	}
-
-
-
 }
