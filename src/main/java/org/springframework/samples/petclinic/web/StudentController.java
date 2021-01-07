@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Students;
 import org.springframework.samples.petclinic.model.Subject;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 
@@ -92,53 +95,17 @@ public class StudentController {
 	}
 	
 	@GetMapping(value = "/subjects/mySubjects/{studentId}")
-	public String listMySubjects(@PathVariable("studentId") int studentId, Map<String, Object> model ) {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.put("principal", principal);
+	public ModelAndView listMySubjects(@PathVariable("studentId") int studentId) {
+		ModelAndView mav = new ModelAndView("students/mySubjects");
 		List<Subject> subjects = studentService.findMySubjects(studentId);
-		model.put("subjects", subjects);
-		Student student = studentService.findStudentById(studentId);
-		model.put("student", student);
-		return "/students/mySubjects";
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        Student student = this.studentService.findStudentByUsername(principal);
+        mav.addObject("student", student);
+		mav.addObject("subjects", subjects);
+		mav.addObject("studentId", studentId);
+		return mav;
 	}
 	
-//	@GetMapping(value = "/studentsForm")
-//	public String studentsForm(Map<String, Object> model) {
-//		model.put("Students", new Student());
-//		return "students/studentsForm";
-//	}
-	
-//	@GetMapping(value = "/students/new")
-//	public String initCreationForm(Map<String, Object> model) {
-//		Student student = new Student();
-//		model.put("student", student);
-//		return "student/createOrUpdateStudentForm";
-//	}
-	
-//	@GetMapping(value = { "/myTeachers/{subjectid}" })
-//	public String showMyScorableTeachersList(Map<String, Object> model, @PathVariable("subjectid") int i) {
-//
-//		Teachers teachers = new Teachers();
-//		teachers.getTeachersList().addAll(this.teacherService.findTeacherBySubject(i));
-//		model.put("teachers", teachers);
-//		return "teachers/scorableTeachers";
-//		
-//	} 
-	
-//	@GetMapping("/myTeachers/{teacherId}")
-//	public ModelAndView showStudent(@PathVariable("teacherId") int teacherId) {
-//		ModelAndView mav = new ModelAndView("teachers/scorableTeachers");
-//		mav.addObject(this.teacherService.findTeacherBySubject(teacherId));
-//		return mav;
-//	}
-	
-//
-//	@GetMapping(value = { "/students.xml" })
-//	public @ResponseBody Students showResourcesTeacherList() {
-//
-//		Students students = new Students();
-//		students.getStudentList().addAll(this.studentService.studentWithScore());
-//		return students;
-//	}
+
 
 }

@@ -53,4 +53,6 @@ public interface StudentRepository extends Repository<Student, Integer>{
 			+ "(select s.subjects from Student s where s.id =?1)")
 	Collection<Student> myTeachers(int id);
 	
+	
+	
 }

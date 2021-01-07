@@ -25,8 +25,10 @@ public class Subject extends BaseEntity{
 	
 	private Integer		curso;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	private Collection<Department> departments;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	private Collection<Department> departments;
+	@ManyToOne(optional=true)@JoinColumn(name = "department_id")
+	private Department department;
 //	
 //	@ManyToOne (fetch = FetchType.EAGER)
 //    @JoinTable(name = "subjects_departments", joinColumns = @JoinColumn(name = "subject_id"),
