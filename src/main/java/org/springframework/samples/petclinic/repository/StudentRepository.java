@@ -44,7 +44,7 @@ public interface StudentRepository extends Repository<Student, Integer>{
 
 	//SELECT * FROM TEACHERS T WHERE T.ID IN 
 	//( SELECT TEACHER_ID FROM TEACHERS_SUBJECTS TS WHERE TS.SUBJECT_ID IN 
-	//(SELECT Subject_id from students_subjects ))
+	//(SELECT Subject_id from students_subjects ))   where s.id =?1
 	
 	@Query("SELECT t FROM Teacher t  WHERE t.lastName || t.name LIKE :word%")
 	public Collection<Teacher> findByWord(@Param("word")String word); 
@@ -52,7 +52,11 @@ public interface StudentRepository extends Repository<Student, Integer>{
 	@Query("select t from Teacher t where t.id in t.subjects AND t.subjects in"
 			+ "(select s.subjects from Student s where s.id =?1)")
 	Collection<Student> myTeachers(int id);
-	
-	
+
+	@Query(nativeQuery = true, value = "SELECT * FROM STUDENTS s where s.id in "
+			+ "(select student_id from scores ss where ss.teacher_id in "
+			+ "(select t.id from teachers t where t.id=?1))")
+	Collection<Student> StudentsRatedATeacher(int teacherId);
+
 	
 }

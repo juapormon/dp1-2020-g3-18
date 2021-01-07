@@ -2,7 +2,9 @@
 package org.springframework.samples.petclinic.web;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +18,12 @@ import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Subjects;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.Teachers;
-import org.springframework.samples.petclinic.repository.ScoreRepository;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.SubjectService;
 import org.springframework.samples.petclinic.service.TeacherService;
+import org.springframework.samples.petclinic.util.ScoreValidator;
+import org.springframework.samples.petclinic.util.DuplicatedStudentScoreException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,7 +40,6 @@ import org.springframework.beans.BeanUtils;
 @Controller
 public class TeacherController {
 
-	private static final String VIEWS_TEACHER_CREATE_OR_UPDATE_FORM = "teachers/createOrUpdateTeacherForm";
 	private final TeacherService teacherService;
 	private final StudentService studentService;
 	private final ScoreService scoreService;
@@ -56,9 +58,17 @@ public class TeacherController {
 		dataBinder.setDisallowedFields("id");
 	}
 
+	@InitBinder("score")
+	public void initTeacherBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
+	}
+
 	@GetMapping(value = { "teachers" })
 	public String showTeacherList(Map<String, Object> model) {
 
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		Student student = this.studentService.findStudentByUsername(principal);
+		model.put("student", student);
 		Teachers teachers = new Teachers();
 		teachers.getTeachersList().addAll(this.teacherService.findTeachers());
 		model.put("teachers", teachers);
@@ -99,41 +109,26 @@ public class TeacherController {
 
 	@GetMapping(value = "/teachersFound")
 	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {
-//		Teacher results = teacherService.findTeacherByLastName(teacher.getLastName());
-//		model.put("selections", results);
-//		ModelAndView mav = new ModelAndView("teachers/teacherDetails");
-//		mav.addObject(this.teacherService.findTeacherByLastName(teacher.getLastName()));
-//		return mav;
-		Teacher res = teacherService.findTeacherByLastName(teacher.getLastName());
-		return "redirect:/teachers/" + res.getId();
-	}
 
-//	@GetMapping(value = "/teachersFound")
-//	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {
-//
-//		// allow parameterless GET request for /owners to return all records
-//		if (teacher.getLastName() == null) {
-//			teacher.setLastName(""); // empty string signifies broadest possible search
-//		}
-//
-//		// find teachers by last name
-//		Collection<Teacher> results = this.teacherService.findOwnerByLastName(teacher.getLastName());
-//		if (results.isEmpty()) {
-//			// no teachers found
-//			result.rejectValue("lastName", "notFound", "not found");
-//			return "teachers/findTeachers";
-//		}
-//		else if (results.size() == 1) {
-//			// 1 teacher found
-//			teacher = results.iterator().next();
-//			return "redirect:/teachers/" + teacher.getId();
-//		}
-//		else {
-//			// multiple teachers found
-//			model.put("selections", results);
-//			return "teachers/teachersList";
-//		}
-//	}
+		if (teacher.getFirstName() == null) {
+			teacher.setFirstName(""); // empty string signifies broadest possible search
+		}
+		// find teachers by first name
+		List<Teacher> results = this.teacherService.findTeacherByFirstName(teacher.getFirstName());
+		if (results.isEmpty()) {
+			result.rejectValue("firstName", "notFound", "not found");
+			model.put("teachers", new Teacher());
+			return "teachers/findTeachers";
+		} else if (results.size() == 1) {
+			// 1 teacher found
+			teacher = results.iterator().next();
+			return "redirect:/teachers/" + teacher.getId();
+		} else {
+			// multiple teachers found
+			model.put("selections", results);
+			return "teachers/teachersList";
+		}
+	}
 
 	@GetMapping(value = { "teachers/{teacherId}/scores" })
 	public String showTeacherScoreList(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
@@ -153,10 +148,13 @@ public class TeacherController {
 //	}
 
 	@GetMapping(value = { "teachers/{teacherId}/scores/new" })
-	public String initCreationForm(@PathVariable int teacherId, ModelMap model)
-			throws NoSuchFieldException, SecurityException { // para crear el modelo que va a la vista.
+	public String initCreationForm(@PathVariable int teacherId, ModelMap model) { // para crear el modelo que va a la
+																					// vista.
 		Score score = new Score();
+		Teacher teacher = this.teacherService.findTeacherById(teacherId);
+		score.setTeacher(teacher);
 		model.put("score", score);
+		model.put("teacher", teacher);
 		return "scores/createForm";
 	}
 
@@ -165,6 +163,8 @@ public class TeacherController {
 			ModelMap model) {
 		if (result.hasErrors()) {
 			model.put("score", score);
+			Teacher teacher = teacherService.findTeacherById(teacherId);
+			model.put("teacher", teacher);
 			return "scores/createForm";
 		} else {
 			String principal = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -172,7 +172,7 @@ public class TeacherController {
 			score.setStudent(student);
 			Teacher teacher = this.teacherService.findTeacherById(teacherId);
 			score.setTeacher(teacher);
-			this.scoreService.saveScore(score);
+			this.scoreService.saveScore2Create(score, teacherId);
 			return "redirect:/teachers/{teacherId}/scores";
 		}
 	}
@@ -181,36 +181,24 @@ public class TeacherController {
 	public String initEditForm(@PathVariable int teacherId, @PathVariable int scoreId, ModelMap model) {
 		Score score = this.scoreService.findScoreById(scoreId);
 		model.put("score", score);
+		Teacher teacher = this.teacherService.findTeacherById(teacherId);
+		model.put("teacher", teacher);
 		return "scores/createForm";
 	}
 
 	@PostMapping(value = "teachers/{teacherId}/scores/{scoreId}/edit")
 	public String processEditForm(@PathVariable int teacherId, @PathVariable int scoreId, @Valid Score score,
 			BindingResult result, ModelMap model) {
-		Score uno = this.scoreService.findScoreById(scoreId);
-		BeanUtils.copyProperties(score, uno, "id", "teacher", "student");
-		this.scoreService.saveScore(uno);
-		return "redirect:/teachers/{teacherId}/scores";
-
-	}
-	
-	@GetMapping(value = "/teachers/new")
-	public String initCreationForm(Map<String, Object> model) {
-		Teacher teacher = new Teacher();
-		model.put("teacher", teacher);
-		return VIEWS_TEACHER_CREATE_OR_UPDATE_FORM;
-	}
-
-	@PostMapping(value = "/teachers/new")
-	public String processCreationForm(@Valid Teacher teacher, BindingResult result) {
 		if (result.hasErrors()) {
-			return VIEWS_TEACHER_CREATE_OR_UPDATE_FORM;
-		}
-		else {
-			//creating teacher, user and authorities
-			this.teacherService.saveTeacher(teacher);
-			
-			return "redirect:/teachers/" + teacher.getId();
+			Teacher teacher = this.teacherService.findTeacherById(teacherId);
+			model.put("teacher", teacher);
+			model.put("score", score);
+			return "scores/createForm";
+		} else {
+			Score uno = this.scoreService.findScoreById(scoreId);
+			BeanUtils.copyProperties(score, uno, "id", "teacher", "student");
+			this.scoreService.saveScore(score);
+			return "redirect:/teachers/{teacherId}/scores";
 		}
 	}
 	
@@ -229,6 +217,13 @@ public class TeacherController {
 		}
 		mav.addObject("teachers", teachers);
 		return mav;
+	}
+
+	@GetMapping(value ="teachers/{teacherId}/studentsRated")
+	public String showStudentsRatedATeacher(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
+		Collection<Student> students = this.studentService.StudentsRatedATeacher(teacherId);
+		model.put("students", students);
+		return "students/studentRatedATeacher";
 	}
 
 }

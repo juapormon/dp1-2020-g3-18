@@ -51,19 +51,31 @@ INSERT INTO students(id,first_name,last_name,username) VALUES (2, 'Francisco', '
 INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', 'Surmano', 's');
 
 
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julián', 'Locuelo García', 'julian');
+INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julian', 'Locuelo García', 'julian');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'Arejo Pínchez', 'macarron32');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lambert Ginni', 'abe');
 
 
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Comentario del score 1',1,1);
+
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Las clases de este profesor me parecen un autentico toston, creo que no debería deshaogarse tanto con nosotros',1,1);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (2, 5, 'Las clases de este profesor estan mejorando desde el ultimo trimestre, le falta confianza',1,1);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (3, 9, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,1);
+
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (4, 3, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (5, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 6, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,3);
 
 
-INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
+
+
 
 INSERT INTO colleges(id,name,city) VALUES (1,'etsii', 'Sevilla');
+
+INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
+INSERT INTO deans(id,first_name,last_name,username,college_id) VALUES (2, 'Paco', 'Administrador', 'a', 1);
+
 
 
 INSERT INTO professionalexperiences(id,university,comment) VALUES (1, 'Universidad de Sevilla', 'Comentario de prueba 1.');
@@ -76,7 +88,7 @@ INSERT INTO externalevaluations(id,note,comment) VALUES (1, 8, 'Otro comentario 
 
 INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience, ext_evaluation) VALUES (1,1,1,1,1);
 
-INSERT INTO reports(id,reason) VALUES (1,'Comportamiento abusivo');
+INSERT INTO reports(id,reason, score_id) VALUES (5,'Comportamiento abusivo', 1);
 
 
 INSERT INTO subjects(id,name,curso) VALUES (111,'Diseño y pruebas', 3);
@@ -108,6 +120,14 @@ INSERT INTO teachers_subjects VALUES (3,114);
 INSERT INTO teachers_subjects VALUES (2,118);
 INSERT INTO teachers_subjects VALUES (4,115);
 INSERT INTO teachers_subjects VALUES (5,117);
+
+INSERT INTO teachers_departments VALUES (1,1);
+INSERT INTO teachers_departments VALUES (2,2);
+INSERT INTO teachers_departments VALUES (1,3);
+INSERT INTO teachers_departments VALUES (3,2);
+INSERT INTO teachers_departments VALUES (2,5);
+INSERT INTO teachers_departments VALUES (4,4);
+INSERT INTO teachers_departments VALUES (5,3);
 
 
 INSERT INTO students_subjects VALUES (2,111);

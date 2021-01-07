@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -16,11 +17,20 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import lombok.Data;
+import org.springframework.boot.context.properties.ConstructorBinding;
 
-@Data
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "teachers")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Teacher extends Person{
 	
 	//Attributes
@@ -38,10 +48,10 @@ public class Teacher extends Person{
 	@OneToOne (optional = true)
 	private PersonalExperience personalExperience;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER) 
 	private Collection<Department> departments;
 	
-	@ManyToMany (fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "teachers_subjects", joinColumns = @JoinColumn(name = "teacher_id"),
 	inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Collection<Subject> subjects;

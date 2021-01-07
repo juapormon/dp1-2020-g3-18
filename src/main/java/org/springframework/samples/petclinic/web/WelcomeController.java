@@ -19,28 +19,30 @@ import java.util.List;
 
 @Controller
 public class WelcomeController {
-	
-	private StudentService studentService;
-	
-	
-	@Autowired
+
 	public WelcomeController(StudentService studentService) {
 		this.studentService = studentService;
 	}
-	
+
+	private StudentService studentService;
+
 	@InitBinder
+
 	public void setAllowedFields(WebDataBinder dataBinder) {
+
 		dataBinder.setDisallowedFields("id");
 	}
-	
-	 @GetMapping({"/","/welcome"})
-	 public String welcome( Map<String, Object> model) {	  
-//		if(SecurityContextHolder.getContext().getAuthentication() != null) {
-//			String principal = SecurityContextHolder.getContext().getAuthentication().getName();
-//			Student student = this.studentService.findStudentByUsername(principal);
-//			Integer studentId = student.getId();
-//			model.put("studentId", studentId);
-//		 }
-	    return "welcome";
-	 }
+
+	@GetMapping({ "/", "/welcome" })
+	public String welcome(Map<String, Object> model) {
+
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		Student student = this.studentService.findStudentByUsername(principal);
+
+		model.put("student", student);
+
+		return "welcome";
+	}
+
 }
