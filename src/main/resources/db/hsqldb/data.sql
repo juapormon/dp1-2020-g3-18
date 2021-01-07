@@ -61,11 +61,11 @@ INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lam
 
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Las clases de este profesor me parecen un autentico toston, creo que no debería deshaogarse tanto con nosotros',1,1);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (2, 5, 'Las clases de este profesor estan mejorando desde el ultimo trimestre, le falta confianza',1,1);
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (3, 9, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,1);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (3, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,1);
 
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (4, 3, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (5, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 6, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,3);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 3, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,3);
 
 
 
