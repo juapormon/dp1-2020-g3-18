@@ -31,10 +31,6 @@ import org.springframework.stereotype.Service;
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class TeacherServiceTest2 {
 	
-	ScoreRepository scoreRepo = mock(ScoreRepository.class);
-	
-	ScoreService scoreService = new ScoreService(scoreRepo);
-	
 	UserRepository userRepo = mock(UserRepository.class);
 	
 	UserService userService = new UserService(userRepo);
@@ -54,6 +50,10 @@ public class TeacherServiceTest2 {
 	DepartmentRepository departmentRepo = mock(DepartmentRepository.class);
 	
 	DepartmentService departmentService = new DepartmentService(departmentRepo);
+	
+	ScoreRepository scoreRepo = mock(ScoreRepository.class);
+	
+	ScoreService scoreService = new ScoreService(scoreRepo, studentService);
 	
 	
 	Teacher t1;
