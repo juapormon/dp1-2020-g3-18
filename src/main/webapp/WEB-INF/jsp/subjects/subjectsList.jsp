@@ -14,7 +14,6 @@
         <tr>
             <th>Name</th>
             <th>Curso</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -29,12 +28,6 @@
                 <td>
                     <c:out value=" ${subject.curso}"/>
                 </td>
-                <td>
-                	<spring:url value="/subjects/delete/{subjectId}" var="subjectUrl">
-                		<spring:param name="subjectId" value ="${subject.id}"/>
-                	</spring:url>
-                    <a href="${fn:escapeXml(subjectUrl)}">Delete</a>
-                </td>
 
                
             </tr> 
@@ -42,12 +35,6 @@
         
              
         </tbody>
-
-    </table>
-    <spring:url value="/subjects/new" var="addUrl">
-    </spring:url>
-    <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add Subject</a> 
-
     </table> 
     <h3>
          <spring:url value="/subjects/mySubjects/{studentId}" var="mySubjectsUrl">
@@ -58,6 +45,5 @@
     
                     
     
-
 </petclinic:layout>
 
