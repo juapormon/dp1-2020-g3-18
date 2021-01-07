@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Teacher</label>
                     <div class="col-sm-10">
-                        <c:out value="${score.teacher.firstName} ${score.teacher.lastName}"/>
+                        <c:out value="${teacher.firstName} ${teacher.lastName}"/>
                     </div>
                 </div>
                 <petclinic:inputField label="Value" name="valu"/>
@@ -28,6 +28,9 @@
                     <c:choose>
                         <c:when test="${score['new']}">
                             <button class="btn btn-default" type="submit">Add Score</button>
+                            <h2>
+                            *You must keep in mind that if you already have a score on this teacher, the new score won't be saved.
+                            </h2>
                         </c:when>
                         <c:otherwise>
                             <button class="btn btn-default" type="submit">Update Score</button>

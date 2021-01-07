@@ -30,7 +30,7 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	//@Query("select t from Teacher t where t.firstName LIKE %:firstName")
 	public List<Teacher> findByFirstName( String firstName);
 
-	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null )")
+	@Query("select t from Teacher t  where t.id in (select teacher from Score s where s.teacher is not null)")
 	Collection<Teacher> showTeacherWithScore();
 
 //	@Query("select t from Teacher t where t.subjects.contains.id=?1")
@@ -53,6 +53,9 @@ public interface TeacherRepository extends Repository<Teacher, Integer>{
 	
 	@Query("select t from Teacher t")
 	List<Teacher> findTeachersFromDepartment(int departmentId);
+	
+	@Query("select t from Teacher t where t.user.username = ?1")
+	Teacher findTeacherByUsername(String username);
 	
 //	@Query("select t from Teacher t where t.colleges in (select c from College c where c.id = ?1)")
 //	@Query("select t from Teacher t left join fetch t.colleges c where c.id =?1")

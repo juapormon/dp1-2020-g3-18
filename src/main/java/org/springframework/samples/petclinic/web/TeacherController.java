@@ -4,6 +4,7 @@ package org.springframework.samples.petclinic.web;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,6 @@ import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.model.Teachers;
-import org.springframework.samples.petclinic.repository.ScoreRepository;
 import org.springframework.samples.petclinic.service.ScoreService;
 import org.springframework.samples.petclinic.service.StudentService;
 import org.springframework.samples.petclinic.service.TeacherService;
@@ -61,6 +61,9 @@ public class TeacherController {
 	@GetMapping(value = { "teachers" })
 	public String showTeacherList(Map<String, Object> model) {
 
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		Student student = this.studentService.findStudentByUsername(principal);
+		model.put("student", student);
 		Teachers teachers = new Teachers();
 		teachers.getTeachersList().addAll(this.teacherService.findTeachers());
 		model.put("teachers", teachers);
@@ -148,6 +151,7 @@ public class TeacherController {
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		score.setTeacher(teacher);
 		model.put("score", score);
+		model.put("teacher", teacher);
 		return "scores/createForm";
 	}
 
@@ -156,6 +160,8 @@ public class TeacherController {
 			ModelMap model) {
 		if (result.hasErrors()) {
 			model.put("score", score);
+			Teacher teacher = teacherService.findTeacherById(teacherId);
+			model.put("teacher", teacher);
 			return "scores/createForm";
 		} else {
 			String principal = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -163,12 +169,7 @@ public class TeacherController {
 			score.setStudent(student);
 			Teacher teacher = this.teacherService.findTeacherById(teacherId);
 			score.setTeacher(teacher);
-			try{
-				score.getValu().equals(null);
-			}catch(NullPointerException ex) {
-				result.rejectValue("valu", "empty value", "value must not be empty");
-			}
-			this.scoreService.saveScore(score);
+			this.scoreService.saveScore2Create(score, teacherId);
 			return "redirect:/teachers/{teacherId}/scores";
 		}
 	}
@@ -177,6 +178,8 @@ public class TeacherController {
 	public String initEditForm(@PathVariable int teacherId, @PathVariable int scoreId, ModelMap model) {
 		Score score = this.scoreService.findScoreById(scoreId);
 		model.put("score", score);
+		Teacher teacher = this.teacherService.findTeacherById(teacherId);
+		model.put("teacher", teacher);
 		return "scores/createForm";
 	}
 
@@ -184,15 +187,11 @@ public class TeacherController {
 	public String processEditForm(@PathVariable int teacherId, @PathVariable int scoreId, @Valid Score score,
 			BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
+			Teacher teacher = this.teacherService.findTeacherById(teacherId);
+			model.put("teacher", teacher);
 			model.put("score", score);
 			return "scores/createForm";
 		}else {
-			try{
-				score.getValu().equals(null);
-			}catch(NullPointerException ex) {
-				result.rejectValue("valu", "empty value", "value must not be empty");
-				return "scores/createForm";
-			}
 			Score uno = this.scoreService.findScoreById(scoreId);
 			BeanUtils.copyProperties(score, uno, "id", "teacher", "student");
 			this.scoreService.saveScore(score);

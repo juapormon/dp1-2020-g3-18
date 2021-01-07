@@ -11,7 +11,7 @@
     <table id="scoresTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Point</th>
+            <th>Value</th>
             <th>Comment</th>
         </tr>
         </thead>
@@ -40,6 +40,7 @@
         <tr>
             <th>Comment</th>
             <th>Student who made it</th>
+             <th>Report comment</th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +48,12 @@
 				<tr>
 					<td><b><c:out value="${scor.comment}"/></b></td>
 					<td><b><c:out value="${scor.student.firstName} ${scor.student.lastName}"/></b></td>
+					<td>
+                    <spring:url value="/reports/new/{scoreId}" var="reportUrl">
+                    <spring:param name="scoreId" value="${scor.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(reportUrl)}"><c:out value="Report"/></a>
+                	</td>
 				</tr>
 			</c:forEach>
         </tbody>
