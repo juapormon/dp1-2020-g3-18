@@ -34,6 +34,23 @@ public class SubjectServiceTest {
 			
 
 		}
+
+		
+		
+		
+//		@Test
+//		@DisplayName("Finding subject by id")
+//		void testFindStudentById(){
+//			
+//			Subject subject = this.subjectService.findSubjectById(111);
+//			System.out.println(subject.getName());
+//			assertThat(subject.getName()).startsWith("Diseño y pruebas");
+//		}
+//		
+		
+
+
+
 		@Test
 		@DisplayName("Finding subject by id")
 		void testFindStudentById(){
@@ -53,3 +70,4 @@ public class SubjectServiceTest {
 		
 
 }
+
