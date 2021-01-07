@@ -3,16 +3,13 @@ package org.springframework.samples.petclinic.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.List;
-
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Score;
-import org.springframework.samples.petclinic.model.Subject;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.repository.ScoreRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +29,7 @@ public class ScoreService {
 	}
 	
 	@Transactional(readOnly = true)	
-	public Optional<Score> findScoreById(int id) throws DataAccessException {
+	public Score findScoreById(int id){
 		return scoreRepository.findById(id);
 	}
 	
@@ -55,11 +52,6 @@ public class ScoreService {
 	@Transactional()	
 	public void saveScore(@Valid Score score)  {
 		scoreRepository.save(score);
-
-	}
-
-	public void delete(Score score) {
-		scoreRepository.delete(score);		
 	}	
 	
 	@Transactional()	
@@ -80,6 +72,5 @@ public class ScoreService {
 	@Transactional(readOnly = true)	
 	public void removeScore(@Valid Score score){
 		scoreRepository.delete(score);
-
 	}
 }

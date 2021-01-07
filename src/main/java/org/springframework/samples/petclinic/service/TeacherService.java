@@ -29,10 +29,8 @@ public class TeacherService {
 	private AuthoritiesService authoritiesService;
 
 	@Autowired
-	public TeacherService(TeacherRepository teacherRepository, UserService userService, AuthoritiesService authoritiesService) { 
+	public TeacherService(TeacherRepository teacherRepository) { 
 		this.teacherRepository = teacherRepository;
-		this.userService = userService;
-		this.authoritiesService = authoritiesService;
 	}
 
 	@Transactional(readOnly = true)
