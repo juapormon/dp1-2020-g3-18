@@ -31,7 +31,10 @@ public class Subject extends BaseEntity{
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Department> departments;
-//	
+	
+	@ManyToMany 
+	private Collection<Teacher> teachers;
+	
 //	@ManyToOne (fetch = FetchType.EAGER)
 //    @JoinTable(name = "subjects_departments", joinColumns = @JoinColumn(name = "subject_id"),
 //    inverseJoinColumns = @JoinColumn(name = "department_id"))

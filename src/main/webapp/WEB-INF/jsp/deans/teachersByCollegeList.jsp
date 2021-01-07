@@ -24,9 +24,9 @@
         <c:forEach items="${teachers}" var="teacher">
              <tr>
                 <td>
-                    <spring:url value="/teachers/{teacherId}" var="teacherUrl">
+                <!--     <spring:url value="/teachers/{teacherId}" var="teacherUrl">
                     <spring:param name="teacherId" value="${teacher.id}"/>
-                    </spring:url>
+                    </spring:url> -->
                     <c:out value="${teacher.firstName}"/>
                 </td>
                 <td>

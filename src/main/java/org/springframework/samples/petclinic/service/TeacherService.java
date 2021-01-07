@@ -22,14 +22,13 @@ public class TeacherService {
 
 	private DepartmentRepository departmentRepository;
 
-
 	@Autowired
 	private UserService userService;
 
 	private AuthoritiesService authoritiesService;
 
 	@Autowired
-	public TeacherService(TeacherRepository teacherRepository) { 
+	public TeacherService(TeacherRepository teacherRepository) {
 		this.teacherRepository = teacherRepository;
 	}
 
@@ -45,6 +44,11 @@ public class TeacherService {
 		return teacherRepository.findAll();
 	}
 
+	@Transactional(readOnly = false)
+	public void save(Teacher teacher) throws DataAccessException {
+		teacherRepository.save(teacher);
+	}
+
 	public Collection<Teacher> showTeacherWithScore() throws DataAccessException {
 		return teacherRepository.showTeacherWithScore();
 	}
@@ -57,7 +61,6 @@ public class TeacherService {
 	public List<Teacher> findTeacherByFirstName(String firstName) throws DataAccessException {
 		return teacherRepository.findByFirstName(firstName);
 	}
-	
 
 	@Transactional(readOnly = true)
 	public List<Teacher> findTeacherByCollege(int id) throws DataAccessException {
@@ -65,7 +68,7 @@ public class TeacherService {
 //		teachers.addAll(teacherRepository.findAll());
 		return teacherRepository.findTeacherByCollegeId(id);
 	}
-	
+
 	@Transactional
 	public void saveTeacher(Teacher teacher) throws DataAccessException {
 		// creating teacher
@@ -75,35 +78,35 @@ public class TeacherService {
 		// creating authorities
 		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
 	}
-	
 
-	@Transactional	
+	@Transactional
 	public List<Teacher> findTeachersFromDepartment(int departmentId) throws DataAccessException {
-		//Tengo un departament mame y quiero obtener la lista de teachers que tienen este department
-		Department d = departmentRepository.findById(departmentId); 
+		// Tengo un departament mame y quiero obtener la lista de teachers que tienen
+		// este department
+		Department d = departmentRepository.findById(departmentId);
 		List<Teacher> result = new ArrayList<Teacher>();
-		for(Teacher t2 : teacherRepository.findAll()) {
-			if(t2.getDepartments().contains(d)) result.add(t2);
+		for (Teacher t2 : teacherRepository.findAll()) {
+			if (t2.getDepartments().contains(d))
+				result.add(t2);
 		}
 		return result;
 	}
 
-	//Buscar profesor por id de estudiante
+	// Buscar profesor por id de estudiante
 	@Transactional(readOnly = true)
 	public Collection<Teacher> findTeacherByStudentId(int studentId) throws DataAccessException {
 		Collection<Teacher> teachers = teacherRepository.findByStudentId(studentId);
 		assert !teachers.isEmpty();
 		return teachers;
 	}
-	
-	public Collection<Teacher> teachersToRate(int studentId)throws DataAccessException{
+
+	public Collection<Teacher> teachersToRate(int studentId) throws DataAccessException {
 		return teacherRepository.teachersToRate(studentId);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Teacher findTeacherByUsername(String username) throws DataAccessException {
 		return teacherRepository.findTeacherByUsername(username);
 	}
-	
 
 }

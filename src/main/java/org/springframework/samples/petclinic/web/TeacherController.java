@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.College;
 import org.springframework.samples.petclinic.model.Score;
 import org.springframework.samples.petclinic.model.Student;
 import org.springframework.samples.petclinic.model.Teacher;
@@ -198,6 +199,5 @@ public class TeacherController {
 		return "redirect:/teachers/{teacherId}/scores";
 		}
 	}
-
 	
 }

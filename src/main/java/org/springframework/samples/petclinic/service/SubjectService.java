@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Department;
 import org.springframework.samples.petclinic.model.Subject;
+import org.springframework.samples.petclinic.model.Teacher;
 import org.springframework.samples.petclinic.repository.DepartmentRepository;
 import org.springframework.samples.petclinic.repository.SubjectRepository;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,12 @@ public class SubjectService {
 	@Transactional(readOnly = true)	
 	public Subject findSubjectById(int id) throws DataAccessException {
 		Subject subject = subjectRepository.findById(id);
-		assert subject != null;
 		return subject;
+	}
+	
+	@Transactional(readOnly = false)
+	public void save(Subject subject) throws DataAccessException{
+		subjectRepository.save(subject);
 	}
 	
 	@Transactional(readOnly = true)	
