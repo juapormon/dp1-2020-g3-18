@@ -52,8 +52,8 @@ public class TeacherController {
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
-	
-	@InitBinder("report")
+
+	@InitBinder("score")
 	public void initTeacherBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
 	}
@@ -105,7 +105,6 @@ public class TeacherController {
 	@GetMapping(value = "/teachersFound")
 	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {
 
-
 		if (teacher.getFirstName() == null) {
 			teacher.setFirstName(""); // empty string signifies broadest possible search
 		}
@@ -115,13 +114,11 @@ public class TeacherController {
 			result.rejectValue("firstName", "notFound", "not found");
 			model.put("teachers", new Teacher());
 			return "teachers/findTeachers";
-		}
-		else if (results.size() == 1) {
+		} else if (results.size() == 1) {
 			// 1 teacher found
-			 teacher = results.iterator().next();
+			teacher = results.iterator().next();
 			return "redirect:/teachers/" + teacher.getId();
-		}
-		else {
+		} else {
 			// multiple teachers found
 			model.put("selections", results);
 			return "teachers/teachersList";
@@ -146,7 +143,8 @@ public class TeacherController {
 //	}
 
 	@GetMapping(value = { "teachers/{teacherId}/scores/new" })
-	public String initCreationForm(@PathVariable int teacherId, ModelMap model){ // para crear el modelo que va a la vista.
+	public String initCreationForm(@PathVariable int teacherId, ModelMap model) { // para crear el modelo que va a la
+																					// vista.
 		Score score = new Score();
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		score.setTeacher(teacher);
@@ -191,13 +189,19 @@ public class TeacherController {
 			model.put("teacher", teacher);
 			model.put("score", score);
 			return "scores/createForm";
-		}else {
+		} else {
 			Score uno = this.scoreService.findScoreById(scoreId);
 			BeanUtils.copyProperties(score, uno, "id", "teacher", "student");
 			this.scoreService.saveScore(score);
-		return "redirect:/teachers/{teacherId}/scores";
+			return "redirect:/teachers/{teacherId}/scores";
 		}
 	}
 
-	
+	@GetMapping(value ="teachers/{teacherId}/studentsRated")
+	public String showStudentsRatedATeacher(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
+		Collection<Student> students = this.studentService.StudentsRatedATeacher(teacherId);
+		model.put("students", students);
+		return "students/studentRatedATeacher";
+	}
+
 }
