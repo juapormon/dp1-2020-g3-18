@@ -32,5 +32,8 @@ public class Subject extends BaseEntity{
 
 	@ManyToOne(optional=true)@JoinColumn(name = "department_id")
 	private Department department;
+	
+	@ManyToMany 
+	private Collection<Teacher> teachers;
 
 }
