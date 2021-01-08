@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -35,13 +36,44 @@ public class SubjectController {
 	
 	
 
-	@GetMapping(value = {"/new"})
+	@GetMapping(value = {"/subjects/new"})
 	public String newSubject(ModelMap model) {
 		
 		Subject subject = new Subject();
 		model.put("subjects", subject);
 		return VIEW_SUBJECT_CREATE_FORM;
 
+	}
+	
+	@PostMapping(value = {"/subjects/save"})
+	public String processCreationForm(@Valid Subject subject, BindingResult result, ModelMap modelMap) {
+		String view = "subjects/subjectsList";
+		if (result.hasErrors()) {
+			modelMap.addAttribute("subject", subject);
+			return "subjects/newSubject";
+		}
+		
+		else {
+			subjectService.save(subject);
+			modelMap.addAttribute("message", "Subject successfully saved!");
+			view = showSubjectsList(modelMap);
+		}
+		return view;
+	}
+	
+	@GetMapping(path="/subjects/delete/{subjectId}")
+	public String deleteSubject(@PathVariable("subjectId") int subjectId, ModelMap modelMap){
+		String view = "subjects/subjectsList";
+		Optional<Subject> subject = Optional.ofNullable(subjectService.findSubjectById(subjectId));
+		if(subject.isPresent()) {
+			subjectService.delete(subject.get());
+			modelMap.addAttribute("message", "Subject successfully deleted!");
+			view = showSubjectsList(modelMap);
+		} else {
+			modelMap.addAttribute("message", "Subject not found!");
+			view = showSubjectsList(modelMap);
+		}
+		return view;
 	}
 	
 	@GetMapping(value = { "/subjects" })

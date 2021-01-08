@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -33,6 +34,11 @@ public class SubjectService {
 		return subject;
 	}
 	
+//	@Transactional(readOnly = true)	
+//	public Optional<Subject> findSubjectById1(int id) throws DataAccessException {
+//		return subjectRepository.findById1(id);
+//	}
+	
 	@Transactional(readOnly = true)	
 	public Collection<Subject> findSubjects() throws DataAccessException {
 		return subjectRepository.findAll();
@@ -58,6 +64,15 @@ public class SubjectService {
 	@Transactional	
 	public List<Subject> findSubjectsFromDepartmentId(int idDepartment) throws DataAccessException {
 		return this.subjectRepository.findSubjectsFromDepartmentId(idDepartment);
+	}
+	
+	@Transactional
+	public void save(Subject subject) {
+		subjectRepository.save(subject);
+	}
+
+	public void delete(Subject subject) {
+		subjectRepository.delete(subject);
 	}
 	
 	

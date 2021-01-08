@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -135,6 +136,22 @@ public class TeacherController {
 		Collection<Score> scores = this.teacherService.findScoresByTeacherId(teacherId);
 		model.put("scores", scores);
 		return "scores/scoresList";
+	}
+	
+	@GetMapping(path="/teachers/{teacherId}/scores/delete/{scoreId}")
+	public String deleteScore(@PathVariable("teacherId") int teacherId, @PathVariable("scoreId") int scoreId, ModelMap modelMap){
+		String view = "scores/scoresList";
+		Optional<Score> score = Optional.ofNullable(scoreService.findScoreById(scoreId));
+		if(score.isPresent()) {
+			//Borrar la columna de los id de las subject que tienen estudiantes en la tabla Subjects_Students
+			scoreService.delete(score.get());
+			modelMap.addAttribute("message", "Score successfully deleted!");
+			view = showTeacherScoreList(teacherId, modelMap);
+		} else {
+			modelMap.addAttribute("message", "Score not found!");
+			view = showTeacherScoreList(teacherId, modelMap);
+		}
+		return view;
 	}
 
 //	@GetMapping(value = { "/teachers/{teacherId}/scores/comments" })  

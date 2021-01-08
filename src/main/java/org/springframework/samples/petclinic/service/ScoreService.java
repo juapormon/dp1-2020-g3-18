@@ -4,6 +4,7 @@ package org.springframework.samples.petclinic.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -32,6 +33,11 @@ public class ScoreService {
 	public Score findScoreById(int id){
 		return scoreRepository.findById(id);
 	}
+	
+//	@Transactional(readOnly = true)	
+//	public Optional<Score> findScoreById1(int id) throws DataAccessException {
+//		return scoreRepository.findById1(id);
+//	}
 	
 	@Transactional(readOnly = true)	
 	public Collection<Score> findAll(){
@@ -72,5 +78,9 @@ public class ScoreService {
 	@Transactional(readOnly = true)	
 	public void removeScore(@Valid Score score){
 		scoreRepository.delete(score);
+	}
+	
+	public void delete(Score score) {
+		scoreRepository.delete(score);		
 	}
 }
