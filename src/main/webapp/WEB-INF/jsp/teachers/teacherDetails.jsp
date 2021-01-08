@@ -29,19 +29,7 @@
     <br/>
     <h2>Scores</h2>
 
- <!-- 	
-    <table class="table table-striped">
-	 	 <tr>
-		<c:forEach items="${scores}" var="scor">
-		<th>Point</th>
-		<th><b><c:out value="${scor.point}"/></b></th>
-		<td>Comment</td>
-		<td><b><c:out value="${scor.comment}"/></b></td>
-		</c:forEach>
-	</tr>
-    </table>
-         -->
-   
+
     <spring:url value="{teacherId}/scores" var="showScoresUrl">
         <spring:param name="teacherId" value="${teacher.id}"/>
     </spring:url>

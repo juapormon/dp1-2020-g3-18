@@ -59,19 +59,4 @@
         </tbody>
     </table>
 
-     <!--
-    <table class="table table-striped">
-      	 <tr>
-   	 	<th><b>Ejemplo de comentario:</b></th>
-		<td><b><c:out value="${teacher.scores[0].comment}"/></b></td>
-	</tr>
-
-    </table>
-    <br/>
-     
-    <spring:url value="comments" var="showCommentsUrl">
-        <spring:param name="teacherId" value="${teacher.id}"/>
-    </spring:url>
-    <a href="${fn:escapeXml(showCommentsUrl)}" class="btn btn-default">Show Comments</a>
-     -->
 </petclinic:layout>
