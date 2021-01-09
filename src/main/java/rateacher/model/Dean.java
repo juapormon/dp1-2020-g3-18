@@ -1,5 +1,6 @@
 package rateacher.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,6 +31,7 @@ public class Dean extends Person {
 	
 	@JoinColumn(name = "college_id")
 	@OneToOne(optional=true) //Es posible que no haga falta el optional
+	
 	private College college;
 	
 	

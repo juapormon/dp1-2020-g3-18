@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.boot.context.properties.ConstructorBinding;
 
@@ -48,6 +49,7 @@ public class Teacher extends Person{
 	private PersonalExperience personalExperience;
 	
 	@ManyToMany(fetch = FetchType.EAGER) 
+	@Size(min=1, max=3)//Rela de Negocio 7
 	private Collection<Department> departments;
 	
 	@ManyToMany
