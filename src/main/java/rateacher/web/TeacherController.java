@@ -17,6 +17,7 @@ import rateacher.model.Subject;
 import rateacher.model.Subjects;
 import rateacher.service.SubjectService;
 import rateacher.util.ScoreValidator;
+import rateacher.util.TeacherValidator;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -67,7 +68,7 @@ public class TeacherController {
 	public void initTeacherBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
 	}
-
+	
 	@GetMapping(value = { "teachers" })
 	public String showTeacherList(Map<String, Object> model) {
 
