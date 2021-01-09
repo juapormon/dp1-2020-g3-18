@@ -40,6 +40,11 @@ public class TeacherService {
 		assert teacher != null;
 		return teacher;
 	}
+	
+	@Transactional(readOnly = false)
+	public void save(Teacher teacher) throws DataAccessException {
+		teacherRepository.save(teacher);
+	}
 
 	@Transactional(readOnly = true)
 	public Collection<Teacher> findTeachers() throws DataAccessException {

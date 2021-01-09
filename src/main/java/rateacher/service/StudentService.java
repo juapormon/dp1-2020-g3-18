@@ -46,10 +46,6 @@ public class StudentService {
 		return studentRepository.findAll();
 	}
 
-	public Collection<Student> studentWithScore() throws DataAccessException {
-		return studentRepository.studentWithScore();
-	}
-
 	@Transactional
 	public void saveStudent(Student student) throws DataAccessException {
 		// creating student
@@ -59,7 +55,7 @@ public class StudentService {
 		// creating authorities
 		authoritiesService.saveAuthorities(student.getUser().getUsername(), "student");
 	}
-	
+	// Se puede borrar este método???
 	@Transactional(readOnly = true)	
 	public Collection<Teacher> findTeachersBySubject(int i) throws DataAccessException {
 		return teacherRepository.findBySubject(i);
@@ -75,12 +71,10 @@ public class StudentService {
 		return studentRepository.findMySubjects(i);
 	}
 
-
-	public Collection<Student> myTeachers(int id) throws DataAccessException{
-		return studentRepository.myTeachers(id);
-
+	
+	public Collection<Student> StudentsRatedATeacher(int teacherId) throws DataAccessException{
+		return studentRepository.StudentsRatedATeacher(teacherId);
 	}
-
 	
 
 }

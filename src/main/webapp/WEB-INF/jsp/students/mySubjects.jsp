@@ -15,6 +15,7 @@
         <tr>
             <th>Name</th>
             <th>Course</th>
+            <th>List of teachers who teach this subject</th>
         </tr>
         </thead>
         <tbody>
@@ -26,8 +27,11 @@
                 <td>
                     <c:out value="${subject.curso}"/>
                 </td>
-                <td>
-                    
+                 <td>
+                     <spring:url value="/teachers/{subjectId}/subjectsTeached" var="subjectUrl">
+                     <spring:param name="subjectId" value="${subject.id}"/>
+                     </spring:url>
+                    <a href="${fn:escapeXml(subjectUrl)}"><c:out value="Teachers"/></a>
                 </td>
 
                

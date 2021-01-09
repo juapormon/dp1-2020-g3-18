@@ -19,7 +19,9 @@ public interface SubjectRepository extends Repository<Subject, Integer> {
 
 	void save(@Valid Subject subject) throws DataAccessException;
 
-	@Query("select s from Subject s")
+	
+	@Query("select s from Subject s where s.department.id = ?1")
+
 	List<Subject> findSubjectsFromDepartmentId(int idDepartment);
 
 }

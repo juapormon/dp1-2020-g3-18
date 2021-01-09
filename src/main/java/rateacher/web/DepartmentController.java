@@ -45,14 +45,13 @@ public class DepartmentController {
 		
 	}
 	
-	@GetMapping(value = { "/departments/{departmentId}/relatedSubjects" })
+	@GetMapping(value = {"/departments/{departmentId}/relatedSubjects"})
 	public String listSubjectsFromDepartmentId(@PathVariable("departmentId") int departmentId, Map<String, Object> model) {
 		Department department = this.departmentService.findDepartmentById(departmentId);
 		model.put("department", department);
-		List<Subject> subjects = new ArrayList<Subject>();
-		for(Subject s : (List<Subject>) subjectService.findAll()) {
-			if(s.getDepartments().contains(department)) subjects.add(s);
-		}
+
+		List<Subject> subjects = subjectService.findSubjectsFromDepartmentId(departmentId);
+
 		model.put("subjects", subjects);
 		return "departments/relatedSubjects";
 	}

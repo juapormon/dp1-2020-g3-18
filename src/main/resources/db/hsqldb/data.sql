@@ -18,6 +18,7 @@ INSERT INTO researchexperiences(id,research) VALUES (1, 'Investigación sobre co
 --EXPERIENCIA LABORAL--
 INSERT INTO teachingexperiences(id,titulation,comment) VALUES (1, 'Graduado en ciencias sociales y económicas del gramo y medio', 'Comentario de prueba a ver que sale...');
 
+
 --EVALUACION EXTERNA--DATOS
 INSERT INTO externalevaluations(id,note,comment) VALUES (1, 8, 'Otro comentario de prueba a ver que sale...');
 
@@ -48,6 +49,7 @@ INSERT INTO users(username,password,enabled) VALUES ('ambrella','ambrella',TRUE)
 INSERT INTO authorities(id,username,authority) VALUES (16,'ambrella','teacher');
 INSERT INTO users(username,password,enabled) VALUES ('abe','abe',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (17,'abe','teacher');
+
 INSERT INTO users(username,password,enabled) VALUES ('mamapon1','mamapon1',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (9,'mamapon1','teacher');
 --PROFESORES--DATOS
@@ -124,10 +126,11 @@ INSERT INTO students_subjects VALUES (1,114);
 INSERT INTO students_subjects VALUES (1,115);
 INSERT INTO students_subjects VALUES (3,116);
 
+
 --ASIGNATURAS POR DEPARTAMENTO--
-INSERT INTO subjects_departments VALUES(111,1);
-INSERT INTO subjects_departments VALUES(112,2);
-INSERT INTO subjects_departments VALUES(113,1);
-INSERT INTO subjects_departments VALUES(114,2);
+--INSERT INTO subjects_departments VALUES(111,1);
+--INSERT INTO subjects_departments VALUES(112,2);
+--INSERT INTO subjects_departments VALUES(113,1);
+--INSERT INTO subjects_departments VALUES(114,2);
 
 

@@ -9,9 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.boot.context.properties.ConstructorBinding;
-
 import com.sun.istack.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -27,6 +25,8 @@ import lombok.Setter;
 public class Score extends BaseEntity {
 
 	//Attributes
+
+	@Range(min = 1, max = 5)
 	private Integer valu;
 
 	private String comment; 

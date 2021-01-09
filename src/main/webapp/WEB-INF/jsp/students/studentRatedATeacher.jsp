@@ -6,28 +6,27 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="departments">
-   
-    <h2><c:out value = "Subjects related to ${department.name}"></c:out></h2>
+<petclinic:layout pageName="students">
+    <h2>Students</h2>
 
-    <table id="sssTable" class="table table-striped">
+    <table id="studentsTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Curso</th>
+            <th>First name</th>
+            <th>Last name</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${subjects}" var="subject">
+        <c:forEach items="${students}" var="student">
              <tr>
                 <td>
-                    <c:out value="${subject.name}"/>
+                    <spring:url value="/students/{studentId}" var="studentUrl">
+                    <spring:param name="studentId" value="${student.id}"/>
+                    </spring:url>
+                    <c:out value="${student.firstName}"/>
                 </td>
                 <td>
-                    <c:out value="${subject.curso}"/>
-                </td>
-                <td>
-                    
+                    <c:out value=" ${student.lastName}"/>
                 </td>
 
                
@@ -35,5 +34,6 @@
         </c:forEach>
         </tbody>
     </table> 
-    
+
 </petclinic:layout>
+

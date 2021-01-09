@@ -10,6 +10,23 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import rateacher.model.Score;
+import rateacher.model.Student;
+import rateacher.model.Students;
+
+import rateacher.model.Subject;
+import rateacher.model.User;
+import rateacher.model.Teachers;
+
+import rateacher.model.Teacher;
+import rateacher.repository.TeacherRepository;
+import rateacher.service.ScoreService;
+
+import rateacher.service.StudentService;
+import rateacher.service.TeacherService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -68,15 +85,6 @@ public class StudentController {
 
 	}
 	
-	@GetMapping(value = { "/studentsWithScore" })
-	public String showStudentsWithScore(Map<String, Object> model) {
-
-		Students students = new Students();
-		students.getStudentList().addAll(this.studentService.studentWithScore());
-		model.put("students", students);
-		return "students/studentsWithScore";
-
-	}
 	
 	@GetMapping(value = "/students/new")
 	public String initCreationForm(Map<String, Object> model) {
@@ -100,18 +108,17 @@ public class StudentController {
 	
 
 	@GetMapping(value = "/subjects/mySubjects/{studentId}")
-	public String listMySubjects(@PathVariable("studentId") int studentId, Map<String, Object> model ) {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.put("principal", principal);
+	public ModelAndView listMySubjects(@PathVariable("studentId") int studentId) {
+		ModelAndView mav = new ModelAndView("students/mySubjects");
 		List<Subject> subjects = studentService.findMySubjects(studentId);
-		model.put("subjects", subjects);
-		Student student = studentService.findStudentById(studentId);
-		model.put("student", student);
-		return "/students/mySubjects";
-
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        Student student = this.studentService.findStudentByUsername(principal);
+        mav.addObject("student", student);
+		mav.addObject("subjects", subjects);
+		mav.addObject("studentId", studentId);
+		return mav;
 	}
 	
-
 	@GetMapping("students/{studentId}/showRatedTeachers")
 	public ModelAndView showMyRatedTeachers(@PathVariable("studentId") int studentId) {
 		ModelAndView mav = new ModelAndView("teachers/myRatedTeachersList");
@@ -131,10 +138,6 @@ public class StudentController {
 		return mav;
 	}
 	
-	
-	
-	
-
 
 
 }

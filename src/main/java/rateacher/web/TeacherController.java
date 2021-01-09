@@ -12,6 +12,12 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import rateacher.model.Subject;
+import rateacher.model.Subjects;
+import rateacher.service.SubjectService;
+import rateacher.util.ScoreValidator;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -42,19 +48,21 @@ public class TeacherController {
 	private final TeacherService teacherService;
 	private final StudentService studentService;
 	private final ScoreService scoreService;
+	private final SubjectService subjectService;
 
 	@Autowired
-	public TeacherController(TeacherService teacherService, StudentService studentService, ScoreService scoreService) {
+	public TeacherController(TeacherService teacherService, StudentService studentService, ScoreService scoreService, SubjectService subjectService) {
 		this.teacherService = teacherService;
 		this.studentService = studentService;
 		this.scoreService = scoreService;
+		this.subjectService = subjectService;
 	}
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
-	
+
 	@InitBinder("score")
 	public void initTeacherBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
@@ -107,7 +115,6 @@ public class TeacherController {
 	@GetMapping(value = "/teachersFound")
 	public String processFindForm(Teacher teacher, BindingResult result, Map<String, Object> model) {
 
-
 		if (teacher.getFirstName() == null) {
 			teacher.setFirstName(""); // empty string signifies broadest possible search
 		}
@@ -117,13 +124,11 @@ public class TeacherController {
 			result.rejectValue("firstName", "notFound", "not found");
 			model.put("teachers", new Teacher());
 			return "teachers/findTeachers";
-		}
-		else if (results.size() == 1) {
+		} else if (results.size() == 1) {
 			// 1 teacher found
-			 teacher = results.iterator().next();
+			teacher = results.iterator().next();
 			return "redirect:/teachers/" + teacher.getId();
-		}
-		else {
+		} else {
 			// multiple teachers found
 			model.put("selections", results);
 			return "teachers/teachersList";
@@ -139,7 +144,8 @@ public class TeacherController {
 
 
 	@GetMapping(value = { "teachers/{teacherId}/scores/new" })
-	public String initCreationForm(@PathVariable int teacherId, ModelMap model){ // para crear el modelo que va a la vista.
+	public String initCreationForm(@PathVariable int teacherId, ModelMap model) { // para crear el modelo que va a la
+																					// vista.
 		Score score = new Score();
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		score.setTeacher(teacher);
@@ -184,13 +190,36 @@ public class TeacherController {
 			model.put("teacher", teacher);
 			model.put("score", score);
 			return "scores/createForm";
-		}else {
+		} else {
 			Score uno = this.scoreService.findScoreById(scoreId);
 			BeanUtils.copyProperties(score, uno, "id", "teacher", "student");
 			this.scoreService.saveScore(score);
-		return "redirect:/teachers/{teacherId}/scores";
+			return "redirect:/teachers/{teacherId}/scores";
 		}
 	}
-
 	
+	
+	
+	
+	@GetMapping(value = {"teachers/{subjectId}/subjectsTeached"})
+	public ModelAndView listMySubjects(@PathVariable("subjectId") int subjectId) {
+		ModelAndView mav = new ModelAndView("teachers/subjectListTeached");
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		Subject s = this.subjectService.findSubjectById(subjectId);
+		for(Teacher t: this.teacherService.findTeachers()) {
+			if(t.getSubjects().contains(s)) {
+				teachers.add(t);
+			}
+		}
+		mav.addObject("teachers", teachers);
+		return mav;
+	}
+
+	@GetMapping(value ="teachers/{teacherId}/studentsRated")
+	public String showStudentsRatedATeacher(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
+		Collection<Student> students = this.studentService.StudentsRatedATeacher(teacherId);
+		model.put("students", students);
+		return "students/studentRatedATeacher";
+	}
+
 }
