@@ -41,7 +41,7 @@ public class Student extends Person{
     @JoinColumn(name = "username")
 	private User user;
 	
-	@ManyToMany (fetch = FetchType.LAZY)
+	@ManyToMany (cascade = CascadeType.REMOVE)
 	@JoinTable(name = "students_subjects", joinColumns = @JoinColumn(name = "student_id"),
 	inverseJoinColumns = @JoinColumn(name = "subject_id"))
 	private Collection<Subject> subjects;
