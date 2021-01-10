@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -71,6 +72,25 @@ public class ScoreServiceTests {
 	}
 	
 	@Test
+	@DisplayName("find scores by teacher id")
+	void testFindAllScoresByTeacherId() throws DataAccessException {
+		int teacherId = 8;
+		Teacher t = new Teacher();
+		t.setId(teacherId);
+		Score sco1 = new Score();
+		sco1.setTeacher(t);
+		Score sco2 = new Score();
+		sco2.setTeacher(t);
+		Collection<Score> scores = new ArrayList<Score>();
+		scores.add(sco1);
+		scores.add(sco2);
+		when(repo.findAllScoreByTeacherId(t.getId())).thenReturn(scores);
+		Collection<Score> res = scoreService.findAllScoresByTeacherId(t.getId());
+		assertTrue(res.size() == 2);
+	}
+	
+	
+	@Test
 	@Transactional
 	@DisplayName("Saving a score works fine")
 	public void shouldSaveScore() {
@@ -116,6 +136,17 @@ public class ScoreServiceTests {
 
 		scores = this.scoreService.findAll();
 		Mockito.verify(this.repo, Mockito.times(0)).save(nuevoScore);;
+	}
+	
+	
+	@Test
+	@DisplayName("find bad scores by teacher id")
+	void testFindBadAllScoresByTeacherId() throws DataAccessException {
+		int badTeacherId = 825;
+
+		when(repo.findAllScoreByTeacherId(badTeacherId)).thenReturn(null);
+		Collection<Score> res = scoreService.findAllScoresByTeacherId(badTeacherId);
+		assertTrue(res == null);
 	}
 }
 
