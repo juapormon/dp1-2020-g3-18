@@ -1,5 +1,3 @@
-
-<%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,6 +12,10 @@
         <tr>
             <th>Name</th>
             <th>Curso</th>
+            <th>Delete</th>
+    <%--         <c:if test="${esDean}"> --%>
+            <th>Add Teacher</th>
+           <%--  </c:if> --%>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +30,20 @@
                 <td>
                     <c:out value=" ${subject.curso}"/>
                 </td>
+                <td>
+                	<spring:url value="/subjects/delete/{subjectId}" var="subjectUrl">
+                		<spring:param name="subjectId" value ="${subject.id}"/>
+                	</spring:url>
+                    <a href="${fn:escapeXml(subjectUrl)}">Delete</a>
+                </td>
+                <%-- <c:if test="${esDean}"> --%>
+                <td>
+                    <spring:url value="/subjects/{subjectId}/teachers" var="showTeachersUrl">
+      				<spring:param name="subjectId" value="${subject.id}"/>
+  					</spring:url>
+   					<a href="${fn:escapeXml(showTeachersUrl)}" class="btn btn-default">Add Teacher</a>
+                </td>
+                <%-- </c:if> --%>
 
                
             </tr> 
@@ -35,15 +51,21 @@
         
              
         </tbody>
-    </table> 
+    </table>
+    <spring:url value="/subjects/new" var="addUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add Subject</a> 
     <h3>
          <spring:url value="/subjects/mySubjects/{studentId}" var="mySubjectsUrl">
                      <spring:param name="studentId" value="${student.id}"/>
                      </spring:url>
-                    <a href="${fn:escapeXml(mySubjectsUrl)}"><c:out value="My Subjects"/></a>
-                </h3>
+                     <c:if test="${condition}">
+                     	<a href="${fn:escapeXml(mySubjectsUrl)}"><c:out value="My Subjects"/></a>
+                     </c:if>
+     </h3>
     
                     
     
 </petclinic:layout>
+
 

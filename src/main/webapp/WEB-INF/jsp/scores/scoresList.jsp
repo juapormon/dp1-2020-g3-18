@@ -11,8 +11,9 @@
     <table id="scoresTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Point</th>
+            <th>Value</th>
             <th>Comment</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -25,9 +26,17 @@
                     </spring:url>
                     <a href="${fn:escapeXml(editScoreUrl)}"><c:out value="${score.valu}"/></a>
                 </td>
+                
                 <td>
                     <c:out value=" ${score.comment}"/>
                 </td>
+                <td>
+                	<spring:url value="/teachers/{teacherId}/scores/delete/{scoreId}" var="scoreUrl">
+                		<spring:param name="teacherId" value ="${score.teacher.id}"/>
+                		<spring:param name="scoreId" value ="${score.id}"/>
+                	</spring:url>
+                    <a href="${fn:escapeXml(scoreUrl)}">Delete</a>
+                </td>                
             </tr>
         </c:forEach> 
         </tbody>
@@ -40,6 +49,9 @@
         <tr>
             <th>Comment</th>
             <th>Student who made it</th>
+            <c:if test="${teacherAuth}">
+            <th>Report comment</th>
+            </c:if>
         </tr>
         </thead>
         <tbody>
@@ -47,24 +59,17 @@
 				<tr>
 					<td><b><c:out value="${scor.comment}"/></b></td>
 					<td><b><c:out value="${scor.student.firstName} ${scor.student.lastName}"/></b></td>
+					<td>
+                    <spring:url value="/reports/new/{scoreId}" var="reportUrl">
+                    <spring:param name="scoreId" value="${scor.id}"/>
+                    </spring:url>
+                    <c:if test="${teacherAuth}">
+                    <a href="${fn:escapeXml(reportUrl)}"><c:out value="Report"/></a>
+                	</c:if>
+                	</td>
 				</tr>
 			</c:forEach>
         </tbody>
     </table>
 
-     <!--
-    <table class="table table-striped">
-      	 <tr>
-   	 	<th><b>Ejemplo de comentario:</b></th>
-		<td><b><c:out value="${teacher.scores[0].comment}"/></b></td>
-	</tr>
-
-    </table>
-    <br/>
-     
-    <spring:url value="comments" var="showCommentsUrl">
-        <spring:param name="teacherId" value="${teacher.id}"/>
-    </spring:url>
-    <a href="${fn:escapeXml(showCommentsUrl)}" class="btn btn-default">Show Comments</a>
-     -->
 </petclinic:layout>

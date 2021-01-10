@@ -7,7 +7,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="departments">
-    <!-- <h2>Subjects related</h2> -->
+   
     <h2><c:out value = "Subjects related to ${department.name}"></c:out></h2>
 
     <table id="sssTable" class="table table-striped">
