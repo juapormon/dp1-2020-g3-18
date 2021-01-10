@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.College;
 import rateacher.model.Dean;
+import rateacher.model.Student;
 import rateacher.model.Teacher;
 import rateacher.repository.DeanRepository;
 import rateacher.repository.TeacherRepository;
@@ -44,6 +45,11 @@ public class DeanService {
 	@Transactional(readOnly = true)
 	public Collection<College> findAllColleges() throws DataAccessException {
 		return deanRepository.findAllColleges();
+	}
+	
+	@Transactional(readOnly = true)
+	public Dean findDeanByUsername(String username) throws DataAccessException {
+		return deanRepository.findDeanByUsername(username);
 	}
 
 }
