@@ -33,7 +33,6 @@ import rateacher.service.TeacherService;
 import rateacher.util.TeacherValidator;
 
 @Controller
-//@RequestMapping("/deans/{deanId}")
 public class DeanController {
 	
 	private final DeanService deanService;
