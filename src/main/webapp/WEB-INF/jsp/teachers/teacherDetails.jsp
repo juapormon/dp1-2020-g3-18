@@ -23,8 +23,9 @@
     <spring:url value="{teacherId}/scores/new" var="addUrl">
         <spring:param name="teacherId" value="${teacher.id}"/>
     </spring:url>
+   	<c:if test="${studentAuth}">
     <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add New Score</a>
-
+	</c:if>
 	<br/>
     <br/>
     <h2>Scores</h2>

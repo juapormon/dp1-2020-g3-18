@@ -46,6 +46,9 @@ public interface TeacherRepository extends Repository<Teacher, Integer> {
 
 	@Query("select t from Teacher t where t.user.username = ?1")
 	Teacher findTeacherByUsername(String username);
+	
+	@Query("select t.subjects from Teacher t where t.user.id=?1")
+	Collection<Subject> findSubjectsByTeacherId(int id);
 
 	@Query("select t from Teacher t join t.colleges c where not c.id = ?1")
 	List<Teacher> findTeacherByCollegeId(int collegeId);
