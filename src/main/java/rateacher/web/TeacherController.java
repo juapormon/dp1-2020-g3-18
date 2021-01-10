@@ -1,23 +1,16 @@
 
 package rateacher.web;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import rateacher.model.Subject;
-import rateacher.model.Subjects;
 import rateacher.service.SubjectService;
 import rateacher.util.ScoreValidator;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,7 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Teacher;
@@ -37,9 +29,6 @@ import rateacher.model.Teachers;
 import rateacher.service.ScoreService;
 import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
-import rateacher.util.DuplicatedStudentScoreException;
-import rateacher.util.ScoreValidator;
-
 import org.springframework.beans.BeanUtils;
 
 @Controller
@@ -67,7 +56,7 @@ public class TeacherController {
 	public void initTeacherBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
 	}
-
+	
 	@GetMapping(value = { "teachers" })
 	public String showTeacherList(Map<String, Object> model) {
 
@@ -92,7 +81,22 @@ public class TeacherController {
 	@GetMapping(value = "teachers/{teacherId}")
 	public ModelAndView showTeacher(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
 		ModelAndView mav = new ModelAndView("teachers/teacherDetails");
-		mav.addObject(this.teacherService.findTeacherById(teacherId));
+		Teacher teacher = this.teacherService.findTeacherById(teacherId);
+		mav.addObject("teacher", this.teacherService.findTeacherById(teacherId));
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		Student student = this.studentService.findStudentByUsername(principal);
+	        if(student!=null) {
+	        	Collection<Subject> subjectsStudent = student.getSubjects(); 
+	        	Collection<Subject> subjectsTeacher = teacher.getSubjects();
+	            Integer match = 1;
+	             for (Subject s: subjectsStudent) {
+	             	if (subjectsTeacher.contains(s)) {
+	             		match = match-match;
+	             	}
+	             }
+	             Boolean studentAuth = ((match==0) && (student != null));
+	             model.put("studentAuth", studentAuth);
+	        }
 		return mav;
 	}
 
@@ -139,6 +143,10 @@ public class TeacherController {
 	public String showTeacherScoreList(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
 		Collection<Score> scores = this.teacherService.findScoresByTeacherId(teacherId);
 		model.put("scores", scores);
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        Teacher teacher = this.teacherService.findTeacherByUsername(principal);
+        Boolean teacherAuth = (teacher != null);
+        model.put("teacherAuth", teacherAuth);
 		return "scores/scoresList";
 	}
 
@@ -197,9 +205,6 @@ public class TeacherController {
 			return "redirect:/teachers/{teacherId}/scores";
 		}
 	}
-	
-	
-	
 	
 	@GetMapping(value = {"teachers/{subjectId}/subjectsTeached"})
 	public ModelAndView listMySubjects(@PathVariable("subjectId") int subjectId) {

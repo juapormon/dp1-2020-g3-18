@@ -30,8 +30,12 @@ public class SubjectService {
 	@Transactional(readOnly = true)	
 	public Subject findSubjectById(int id) throws DataAccessException {
 		Subject subject = subjectRepository.findById(id);
-		assert subject != null;
 		return subject;
+	}
+	
+	@Transactional(readOnly = false)
+	public void save(Subject subject) throws DataAccessException{
+		subjectRepository.save(subject);
 	}
 	
 	@Transactional(readOnly = true)	

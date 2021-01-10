@@ -85,15 +85,6 @@ public class StudentController {
 
 	}
 	
-	@GetMapping(value = { "/studentsWithScore" })
-	public String showStudentsWithScore(Map<String, Object> model) {
-
-		Students students = new Students();
-		students.getStudentList().addAll(this.studentService.studentWithScore());
-		model.put("students", students);
-		return "students/studentsWithScore";
-
-	}
 	
 	@GetMapping(value = "/students/new")
 	public String initCreationForm(Map<String, Object> model) {

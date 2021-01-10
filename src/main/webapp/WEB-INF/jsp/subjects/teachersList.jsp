@@ -24,9 +24,6 @@
         <c:forEach items="${teachers}" var="teacher">
              <tr>
                 <td>
-                    <spring:url value="/teachers/{teacherId}" var="teacherUrl">
-                    <spring:param name="teacherId" value="${teacher.id}"/>
-                    </spring:url>
                     <c:out value="${teacher.firstName}"/>
                 </td>
                 <td>
@@ -39,11 +36,11 @@
 	                </c:forEach>
                 </td>
 				<td>
-				 <spring:url value="/deans/colleges/{collegeId}/teachers/{teacherId}/add" var="addTeacherToScoreUrl">
-                  	<spring:param name="collegeId" value="${collegeId}"/>
+				 <spring:url value="teachers/{teacherId}/add" var="addTeacherToScoreUrl">
+                  	<spring:param name="subjectId" value="${subjectId}"/>
                   	<spring:param name="teacherId" value="${teacher.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(addTeacherToScoreUrl)}"><c:out value="add to college"/></a> -->
+                    <a href="${fn:escapeXml(addTeacherToScoreUrl)}"><c:out value="add to subject"/></a> -->
 				</td>
                
             </tr> 
