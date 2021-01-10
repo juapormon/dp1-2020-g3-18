@@ -29,6 +29,9 @@ public interface StudentRepository extends Repository<Student, Integer> {
 
 	@Query("select s.subjects from Student s where s.id=?1")
 	List<Subject> findMySubjects(int i);
+	
+	@Query("select s.subjects from Student s where s.user.username=?1")
+	List<Subject> findMySubjectsByUsername(String username);
 
 //Esta consulta muestra los profesores de un alumno, pero no se usa por eso la comento
 //	@Query("select t from Teacher t where t.id in t.subjects AND t.subjects in"

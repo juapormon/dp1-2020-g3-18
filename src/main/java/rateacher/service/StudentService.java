@@ -65,6 +65,11 @@ public class StudentService {
 	public List<Subject> findMySubjects(int i){
 		return studentRepository.findMySubjects(i);
 	}
+	
+	@Transactional
+	public List<Subject> findMySubjectsByUsername(String username){
+		return studentRepository.findMySubjectsByUsername(username);
+	}
 
 	
 	public Collection<Student> StudentsRatedATeacher(int teacherId) throws DataAccessException{
