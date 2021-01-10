@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.Department;
 import rateacher.model.Score;
+import rateacher.model.Subject;
 import rateacher.model.Teacher;
 import rateacher.repository.DepartmentRepository;
 import rateacher.repository.TeacherRepository;
@@ -40,6 +41,11 @@ public class TeacherService {
 		assert teacher != null;
 		return teacher;
 	}
+	
+	@Transactional(readOnly = false)
+	public void save(Teacher teacher) throws DataAccessException {
+		teacherRepository.save(teacher);
+	}
 
 	@Transactional(readOnly = true)
 	public Collection<Teacher> findTeachers() throws DataAccessException {
@@ -59,6 +65,10 @@ public class TeacherService {
 		return teacherRepository.findByFirstName(firstName);
 	}
 	
+	@Transactional(readOnly = true)
+	public Collection<Subject> findSubjectsByTeacherId(int id) throws DataAccessException {
+		return teacherRepository.findSubjectsByTeacherId(id);
+	}
 
 	@Transactional(readOnly = true)
 	public List<Teacher> findTeacherByCollege(int id) throws DataAccessException {

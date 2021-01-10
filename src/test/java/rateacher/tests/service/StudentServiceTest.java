@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.ConstraintViolationException;
@@ -21,8 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javassist.bytecode.stackmap.BasicBlock.Catch;
 import rateacher.model.Student;
+import rateacher.model.Teacher;
 import rateacher.model.User;
 import rateacher.service.StudentService;
+import rateacher.service.TeacherService;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class StudentServiceTest {
@@ -30,7 +33,7 @@ public class StudentServiceTest {
 	
 	@Autowired
 	protected StudentService studentService; //= new StudentService(repo);
-
+	protected TeacherService teacherService;
 
 	
 	//Casos positivos
@@ -105,6 +108,8 @@ public class StudentServiceTest {
                 
 		assertThrows(ConstraintViolationException.class,()->this.studentService.saveStudent(student));
 	}
+	
+
 	
 
 

@@ -12,8 +12,20 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import rateacher.model.Score;
+import rateacher.model.Student;
+import rateacher.model.Students;
 
+import rateacher.model.Subject;
+import rateacher.model.User;
+import rateacher.model.Teachers;
 
+import rateacher.model.Teacher;
+import rateacher.repository.TeacherRepository;
+import rateacher.service.ScoreService;
+
+import rateacher.service.StudentService;
+import rateacher.service.TeacherService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -74,15 +86,6 @@ public class StudentController {
 
 	}
 	
-	@GetMapping(value = { "/studentsWithScore" })
-	public String showStudentsWithScore(Map<String, Object> model) {
-
-		Students students = new Students();
-		students.getStudentList().addAll(this.studentService.studentWithScore());
-		model.put("students", students);
-		return "students/studentsWithScore";
-
-	}
 	
 	@GetMapping(value = "/students/new")
 	public String initCreationForm(Map<String, Object> model) {

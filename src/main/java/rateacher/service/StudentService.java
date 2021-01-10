@@ -46,10 +46,6 @@ public class StudentService {
 		return studentRepository.findAll();
 	}
 
-	public Collection<Student> studentWithScore() throws DataAccessException {
-		return studentRepository.studentWithScore();
-	}
-
 	@Transactional
 	public void saveStudent(Student student) throws DataAccessException {
 		// creating student
@@ -58,11 +54,6 @@ public class StudentService {
 		userService.saveUser(student.getUser());
 		// creating authorities
 		authoritiesService.saveAuthorities(student.getUser().getUsername(), "student");
-	}
-	
-	@Transactional(readOnly = true)	
-	public Collection<Teacher> findTeachersBySubject(int i) throws DataAccessException {
-		return teacherRepository.findBySubject(i);
 	}
 	
 	@Transactional(readOnly = true)
@@ -74,12 +65,12 @@ public class StudentService {
 	public List<Subject> findMySubjects(int i){
 		return studentRepository.findMySubjects(i);
 	}
-
-
-	public Collection<Student> myTeachers(int id) throws DataAccessException{
-		return studentRepository.myTeachers(id);
-
+	
+	@Transactional
+	public List<Subject> findMySubjectsByUsername(String username){
+		return studentRepository.findMySubjectsByUsername(username);
 	}
+
 	
 	public Collection<Student> StudentsRatedATeacher(int teacherId) throws DataAccessException{
 		return studentRepository.StudentsRatedATeacher(teacherId);

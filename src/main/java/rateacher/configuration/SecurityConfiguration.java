@@ -1,3 +1,4 @@
+
 package rateacher.configuration;
 
 import javax.sql.DataSource;
@@ -44,15 +45,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/teachers/new").hasAnyAuthority("dean","admin")
 				.antMatchers("/myTeachers/**").hasAnyAuthority("student","admin")
 				.antMatchers("/teachers/*").permitAll()
-				.antMatchers("/teachers/**").permitAll()
 				.antMatchers("/teachers/*/scores").permitAll()
 				.antMatchers("/teachers/*/scores/new").hasAnyAuthority("admin", "student")
 				.antMatchers("/studentsWithScore").hasAnyAuthority("admin")
 				.antMatchers("/students/**").permitAll()
 				.antMatchers("/students/new").permitAll()
-				.antMatchers("/subjects/mySubjects/*").hasAnyAuthority("student")
+				.antMatchers("/subjects/mySubjects/*").permitAll()
 				.antMatchers("/teachers/*/scores/*/edit").hasAnyAuthority("admin")
 				.antMatchers("/subjects/**").permitAll()
+				.antMatchers("/subjects/*/teachers").permitAll()
 				.antMatchers("/teachersWithScore").hasAnyAuthority("admin")
 				.antMatchers("/findTeachers").permitAll()
 				.antMatchers("/teachersFound").permitAll()
@@ -63,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/reports").hasAnyAuthority("teacher")
 				.antMatchers("/reports/**").hasAnyAuthority("teacher")
 				.antMatchers("/teachers/{teacherId}/studentsRated").hasAnyAuthority("admin")
-        .antMatchers("/teachers/{subjectId}/subjectsTeached").permitAll()
+				.antMatchers("/teachers/{subjectId}/subjectsTeached").permitAll()
 				.anyRequest().denyAll()
 				.and()
 				 	.formLogin()

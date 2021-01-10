@@ -23,24 +23,20 @@ public interface StudentRepository extends Repository<Student, Integer> {
 
 	void save(@Valid Student student) throws DataAccessException;
 
-	@Query("select t from Teacher t")
-	Collection<Teacher> teachersWithSameSubject();
-
-	@Query("select s from Student s where scores_id is not null")
-	Collection<Student> studentWithScore();
 
 	@Query("select s from Student s where s.user.username = ?1")
 	Student findStudentByUsername(String username);
 
 	@Query("select s.subjects from Student s where s.id=?1")
 	List<Subject> findMySubjects(int i);
+	
+	@Query("select s.subjects from Student s where s.user.username=?1")
+	List<Subject> findMySubjectsByUsername(String username);
 
-	@Query("SELECT t FROM Teacher t  WHERE t.lastName || t.name LIKE :word%")
-	public Collection<Teacher> findByWord(@Param("word") String word);
-
-	@Query("select t from Teacher t where t.id in t.subjects AND t.subjects in"
-			+ "(select s.subjects from Student s where s.id =?1)")
-	Collection<Student> myTeachers(int id);
+//Esta consulta muestra los profesores de un alumno, pero no se usa por eso la comento
+//	@Query("select t from Teacher t where t.id in t.subjects AND t.subjects in"
+//			+ "(select s.subjects from Student s where s.id =?1)")
+//	Collection<Teacher> myTeachers(int id);
 
 
 	@Query(nativeQuery = true, value = "SELECT * FROM STUDENTS s where s.id in "

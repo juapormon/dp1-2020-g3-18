@@ -43,6 +43,8 @@ import rateacher.util.ScoreValidator;
 
 import org.springframework.beans.BeanUtils;
 
+
+
 @Controller
 public class TeacherController {
 
@@ -68,7 +70,7 @@ public class TeacherController {
 	public void initTeacherBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
 	}
-
+	
 	@GetMapping(value = { "teachers" })
 	public String showTeacherList(Map<String, Object> model) {
 
@@ -93,7 +95,22 @@ public class TeacherController {
 	@GetMapping(value = "teachers/{teacherId}")
 	public ModelAndView showTeacher(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
 		ModelAndView mav = new ModelAndView("teachers/teacherDetails");
-		mav.addObject(this.teacherService.findTeacherById(teacherId));
+		Teacher teacher = this.teacherService.findTeacherById(teacherId);
+		mav.addObject("teacher", this.teacherService.findTeacherById(teacherId));
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		Student student = this.studentService.findStudentByUsername(principal);
+	        if(student!=null) {
+	        	Collection<Subject> subjectsStudent = student.getSubjects(); 
+	        	Collection<Subject> subjectsTeacher = teacher.getSubjects();
+	            Integer match = 1;
+	             for (Subject s: subjectsStudent) {
+	             	if (subjectsTeacher.contains(s)) {
+	             		match = match-match;
+	             	}
+	             }
+	             Boolean studentAuth = ((match==0) && (student != null));
+	             model.put("studentAuth", studentAuth);
+	        }
 		return mav;
 	}
 
@@ -140,22 +157,11 @@ public class TeacherController {
 	public String showTeacherScoreList(@PathVariable("teacherId") int teacherId, Map<String, Object> model) {
 		Collection<Score> scores = this.teacherService.findScoresByTeacherId(teacherId);
 		model.put("scores", scores);
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        Teacher teacher = this.teacherService.findTeacherByUsername(principal);
+        Boolean teacherAuth = (teacher != null);
+        model.put("teacherAuth", teacherAuth);
 		return "scores/scoresList";
-	}
-	
-	@GetMapping(path="/teachers/{teacherId}/scores/delete/{scoreId}")
-	public String deleteScore(@PathVariable("teacherId") int teacherId, @PathVariable("scoreId") int scoreId, ModelMap modelMap){
-		String view = "scores/scoresList";
-		Optional<Score> score = Optional.ofNullable(scoreService.findScoreById(scoreId));
-		if(score.isPresent()) {
-			scoreService.delete(score.get());
-			modelMap.addAttribute("message", "Score successfully deleted!");
-			view = showTeacherScoreList(teacherId, modelMap);
-		} else {
-			modelMap.addAttribute("message", "Score not found!");
-			view = showTeacherScoreList(teacherId, modelMap);
-		}
-		return view;
 	}
 
 
@@ -214,9 +220,6 @@ public class TeacherController {
 		}
 	}
 	
-	
-	
-	
 	@GetMapping(value = {"teachers/{subjectId}/subjectsTeached"})
 	public ModelAndView listMySubjects(@PathVariable("subjectId") int subjectId) {
 		ModelAndView mav = new ModelAndView("teachers/subjectListTeached");
@@ -236,6 +239,20 @@ public class TeacherController {
 		Collection<Student> students = this.studentService.StudentsRatedATeacher(teacherId);
 		model.put("students", students);
 		return "students/studentRatedATeacher";
+	}
+  	@GetMapping(path="/teachers/{teacherId}/scores/delete/{scoreId}")
+	public String deleteScore(@PathVariable("teacherId") int teacherId, @PathVariable("scoreId") int scoreId, ModelMap modelMap){
+		String view = "scores/scoresList";
+		Optional<Score> score = Optional.ofNullable(scoreService.findScoreById(scoreId));
+		if(score.isPresent()) {
+			scoreService.delete(score.get());
+			modelMap.addAttribute("message", "Score successfully deleted!");
+			view = showTeacherScoreList(teacherId, modelMap);
+		} else {
+			modelMap.addAttribute("message", "Score not found!");
+			view = showTeacherScoreList(teacherId, modelMap);
+		}
+		return view;
 	}
 
 }
