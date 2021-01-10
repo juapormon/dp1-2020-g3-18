@@ -11,20 +11,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.samples.petclinic.model.Score;
-import org.springframework.samples.petclinic.model.Student;
-import org.springframework.samples.petclinic.model.Students;
 
-import org.springframework.samples.petclinic.model.Subject;
-import org.springframework.samples.petclinic.model.User;
-import org.springframework.samples.petclinic.model.Teachers;
 
-import org.springframework.samples.petclinic.model.Teacher;
-import org.springframework.samples.petclinic.repository.TeacherRepository;
-import org.springframework.samples.petclinic.service.ScoreService;
 
-import org.springframework.samples.petclinic.service.StudentService;
-import org.springframework.samples.petclinic.service.TeacherService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -130,9 +130,9 @@ INSERT INTO students_subjects VALUES (3,116);
 
 
 --ASIGNATURAS POR DEPARTAMENTO--
-INSERT INTO subjects_departments VALUES(111,1);
-INSERT INTO subjects_departments VALUES(112,2);
-INSERT INTO subjects_departments VALUES(113,1);
-INSERT INTO subjects_departments VALUES(114,2);
+--INSERT INTO subjects_departments VALUES(111,1);
+--INSERT INTO subjects_departments VALUES(112,2);
+--INSERT INTO subjects_departments VALUES(113,1);
+--INSERT INTO subjects_departments VALUES(114,2);
 
 
