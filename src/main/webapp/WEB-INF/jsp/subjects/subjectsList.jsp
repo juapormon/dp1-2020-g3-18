@@ -1,4 +1,3 @@
-
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -14,30 +13,38 @@
         <tr>
             <th>Name</th>
             <th>Curso</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${subjects}" var="subject">
+        <c:forEach items="${subjects.subjectList}" var="subject">
              <tr>
                 <td>
+                    <spring:url value="/subjects/{subjectId}" var="subjectUrl">
+                    <spring:param name="subjectId" value="${subject.id}"/>
+                    </spring:url>
                     <c:out value="${subject.name}"/>
                 </td>
                 <td>
                     <c:out value=" ${subject.curso}"/>
                 </td>
                 <td>
-                    <spring:url value="/subjects/{subjectId}/teachers" var="showTeachersUrl">
-      				<spring:param name="subjectId" value="${subject.id}"/>
-  					</spring:url>
-   					<a href="${fn:escapeXml(showTeachersUrl)}" class="btn btn-default">Add Teacher</a>
+                	<spring:url value="/subjects/delete/{subjectId}" var="subjectUrl">
+                		<spring:param name="subjectId" value ="${subject.id}"/>
+                	</spring:url>
+                    <a href="${fn:escapeXml(subjectUrl)}">Delete</a>
                 </td>
+
+               
             </tr> 
         </c:forEach>
         
              
         </tbody>
-    </table> 
+    </table>
+    <spring:url value="/subjects/new" var="addUrl">
+    </spring:url>
+    <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add Subject</a> 
     <h3>
          <spring:url value="/subjects/mySubjects/{studentId}" var="mySubjectsUrl">
                      <spring:param name="studentId" value="${student.id}"/>
@@ -50,4 +57,5 @@
                     
     
 </petclinic:layout>
+
 

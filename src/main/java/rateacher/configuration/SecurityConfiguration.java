@@ -1,3 +1,4 @@
+
 package rateacher.configuration;
 
 import javax.sql.DataSource;
@@ -44,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/teachers/new").hasAnyAuthority("dean","admin")
 				.antMatchers("/myTeachers/**").hasAnyAuthority("student","admin")
 				.antMatchers("/teachers/*").permitAll()
+				.antMatchers("/teachers/**").permitAll()
 				.antMatchers("/teachers/*/scores").permitAll()
 				.antMatchers("/teachers/*/scores/new").hasAnyAuthority("admin", "student")
 				.antMatchers("/studentsWithScore").hasAnyAuthority("admin")
