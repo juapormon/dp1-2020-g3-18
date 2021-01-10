@@ -143,7 +143,6 @@ public class TeacherController {
 		String view = "scores/scoresList";
 		Optional<Score> score = Optional.ofNullable(scoreService.findScoreById(scoreId));
 		if(score.isPresent()) {
-			//Borrar la columna de los id de las subject que tienen estudiantes en la tabla Subjects_Students
 			scoreService.delete(score.get());
 			modelMap.addAttribute("message", "Score successfully deleted!");
 			view = showTeacherScoreList(teacherId, modelMap);

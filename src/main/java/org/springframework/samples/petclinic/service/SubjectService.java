@@ -34,11 +34,6 @@ public class SubjectService {
 		return subject;
 	}
 	
-//	@Transactional(readOnly = true)	
-//	public Optional<Subject> findSubjectById1(int id) throws DataAccessException {
-//		return subjectRepository.findById1(id);
-//	}
-	
 	@Transactional(readOnly = true)	
 	public Collection<Subject> findSubjects() throws DataAccessException {
 		return subjectRepository.findAll();

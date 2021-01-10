@@ -35,6 +35,7 @@ public class SubjectController {
 	private StudentService studentService;
 	
 	
+	
 
 	@GetMapping(value = {"/subjects/new"})
 	public String newSubject(ModelMap model) {

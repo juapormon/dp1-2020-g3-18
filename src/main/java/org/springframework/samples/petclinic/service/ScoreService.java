@@ -34,11 +34,6 @@ public class ScoreService {
 		return scoreRepository.findById(id);
 	}
 	
-//	@Transactional(readOnly = true)	
-//	public Optional<Score> findScoreById1(int id) throws DataAccessException {
-//		return scoreRepository.findById1(id);
-//	}
-	
 	@Transactional(readOnly = true)	
 	public Collection<Score> findAll(){
 		return scoreRepository.findAll();

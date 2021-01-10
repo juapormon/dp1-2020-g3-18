@@ -6,6 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
+
 <petclinic:layout pageName="subjects">
     <h2><c:if test="${student['new']}">New </c:if> Subject</h2>
     <form:form modelAttribute="subjects" class="form-horizontal" id="add-subject-form" action ="/subjects/save">

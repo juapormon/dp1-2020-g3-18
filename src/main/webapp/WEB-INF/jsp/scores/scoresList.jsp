@@ -36,8 +36,7 @@
                 		<spring:param name="scoreId" value ="${score.id}"/>
                 	</spring:url>
                     <a href="${fn:escapeXml(scoreUrl)}">Delete</a>
-                </td>
-                
+                </td>                
             </tr>
         </c:forEach> 
         </tbody>
