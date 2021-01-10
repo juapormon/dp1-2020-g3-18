@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import rateacher.model.Dean;
 import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Subjects;
 import rateacher.model.Teacher;
+import rateacher.service.DeanService;
 import rateacher.service.StudentService;
 import rateacher.service.SubjectService;
 import rateacher.service.TeacherService;
@@ -36,12 +38,14 @@ public class SubjectController {
 	private final SubjectService subjectService;
 	private final TeacherService teacherService;
 	private final StudentService studentService;
+	private final DeanService deanService;
 	
 	@Autowired
-	public SubjectController(SubjectService subjectService, TeacherService teacherService, StudentService studentService) {
+	public SubjectController(SubjectService subjectService, TeacherService teacherService, StudentService studentService,DeanService deanService) {
 		this.subjectService = subjectService;
 		this.teacherService = teacherService;
 		this.studentService = studentService;
+		this.deanService = deanService;
 	}
 	
 	@InitBinder
@@ -66,6 +70,9 @@ public class SubjectController {
 		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
         Student student = this.studentService.findStudentByUsername(principal);
         Boolean condition = (student != null);
+        Dean dean = this.deanService.findDeanByUsername(principal);
+        Boolean esDean = (dean != null);
+        model.put("esDean", esDean);
         model.put("condition", condition);
         model.put("student", student);
 		return "subjects/subjectsList";

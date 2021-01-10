@@ -174,7 +174,7 @@ name: String {NotBlank}
       <h>81</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
-PersonaleExperience
+PersonalExperience
 --
  
 </panel_attributes>
@@ -189,7 +189,7 @@ PersonaleExperience
       <h>81</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
-TeachingExpereience
+TeachingExperience
 --
 titulation: String {NotBlank} 
 comment: String </panel_attributes>
@@ -505,7 +505,7 @@ research: String {NotBlank}
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 ProfessionalExperience
 --
-unicersity: String {NotBlank} 
+university: String {NotBlank} 
 comment: String</panel_attributes>
     <additional_attributes/>
   </element>

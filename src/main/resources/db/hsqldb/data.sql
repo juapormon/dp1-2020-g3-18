@@ -85,22 +85,22 @@ INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 5, 'Me gust
 --REPORTES--DATOS
 INSERT INTO reports(id,reason, score_id) VALUES (5,'Comportamiento abusivo', 1);
 
---ASIGNATURAS--DATOS
-INSERT INTO subjects(id,name,curso) VALUES (111,'Diseño y pruebas', 3);
-INSERT INTO subjects(id,name,curso) VALUES (112,'Fundamentos Fisicos de la Informatica', 1);
-INSERT INTO subjects(id,name,curso) VALUES (113,'Matematica Discreta', 2);
-INSERT INTO subjects(id,name,curso) VALUES (114,'Circuitos Electronicos Digitales', 1);
-INSERT INTO subjects(id,name,curso) VALUES (115,'Sistemas Operativos', 2);
-INSERT INTO subjects(id,name,curso) VALUES (116,'Logica Informatica', 2);
-INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
-INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
-
 --DEPARTAMENTOS--DATOS
 INSERT INTO departments(id,name) VALUES (1,'Lenguaje y sistemas informaticos');
 INSERT INTO departments(id,name) VALUES (2,'Tecnologia electronica');
 INSERT INTO departments(id,name) VALUES (3,'Matematicas aplicadas');
 INSERT INTO departments(id,name) VALUES (4,'Ingenieria del diseño');
 INSERT INTO departments(id,name) VALUES (5,'Electronica y magnetismo');
+
+--ASIGNATURAS--DATOS
+INSERT INTO subjects(id,name,curso,department_id) VALUES (111,'Diseño y pruebas', 3,1);
+INSERT INTO subjects(id,name,curso,department_id) VALUES (112,'Fundamentos Fisicos de la Informatica', 1,1);
+INSERT INTO subjects(id,name,curso,department_id) VALUES (113,'Matematica Discreta', 2,2);
+INSERT INTO subjects(id,name,curso,department_id) VALUES (114,'Circuitos Electronicos Digitales', 1,3);
+INSERT INTO subjects(id,name,curso,department_id) VALUES (115,'Sistemas Operativos', 2,3);
+INSERT INTO subjects(id,name,curso,department_id) VALUES (116,'Logica Informatica', 2,3);
+INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
+INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
 
 --ASIGNATURAS DE PROFESORES--
 INSERT INTO teachers_subjects VALUES (1,111);

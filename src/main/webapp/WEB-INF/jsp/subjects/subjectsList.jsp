@@ -1,4 +1,3 @@
-<%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -13,7 +12,10 @@
         <tr>
             <th>Name</th>
             <th>Curso</th>
-            <th>Actions</th>
+            <th>Delete</th>
+    <%--         <c:if test="${esDean}"> --%>
+            <th>Add Teacher</th>
+           <%--  </c:if> --%>
         </tr>
         </thead>
         <tbody>
@@ -34,6 +36,14 @@
                 	</spring:url>
                     <a href="${fn:escapeXml(subjectUrl)}">Delete</a>
                 </td>
+                <%-- <c:if test="${esDean}"> --%>
+                <td>
+                    <spring:url value="/subjects/{subjectId}/teachers" var="showTeachersUrl">
+      				<spring:param name="subjectId" value="${subject.id}"/>
+  					</spring:url>
+   					<a href="${fn:escapeXml(showTeachersUrl)}" class="btn btn-default">Add Teacher</a>
+                </td>
+                <%-- </c:if> --%>
 
                
             </tr> 
