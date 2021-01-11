@@ -19,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${subjects.subjectList}" var="subject">
+        <c:forEach items="${subjects}" var="subject">
              <tr>
                 <td>
                     <spring:url value="/subjects/{subjectId}" var="subjectUrl">
