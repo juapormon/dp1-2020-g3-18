@@ -14,11 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import rateacher.model.Score;
 import rateacher.model.Student;
-import rateacher.model.Students;
 
 import rateacher.model.Subject;
 import rateacher.model.User;
-import rateacher.model.Teachers;
 
 import rateacher.model.Teacher;
 import rateacher.repository.TeacherRepository;
@@ -38,16 +36,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import rateacher.model.Score;
-import rateacher.model.Student;
-import rateacher.model.Students;
-import rateacher.model.Subject;
-import rateacher.model.Teacher;
-import rateacher.model.Teachers;
-import rateacher.repository.TeacherRepository;
-import rateacher.service.ScoreService;
-import rateacher.service.StudentService;
-import rateacher.service.TeacherService;
 
 @Controller
 
@@ -79,8 +67,7 @@ public class StudentController {
 	@GetMapping(value = { "/students" })
 	public String showStudentsList(Map<String, Object> model) {
 
-		Students students = new Students();
-		students.getStudentList().addAll(this.studentService.findStudents());
+		Collection<Student> students = this.studentService.findStudents();
 		model.put("students", students);
 		return "students/studentsList";
 

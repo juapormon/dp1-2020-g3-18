@@ -62,14 +62,14 @@ public class SubjectServiceTest {
 		@DisplayName("Finding a subject by bad id")
 		void testFindSubjectByBadId(){
 			int badId = 234234;
-			assertThrows(AssertionError.class,()->this.subjectService.findSubjectById(badId));
+			assertThrows(AssertionError.class,()->this.subjectService.findSubjectById(badId)); // lo mismo
 		}
 		
 		@Test
 		@DisplayName("Finding bad subject by departmentId")
 		void testFindBadFindSubjectsFromDepartmentId(){
 			int badId = 22222;
-			assertThrows(AssertionError.class, () -> this.subjectService.findSubjectsFromDepartmentId(badId));
+			assertThrows(AssertionError.class, () -> this.subjectService.findSubjectsFromDepartmentId(badId));//problemas
 		}
 		
 
