@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${reports.reportsList}" var="report">
+        <c:forEach items="${reports}" var="report">
              <tr>
                 <td>
                     <c:out value=" ${report.score.comment}"/>

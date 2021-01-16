@@ -1,5 +1,6 @@
 package rateacher.web;
 
+import java.util.Collection;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -16,11 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import rateacher.model.Report;
-import rateacher.model.Reports;
 import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Teacher;
-import rateacher.model.Teachers;
 import rateacher.service.ReportService;
 import rateacher.service.ScoreService;
 import rateacher.service.StudentService;
@@ -48,10 +47,10 @@ public class ReportController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
-	@InitBinder("report")
-	public void initReportBinder(WebDataBinder dataBinder) {
-		dataBinder.setValidator(new ReportValidator(reportService));
-	}
+//	@InitBinder("report")
+//	public void initReportBinder(WebDataBinder dataBinder) {
+//		dataBinder.setValidator(new ReportValidator(reportService));
+//	}
 	
 	@GetMapping(value = {"/reports/new/{scoreId}"})
 	public String initCreationForm(@PathVariable int scoreId, ModelMap model) {
@@ -80,8 +79,7 @@ public class ReportController {
 	@GetMapping(value = { "reports" })
 	public String showReportList(Map<String, Object> model) {
 
-		Reports reports = new Reports();
-		reports.getReportsList().addAll(this.reportService.findReports());
+		Collection<Report> reports = this.reportService.findReports();
 		model.put("reports", reports);
 		return "reports/reportsList";
 	}
