@@ -16,7 +16,9 @@
 package rateacher.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Controller used to showcase what happens when an exception is thrown
@@ -32,7 +34,15 @@ public class CrashController {
 	@GetMapping(value = "/oups")
 	public String triggerException() {
 		throw new RuntimeException(
-				"Expected: controller used to showcase what " + "happens when an exception is thrown");
+				"Expected: controller used to showcase what " + "happens when an exception is thrown" + " Error enviado por un error de la aplicación");
+	}
+	
+	@GetMapping(value = "/forbiddenAccess")
+	public String triggerExceptionForbidden(ModelMap model) {
+		Boolean forbidden = true;
+		model.put("forbidden", forbidden);
+		throw new RuntimeException(
+				"Expected: controller used to showcase what " + "happens when an access is not permited" + " Error provocado por acceso no autorizado");
 	}
 
 }
