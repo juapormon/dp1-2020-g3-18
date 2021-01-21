@@ -64,17 +64,17 @@ public class SubjectController {
 	
 	@GetMapping(value = { "/subjects" })
 	public String showSubjectsList(Map<String, Object> model) {
-		Subjects subjects = new Subjects();
-		subjects.getSubjectList().addAll(this.subjectService.findSubjects());
+		List<Subject> subjects = new ArrayList<Subject>(subjectService.findAll());
 		model.put("subjects", subjects);
 		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
-        Student student = this.studentService.findStudentByUsername(principal);
+		Dean dean = this.deanService.findDeanByUsername(principal);
+		Student student = this.studentService.findStudentByUsername(principal);
         Boolean condition = (student != null);
-        Dean dean = this.deanService.findDeanByUsername(principal);
         Boolean esDean = (dean != null);
         model.put("esDean", esDean);
         model.put("condition", condition);
         model.put("student", student);
+        model.put("dean", dean);
 		return "subjects/subjectsList";
 
 	}

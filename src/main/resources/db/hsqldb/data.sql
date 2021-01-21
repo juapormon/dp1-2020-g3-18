@@ -30,7 +30,7 @@ INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience,
 --DECANOS--ROL
 INSERT INTO users(username,password,enabled) VALUES ('josrojrom1','pepe12345',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'josrojrom1','dean');
-INSERT INTO users(username, password, enabled) VALUES ('d', 'd', TRUE);
+INSERT INTO users(username, password,enabled) VALUES ('d', 'd', TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (55,'d','dean');
 --DECANOS--DATOS
 INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
@@ -68,6 +68,8 @@ INSERT INTO users(username,password,enabled) VALUES ('fran','fran12345',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (11,'fran','student');
 INSERT INTO users(username,password,enabled) VALUES ('s','s',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (12,'s','student');
+INSERT INTO users(username,password,enabled) VALUES ('d1','d1',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (44,'d1','dean');
 --ESTUDIANTES--DATOS
 INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas');
 INSERT INTO students(id,first_name,last_name,username) VALUES (66, 'administrador', 'Rodríguez Rodríguez', 'a');
