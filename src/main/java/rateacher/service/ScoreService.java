@@ -41,11 +41,6 @@ public class ScoreService {
 	}
 	
 	@Transactional(readOnly = true)	
-	public Collection<Score> findAllByTeacherId(int id){
-		return scoreRepository.findAllByTeacherId(id);
-	}
-	
-	@Transactional(readOnly = true)	
 	public Collection<Score> findAllScoresByTeacherId(int id){
 		return scoreRepository.findAllScoreByTeacherId(id);
 	}

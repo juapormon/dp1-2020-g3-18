@@ -89,7 +89,31 @@ public class TeacherControllerTest {
 	}
 	
 	@Test
-	@DisplayName("Test show teacher")
+	@DisplayName("Show teacher list")
+	@WithMockUser(value="spring")
+	void ShowTeacherListTest() {
+		//arrange		
+		when(this.studentService.findStudentByUsername(any())).thenReturn(student1);
+		when(this.teacherService.findTeachers()).thenReturn(Lists.list(teacher1));
+		
+		try {
+			//act
+			mockMvc.perform(get("/teachers"))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("teachers/teachersList"))
+			.andExpect(model().attribute("student", hasProperty("name", is(student1.getName()))))
+			.andExpect(model().attribute("teachers", hasItem(
+                            hasProperty("name", is(teacher1.getName()))
+            )));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Show teacher")
 	@WithMockUser(value="spring")
 	void ShowTeacherTest() {
 		//arrange		
@@ -102,6 +126,7 @@ public class TeacherControllerTest {
 			mockMvc.perform(get("/teachers/{teacherId}", 80))
 			//assert
 			.andExpect(status().isOk())
+			.andExpect(view().name("teachers/teacherDetails"))
 			.andExpect(model().attribute("teacher", hasProperty("firstName", is(teacher1.getFirstName()))));
 		} catch (Exception e) {
 			System.err.println("Error testing controller: "+e.getMessage());
@@ -150,6 +175,26 @@ public class TeacherControllerTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	}
+	
+	@Test
+	@DisplayName("Show teacher found")
+	@WithMockUser(value="spring")
+	void teacherFoundTest() {
+		//arrange		
+		teacher1.setFirstName(teacher1.getName());
+		when(this.teacherService.findTeacherByFirstName(any())).thenReturn(Lists.list(teacher1));
+		try {
+			//act
+			mockMvc.perform(get("/teachersFound", teacher1)
+					.param("firstName", teacher1.getFirstName()))
+			//assert
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/teachers/" + teacher1.getId()));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -239,3 +284,4 @@ public class TeacherControllerTest {
 	}
 
 }
+
