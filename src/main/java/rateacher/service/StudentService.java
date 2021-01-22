@@ -55,11 +55,6 @@ public class StudentService {
 		// creating authorities
 		authoritiesService.saveAuthorities(student.getUser().getUsername(), "student");
 	}
-	// Se puede borrar este método???
-	@Transactional(readOnly = true)	
-	public Collection<Teacher> findTeachersBySubject(int i) throws DataAccessException {
-		return teacherRepository.findBySubject(i);
-	}
 	
 	@Transactional(readOnly = true)
 	public Student findStudentByUsername(String username) throws DataAccessException {
@@ -69,6 +64,11 @@ public class StudentService {
 	@Transactional
 	public List<Subject> findMySubjects(int i){
 		return studentRepository.findMySubjects(i);
+	}
+	
+	@Transactional
+	public List<Subject> findMySubjectsByUsername(String username){
+		return studentRepository.findMySubjectsByUsername(username);
 	}
 
 	

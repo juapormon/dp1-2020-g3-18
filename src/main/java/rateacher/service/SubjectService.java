@@ -3,6 +3,7 @@ package rateacher.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -13,6 +14,7 @@ import rateacher.model.Department;
 import rateacher.model.Subject;
 import rateacher.repository.DepartmentRepository;
 import rateacher.repository.SubjectRepository;
+
 
 @Service
 public class SubjectService {
@@ -33,10 +35,10 @@ public class SubjectService {
 		return subject;
 	}
 	
-	@Transactional(readOnly = false)
-	public void save(Subject subject) throws DataAccessException{
-		subjectRepository.save(subject);
-	}
+//	@Transactional(readOnly = false)
+//	public void save(Subject subject) throws DataAccessException{
+//		subjectRepository.save(subject);
+//	}
 	
 	@Transactional(readOnly = true)	
 	public Collection<Subject> findSubjects() throws DataAccessException {
@@ -63,6 +65,15 @@ public class SubjectService {
 	@Transactional	
 	public List<Subject> findSubjectsFromDepartmentId(int idDepartment) throws DataAccessException {
 		return this.subjectRepository.findSubjectsFromDepartmentId(idDepartment);
+	}
+  
+  @Transactional
+	public void save(Subject subject) {
+		subjectRepository.save(subject);
+	}
+
+	public void delete(Subject subject) {
+		subjectRepository.delete(subject);
 	}
 	
 	

@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${teachers.teachersList}" var="teacher">
+        <c:forEach items="${teachers}" var="teacher">
              <tr>
                 <td>
                     <spring:url value="/teachers/{teacherId}" var="teacherUrl">

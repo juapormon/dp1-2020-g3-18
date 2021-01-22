@@ -30,9 +30,9 @@ import rateacher.repository.TeacherRepository;
 import rateacher.service.CollegeService;
 import rateacher.service.DeanService;
 import rateacher.service.TeacherService;
+import rateacher.util.TeacherValidator;
 
 @Controller
-//@RequestMapping("/deans/{deanId}")
 public class DeanController {
 	
 	private final DeanService deanService;
@@ -57,19 +57,24 @@ public class DeanController {
     public void setAllowedFields(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
     }
+	
+	@InitBinder("teacher")
+	public void initTeacherBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new TeacherValidator());
+	}
 
 
 	@GetMapping(value = {"/teachers/new"})
 	public String newTeacherCreationForm(ModelMap model) {
 
 		Teacher teacher = new Teacher();
-		model.put("teachers", teacher);
+		model.put("teacher", teacher);
 		return VIEW_TEACHER_CREATE_FORM;
 
 	}
 	
 	@PostMapping("/teachers/new")
-	public String processCreationForm(@Valid Teacher teacher, BindingResult result) {
+	public String processCreationForm(@Valid Teacher teacher, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
 			return VIEW_TEACHER_CREATE_FORM;
 		}

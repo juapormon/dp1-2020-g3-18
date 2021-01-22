@@ -35,7 +35,6 @@ import lombok.Setter;
 public class Teacher extends Person{
 	
 	//Attributes
-	@NotBlank
 	private String name;
 	
 	//Relationships
