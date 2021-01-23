@@ -8,15 +8,18 @@
 
 
 <petclinic:layout pageName="teachingPlans">
-    <h2><c:if test="${teacher['new']}">New </c:if> TeachingPlan	</h2>
-    <form:form modelAttribute="teachingPlans" class="form-horizontal" id="add-teachingPlan-form" action ="/teachingPlan/save">
+    <h2><c:if test="${teachingPlan['new']}">New </c:if> TeachingPlan	</h2>
+    <form:form modelAttribute="teachingPlans" class="form-horizontal" id="add-teachingPlan-form" action ="newTeachingPlan">
         <div class="form-group has-feedback">
             <petclinic:inputField label="Name" name="name"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
             	<button class="btn btn-default" type="submit">Save TeachingPlan</button>
-                  
+    				<spring:url value="/subjects/{subjectId}/newTeachingPlan" var="mySubjectsUrl">
+       				 <spring:param name="subjectId" value="${subject.id}"/>
+        			 </spring:url>
+        			  <a href="${fn:escapeXml(mySubjectsUrl)}" class="btn btn-default"><c:out value="My Subjects"/></a>
             </div>
         </div>
     </form:form>
