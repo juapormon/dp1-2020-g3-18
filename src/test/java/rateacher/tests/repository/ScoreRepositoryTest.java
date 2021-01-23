@@ -24,7 +24,8 @@ public class ScoreRepositoryTest {
 	private ScoreRepository scoreRepository;
 
 	@Test
-	void probandoquery() {
+	void findAllScoreByTeacherTest() {
+	//arrange
 	//act
 		List<Score> scores = new ArrayList<>(scoreRepository.findAllScoreByTeacherId(1));//id de julian
 	//assert	
