@@ -54,7 +54,7 @@ public class SubjectServiceTest {
 			int idDepartment = 1;
 
 			List<Subject> res = this.subjectService.findSubjectsFromDepartmentId(idDepartment);
-			assertTrue(res.size() == 0); // está así porque no tenemos relacionados aún ninguno
+			assertTrue(res.size() != 0); // está así porque no tenemos relacionados aún ninguno
 		}
 		
 	//casos negativos	
@@ -62,15 +62,16 @@ public class SubjectServiceTest {
 		@DisplayName("Finding a subject by bad id")
 		void testFindSubjectByBadId(){
 			int badId = 234234;
-			assertThrows(AssertionError.class,()->this.subjectService.findSubjectById(badId)); // lo mismo
+			assertThat(this.subjectService.findSubjectById(badId)==null); // lo mismo
 		}
 		
 		@Test
 		@DisplayName("Finding bad subject by departmentId")
 		void testFindBadFindSubjectsFromDepartmentId(){
 			int badId = 22222;
-			assertThrows(AssertionError.class, () -> this.subjectService.findSubjectsFromDepartmentId(badId));//problemas
+			assertThat(this.subjectService.findSubjectsFromDepartmentId(badId)==null);//problemas
 		}
 		
 
 }
+
