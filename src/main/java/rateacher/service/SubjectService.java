@@ -16,14 +16,6 @@ import rateacher.repository.DepartmentRepository;
 import rateacher.repository.SubjectRepository;
 
 
-	
-	
-	
-	
-	
-
-
-
 @Service
 public class SubjectService {
 	
@@ -43,10 +35,10 @@ public class SubjectService {
 		return subject;
 	}
 	
-	@Transactional(readOnly = false)
-	public void save(Subject subject) throws DataAccessException{
-		subjectRepository.save(subject);
-	}
+//	@Transactional(readOnly = false)
+//	public void save(Subject subject) throws DataAccessException{
+//		subjectRepository.save(subject);
+//	}
 	
 	@Transactional(readOnly = true)	
 	public Collection<Subject> findSubjects() throws DataAccessException {

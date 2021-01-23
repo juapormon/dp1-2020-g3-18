@@ -1,5 +1,7 @@
 package rateacher.web;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -7,27 +9,25 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import rateacher.model.Student;
-import rateacher.service.StudentService;
-import rateacher.service.SubjectService;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
+import rateacher.model.Dean;
+import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Subjects;
 import rateacher.model.Teacher;
-import rateacher.repository.DeanRepository;
-import rateacher.repository.SubjectRepository;
+import rateacher.service.DeanService;
+import rateacher.service.StudentService;
 import rateacher.service.SubjectService;
+import rateacher.service.TeacherService;
 
 
 
@@ -38,12 +38,14 @@ public class SubjectController {
 	private final SubjectService subjectService;
 	private final TeacherService teacherService;
 	private final StudentService studentService;
+	private final DeanService deanService;
 	
 	@Autowired
-	public SubjectController(SubjectService subjectService, TeacherService teacherService, StudentService studentService) {
+	public SubjectController(SubjectService subjectService, TeacherService teacherService, StudentService studentService,DeanService deanService) {
 		this.subjectService = subjectService;
 		this.teacherService = teacherService;
 		this.studentService = studentService;
+		this.deanService = deanService;
 	}
 	
 	@InitBinder
@@ -51,7 +53,7 @@ public class SubjectController {
 		dataBinder.setDisallowedFields("id");
 	}
 
-	@GetMapping(value = {"/new"})
+	@GetMapping(value = {"/subjects/new"})
 	public String newSubject(ModelMap model) {
 		
 		Subject subject = new Subject();
@@ -62,13 +64,17 @@ public class SubjectController {
 	
 	@GetMapping(value = { "/subjects" })
 	public String showSubjectsList(Map<String, Object> model) {
-		Collection<Subject> subjects = this.subjectService.findSubjects();
+		List<Subject> subjects = new ArrayList<Subject>(subjectService.findAll());
 		model.put("subjects", subjects);
 		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
-        Student student = this.studentService.findStudentByUsername(principal);
+		Dean dean = this.deanService.findDeanByUsername(principal);
+		Student student = this.studentService.findStudentByUsername(principal);
         Boolean condition = (student != null);
+        Boolean esDean = (dean != null);
+        model.put("esDean", esDean);
         model.put("condition", condition);
         model.put("student", student);
+        model.put("dean", dean);
 		return "subjects/subjectsList";
 
 	}
