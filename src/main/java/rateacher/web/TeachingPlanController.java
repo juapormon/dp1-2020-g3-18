@@ -44,31 +44,44 @@ private static final String VIEW_TEACHINGPLAN_CREATE_FORM ="teachingPlans/newTea
 		dataBinder.setDisallowedFields("id");
 	}
 
+//	@GetMapping(value = {"/subjects/{subjectId}/newTeachingPlan"})
+//	public String newSubject(@PathVariable int subjectId,ModelMap model) {
+//		
+//		Subject subject = subjectService.findSubjectById(subjectId);
+//		model.put("subject", subject);
+//		TeachingPlan teachingPlan = new TeachingPlan();
+//		model.put("teachingPlans", teachingPlan);
+//		return VIEW_TEACHINGPLAN_CREATE_FORM;
+//	}
+//	@PostMapping(value = "subjects/{subjectId}/newTeachingPlan")
+//	public String processCreationForm(@PathVariable int subjectId, @Valid TeachingPlan teachingPlan, BindingResult result,
+//			ModelMap model) {
+//		if (result.hasErrors()) {
+//			model.put("teachingPlans", teachingPlan);
+//			Subject subject = subjectService.findSubjectById(subjectId);
+//			model.put("subject", subject);
+//			return "teachingPlans/newTeachingPlan";
+//		} else {
+//			
+//			Subject subject = subjectService.findSubjectById(subjectId);
+//			model.put("subject", subject);
+//			subject.setTeachingPlan(teachingPlan);
+//			this.subjectService.save(subject);
+//			return "subjects/subjectsList";
+//		}
+//	}
+	
 	@GetMapping(value = {"/subjects/{subjectId}/newTeachingPlan"})
-	public String newSubject(@PathVariable int subjectId,ModelMap model) {
-		
-		Subject subject = subjectService.findSubjectById(subjectId);
-		model.put("subject", subject);
+	public String newTeachingPlan(ModelMap model, @PathVariable int subjectId) {
 		TeachingPlan teachingPlan = new TeachingPlan();
-		model.put("teachingPlans", teachingPlan);
-		return VIEW_TEACHINGPLAN_CREATE_FORM;
+		model.put("teachingPlan", teachingPlan);
+		Subject subject = subjectService.findSubjectById(subjectId);
+		subject.setTeachingPlan(teachingPlan);
+		model.put("subjects", subject);
+		return "teachingPlans/newTeachingPlan";
+
 	}
-	@PostMapping(value = "subjects/{subjectId}/newTeachingPlan")
-	public String processCreationForm(@PathVariable int subjectId, @Valid TeachingPlan teachingPlan, BindingResult result,
-			ModelMap model) {
-		if (result.hasErrors()) {
-			model.put("teachingPlans", teachingPlan);
-			Subject subject = subjectService.findSubjectById(subjectId);
-			model.put("subject", subject);
-			return "teachingPlans/newTeachingPlan";
-		} else {
-			
-			Subject subject = subjectService.findSubjectById(subjectId);
-			model.put("subject", subject);
-			subject.setTeachingPlan(teachingPlan);
-			this.subjectService.save(subject);
-			return "subjects/subjectsList";
-		}
-	}
+	
+	  
 	
 }

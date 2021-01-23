@@ -224,34 +224,34 @@ public class TeacherControllerTest {
 			}
 	}
 	
-	@Test
-	@DisplayName("List my subjects")
-	@WithMockUser(value="spring")
-	void ListMySubjectsTest() {
-		//arrange
-		Subject subject = new Subject("mates", 2, new Department(), new ArrayList<>());
-		Teacher teacher2 = new Teacher("nombre", new User(), Lists.list(new College()), 
-				new PersonalExperience(), Lists.list(new Department()), Lists.list(subject));
-		List<Teacher> teachers = new ArrayList<>();
-		teachers.add(teacher2);
-		when(subjectService.findSubjectById(80)).thenReturn(subject);
-		when(teacherService.findTeachers()).thenReturn(teachers);
-		
-		try {
-			//act
-			mockMvc.perform(get("/teachers/{subjectId}/subjectsTeached", 80))
-			//assert
-			.andExpect(status().isOk())
-			.andExpect(view().name("teachers/subjectListTeached"))
-			.andExpect(model().attribute("teachers", hasItem(
-                            hasProperty("name", is(teacher2.getName()))
-            )));
-			
-		} catch (Exception e) {
-			System.err.println("Error testing controller: "+e.getMessage());
-			e.printStackTrace();
-		}
-	}
+//	@Test
+//	@DisplayName("List my subjects")
+//	@WithMockUser(value="spring")
+//	void ListMySubjectsTest() {
+//		//arrange
+//		Subject subject = new Subject("mates", 2, new Department(), new ArrayList<>());
+//		Teacher teacher2 = new Teacher("nombre", new User(), Lists.list(new College()), 
+//				new PersonalExperience(), Lists.list(new Department()), Lists.list(subject));
+//		List<Teacher> teachers = new ArrayList<>();
+//		teachers.add(teacher2);
+//		when(subjectService.findSubjectById(80)).thenReturn(subject);
+//		when(teacherService.findTeachers()).thenReturn(teachers);
+//		
+//		try {
+//			//act
+//			mockMvc.perform(get("/teachers/{subjectId}/subjectsTeached", 80))
+//			//assert
+//			.andExpect(status().isOk())
+//			.andExpect(view().name("teachers/subjectListTeached"))
+//			.andExpect(model().attribute("teachers", hasItem(
+//                            hasProperty("name", is(teacher2.getName()))
+//            )));
+//			
+//		} catch (Exception e) {
+//			System.err.println("Error testing controller: "+e.getMessage());
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@Test
 	@DisplayName("Show Students who rated a teacher")
