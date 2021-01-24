@@ -21,8 +21,7 @@ import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Teacher;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+
 public class ScoreValidatorTest {
 
 	private Validator createValidator() {
@@ -35,40 +34,22 @@ public class ScoreValidatorTest {
 	void ShouldNotValidateWhenValueOutOfRange() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Score score = new Score();
-		score.setValu(null);
-		score.setComment("Este es tu comentario, cheñó");
+		score.setValu(20);
+		score.setComment("Very good teacher, i like it.");
 		score.setStudent(new Student());
 		score.setTeacher(new Teacher());
 		Validator validator =  createValidator();
 		Set<ConstraintViolation<Score>> constraintViolations = validator.validate(score);
-		assertFalse(constraintViolations.isEmpty()); //por algun motivo falla
+		assertTrue(constraintViolations.size()==1);
+		ConstraintViolation<Score> violation = constraintViolations.iterator().next();
+		assertTrue(violation.getPropertyPath().toString().equals("valu"));
+		assertTrue(violation.getMessage().equals("must be between 1 and 5"));
+		
+		
+		
 		
 	}
-//	private static ValidatorFactory validatorFactory;
-//	private static javax.validation.Validator validator;
-//
-//	@BeforeClass
-//	public static void createValidator() {
-//		validatorFactory = Validation.buildDefaultValidatorFactory();
-//		validator = validatorFactory.getValidator();
-//	}
-//	
-//	@AfterClass
-//	public static void close() {
-//	    validatorFactory.close();
-//
-//	}
-//	
-//	@Test
-//	void ShouldNotValidateWhenValueOutOfRange() {
-//	    Score score = new Score();
-//		score.setValu(7);
-//		score.setComment("Este es tu comentario, cheñó");
-//		score.setStudent(new Student());
-//		score.setTeacher(new Teacher());
-//		Set<ConstraintViolation<Score>> violations = validator.validate(score);
-//		assertFalse(violations.isEmpty());
-//	}
+
 	
 	
 }

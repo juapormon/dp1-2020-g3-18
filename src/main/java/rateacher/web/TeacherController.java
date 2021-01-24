@@ -1,16 +1,24 @@
 
 package rateacher.web;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
+
 import rateacher.model.Subject;
+import rateacher.model.Subjects;
 import rateacher.service.SubjectService;
-import rateacher.util.ScoreValidator;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Teacher;
@@ -29,7 +38,12 @@ import rateacher.model.Teachers;
 import rateacher.service.ScoreService;
 import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
+import rateacher.util.DuplicatedStudentScoreException;
+import rateacher.util.ScoreValidator;
+
 import org.springframework.beans.BeanUtils;
+
+
 
 @Controller
 public class TeacherController {
@@ -57,15 +71,18 @@ public class TeacherController {
 		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
 	}
 	
-	@GetMapping(value = { "teachers" })
+	@GetMapping(value = { "/teachers" })
 	public String showTeacherList(Map<String, Object> model) {
-
 		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
 		Student student = this.studentService.findStudentByUsername(principal);
+		Teacher teacher = this.teacherService.findTeacherByUsername(principal); 
 		model.put("student", student);
-		Teachers teachers = new Teachers();
-		teachers.getTeachersList().addAll(this.teacherService.findTeachers());
+		Collection<Teacher> teachers = this.teacherService.findTeachers();
 		model.put("teachers", teachers);
+		Boolean condition = (teacher != null);
+		model.put("condition", condition);
+		if(teacher != null)
+		model.put("teacherr", teacher);
 		return "teachers/teachersList";
 
 	}
@@ -103,15 +120,20 @@ public class TeacherController {
 	@GetMapping(value = { "/teachersWithScore" })
 	public String showTeacherWithScore(Map<String, Object> model) {
 
-		Teachers teachers = new Teachers();
-		teachers.getTeachersList().addAll(this.teacherService.showTeacherWithScore());
+		Collection<Teacher> teachers = this.teacherService.findTeachers();
 		model.put("teachers", teachers);
 		return "teachers/teachersWithScore";
-
 	}
 
 	@GetMapping(value = "/findTeachers")
 	public String initFindForm(Map<String, Object> model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Teacher t = teacherService.findTeacherByUsername(username);
+		if(t != null) {
+			model.put( "teacher", t);
+			Boolean condition = true;
+			model.put("condition", condition);
+		}
 		model.put("teachers", new Teacher());
 		return "teachers/findTeachers";
 	}
@@ -135,6 +157,10 @@ public class TeacherController {
 		} else {
 			// multiple teachers found
 			model.put("selections", results);
+
+			String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+			Teacher teacherr = this.teacherService.findTeacherByUsername(principal); 
+			if(teacherr != null) model.put("teacher", teacherr);
 			return "teachers/teachersList";
 		}
 	}
@@ -225,6 +251,20 @@ public class TeacherController {
 		Collection<Student> students = this.studentService.StudentsRatedATeacher(teacherId);
 		model.put("students", students);
 		return "students/studentRatedATeacher";
+	}
+  	@GetMapping(path="/teachers/{teacherId}/scores/delete/{scoreId}")
+	public String deleteScore(@PathVariable("teacherId") int teacherId, @PathVariable("scoreId") int scoreId, ModelMap modelMap){
+		String view = "scores/scoresList";
+		Optional<Score> score = Optional.ofNullable(scoreService.findScoreById(scoreId));
+		if(score.isPresent()) {
+			scoreService.delete(score.get());
+			modelMap.addAttribute("message", "Score successfully deleted!");
+			view = showTeacherScoreList(teacherId, modelMap);
+		} else {
+			modelMap.addAttribute("message", "Score not found!");
+			view = showTeacherScoreList(teacherId, modelMap);
+		}
+		return view;
 	}
 
 }

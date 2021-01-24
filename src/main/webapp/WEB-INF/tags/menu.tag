@@ -4,6 +4,11 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ attribute name="name" required="true" rtexprvalue="true" description="Name of the active menu"%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+
+
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
@@ -25,14 +30,13 @@
 					<span>Home</span>
 				</petclinic:menuItem>
 				
-				
+        	
 				
 				<petclinic:menuItem active="${name eq 'teachersNew'}" url="/teachers/new"
 					title="teachers">
 					<span aria-hidden="true"></span>
 					<span>Add new Teacher</span>
 				</petclinic:menuItem>
-				
 
 				
  

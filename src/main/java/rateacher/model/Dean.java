@@ -1,5 +1,6 @@
 package rateacher.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -25,7 +26,7 @@ public class Dean extends Person {
 	
 	
 	//Relationships
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username")
 	private User user;
 	
