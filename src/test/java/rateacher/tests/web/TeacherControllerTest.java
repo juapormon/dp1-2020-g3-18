@@ -95,7 +95,6 @@ public class TeacherControllerTest {
 		//arrange		
 		when(this.studentService.findStudentByUsername(any())).thenReturn(student1);
 		when(this.teacherService.findTeachers()).thenReturn(Lists.list(teacher1));
-		
 		try {
 			//act
 			mockMvc.perform(get("/teachers"))
