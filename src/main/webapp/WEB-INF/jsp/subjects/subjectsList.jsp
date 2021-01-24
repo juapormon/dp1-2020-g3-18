@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
 <petclinic:layout pageName="subjects">
     <h2>Subjects</h2>
@@ -12,7 +13,9 @@
         <tr>
             <th>Name</th>
             <th>Curso</th>
+            <sec:authorize access="hasAuthority('admin')">
             <th>Delete</th>
+            </sec:authorize> 
             <c:if test="${esDean}"> 
             	<th>Add Teacher</th>
             </c:if> 
@@ -30,12 +33,14 @@
                 <td>
                     <c:out value=" ${subject.curso}"/>
                 </td>
+                <sec:authorize access="hasAuthority('admin')">
                 <td>
                 	<spring:url value="/subjects/delete/{subjectId}" var="subjectUrl">
                 		<spring:param name="subjectId" value ="${subject.id}"/>
                 	</spring:url>
                     <a href="${fn:escapeXml(subjectUrl)}">Delete</a>
-                </td> 
+                </td>
+                </sec:authorize> 
                   <c:if test="${esDean}">
                 <td>
                     <spring:url value="/subjects/{subjectId}/teachers" var="showTeachersUrl">
@@ -54,7 +59,10 @@
     </table>
     <spring:url value="/subjects/new" var="addUrl">
     </spring:url>
+   		<sec:authorize access="hasAuthority('admin')">
     	<a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add Subject</a> 
+    	</sec:authorize>
+    	
     <spring:url value="/subjects/mySubjects/{studentId}" var="mySubjectsUrl">
         <spring:param name="studentId" value="${student.id}"/>
         </spring:url>
