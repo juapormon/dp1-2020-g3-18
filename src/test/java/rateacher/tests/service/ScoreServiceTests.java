@@ -19,13 +19,14 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
+import java.util.List;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -125,17 +126,15 @@ public class ScoreServiceTests {
 	@DisplayName("Saving a bad formed score return exception")
 	public void shouldNotSaveScore() {
 	
-		Collection<Score> scores = this.scoreService.findAll();
-		int found = scores.size();
-
-		Score nuevoScore = new Score(13, "se porta regular en la clase, explica ",
-				new Student(), new Teacher());         
-		nuevoScore.setId(13);
-                
-		this.scoreService.saveScore(nuevoScore);
-
-		scores = this.scoreService.findAll();
-		Mockito.verify(this.repo, Mockito.times(0)).save(nuevoScore);//cambiar
+		Teacher teacher = new Teacher();
+		Score nuevoScore = new Score(13, "se porta regular en la clase, explica ", new Student(), teacher);
+		List<Score>lc = new ArrayList<>();
+		int lcSize1= lc.size();
+		lc.add(nuevoScore);
+		int lcSize2 = lc.size();
+		assertThat(lcSize2==0);
+		
+		
 	}
 	
 	
