@@ -24,10 +24,12 @@ import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Subjects;
 import rateacher.model.Teacher;
+import rateacher.model.TeachingPlan;
 import rateacher.service.DeanService;
 import rateacher.service.StudentService;
 import rateacher.service.SubjectService;
 import rateacher.service.TeacherService;
+import rateacher.service.TeachingPlanService;
 
 
 
@@ -39,13 +41,15 @@ public class SubjectController {
 	private final TeacherService teacherService;
 	private final StudentService studentService;
 	private final DeanService deanService;
+	private final TeachingPlanService teachingPlanService;
 	
 	@Autowired
-	public SubjectController(SubjectService subjectService, TeacherService teacherService, StudentService studentService,DeanService deanService) {
+	public SubjectController(SubjectService subjectService, TeacherService teacherService, StudentService studentService,DeanService deanService, TeachingPlanService teachingPlanService) {
 		this.subjectService = subjectService;
 		this.teacherService = teacherService;
 		this.studentService = studentService;
 		this.deanService = deanService;
+		this.teachingPlanService = teachingPlanService;
 	}
 	
 	@InitBinder
@@ -160,6 +164,24 @@ public class SubjectController {
 			view = showSubjectsList(modelMap);
 		} else {
 			modelMap.addAttribute("message", "Subject not found!");
+			view = showSubjectsList(modelMap);
+		}
+		return view;
+	}
+	
+	@PostMapping(value = {"/subjects/{subjectId}/newTeachingPlan/save"})
+	public String processCreationForm(@PathVariable int subjectId, @Valid TeachingPlan teachingPlan, BindingResult result, ModelMap modelMap ) {
+		String view = "subjects/subjectsList";
+		if (result.hasErrors()) {
+			modelMap.addAttribute("teachingPlan", teachingPlan);
+			Subject subject = subjectService.findSubjectById(subjectId);
+			modelMap.addAttribute("subject", subject);
+			return "teachingPlans/newTeachingPlan";
+		}
+		
+		else {
+			teachingPlanService.save(teachingPlan);
+			modelMap.addAttribute("message", "Teaching Plan successfully saved!");
 			view = showSubjectsList(modelMap);
 		}
 		return view;
