@@ -202,44 +202,44 @@ public class DeanControllerTest {
 		}
 	}
 	
-//	@Test
-//	@DisplayName("add teacher to college proccess")
-//	@WithMockUser(value="spring")
-//	void AddTeacherToCollegeProcessTest() {
-//		//arrange		
-//		Integer collegeId = 99;
-//		Integer teacherId = 90;
-//		Teacher teacher = new Teacher("nombre", new User(), Lists.list(new College()), new PersonalExperience(),
-//				Lists.list(new Department()), Lists.list(new Subject()));
-//		teacher.setFirstName("consternado");
-//		teacher.setId(teacherId);
-//		List<Teacher> teachers = Lists.list(teacher);
-//		College college = new College("un colegio", "una siudá", new ArrayList<>());
-//		college.setId(collegeId);
-//		when(this.collegeService.findCollegeById(collegeId)).thenReturn(college);
-//		when(this.teacherService.findTeacherById(teacherId)).thenReturn(teacher);
-//		when(this.teacherService.findTeachers()).thenReturn(teachers);
-//		when(this.deanService.findAllColleges()).thenReturn(Lists.list(college));
-//		
-//		try {
-//			//act
-//			mockMvc.perform(get("/deans/colleges/{collegeId}/teachers/{teacherId}/add", 99, 90, teacher)
-//				.param("id", "90")	
-//				.with(csrf()))
-//			//assert
-//				.andExpect(status().isOk())
-//				.andExpect(view().name("deans/collegesList"))
-//				.andExpect(model().attribute("colleges", hasItem(
-//	                    allOf(
-//	                            hasProperty("name", is(college.getName())),
-//	                            hasProperty("city", is(college.getCity()))
-//	                    )
-//	            )));
-//		} catch (Exception e) {
-//			System.err.println("Error testing controller: "+e.getMessage());
-//			e.printStackTrace();
-//		}
-//	}
+	@Test
+	@DisplayName("add teacher to college proccess")
+	@WithMockUser(value="spring")
+	void AddTeacherToCollegeProcessTest() {
+		//arrange		
+		Integer collegeId = 99;
+		Integer teacherId = 90;
+		Teacher teacher = new Teacher("nombre", new User(), Lists.list(new College()), new PersonalExperience(),
+				Lists.list(new Department()), Lists.list(new Subject()));
+		teacher.setFirstName("consternado");
+		teacher.setId(teacherId);
+		List<Teacher> teachers = Lists.list(teacher);
+		College college = new College("un colegio", "una siudá", new ArrayList<>());
+		college.setId(collegeId);
+		when(this.collegeService.findCollegeById(collegeId)).thenReturn(college);
+		when(this.teacherService.findTeacherById(teacherId)).thenReturn(teacher);
+		when(this.teacherService.findTeachers()).thenReturn(teachers);
+		when(this.deanService.findAllColleges()).thenReturn(Lists.list(college));
+		
+		try {
+			//act
+			mockMvc.perform(post("/deans/colleges/{collegeId}/teachers/{teacherId}/add", 99, 90, teacher)
+				.param("id", "90")	
+				.with(csrf()))
+			//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("deans/collegesList"))
+				.andExpect(model().attribute("colleges", hasItem(
+	                    allOf(
+	                            hasProperty("name", is(college.getName())),
+	                            hasProperty("city", is(college.getCity()))
+	                    )
+	            )));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 
 }
