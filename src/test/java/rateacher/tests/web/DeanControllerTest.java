@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -241,5 +242,33 @@ public class DeanControllerTest {
 		}
 	}
 	
+	// Test negativo
+	@Test
+	@Disabled
+	@DisplayName("Test ProcessCreationForm new Teacher with empty name")
+	@WithMockUser(value = "spring")
+	void CreateTeacherProcessFormTestEmptyName() {
+		// arrange
+		Teacher teacher1 = new Teacher();
+		teacher1.setFirstName("");
+		teacher1.setId(800);
+		teacher1.setLastName("Rodríguez");
+
+		when(this.teacherService.findTeacherById(800)).thenReturn(teacher1);
+
+		try {
+			// act
+			mockMvc.perform(post("/teachers/new", 800, teacher1)
+					.param("id", "800")
+					// assert
+					.with(csrf()))
+					.andExpect(status().isBadRequest());
+					
+					
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
 
 }
