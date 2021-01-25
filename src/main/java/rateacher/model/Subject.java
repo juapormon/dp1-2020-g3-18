@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -22,18 +23,21 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Subject extends BaseEntity{
+public class Subject extends BaseEntity {
 
 	@NotBlank
-	private String		name;
-	
-	private Integer		curso;
-	
+	private String name;
 
-	@ManyToOne(optional=true)@JoinColumn(name = "department_id")
+	private Integer curso;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "department_id")
 	private Department department;
-	
-	@ManyToMany 
+
+	@ManyToMany
 	private Collection<Teacher> teachers;
 
+	@OneToOne(optional = true)
+	@JoinColumn(name = "teaching_plan_id")
+	private TeachingPlan teachingPlan;
 }
