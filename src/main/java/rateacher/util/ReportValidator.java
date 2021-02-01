@@ -1,15 +1,11 @@
 package rateacher.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import rateacher.model.Report;
-import rateacher.model.Score;
 import rateacher.service.ReportService;
 
 public class ReportValidator implements Validator{
@@ -25,22 +21,15 @@ public class ReportValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		Report report = (Report) target;
-		Collection<Report> reports = this.reportService.findReports();
-		List<Score> scores = new ArrayList<>(); 
+		List<Report> reports = (List<Report>) this.reportService.findReports();
 		Integer reportsOfTheSameScore = 0;
 		for(Report r: reports) {
-			scores.add(r.getScore());
-		}
-		if(scores.contains(report.getScore())) {
-			reportsOfTheSameScore+=1;
-		}
-		if(reportsOfTheSameScore == 3) {
-			errors.rejectValue("score", "too many reports", "There are already 3 reports made for this comment, you cannot report it again");
-		}else { 
-			
-		if(report.getScore().getComment()==null || report.getScore().getComment().isEmpty()) {
-			errors.rejectValue("reason", "no reason", "You must provide a valid reason for the report");
+			if(report.getScore()==r.getScore()) {
+				reportsOfTheSameScore ++;
 			}
+		}
+		if(reportsOfTheSameScore >= 3) {
+			errors.rejectValue("score", "too many reports", "There are already 3 reports made for this comment, you cannot report it again");
 		}
 	}
 	
