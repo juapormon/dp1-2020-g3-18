@@ -46,6 +46,6 @@ public class ReportValidator implements Validator{
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Score.class.isAssignableFrom(clazz);
+		return Report.class.isAssignableFrom(clazz);
 	}
 }
