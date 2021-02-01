@@ -26,6 +26,6 @@ public class Report extends BaseEntity {
 	
 	//Relationships
 
-	@OneToOne
+	@ManyToOne
 	private Score score;
 }
