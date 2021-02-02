@@ -55,23 +55,23 @@ private static final String VIEW_TEACHINGPLAN_CREATE_FORM ="teachingPlans/newTea
 //		model.put("teachingPlans", teachingPlan);
 //		return VIEW_TEACHINGPLAN_CREATE_FORM;
 //	}
-//	@PostMapping(value = "subjects/{subjectId}/newTeachingPlan")
-//	public String processCreationForm(@PathVariable int subjectId, @Valid TeachingPlan teachingPlan, BindingResult result,
-//			ModelMap model) {
-//		if (result.hasErrors()) {
-//			model.put("teachingPlans", teachingPlan);
-//			Subject subject = subjectService.findSubjectById(subjectId);
-//			model.put("subject", subject);
-//			return "teachingPlans/newTeachingPlan";
-//		} else {
-//			
-//			Subject subject = subjectService.findSubjectById(subjectId);
-//			model.put("subject", subject);
-//			subject.setTeachingPlan(teachingPlan);
-//			this.subjectService.save(subject);
-//			return "subjects/subjectsList";
-//		}
-//	}
+	@PostMapping(value = "subjects/{subjectId}/newTeachingPlan/saveee")
+	public String processCreationForm(@PathVariable int subjectId, @Valid TeachingPlan teachingPlan, BindingResult result,
+			ModelMap model) {
+		System.out.println("0000000000000000000000000000000000000000000000");
+		System.out.println(teachingPlan.getName());
+		System.out.println("0000000000000000000000000000000000000000000000");
+		if (result.hasErrors()) {
+			Subject subject = subjectService.findSubjectById(subjectId);
+			model.put("subject", subject);
+			return "teachingPlans/newTeachingPlan";
+		} else {
+			teachingPlanService.save2(teachingPlan, subjectId);
+			Subject subject = subjectService.findSubjectById(subjectId);
+			model.put("subject", subject);
+			return "subjects/subjectsList";
+		}
+	}
 	
 	@GetMapping(value = {"/subjects/{subjectId}/newTeachingPlan"})
 	public String newTeachingPlan(ModelMap model, @PathVariable int subjectId) {
