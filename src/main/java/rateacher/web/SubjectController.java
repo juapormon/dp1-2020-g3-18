@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import rateacher.model.Dean;
+import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Subjects;
@@ -187,7 +188,20 @@ public class SubjectController {
 		return view;
 	}
 	
-	
+	@GetMapping(path="/subjects/deleteTeachingPlan/{subjectId}")
+	public String deleteTeachingPlan(@PathVariable("subjectId") int subjectId, ModelMap modelMap){
+		String view = "subjects/subjectsList";
+		Optional<Subject> subject = Optional.ofNullable(subjectService.findSubjectById(subjectId));
+		if(subject.isPresent()) {
+			subjectService.deleteTeachingPlan(subject.get());
+			modelMap.addAttribute("message", "Teaching Plan successfully deleted!");
+			view = showSubjectsList(modelMap);
+		} else {
+			modelMap.addAttribute("message", "Teachin Plan not found!");
+			view = showSubjectsList(modelMap);
+		}
+		return view;
+	}
 	
 }
 

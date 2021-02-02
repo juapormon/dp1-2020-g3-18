@@ -33,7 +33,7 @@
                 </td>
                 <td><c:out value=" ${subject.teachingPlan.name}"/>
                 <c:if test="${subject.teachingPlan  != null}">
-   					   <spring:url value="/subjects/{subjectId}/deleteTeachingPlan" var="subjectUrl">
+   					   <spring:url value="/subjects/deleteTeachingPlan/{subjectId}" var="subjectUrl">
                 		<spring:param name="subjectId" value ="${subject.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(subjectUrl)}">((  Delete  ))</a>
