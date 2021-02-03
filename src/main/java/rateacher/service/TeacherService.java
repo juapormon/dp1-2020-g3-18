@@ -38,7 +38,6 @@ public class TeacherService {
 	@Transactional(readOnly = true)
 	public Teacher findTeacherById(int id) throws DataAccessException {
 		Teacher teacher = teacherRepository.findById(id);
-		assert teacher != null;
 		return teacher;
 	}
 	
