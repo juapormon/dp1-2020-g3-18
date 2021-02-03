@@ -15,10 +15,12 @@ import rateacher.repository.TeachingPlanRepository;
 public class TeachingPlanService {
 
 	private TeachingPlanRepository teachingPlanRepository;
-
+	private SubjectService subjectService;
+	
 	@Autowired
-	public TeachingPlanService(TeachingPlanRepository teachingPlanRepository) {
+	public TeachingPlanService(TeachingPlanRepository teachingPlanRepository, SubjectService subjectService) {
 		this.teachingPlanRepository = teachingPlanRepository;
+		this.subjectService=subjectService;
 	}
 
 	@Transactional(readOnly = true)
@@ -36,9 +38,10 @@ public class TeachingPlanService {
 	public void save(TeachingPlan teachingPlan) {
 		teachingPlanRepository.save(teachingPlan);
 	}
-
-	public void delete(TeachingPlan teachingPlan) {
-		teachingPlanRepository.delete(teachingPlan);
+	@Transactional
+	public void save2(TeachingPlan teachingPlan, int subjectId) {
+		Subject subject= subjectService.findSubjectById(subjectId);
+		subject.setTeachingPlan(teachingPlan);
 	}
 	
 }

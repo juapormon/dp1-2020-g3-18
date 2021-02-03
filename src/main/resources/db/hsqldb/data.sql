@@ -96,9 +96,11 @@ INSERT INTO departments(id,name) VALUES (5,'Electronica y magnetismo');
 
 --TEACHING PLAN -- DATOS
 INSERT INTO teaching_plans(id,name) VALUES (1,'teaching plan to Redes de Computadores');
+INSERT INTO teaching_plans(id,name) VALUES (2,'teaching plan to Diseño y pruebas');
+
 
 --ASIGNATURAS--DATOS
-INSERT INTO subjects(id,name,curso,department_id) VALUES (111,'Diseño y pruebas', 3,1);
+INSERT INTO subjects(id,name,curso,department_id, teaching_plan_id) VALUES (111,'Diseño y pruebas', 3,1,2);
 INSERT INTO subjects(id,name,curso,department_id) VALUES (112,'Fundamentos Fisicos de la Informatica', 1,1);
 INSERT INTO subjects(id,name,curso,department_id) VALUES (113,'Matematica Discreta', 2,2);
 INSERT INTO subjects(id,name,curso,department_id) VALUES (114,'Circuitos Electronicos Digitales', 1,3);
