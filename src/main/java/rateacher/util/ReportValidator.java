@@ -24,12 +24,12 @@ public class ReportValidator implements Validator{
 		List<Report> reports = (List<Report>) this.reportService.findReports();
 		Integer reportsOfTheSameScore = 0;
 		for(Report r: reports) {
-			if(report.getScore()==r.getScore()) {
+			if(report.getScore().getId().equals(r.getScore().getId())) {
 				reportsOfTheSameScore ++;
 			}
 		}
 		if(reportsOfTheSameScore >= 3) {
-			errors.rejectValue("score", "too many reports", "There are already 3 reports made for this comment, you cannot report it again");
+			errors.rejectValue("reason", "too many reports", "There are already 3 reports made for this comment, you cannot report it again");
 		}
 	}
 	
