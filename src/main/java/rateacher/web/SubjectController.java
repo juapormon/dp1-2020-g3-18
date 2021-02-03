@@ -185,9 +185,6 @@ public class SubjectController {
 	@PostMapping(value = "subjects/{subjectId}/newTeachingPlan")
 	public String processCreationForm(@PathVariable int subjectId, @Valid TeachingPlan teachingPlan, BindingResult result,
 			ModelMap model) {
-		System.out.println("0000000000000000000000000000000000000000000000");
-		System.out.println(teachingPlan.getName());
-		System.out.println("0000000000000000000000000000000000000000000000");
 		if (result.hasErrors()) {
 			Subject subject = subjectService.findSubjectById(subjectId);
 			model.put("subject", subject);
