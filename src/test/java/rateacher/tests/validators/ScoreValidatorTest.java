@@ -1,28 +1,17 @@
 package rateacher.tests.validators;
-
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 import java.util.Locale;
 import java.util.Set;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-
 import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Teacher;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+
 public class ScoreValidatorTest {
 
 	private Validator createValidator() {
@@ -31,44 +20,68 @@ public class ScoreValidatorTest {
 		return localValidatorFactoryBean;
 	}
 	
+
+	
 	@Test
 	void ShouldNotValidateWhenValueOutOfRange() {
+		System.out.println("---------------------------------------------");
+		System.out.println("Should not validate when value out of range");
+		System.out.println("---------------------------------------------");
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
 		Score score = new Score();
-		score.setValu(null);
-		score.setComment("Este es tu comentario, cheñó");
+		score.setValu(20);
+		score.setComment("Very good teacher, i like it.");
 		score.setStudent(new Student());
 		score.setTeacher(new Teacher());
 		Validator validator =  createValidator();
 		Set<ConstraintViolation<Score>> constraintViolations = validator.validate(score);
-		assertFalse(constraintViolations.isEmpty()); //por algun motivo falla
+		assertTrue(constraintViolations.size()==1);
+		ConstraintViolation<Score> violation = constraintViolations.iterator().next();
+		assertTrue(violation.getPropertyPath().toString().equals("valu"));
+		assertTrue(violation.getMessage().equals("must be between 1 and 5"));
+	
+	}
+	
+	@Test
+	void ShouldNotValidateWhenValueEmpty() {
+		System.out.println("---------------------------------------------");
+		System.out.println("Should not validate when value is empty");
+		System.out.println("---------------------------------------------");
+		LocaleContextHolder.setLocale(Locale.ENGLISH);
+		Score score1 = new Score();
+		score1.setValu(null);
+		score1.setComment("Este es un comentario de prueba para el test");
+		Validator validator = createValidator();
+		Set<ConstraintViolation<Score>> constraintViolations1 = validator.validate(score1);
+		assertTrue(constraintViolations1.size()==1);
+		ConstraintViolation<Score> violation1 = constraintViolations1.iterator().next();
+		assertTrue(violation1.getPropertyPath().toString().equals("valu"));
+		assertTrue(violation1.getMessage().equals("must not be null"));
 		
 	}
-//	private static ValidatorFactory validatorFactory;
-//	private static javax.validation.Validator validator;
-//
-//	@BeforeClass
-//	public static void createValidator() {
-//		validatorFactory = Validation.buildDefaultValidatorFactory();
-//		validator = validatorFactory.getValidator();
-//	}
-//	
-//	@AfterClass
-//	public static void close() {
-//	    validatorFactory.close();
-//
-//	}
-//	
-//	@Test
-//	void ShouldNotValidateWhenValueOutOfRange() {
-//	    Score score = new Score();
-//		score.setValu(7);
-//		score.setComment("Este es tu comentario, cheñó");
-//		score.setStudent(new Student());
-//		score.setTeacher(new Teacher());
-//		Set<ConstraintViolation<Score>> violations = validator.validate(score);
-//		assertFalse(violations.isEmpty());
-//	}
+	
+	@Test
+	void ShouldNotValidateWhenCommentEmpty() {
+		System.out.println("---------------------------------------------");
+		System.out.println("Should not validate when comment is null");
+		System.out.println("---------------------------------------------");
+		LocaleContextHolder.setLocale(Locale.ENGLISH);
+		Score score1 = new Score();
+		score1.setValu(3);
+		score1.setComment("");
+		Validator validator = createValidator();
+		Set<ConstraintViolation<Score>> constraintViolations1 = validator.validate(score1);
+		assertTrue(constraintViolations1.size()==1);
+		ConstraintViolation<Score> violation1 = constraintViolations1.iterator().next();
+		assertTrue(violation1.getPropertyPath().toString().equals("comment"));
+		assertTrue(violation1.getMessage().equals("must not be empty"));
+		
+	}
+	
+
+	
+
+
 	
 	
 }

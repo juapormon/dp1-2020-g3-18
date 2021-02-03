@@ -75,6 +75,9 @@ public class SubjectService {
 	public void delete(Subject subject) {
 		subjectRepository.delete(subject);
 	}
+	public void deleteTeachingPlan(Subject subject) {
+		subject.setTeachingPlan(null);
+	}
 	
 	
 	
