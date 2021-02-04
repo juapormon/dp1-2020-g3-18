@@ -19,17 +19,15 @@ public class DeanService {
 	
 	private DeanRepository deanRepository;
 	private TeacherRepository teacherRepository;
-	
-	@Autowired
 	private UserService userService;
-	
-	@Autowired
 	private AuthoritiesService authoritiesService;
 	
 	@Autowired
-	public DeanService(DeanRepository deanRepository, TeacherRepository teacherRepository ) {
+	public DeanService(DeanRepository deanRepository, TeacherRepository teacherRepository, UserService userService, AuthoritiesService authoritiesService) {
 		this.deanRepository = deanRepository;
 		this.teacherRepository = teacherRepository;
+		this.userService = userService;
+		this.authoritiesService = authoritiesService;
 	}
 	
 	@Transactional

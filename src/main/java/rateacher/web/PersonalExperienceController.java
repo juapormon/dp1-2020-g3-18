@@ -1,5 +1,8 @@
 package rateacher.web;
 
+import java.util.Collection;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import rateacher.model.PersonalExperience;
 import rateacher.model.Score;
 import rateacher.model.Student;
+import rateacher.model.Subject;
 import rateacher.model.Teacher;
 import rateacher.service.PersonalExperienceService;
 import rateacher.service.ScoreService;
@@ -40,23 +45,45 @@ public class PersonalExperienceController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
-	@GetMapping(value = { "teachers/{teacherId}/newPersonalExperience" })
+	@GetMapping(value = { "/teachers/{teacherId}/newPersonalExperience" })
 	public String initCreationPersonalExperienceForm(@PathVariable int teacherId, ModelMap model) { // para crear el modelo que va a la																			// vista.
 		PersonalExperience personalExperience = new PersonalExperience();
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
-		teacher.setPersonalExperience(personalExperience);
 		model.put("personalExperience", personalExperience);
 		model.put("teacher", teacher);
 		return "personalExperience/createPersonalExperienceForm";
 	}
 	
-	@PostMapping(value = "teachers/{teacherId}/newPersonalExperience")
+	@PostMapping(value = "/teachers/{teacherId}/newPersonalExperience")
 	public String processCreationPersonalExperienceForm(@PathVariable int teacherId, @Valid PersonalExperience personalExperience, BindingResult result,
 			ModelMap model) {
-			model.put("personalExperience", personalExperience);
-			Teacher teacher = teacherService.findTeacherById(teacherId);
-			model.put("teacher", teacher);
-			return "personalExperience/createPersonalExperienceForm";
-		
+			if (result.hasErrors()) {
+				Teacher teacher = teacherService.findTeacherById(teacherId);
+				model.put("teacher", teacher);
+				return "personalExperience/createPersonalExperienceForm";
+			} else {
+				personalExperienceService.save(personalExperience);
+				Teacher teacher = teacherService.findTeacherById(teacherId);
+				teacher.setPersonalExperience(personalExperience);
+				teacherService.save(teacher);
+				model.put("personalExperience", personalExperience);
+				model.put("teacher", teacher);
+				Collection<Teacher> teachers = this.teacherService.findTeachers();
+				model.put("teachers", teachers);
+				return "teachers/teachersList";
+			}		
 	}
+	
+	@GetMapping(value = "/personalExperience/{personalExperienceId}")
+	public String showTeacher(@PathVariable("personalExperienceId") int personalExperieneId, ModelMap model) {
+		PersonalExperience p = personalExperienceService.findById(personalExperieneId);
+		model.put("personalExperience", p);
+		return "personalExperience/personalExperience";
+	}
+	
+	
+	
+	
+	
+	
 }

@@ -28,7 +28,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>245</x>
+      <x>105</x>
       <y>392</y>
       <w>161</w>
       <h>70</h>
@@ -46,7 +46,7 @@ course: Integer {NotNull}
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>217</x>
+      <x>77</x>
       <y>105</y>
       <w>161</w>
       <h>63</h>
@@ -61,7 +61,7 @@ email: String {email, NotBLank}</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>546</x>
+      <x>406</x>
       <y>112</y>
       <w>161</w>
       <h>56</h>
@@ -76,7 +76,7 @@ name: String {NotBlank}
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>945</x>
+      <x>805</x>
       <y>105</y>
       <w>161</w>
       <h>63</h>
@@ -91,7 +91,7 @@ name: String {NotBlank}
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>763</x>
+      <x>623</x>
       <y>112</y>
       <w>161</w>
       <h>56</h>
@@ -106,7 +106,7 @@ name: String {NotBlank}
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>567</x>
+      <x>427</x>
       <y>511</y>
       <w>161</w>
       <h>63</h>
@@ -121,7 +121,7 @@ name: String {NotBlank}
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>903</x>
+      <x>763</x>
       <y>210</y>
       <w>161</w>
       <h>63</h>
@@ -137,7 +137,7 @@ city: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>392</x>
+      <x>252</x>
       <y>196</y>
       <w>161</w>
       <h>70</h>
@@ -153,7 +153,7 @@ value: Integer
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>231</x>
+      <x>91</x>
       <y>546</y>
       <w>161</w>
       <h>63</h>
@@ -168,7 +168,7 @@ name: String {NotBlank}
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>686</x>
+      <x>546</x>
       <y>266</y>
       <w>161</w>
       <h>63</h>
@@ -176,6 +176,7 @@ name: String {NotBlank}
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 PersonalExperience
 --
+name: String
  
 </panel_attributes>
     <additional_attributes/>
@@ -183,7 +184,7 @@ PersonalExperience
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1064</x>
+      <x>924</x>
       <y>322</y>
       <w>161</w>
       <h>63</h>
@@ -198,7 +199,7 @@ comment: String </panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>287</x>
+      <x>147</x>
       <y>161</y>
       <w>49</w>
       <h>245</h>
@@ -212,7 +213,7 @@ has v</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>427</x>
+      <x>287</x>
       <y>14</y>
       <w>175</w>
       <h>42</h>
@@ -225,7 +226,7 @@ authority: String {NotBlank}</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
+      <x>0</x>
       <y>0</y>
       <w>217</w>
       <h>63</h>
@@ -239,7 +240,7 @@ password: String {Length(8,50)}</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>693</x>
+      <x>553</x>
       <y>14</y>
       <w>70</w>
       <h>42</h>
@@ -254,7 +255,7 @@ id: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>623</x>
+      <x>483</x>
       <y>49</y>
       <w>119</w>
       <h>77</h>
@@ -265,7 +266,7 @@ id: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>294</x>
+      <x>154</x>
       <y>49</y>
       <w>448</w>
       <h>70</h>
@@ -276,7 +277,7 @@ id: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>721</x>
+      <x>581</x>
       <y>49</y>
       <w>140</w>
       <h>77</h>
@@ -287,7 +288,7 @@ id: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>721</x>
+      <x>581</x>
       <y>49</y>
       <w>322</w>
       <h>70</h>
@@ -298,7 +299,7 @@ id: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>595</x>
+      <x>455</x>
       <y>28</y>
       <w>112</w>
       <h>21</h>
@@ -309,7 +310,7 @@ id: int
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
+      <x>210</x>
       <y>21</y>
       <w>91</w>
       <h>35</h>
@@ -323,7 +324,7 @@ m1=0..n
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>399</x>
+      <x>259</x>
       <y>161</y>
       <w>238</w>
       <h>287</h>
@@ -337,7 +338,7 @@ m2=0..n
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>658</x>
+      <x>518</x>
       <y>161</y>
       <w>126</w>
       <h>119</h>
@@ -351,7 +352,7 @@ m2=1..1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>301</x>
+      <x>161</x>
       <y>455</y>
       <w>49</w>
       <h>105</h>
@@ -365,7 +366,7 @@ has v</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>700</x>
+      <x>560</x>
       <y>154</y>
       <w>217</w>
       <h>98</h>
@@ -379,7 +380,7 @@ m2=0..n
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>637</x>
+      <x>497</x>
       <y>161</y>
       <w>70</w>
       <h>364</h>
@@ -393,7 +394,7 @@ belongs v</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>371</x>
+      <x>231</x>
       <y>126</y>
       <w>189</w>
       <h>35</h>
@@ -407,7 +408,7 @@ score &gt;</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>798</x>
+      <x>658</x>
       <y>7</y>
       <w>112</w>
       <h>63</h>
@@ -422,7 +423,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>455</x>
+      <x>315</x>
       <y>133</y>
       <w>21</w>
       <h>77</h>
@@ -434,7 +435,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1050</x>
+      <x>910</x>
       <y>441</y>
       <w>161</w>
       <h>70</h>
@@ -452,7 +453,7 @@ comment: String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>854</x>
+      <x>714</x>
       <y>161</y>
       <w>140</w>
       <h>63</h>
@@ -466,7 +467,7 @@ m2=0..n
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>742</x>
+      <x>602</x>
       <y>322</y>
       <w>49</w>
       <h>98</h>
@@ -480,7 +481,7 @@ has v</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>686</x>
+      <x>546</x>
       <y>406</y>
       <w>161</w>
       <h>63</h>
@@ -497,7 +498,7 @@ research: String {NotBlank}
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>861</x>
+      <x>721</x>
       <y>441</y>
       <w>161</w>
       <h>63</h>
@@ -512,7 +513,7 @@ comment: String</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
+      <x>700</x>
       <y>308</y>
       <w>315</w>
       <h>147</h>
@@ -526,7 +527,7 @@ has v</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>413</x>
+      <x>273</x>
       <y>322</y>
       <w>161</w>
       <h>70</h>
@@ -542,21 +543,21 @@ reason: String {NotBlank}
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>469</x>
+      <x>329</x>
       <y>259</y>
       <w>49</w>
       <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 m1=1..1
-m2=0..1
+m2=0..*
 has ^</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>805</x>
+      <x>665</x>
       <y>322</y>
       <w>168</w>
       <h>133</h>
@@ -570,7 +571,7 @@ has v</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
+      <x>700</x>
       <y>273</y>
       <w>378</w>
       <h>63</h>
@@ -584,7 +585,7 @@ m2=1..1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
+      <x>357</x>
       <y>161</y>
       <w>63</w>
       <h>49</h>
@@ -598,7 +599,7 @@ m2=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>364</x>
+      <x>224</x>
       <y>161</y>
       <w>49</w>
       <h>49</h>
@@ -612,7 +613,7 @@ m2=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>399</x>
+      <x>259</x>
       <y>441</y>
       <w>210</w>
       <h>84</h>

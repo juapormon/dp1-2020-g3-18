@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import rateacher.model.PersonalExperience;
 import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Teacher;
@@ -101,6 +102,8 @@ public class TeacherController {
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		mav.addObject("teacher", this.teacherService.findTeacherById(teacherId));
 		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		PersonalExperience p = teacher.getPersonalExperience();
+		model.put("personalExperience", p);
 		Student student = this.studentService.findStudentByUsername(principal);
 	        if(student!=null) {
 	        	Collection<Subject> subjectsStudent = student.getSubjects(); 
