@@ -54,8 +54,13 @@ INSERT INTO authorities(id,username,authority) VALUES (17,'abe','teacher');
 
 INSERT INTO users(username,password,enabled) VALUES ('mamapon1','mamapon1',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (9,'mamapon1','teacher');
+
+--Personal Experience Datos--
+INSERT INTO personalexperiences(id,name) VALUES (80,'Personal Experience');
+
+
 --PROFESORES--DATOS
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julian', 'Locuelo García', 'julian');
+INSERT INTO teachers(id,first_name,last_name,username, personal_experience_id) VALUES (1, 'Julian', 'Locuelo García', 'julian',80);
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'Arejo Pínchez', 'macarron32');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');

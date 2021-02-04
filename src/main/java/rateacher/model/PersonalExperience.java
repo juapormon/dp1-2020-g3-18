@@ -21,7 +21,7 @@ public class PersonalExperience extends BaseEntity{
 
 	//Attributes
 	
-	
+	private String 		name;
 	//Relationships
 	@OneToOne(optional = true)
 	@JoinColumn(name = "res_experience")

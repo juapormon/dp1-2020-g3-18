@@ -1,0 +1,58 @@
+<%@ page session="false" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+
+
+<petclinic:layout pageName="personalExperience">
+
+    <h2>Personal Experience</h2>
+
+            <h2>Teacher</h2>
+            <b><c:out value="${teacher.firstName} ${teacher.lastName}"/></b>
+            <br/>
+		    <br/>
+		    <h2>Personal Experience</h2>
+            <c:out value="${personalExperience.name}"/>
+
+
+   <%--  <spring:url value="{teacherId}/scores/new" var="addUrl">
+        <spring:param name="teacherId" value="${teacher.id}"/>
+    </spring:url>
+   	<c:if test="${studentAuth}">
+    <a href="${fn:escapeXml(addUrl)}" class="btn btn-default">Add New Score</a>
+	</c:if>
+	<br/>
+    <br/>
+    <h2>Scores</h2>
+
+
+    <spring:url value="{teacherId}/scores" var="showScoresUrl">
+        <spring:param name="teacherId" value="${teacher.id}"/>
+    </spring:url>
+    <a href="${fn:escapeXml(showScoresUrl)}" class="btn btn-default">Show Score and Comment List</a>
+    
+    <spring:url value="{teacherId}/studentsRated" var="studentsRatedUrl">
+        <spring:param name="teacherId" value="${teacher.id}"/>
+    </spring:url>
+    <sec:authorize access="hasAuthority('admin')">
+    <a href="${fn:escapeXml(studentsRatedUrl)}" class="btn btn-default">Students Rated</a>
+    </sec:authorize>
+
+	<br/>
+    <br/>
+    <h2>Personal Experience</h2>
+    <br/>    
+    <c:if test="${teacher.personalExperience  != null}">
+		    <c:out value="${teacher.personalExperience.name}"/>
+	</c:if>
+	<c:if test="${teacher.personalExperience  == null}">
+   		<spring:url value="/teachers/{teacherId}/newPersonalExperience" var="teacherUrl">
+                <spring:param name="teacherId" value ="${teacher.id}"/>
+        </spring:url>
+        <a href="${fn:escapeXml(teacherUrl)}">Add Personal Experience</a>
+	</c:if> --%>
+
+</petclinic:layout>
