@@ -5,33 +5,24 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.College;
 import rateacher.model.Dean;
 import rateacher.model.PersonalExperience;
-import rateacher.model.Score;
-import rateacher.model.Student;
 import rateacher.model.Teacher;
 import rateacher.model.User;
 import rateacher.repository.DeanRepository;
 import rateacher.repository.TeacherRepository;
 import rateacher.service.AuthoritiesService;
 import rateacher.service.DeanService;
-import rateacher.service.ScoreService;
 import rateacher.service.UserService;
 
 import static org.junit.Assert.assertTrue;
