@@ -18,6 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import junit.framework.AssertionFailedError;
 import rateacher.model.Department;
 import rateacher.model.Teacher;
 import rateacher.model.User;
@@ -118,6 +119,6 @@ public class TeacherServiceTest2 {
 	@DisplayName("Finding a Teacher by bad id")
 	void testFindTeacherByBadId(){
 		int badId = 234234;
-		assertThrows(AssertionError.class,()->this.teacherService.findTeacherById(badId));
+		assertTrue(this.teacherService.findTeacherById(badId)==null);
 	}
 }
