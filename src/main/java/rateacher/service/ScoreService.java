@@ -66,10 +66,10 @@ public class ScoreService {
 		}
 	}
 	
-	@Transactional(readOnly = true)	
-	public void removeScore(@Valid Score score){
-		scoreRepository.delete(score);
-	}
+//	@Transactional(readOnly = true)	
+//	public void removeScore(@Valid Score score){
+//		scoreRepository.delete(score);
+//	}
 	
 	public void delete(Score score) {
 		scoreRepository.delete(score);		
