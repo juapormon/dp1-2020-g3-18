@@ -5,40 +5,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="personalExperiences">
-    <jsp:body>
-        <h2>
-          <c:choose><c:when test="${personalExperience['new']}">New </c:when><c:otherwise>Update </c:otherwise></c:choose>Score
-        </h2>
-         <form:form modelAttribute="personalExperience"
-                   class="form-horizontal">
-            <input type="hidden" name="id" value="${personalExperience.id}"/>
-            <div class="form-group has-feedback">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Teacher</label>
-                    <div class="col-sm-10">
-                        <c:out value="${teacher.firstName} ${teacher.lastName}"/>
-                    </div>
-                </div>
-                <h3>Continua</h3>
-               <%--  <petclinic:inputField label="Value" name="valu"/>
-                <petclinic:inputField label="Comment" name="comment"/> --%>
+
+ <petclinic:layout pageName="personalExperiences">
+    <h2><c:if test="${personalExperience['new']}">New </c:if> Personal Experience	</h2>
+    <form:form modelAttribute="personalExperience" class="form-horizontal" id="add-personalExperience-form" >
+        <div class="form-group has-feedback">
+            <petclinic:inputField label="Name" name="name"/>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+    		<button class="btn btn-default" type="submit">Save Personal Experience</button>
+    				
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <c:choose>
-                        <c:when test="${personalExperience['new']}">
-                            <button class="btn btn-default" type="submit">Add PersonalExperience</button>
-                            <h2>
-                            *Personal Experience already created, you can't create a new one.
-                            </h2>
-                        </c:when>
-                        <c:otherwise>
-                            <button class="btn btn-default" type="submit">Update Personal Experience</button>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-            </div>
-        </form:form>
-	</jsp:body>
-</petclinic:layout>
+        </div>
+    </form:form>
+</petclinic:layout> 

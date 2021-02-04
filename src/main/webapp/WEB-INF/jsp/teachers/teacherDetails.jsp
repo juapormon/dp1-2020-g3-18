@@ -45,5 +45,22 @@
     <a href="${fn:escapeXml(studentsRatedUrl)}" class="btn btn-default">Students Rated</a>
     </sec:authorize>
 
+	<br/>
+    <br/>
+    <h2>Personal Experience</h2>
+    <br/>    
+    <c:if test="${teacher.personalExperience  != null}">
+		<spring:url value="/personalExperience/{personalExperienceId}" var="personalExperienceUrl">
+               <spring:param name="personalExperienceId" value="${personalExperience.id}"/>
+               </spring:url>
+               <a href="${fn:escapeXml(personalExperienceUrl)}"><c:out value="${teacher.personalExperience.name}"/></a>
+                    
+	</c:if>
+	<c:if test="${teacher.personalExperience  == null}">
+   		<spring:url value="/teachers/{teacherId}/newPersonalExperience" var="teacherUrl">
+                <spring:param name="teacherId" value ="${teacher.id}"/>
+        </spring:url>
+        <a href="${fn:escapeXml(teacherUrl)}">Add Personal Experience</a>
+	</c:if>
 
 </petclinic:layout>
