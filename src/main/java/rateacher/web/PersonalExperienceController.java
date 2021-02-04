@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import rateacher.model.PersonalExperience;
+import rateacher.model.ResearchExperience;
 import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Teacher;
+import rateacher.model.TeachingExperience;
 import rateacher.service.PersonalExperienceService;
 import rateacher.service.ScoreService;
 import rateacher.service.StudentService;
@@ -46,7 +48,7 @@ public class PersonalExperienceController {
 	}
 	
 	@GetMapping(value = { "/teachers/{teacherId}/newPersonalExperience" })
-	public String initCreationPersonalExperienceForm(@PathVariable int teacherId, ModelMap model) { // para crear el modelo que va a la																			// vista.
+	public String initCreationPersonalExperienceForm(@PathVariable int teacherId, ModelMap model) {																		// vista.
 		PersonalExperience personalExperience = new PersonalExperience();
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		model.put("personalExperience", personalExperience);
@@ -81,7 +83,27 @@ public class PersonalExperienceController {
 		return "personalExperience/personalExperience";
 	}
 	
+	@GetMapping(value = { "/personalExperience/{personalExperienceId}/newResearchExperience" })
+	public String initCreationResearchExperienceForm(@PathVariable int personalExperienceId, ModelMap model) {																		// vista.
+		PersonalExperience personalExperience = personalExperienceService.findById(personalExperienceId);
+		ResearchExperience re = new ResearchExperience();
+		model.put("personalExperience", personalExperience);
+		model.put("researchExperience", re);
+		return "personalExperience/researchExperience";
+	}
 	
+	
+	// POST
+	
+	
+	@GetMapping(value = { "/personalExperience/{personalExperienceId}/newTeachingExperience" })
+	public String initCreationTeachingExperienceForm(@PathVariable int personalExperienceId, ModelMap model) {																		// vista.
+		PersonalExperience personalExperience = personalExperienceService.findById(personalExperienceId);
+		TeachingExperience te = new TeachingExperience();
+		model.put("personalExperience", personalExperience);
+		model.put("teachingExperience", te);
+		return "personalExperience/teachingExperience";
+	}
 	
 	
 	
