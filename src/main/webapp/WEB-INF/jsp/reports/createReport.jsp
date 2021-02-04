@@ -10,6 +10,7 @@
          <form:form modelAttribute="report"
                    class="form-horizontal">
             <input type="hidden" name="id" value="${report.id}"/>
+            <input type="hidden" name = "score.id" value="${report.score.id}"/>
             <div class="form-group has-feedback">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Reported comment:</label>

@@ -20,32 +20,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import rateacher.model.Dean;
+import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Subjects;
 import rateacher.model.Teacher;
+import rateacher.model.TeachingPlan;
 import rateacher.service.DeanService;
 import rateacher.service.StudentService;
 import rateacher.service.SubjectService;
 import rateacher.service.TeacherService;
+import rateacher.service.TeachingPlanService;
 
 
 
 @Controller
 public class SubjectController {
 	private static final String VIEW_SUBJECT_CREATE_FORM ="subjects/newSubject";
+	private static final String VIEW_TEACHINGPLAN_CREATE_FORM ="teachingPlans/newTeachingPlan";
+
 	
 	private final SubjectService subjectService;
 	private final TeacherService teacherService;
 	private final StudentService studentService;
 	private final DeanService deanService;
+	private final TeachingPlanService teachingPlanService;
 	
 	@Autowired
-	public SubjectController(SubjectService subjectService, TeacherService teacherService, StudentService studentService,DeanService deanService) {
+	public SubjectController(SubjectService subjectService, TeacherService teacherService, StudentService studentService,DeanService deanService, TeachingPlanService teachingPlanService) {
 		this.subjectService = subjectService;
 		this.teacherService = teacherService;
 		this.studentService = studentService;
 		this.deanService = deanService;
+		this.teachingPlanService = teachingPlanService;
 	}
 	
 	@InitBinder
@@ -164,8 +171,51 @@ public class SubjectController {
 		}
 		return view;
 	}
+	@GetMapping(value = {"/subjects/{subjectId}/newTeachingPlan"})
+	public String newTeachingPlan(ModelMap model, @PathVariable int subjectId) {
+		TeachingPlan teachingPlan = new TeachingPlan();
+		model.put("teachingPlan", teachingPlan);
+		Subject subject = subjectService.findSubjectById(subjectId);
+		model.put("subjects", subject);
+		return "teachingPlans/newTeachingPlan";
+
+	}
+
+	
+	@PostMapping(value = "subjects/{subjectId}/newTeachingPlan")
+	public String processCreationForm(@PathVariable int subjectId, @Valid TeachingPlan teachingPlan, BindingResult result,
+			ModelMap model) {
+		if (result.hasErrors()) {
+			Subject subject = subjectService.findSubjectById(subjectId);
+			model.put("subject", subject);
+			return "teachingPlans/newTeachingPlan";
+		} else {
+			teachingPlanService.save(teachingPlan);
+			teachingPlanService.save2(teachingPlan, subjectId);
+			Subject subject = subjectService.findSubjectById(subjectId);
+			model.put("teachingPlan", teachingPlan);
+			model.put("subject", subject);
+			Collection<Subject> subjects = this.subjectService.findAll();
+			model.put("subjects", subjects);
+			return "subjects/subjectsList";
+		}
+	}
 	
 	
+	@GetMapping(path="/subjects/deleteTeachingPlan/{subjectId}")
+	public String deleteTeachingPlan(@PathVariable("subjectId") int subjectId, ModelMap modelMap){
+		String view = "subjects/subjectsList";
+		Optional<Subject> subject = Optional.ofNullable(subjectService.findSubjectById(subjectId));
+		if(subject.isPresent()) {
+			subjectService.deleteTeachingPlan(subject.get());
+			modelMap.addAttribute("message", "Teaching Plan successfully deleted!");
+			view = showSubjectsList(modelMap);
+		} else {
+			modelMap.addAttribute("message", "Teachin Plan not found!");
+			view = showSubjectsList(modelMap);
+		}
+		return view;
+	}
 	
 }
 

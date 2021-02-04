@@ -43,7 +43,7 @@
                   	<spring:param name="collegeId" value="${collegeId}"/>
                   	<spring:param name="teacherId" value="${teacher.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(addTeacherToScoreUrl)}"><c:out value="add to college"/></a> -->
+                    <a href="${fn:escapeXml(addTeacherToScoreUrl)}"><c:out value="add to college"/></a>
 				</td>
                
             </tr> 
