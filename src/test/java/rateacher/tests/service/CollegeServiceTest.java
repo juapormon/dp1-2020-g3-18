@@ -60,6 +60,46 @@ public class CollegeServiceTest {
 		Assertions.assertThat(college!=null);
 		Assertions.assertThat(lc1.size()==lc2.size()+1);
 	}
+
+	//Negative test
+	@Test
+	@DisplayName("Save college with empty name")
+	public void testSaveCollegeBadName() {
+		Teacher t1 = new Teacher();
+		List<Teacher>lt = new ArrayList<>();
+		lt.add(t1);
+		Collection<College> lc1 = this.collegeService.findAllColleges();
+		Collection<College> lc2 = this.collegeService.findAllColleges();
+		int size1 = lc1.size();
+		int size2 = lc2.size();
+		
+		College college = new College("", "Madrid", lt);
+		lc2.add(college);
+		
+		Assertions.assertThat(college==null);
+		Assertions.assertThat(size1==size2);
+		
+	}
+	//Negative test
+	@Test
+	@DisplayName("Save college with empty city name")
+	public void testSaveCollegeBadCity() {
+		Teacher t1 = new Teacher();
+		List<Teacher>lt = new ArrayList<>();
+		lt.add(t1);
+		Collection<College> lc1 = this.collegeService.findAllColleges();
+		Collection<College> lc2 = this.collegeService.findAllColleges();
+		int size1 = lc1.size();
+		int size2 = lc2.size();
+		
+		College college = new College("UPO", "", lt);
+		lc2.add(college);
+		
+		Assertions.assertThat(college==null);
+		Assertions.assertThat(size1==size2);
+		
+	}
+	
 	
 	//Positive test
 	@Test
