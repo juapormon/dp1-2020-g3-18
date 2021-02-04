@@ -47,10 +47,10 @@ public class ReportController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
-//	@InitBinder("report")
-//	public void initReportBinder(WebDataBinder dataBinder) {
-//		dataBinder.setValidator(new ReportValidator(reportService));
-//	}
+	@InitBinder("report")
+	public void initReportBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new ReportValidator(reportService));
+	}
 	
 	@GetMapping(value = {"/reports/new/{scoreId}"})
 	public String initCreationForm(@PathVariable int scoreId, ModelMap model) {
@@ -58,6 +58,7 @@ public class ReportController {
 		Score score = this.scoreService.findScoreById(scoreId);
 		Report report = new Report();
 		report.setScore(score);
+		model.put("score", score);
 		model.put("report", report);
 		return VIEW_REPORT_CREATE_FORM;
 	}	
@@ -66,8 +67,10 @@ public class ReportController {
 	public String processCreationForm(@PathVariable int scoreId, @Valid Report report, BindingResult result,
 	ModelMap model) {
 		if (result.hasErrors()) {
+			Score score = this.scoreService.findScoreById(scoreId);
+			report.setScore(score);
 			model.put("report", report);
-			return "reports/createReport";
+			return VIEW_REPORT_CREATE_FORM;
 		} else {
 			Score score = this.scoreService.findScoreById(scoreId);
 			report.setScore(score);

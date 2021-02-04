@@ -3,7 +3,6 @@ package rateacher.tests.web;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -12,8 +11,6 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.servlet.ModelAndView;
 
 import rateacher.configuration.SecurityConfiguration;
 import rateacher.model.College;
@@ -39,15 +36,12 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasItem;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.assertj.core.util.Lists;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = TeacherController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
@@ -134,6 +128,28 @@ public class TeacherControllerTest {
 	}
 	
 	@Test
+	@DisplayName("Show teacher score list")
+	@WithMockUser(value="spring")
+	void ShowTeacherScoreListTest() {
+		//arrange		
+		Integer teacherId = 91;
+		when(this.teacherService.findScoresByTeacherId(teacherId)).thenReturn(scores);
+		when(this.teacherService.findTeacherByUsername(any())).thenReturn(teacher1);
+		try {
+			//act
+			mockMvc.perform(get("/teachers/{teacherId}/scores", teacherId))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("scores/scoresList"))
+			.andExpect(model().attributeExists("teacherAuth"))
+			.andExpect(model().attribute("teacherAuth", is(true)));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
 	@DisplayName("Test initCreationForm new Score")
 	@WithMockUser(value="spring")
 	void CreateScoreInitFormTest() {
@@ -142,6 +158,7 @@ public class TeacherControllerTest {
 
 		try {
 			mockMvc.perform(get("/teachers/{teacherId}/scores/new", 80))
+			.andExpect(view().name("scores/createForm"))
 			.andExpect(status().isOk())
 			.andExpect(model().attribute("teacher", hasProperty("firstName", is(teacher1.getFirstName()))));
 		} catch (Exception e) {
@@ -177,6 +194,25 @@ public class TeacherControllerTest {
 	}
 	
 	@Test
+	@DisplayName("initFindForm teacher")
+	@WithMockUser(value="spring")
+	void initFindFormTest() {
+		//arrange
+		when(teacherService.findTeacherByUsername(any())).thenReturn(teacher1);
+
+		try {
+			mockMvc.perform(get("/findTeachers"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("teachers/findTeachers"))
+			.andExpect(model().attributeExists("teachers"))
+			.andExpect(model().attributeExists("teacher"));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
 	@DisplayName("Show teacher found")
 	@WithMockUser(value="spring")
 	void teacherFoundTest() {
@@ -190,6 +226,46 @@ public class TeacherControllerTest {
 			//assert
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/teachers/" + teacher1.getId()));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Show teacher found without teacher found")
+	@WithMockUser(value="spring")
+	void teacherFoundNoTeacherTest() {
+		//arrange		
+		teacher1.setFirstName(teacher1.getName());
+		when(this.teacherService.findTeacherByFirstName(any())).thenReturn(new ArrayList<>());
+		try {
+			//act
+			mockMvc.perform(get("/teachersFound", teacher1)
+					.param("firstName", teacher1.getFirstName()))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("teachers/findTeachers"));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Show teacher found more than 1 teacher")
+	@WithMockUser(value="spring")
+	void teacherFoundSomeTeachersTest() {
+		//arrange		
+		teacher1.setFirstName(teacher1.getName());
+		when(this.teacherService.findTeacherByFirstName(any())).thenReturn(Lists.list(teacher1, teacher1));
+		try {
+			//act
+			mockMvc.perform(get("/teachersFound", teacher1)
+					.param("firstName", teacher1.getFirstName()))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("teachers/teachersList"));
 		} catch (Exception e) {
 			System.err.println("Error testing controller: "+e.getMessage());
 			e.printStackTrace();
@@ -223,34 +299,35 @@ public class TeacherControllerTest {
 			}
 	}
 	
-//	@Test
-//	@DisplayName("List my subjects")
-//	@WithMockUser(value="spring")
-//	void ListMySubjectsTest() {
-//		//arrange
-//		Subject subject = new Subject("mates", 2, new Department(), new ArrayList<>());
-//		Teacher teacher2 = new Teacher("nombre", new User(), Lists.list(new College()), 
-//				new PersonalExperience(), Lists.list(new Department()), Lists.list(subject));
-//		List<Teacher> teachers = new ArrayList<>();
-//		teachers.add(teacher2);
-//		when(subjectService.findSubjectById(80)).thenReturn(subject);
-//		when(teacherService.findTeachers()).thenReturn(teachers);
-//		
-//		try {
-//			//act
-//			mockMvc.perform(get("/teachers/{subjectId}/subjectsTeached", 80))
-//			//assert
-//			.andExpect(status().isOk())
-//			.andExpect(view().name("teachers/subjectListTeached"))
-//			.andExpect(model().attribute("teachers", hasItem(
-//                            hasProperty("name", is(teacher2.getName()))
-//            )));
-//			
-//		} catch (Exception e) {
-//			System.err.println("Error testing controller: "+e.getMessage());
-//			e.printStackTrace();
-//		}
-//	}
+	@Test
+	@DisplayName("List my subjects test")
+	@WithMockUser(value="spring")
+	void listMysubjectsTest() {
+		//arrange		
+		Subject subject = new Subject("mates", 2, new Department(), new ArrayList<>(), null);
+		teacher1.getSubjects().add(subject);
+		when(this.subjectService.findSubjectById(111)).thenReturn(subject);
+		when(this.teacherService.findTeachers()).thenReturn(Lists.list(teacher1));
+		
+		try {
+			//act
+			mockMvc.perform(get("/teachers/{subjectId}/subjectsTeached", 111))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("teachers/subjectListTeached"))
+			.andExpect(model().attribute("teachers", hasItem(
+                    allOf(
+                            hasProperty("name", is(teacher1.getName())),
+                            hasProperty("subjects", hasItem(
+                            		 hasProperty("name", is(subject.getName()))
+                            		))
+                    )
+            )));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 	@Test
 	@DisplayName("Show Students who rated a teacher")
@@ -281,6 +358,225 @@ public class TeacherControllerTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	@DisplayName("Delete score test")
+	@WithMockUser(value="spring")
+	void deleteScoreTest() {
+		//arrange		
+		Subject subject = new Subject("mates", 2, new Department(), new ArrayList<>(), null);
+		teacher1.getSubjects().add(subject);
+		when(scoreService.findScoreById(112)).thenReturn(score1);
+		
+		try {
+			//act
+			mockMvc.perform(get("/teachers/{teacherId}/scores/delete/{scoreId}", 111, 112))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("scores/scoresList"))
+			.andExpect(model().attribute("message", is("Score successfully deleted!")));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
 
+//NEGATIVO
+	
+	@Test
+	@DisplayName("Show teacher with bad id")
+	@WithMockUser(value="spring")
+	void ShowTeacherNegativeTest() {
+		//arrange		
+		when(this.studentService.findStudentByUsername(any())).thenReturn(student1);
+		when(this.teacherService.findTeacherById(80)).thenReturn(null);
+		when(this.scoreService.findAll()).thenReturn(scores);
+		
+		try {
+			//act
+			mockMvc.perform(get("/teachers/{teacherId}", 80))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("exception"))
+			.andExpect(model().attributeDoesNotExist("teacher"));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Show teacher score list by bad teacher id")
+	@WithMockUser(value="spring")
+	void ShowTeacherScoreListNegativeTest() {
+		//arrange		
+		Integer teacherId = 91;
+		when(this.teacherService.findScoresByTeacherId(teacherId)).thenReturn(null);
+		when(this.teacherService.findTeacherByUsername(any())).thenReturn(teacher1);
+		try {
+			//act
+			mockMvc.perform(get("/teachers/{teacherId}/scores", teacherId))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("scores/scoresList"))
+			.andExpect(model().attributeDoesNotExist("scores"));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("initCreationForm new Score bad id")
+	@WithMockUser(value="spring")
+	void CreateScoreInitFormNegativeTest() {
+		//arrange
+		when(this.teacherService.findTeacherById(80)).thenReturn(null);
+
+		try {
+			mockMvc.perform(get("/teachers/{teacherId}/scores/new", 80))
+			.andExpect(view().name("scores/createForm"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeDoesNotExist("teacher"));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Test ProcessCreationForm new Score bad id")
+	@WithMockUser(value = "spring")
+	void CreateScoreProcessFormNegativeTest() {
+		//arrange
+		when(this.studentService.findStudentByUsername(any())).thenReturn(student1);
+		when(this.teacherService.findTeacherById(80)).thenReturn(null);
+		when(this.scoreService.findAll()).thenReturn(scores);
+		
+			try {
+				//act
+				mockMvc.perform(post("/teachers/{teacherId}/scores/new", 80)
+				.with(csrf())
+					.param("valu", "8")
+					.param("comment", "un comment cualquiera"))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("scores/createForm"))
+				.andExpect(model().attributeExists("score"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	@Test
+	@DisplayName("initFindForm with non existent username teacher")
+	@WithMockUser(value="spring")
+	void initFindFormNegativeTest() {
+		//arrange
+		when(teacherService.findTeacherByUsername(any())).thenReturn(null);
+
+		try {
+			mockMvc.perform(get("/findTeachers"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("teachers/findTeachers"))
+			.andExpect(model().attributeDoesNotExist("teacher"));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	
+	@Test
+	@DisplayName("Test ProcessEditForm new Score by bad score")
+	@WithMockUser(value = "spring")
+	void EditScoreProcessFormNegativeTest() {
+		//arrange
+		when(this.teacherService.findTeacherById(80)).thenReturn(teacher1);
+		when(this.scoreService.findScoreById(81)).thenReturn(null);
+
+			try {
+				//act
+				mockMvc.perform(post("/teachers/{teacherId}/scores/{scoreId}/edit", 80, 81)
+				.with(csrf())
+					.param("valu", "9")
+					.param("comment", "comentario editado"))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("scores/createForm"));
+		
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	@Test
+	@DisplayName("List my subjects by bad id test")
+	@WithMockUser(value="spring")
+	void listMysubjectsNegativeTest() {
+		//arrange		ç
+		when(this.subjectService.findSubjectById(111)).thenReturn(null);
+		when(this.teacherService.findTeachers()).thenReturn(Lists.list(teacher1));
+		
+		try {
+			//act
+			mockMvc.perform(get("/teachers/{subjectId}/subjectsTeached", 111))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("teachers/subjectListTeached"))
+			.andExpect(model().attribute("teachers", is(new ArrayList<>())));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Show Students who rated a teacher by bad id")
+	@WithMockUser(value="spring")
+	void showStudentsRatedATeacherNegativeTest() {
+		//arrange
+		Student student = new Student("manolo", "si@dime.es", new User(), new ArrayList<>(), new ArrayList<>());
+		List<Student> students = new ArrayList<>();
+		students.add(student);
+		when(studentService.StudentsRatedATeacher(80)).thenReturn(null);
+		
+		try {
+			//act
+			mockMvc.perform(get("/teachers/{teacherId}/studentsRated", 80))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("students/studentRatedATeacher"))
+			.andExpect(model().attributeDoesNotExist("students"));
+			
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Delete score bad id test")
+	@WithMockUser(value="spring")
+	void deleteScoreNegativeTest() {
+		//arrange		
+		Subject subject = new Subject("mates", 2, new Department(), new ArrayList<>(), null);
+		teacher1.getSubjects().add(subject);
+		when(scoreService.findScoreById(112)).thenReturn(null);
+		
+		try {
+			//act
+			mockMvc.perform(get("/teachers/{teacherId}/scores/delete/{scoreId}", 111, 112))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("scores/scoresList"))
+			.andExpect(model().attribute("message", is("Score not found!")));
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
 }
 

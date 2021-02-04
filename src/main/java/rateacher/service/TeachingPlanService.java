@@ -43,9 +43,5 @@ public class TeachingPlanService {
 		Subject subject= subjectService.findSubjectById(subjectId);
 		subject.setTeachingPlan(teachingPlan);
 	}
-	@Transactional
-	public void delete(TeachingPlan teachingPlan) {
-		teachingPlanRepository.delete(teachingPlan);
-	}
 	
 }
