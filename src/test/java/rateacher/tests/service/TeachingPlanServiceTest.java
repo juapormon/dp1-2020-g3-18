@@ -85,23 +85,6 @@ public class TeachingPlanServiceTest {
 			Mockito.verify(this.repo, Mockito.times(1)).save(nuevoTeachingPlan);
 			
 		}
-		
-//		@Test
-//		@Transactional
-//		@DisplayName("Saving 2 a teachingPlan ")
-//		public void shouldSaveTeachingPlan2() {
-//		
-//			int theId = 10000;
-//			TeachingPlan nuevoTeachingPlan = new TeachingPlan("Teaching plan to ADDA");
-//			nuevoTeachingPlan.setId(2555);
-//			Subject s = new Subject();
-//			s.setCurso(2);
-//			s.setName("DP");
-//			s.setId(theId);
-//	        this.teachingPlanService.save(nuevoTeachingPlan);      
-//			this.teachingPlanService.save2(nuevoTeachingPlan,s.getId());
-//			assertTrue(s.getTeachingPlan().getName()== nuevoTeachingPlan.getName());
-//		}
 	
 		
 		//Casos negativos

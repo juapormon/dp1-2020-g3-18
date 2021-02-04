@@ -9,7 +9,7 @@
 
  <petclinic:layout pageName="teachingExperience">
     <h2><c:if test="${teachingExperience['new']}">New </c:if> Teaching Experience	</h2>
-    <form:form modelAttribute="teachingExperience" class="form-horizontal" id="add-teachingPlan-form" >
+    <form:form modelAttribute="teachingExperience" class="form-horizontal" id="add-teachingExperience-form" >
         <div class="form-group has-feedback">
             <petclinic:inputField label="Titulation" name="titulation"/>
             <petclinic:inputField label="Comment" name="comment"/>

@@ -7,15 +7,17 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
- <petclinic:layout pageName="researchExperience">
-    <h2><c:if test="${researchExperience['new']}">New </c:if> Research Experience	</h2>
-    <form:form modelAttribute="researchExperience" class="form-horizontal" id="add-researchExperience-form" >
+ <petclinic:layout pageName="externalEvaluation">
+    <h2><c:if test="${externalEvaluation['new']}">New </c:if> External Evaluation	</h2>
+    <form:form modelAttribute="externalEvaluation" class="form-horizontal" id="add-externalEvaluation-form" >
         <div class="form-group has-feedback">
-            <petclinic:inputField label="Research" name="research"/>
+            <petclinic:inputField label="Note" name="note"/>
+            <petclinic:inputField label="Evaluation Report" name="evaluationReport"/>
+            <petclinic:inputField label="Comment" name="comment"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-    		<button class="btn btn-default" type="submit">Save Research Experience</button>
+    		<button class="btn btn-default" type="submit">Save External Evaluation</button>
     				
             </div>
         </div>
