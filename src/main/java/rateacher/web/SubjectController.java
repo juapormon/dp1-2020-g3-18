@@ -191,8 +191,9 @@ public class SubjectController {
 			return "teachingPlans/newTeachingPlan";
 		} else {
 			teachingPlanService.save(teachingPlan);
-			teachingPlanService.save2(teachingPlan, subjectId);
 			Subject subject = subjectService.findSubjectById(subjectId);
+			subject.setTeachingPlan(teachingPlan);
+			subjectService.save(subject);
 			model.put("teachingPlan", teachingPlan);
 			model.put("subject", subject);
 			Collection<Subject> subjects = this.subjectService.findAll();

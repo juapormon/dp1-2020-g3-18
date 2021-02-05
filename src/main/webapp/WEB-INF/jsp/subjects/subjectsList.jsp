@@ -37,16 +37,20 @@
 
                 <td><c:out value=" ${subject.teachingPlan.name}"/>
                 <c:if test="${subject.teachingPlan  != null}">
+                <sec:authorize access="hasAuthority('teacher')">
    					   <spring:url value="/subjects/deleteTeachingPlan/{subjectId}" var="subjectUrl">
                 		<spring:param name="subjectId" value ="${subject.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(subjectUrl)}">((  Delete  ))</a>
+                	</sec:authorize>
 				</c:if>
 				<c:if test="${subject.teachingPlan  == null}">
+				<sec:authorize access="hasAuthority('teacher')">
    					   <spring:url value="/subjects/{subjectId}/newTeachingPlan" var="subjectUrl">
                 		<spring:param name="subjectId" value ="${subject.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(subjectUrl)}">Add Teaching Plan</a>
+				</sec:authorize>
 				</c:if>
                 
                 </td>
