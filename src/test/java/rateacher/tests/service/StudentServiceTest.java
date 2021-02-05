@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
@@ -21,8 +22,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javassist.bytecode.stackmap.BasicBlock.Catch;
+import rateacher.model.Department;
 import rateacher.model.Student;
+import rateacher.model.Subject;
 import rateacher.model.Teacher;
+import rateacher.model.TeachingPlan;
 import rateacher.model.User;
 import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
@@ -104,12 +108,44 @@ public class StudentServiceTest {
                 user.setUsername("paco");
                 user.setPassword("paco1");
                 user.setEnabled(true);
-                student.setUser(user);                
+                student.setUser(user);    
+        
                 
 		assertThrows(ConstraintViolationException.class,()->this.studentService.saveStudent(student));
 	}
 	
+	//Possitive test
+	@Test
+	@Transactional
+	@DisplayName("Finding my subjects by username")
+	public void testFindMySubjectsByUsername() {
+		
+                
+		List<Subject> ls = this.studentService.findMySubjectsByUsername("tomas");
+		List<Teacher> lt = new ArrayList<>();
+		Department department1 = new Department("DTE");
+		TeachingPlan tp1 = new TeachingPlan("Our teaching plan");
+		Teacher teacher1 = new Teacher();
+		Teacher teacher2 = new Teacher();
+		lt.add(teacher1);
+		lt.add(teacher2);
+		Subject s1 = new Subject("Arquitectura de Computadores", 2, department1, lt, tp1);
+		ls.add(s1);
+		
+		assertTrue(!ls.isEmpty());
+		assertTrue(ls.contains(s1));
+	}
 
+	//Negative test
+	@Test
+	@Transactional
+	@DisplayName("Finding my subjects by bad username")
+	public void testFindMySubjectsByBadUsername() {
+		String badUserName="klsdfhglskdf";
+		List<Subject> ls = this.studentService.findMySubjectsByUsername(badUserName);
+		
+		assertTrue(ls.isEmpty());
+	}
 	
 
 
