@@ -120,23 +120,12 @@ public class SubjectController {
 		for(Teacher teacher: subject.getTeachers()) {
 			teacherIds.add(teacher.getId());
 		}
-//		if(teacherIds.contains(teacherId)) { //regla de negocio a implementar
-//			model.put("subjectId", subjectId);
-//			Teacher teacherAdded = this.teacherService.findTeacherById(teacherId);
-//			model.put("teacher", teacherAdded);
-//			Collection<Teacher> teachers = this.teacherService.findTeachers();
-//			model.put("teachers", teachers);
-//			model.put("nono", "Error: No puedes añadir a ese profesor porque ya esta en la lista");
-//			result.rejectValue("name", "This teacher is already in the subject");
-//			return "subjects/teachersList";
-//		}else {
 		Teacher teacherAdded = this.teacherService.findTeacherById(teacherId);
 		teacherAdded.setName(teacherAdded.getFirstName());
 		teacherAdded.getSubjects().add(subject);	
 		this.teacherService.save(teacherAdded);
 		Collection<Subject> subjects = this.subjectService.findAll();
 		model.put("subjects", subjects);
-//		}
 		return "subjects/subjectsList";
 		
 	}
