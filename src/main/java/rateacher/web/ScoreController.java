@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import rateacher.model.Score;
 import rateacher.service.ScoreService;
+import rateacher.util.ScoreValidator;
 
 @Controller
 public class ScoreController {
@@ -24,6 +25,7 @@ public class ScoreController {
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
+
 
 
 }

@@ -17,19 +17,27 @@ import rateacher.repository.TeacherRepository;
 @Service
 public class DeanService {
 	
-	private TeacherRepository teacherRepository;
 	private DeanRepository deanRepository;
-	
-	@Autowired
+	private TeacherRepository teacherRepository;
 	private UserService userService;
-	
-	@Autowired
 	private AuthoritiesService authoritiesService;
 	
 	@Autowired
-	public DeanService(TeacherRepository teacherRepository, DeanRepository deanRepository) {
+	public DeanService(DeanRepository deanRepository, TeacherRepository teacherRepository, UserService userService, AuthoritiesService authoritiesService) {
 		this.deanRepository = deanRepository;
 		this.teacherRepository = teacherRepository;
+		this.userService = userService;
+		this.authoritiesService = authoritiesService;
+	}
+	
+	@Transactional
+	public void saveDean(Dean dean) throws DataAccessException {
+		// creating student
+		deanRepository.save(dean);
+		// creating user
+		userService.saveUser(dean.getUser());
+		// creating authorities
+		authoritiesService.saveAuthorities(dean.getUser().getUsername(), "dean");
 	}
 
 	@Transactional(readOnly = true)

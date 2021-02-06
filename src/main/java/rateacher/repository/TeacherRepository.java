@@ -41,17 +41,8 @@ public interface TeacherRepository extends Repository<Teacher, Integer> {
 	@Query("select t from Teacher t where t.id in (select s.teacher from Score s where s.teacher is not null  AND s.student in (select e.id from Student e where e.id = ?1))")
 	Collection<Teacher> findByStudentId(int studentId);
 
-	@Query("select t from Teacher t")
-	List<Teacher> findTeachersFromDepartment(int departmentId);
-
 	@Query("select t from Teacher t where t.user.username = ?1")
 	Teacher findTeacherByUsername(String username);
-	
-	@Query("select t.subjects from Teacher t where t.user.id=?1")
-	Collection<Subject> findSubjectsByTeacherId(int id);
-
-	@Query("select t from Teacher t join t.colleges c where not c.id = ?1")
-	List<Teacher> findTeacherByCollegeId(int collegeId);
 
 	@Query(nativeQuery = true, value = "select * from teachers t where t.id in"
 			+ "( select q.teacher_id from teachers_subjects q where q.subject_id in "

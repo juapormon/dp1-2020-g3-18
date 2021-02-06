@@ -19,8 +19,7 @@ import rateacher.repository.SubjectRepository;
 @Service
 public class SubjectService {
 	
-	private SubjectRepository subjectRepository;
-	
+	private SubjectRepository subjectRepository;	
 	private DepartmentRepository departmentRepository;
 	
 	@Autowired
@@ -74,6 +73,9 @@ public class SubjectService {
 
 	public void delete(Subject subject) {
 		subjectRepository.delete(subject);
+	}
+	public void deleteTeachingPlan(Subject subject) {
+		subject.setTeachingPlan(null);
 	}
 	
 	

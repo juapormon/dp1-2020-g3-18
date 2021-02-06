@@ -2,6 +2,8 @@ package rateacher.repository;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -20,5 +22,8 @@ public interface DeanRepository extends Repository<Dean, Integer>{
 	
 	@Query("select s from Dean s where s.user.username = ?1")
 	Dean findDeanByUsername(String username);
+
+	
+	void save(@Valid Dean dean) throws DataAccessException;
 }
 

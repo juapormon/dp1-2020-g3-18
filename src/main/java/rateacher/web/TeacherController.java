@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import rateacher.model.PersonalExperience;
 import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Teacher;
@@ -71,15 +72,18 @@ public class TeacherController {
 		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
 	}
 	
-	@GetMapping(value = { "teachers" })
+	@GetMapping(value = { "/teachers" })
 	public String showTeacherList(Map<String, Object> model) {
-
 		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
 		Student student = this.studentService.findStudentByUsername(principal);
+		Teacher teacher = this.teacherService.findTeacherByUsername(principal); 
 		model.put("student", student);
-		Teachers teachers = new Teachers();
-		teachers.getTeachersList().addAll(this.teacherService.findTeachers());
+		Collection<Teacher> teachers = this.teacherService.findTeachers();
 		model.put("teachers", teachers);
+		Boolean condition = (teacher != null);
+		model.put("condition", condition);
+		if(teacher != null)
+		model.put("teacherr", teacher);
 		return "teachers/teachersList";
 
 	}
@@ -98,6 +102,8 @@ public class TeacherController {
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		mav.addObject("teacher", this.teacherService.findTeacherById(teacherId));
 		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		PersonalExperience p = teacher.getPersonalExperience();
+		model.put("personalExperience", p);
 		Student student = this.studentService.findStudentByUsername(principal);
 	        if(student!=null) {
 	        	Collection<Subject> subjectsStudent = student.getSubjects(); 
@@ -117,15 +123,20 @@ public class TeacherController {
 	@GetMapping(value = { "/teachersWithScore" })
 	public String showTeacherWithScore(Map<String, Object> model) {
 
-		Teachers teachers = new Teachers();
-		teachers.getTeachersList().addAll(this.teacherService.showTeacherWithScore());
+		Collection<Teacher> teachers = this.teacherService.findTeachers();
 		model.put("teachers", teachers);
 		return "teachers/teachersWithScore";
-
 	}
 
 	@GetMapping(value = "/findTeachers")
 	public String initFindForm(Map<String, Object> model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Teacher t = teacherService.findTeacherByUsername(username);
+		if(t != null) {
+			model.put( "teacher", t);
+			Boolean condition = true;
+			model.put("condition", condition);
+		}
 		model.put("teachers", new Teacher());
 		return "teachers/findTeachers";
 	}
@@ -149,6 +160,10 @@ public class TeacherController {
 		} else {
 			// multiple teachers found
 			model.put("selections", results);
+
+			String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+			Teacher teacherr = this.teacherService.findTeacherByUsername(principal); 
+			if(teacherr != null) model.put("teacher", teacherr);
 			return "teachers/teachersList";
 		}
 	}

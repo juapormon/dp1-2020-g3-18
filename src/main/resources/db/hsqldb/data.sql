@@ -22,7 +22,7 @@ INSERT INTO teachingexperiences(id,titulation,comment) VALUES (1, 'Graduado en c
 
 
 --EVALUACION EXTERNA--DATOS
-INSERT INTO externalevaluations(id,note,comment) VALUES (1, 8, 'Otro comentario de prueba a ver que sale...');
+INSERT INTO externalevaluations(id,note,comment) VALUES (1, 4, 'Otro comentario de prueba a ver que sale...');
 
 --EXPERIENCIA PERSONAL--DATOS
 INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience, ext_evaluation) VALUES (1,1,1,1,1);
@@ -30,7 +30,7 @@ INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience,
 --DECANOS--ROL
 INSERT INTO users(username,password,enabled) VALUES ('josrojrom1','pepe12345',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'josrojrom1','dean');
-INSERT INTO users(username, password, enabled) VALUES ('d', 'd', TRUE);
+INSERT INTO users(username, password,enabled) VALUES ('d', 'd', TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (55,'d','dean');
 --DECANOS--DATOS
 INSERT INTO deans(id,first_name,last_name,username) VALUES (1, 'Pedro', 'Javieles', 'admin1');
@@ -54,8 +54,13 @@ INSERT INTO authorities(id,username,authority) VALUES (17,'abe','teacher');
 
 INSERT INTO users(username,password,enabled) VALUES ('mamapon1','mamapon1',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (9,'mamapon1','teacher');
+
+--Personal Experience Datos--
+INSERT INTO personalexperiences(id,name) VALUES (80,'Personal Experience');
+
+
 --PROFESORES--DATOS
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (1, 'Julian', 'Locuelo García', 'julian');
+INSERT INTO teachers(id,first_name,last_name,username, personal_experience_id) VALUES (1, 'Julian', 'Locuelo García', 'julian',80);
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'Arejo Pínchez', 'macarron32');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');
@@ -68,6 +73,8 @@ INSERT INTO users(username,password,enabled) VALUES ('fran','fran12345',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (11,'fran','student');
 INSERT INTO users(username,password,enabled) VALUES ('s','s',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (12,'s','student');
+INSERT INTO users(username,password,enabled) VALUES ('d1','d1',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (44,'d1','dean');
 --ESTUDIANTES--DATOS
 INSERT INTO students(id,first_name,last_name,username) VALUES (1, 'Tomás Francisco', 'Rodríguez Rodríguez', 'tomas');
 INSERT INTO students(id,first_name,last_name,username) VALUES (66, 'administrador', 'Rodríguez Rodríguez', 'a');
@@ -92,14 +99,19 @@ INSERT INTO departments(id,name) VALUES (3,'Matematicas aplicadas');
 INSERT INTO departments(id,name) VALUES (4,'Ingenieria del diseño');
 INSERT INTO departments(id,name) VALUES (5,'Electronica y magnetismo');
 
+--TEACHING PLAN -- DATOS
+INSERT INTO teaching_plans(id,name) VALUES (1,'teaching plan to Redes de Computadores');
+INSERT INTO teaching_plans(id,name) VALUES (2,'teaching plan to Diseño y pruebas');
+
+
 --ASIGNATURAS--DATOS
-INSERT INTO subjects(id,name,curso,department_id) VALUES (111,'Diseño y pruebas', 3,1);
+INSERT INTO subjects(id,name,curso,department_id, teaching_plan_id) VALUES (111,'Diseño y pruebas', 3,1,2);
 INSERT INTO subjects(id,name,curso,department_id) VALUES (112,'Fundamentos Fisicos de la Informatica', 1,1);
 INSERT INTO subjects(id,name,curso,department_id) VALUES (113,'Matematica Discreta', 2,2);
 INSERT INTO subjects(id,name,curso,department_id) VALUES (114,'Circuitos Electronicos Digitales', 1,3);
 INSERT INTO subjects(id,name,curso,department_id) VALUES (115,'Sistemas Operativos', 2,3);
 INSERT INTO subjects(id,name,curso,department_id) VALUES (116,'Logica Informatica', 2,3);
-INSERT INTO subjects(id,name,curso) VALUES (117,'Redes de Computadores', 2);
+INSERT INTO subjects(id,name,curso, teaching_plan_id) VALUES (117,'Redes de Computadores', 2,1);
 INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
 
 --ASIGNATURAS DE PROFESORES--
