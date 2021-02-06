@@ -68,7 +68,7 @@ public class SubjectService {
 	}
   
   @Transactional
-	public void save(Subject subject) {
+	public void save(Subject subject)throws DataAccessException {
 		subjectRepository.save(subject);
 	}
 
