@@ -34,6 +34,8 @@ import rateacher.service.ScoreService;
 import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
 import rateacher.service.TeachingExperienceService;
+import rateacher.util.ExternalEvaluationValidator;
+import rateacher.util.ScoreValidator;
 
 @Controller
 public class PersonalExperienceController {
@@ -63,7 +65,14 @@ public class PersonalExperienceController {
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
+	
+	@InitBinder("externalEvaluation")
+	public void initPersonalExperienceBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new ExternalEvaluationValidator(externalEvaluationService, personalExperienceService ));
+	}
 
+	
+	
 	@GetMapping(value = { "/teachers/{teacherId}/newPersonalExperience" })
 	public String initCreationPersonalExperienceForm(@PathVariable int teacherId, ModelMap model) { // vista.
 		PersonalExperience personalExperience = new PersonalExperience();
@@ -172,7 +181,7 @@ public class PersonalExperienceController {
 		if (result.hasErrors()) {
 			PersonalExperience personalExperience = personalExperienceService.findById(personalExperienceId);
 			model.put("personalExperience", personalExperience);
-			return "personalExperience/teachingExperience";
+			return "personalExperience/profesionalExperience";
 		} else {
 			professionalExperienceService.save(professionalExperience);
 			PersonalExperience personalExperience = personalExperienceService.findById(personalExperienceId);
@@ -199,7 +208,7 @@ public class PersonalExperienceController {
 		if (result.hasErrors()) {
 			PersonalExperience personalExperience = personalExperienceService.findById(personalExperienceId);
 			model.put("personalExperience", personalExperience);
-			return "personalExperience/teachingExperience";
+			return "personalExperience/externalEvaluation";
 		} else {
 			externalEvaluationService.save(externalEvaluation);
 			PersonalExperience personalExperience = personalExperienceService.findById(personalExperienceId);
