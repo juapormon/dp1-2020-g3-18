@@ -19,8 +19,7 @@ import rateacher.repository.SubjectRepository;
 @Service
 public class SubjectService {
 	
-	private SubjectRepository subjectRepository;
-	
+	private SubjectRepository subjectRepository;	
 	private DepartmentRepository departmentRepository;
 	
 	@Autowired
