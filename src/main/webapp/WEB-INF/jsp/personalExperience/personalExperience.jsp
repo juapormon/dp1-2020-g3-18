@@ -2,15 +2,16 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
 
-<petclinic:layout pageName="personalExperience">
+<rateacher:layout pageName="personalExperience">
 
     <h2>Personal Experience</h2>
-
+	<c:out value="${personalExperience.name}"/>
             <br/>
+            
 		    <br/>
 		    <h2>Research Experience</h2>
 		<c:if test="${personalExperience.researchExperience  == null}">
@@ -85,4 +86,4 @@
    			
 		</c:if>
 
-</petclinic:layout>
+</rateacher:layout>
