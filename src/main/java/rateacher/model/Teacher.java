@@ -46,6 +46,7 @@ public class Teacher extends Person{
 	private Collection<College> colleges;
 	
 	@OneToOne (optional = true)
+	@JoinColumn(name = "personal_experience_id")
 	private PersonalExperience personalExperience;
 	
 	@ManyToMany(fetch = FetchType.EAGER) 

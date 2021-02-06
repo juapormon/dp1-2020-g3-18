@@ -25,7 +25,7 @@ public class PersonalExperienceService {
 	}
 	
 	@Transactional(readOnly = true)
-	public PersonalExperience findStudentById(int id) throws DataAccessException {
+	public PersonalExperience findById(int id) throws DataAccessException {
 		PersonalExperience personalExperience = personalExperienceRepository.findById(id);
 		assert personalExperience != null;
 		return personalExperience;
@@ -37,7 +37,7 @@ public class PersonalExperienceService {
 	}
 
 	@Transactional
-	public void saveStudent(PersonalExperience personalExperience) throws DataAccessException {
+	public void save(PersonalExperience personalExperience) throws DataAccessException {
 		// creating personalExperience
 		personalExperienceRepository.save(personalExperience);
 	}

@@ -7,18 +7,18 @@
 <%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 
 
-<rateacher:layout pageName="subjects">
-    <h2><c:if test="${student['new']}">New </c:if> Subject</h2>
-    <form:form modelAttribute="subjects" class="form-horizontal" id="add-subject-form" action ="/subjects/save">
+ <rateacher:layout pageName="teachingExperience">
+    <h2><c:if test="${teachingExperience['new']}">New </c:if> Teaching Experience	</h2>
+    <form:form modelAttribute="teachingExperience" class="form-horizontal" id="add-teachingExperience-form" >
         <div class="form-group has-feedback">
-            <rateacher:inputField label="Name" name="name"/>
-            <rateacher:inputField label="Curso" name="curso"/>
+            <rateacher:inputField label="Titulation" name="titulation"/>
+            <rateacher:inputField label="Comment" name="comment"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-            	<button class="btn btn-default" type="submit">Save Subject</button>
-                  
+    		<button class="btn btn-default" type="submit">Save Teaching Experience</button>
+    				
             </div>
         </div>
     </form:form>
-</rateacher:layout>
+</rateacher:layout> 
