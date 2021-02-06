@@ -1,16 +1,11 @@
 package rateacher.tests.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-import javax.validation.ConstraintViolationException;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,25 +13,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
 
 import rateacher.model.Department;
-import rateacher.model.Student;
 import rateacher.model.Subject;
-import rateacher.model.Teacher;
 import rateacher.model.TeachingPlan;
-import rateacher.model.User;
-import rateacher.repository.DepartmentRepository;
-import rateacher.repository.StudentRepository;
 import rateacher.repository.SubjectRepository;
 import rateacher.repository.TeachingPlanRepository;
-import rateacher.service.DepartmentService;
-import rateacher.service.StudentService;
 import rateacher.service.SubjectService;
 import rateacher.service.TeachingPlanService;
 
@@ -129,10 +113,10 @@ public class SubjectServiceTest2 {
 			t1.setId(456);
 			s1.setId(123);
 			when(this.teachingPlanRepo.findById(456)).thenReturn(t1);
-			TeachingPlan teachingPlanToDelete = this.teachingPlanRepo.findById(456);
-			s1.setTeachingPlan(teachingPlanToDelete);
+			TeachingPlan teachingPlan = this.teachingPlanRepo.findById(456);
+			s1.setTeachingPlan(teachingPlan);
 			assertTrue(s1.getTeachingPlan().getName()== "Teaching Plan 1");
-			this.teachingPlanService.delete(teachingPlanToDelete);
+			this.subjectService.deleteTeachingPlan(s1);
 			assertTrue(s1.getTeachingPlan()==null);
 		}
 		
@@ -146,13 +130,5 @@ public class SubjectServiceTest2 {
 			assertTrue(res == null);
 		}
 		
-//		@Test
-//		@DisplayName("Saving subject without a name")
-//		public void SavingSubjectNoNameTest() {
-//			s1.setName(null);
-//	                
-//			this.subjectService.save(s1);
-//			assertThrows(ConstraintViolationException.class,()->this.subjectService.save(s1));
-//		}
 }
 

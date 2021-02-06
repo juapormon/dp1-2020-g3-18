@@ -3,7 +3,6 @@ package rateacher.tests.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -176,16 +175,7 @@ public class SubjectServiceTest {
 			Subject subject = new Subject();
 			subject.setName(null);
 			subject.setCurso(3);
-				Department d1 = new Department();
-				Collection<Department> departments = new ArrayList<Department>();
-				d1.setName("Violencia ingenieril");
-				departments.add(d1);
-	              Teacher t1 = new Teacher();
-	              t1.setFirstName("Antouniou");
-	              t1.setLastName("Perks");
-	              t1.setDepartments(departments);
 	                
-			this.subjectService.save(subject);
 			assertThrows(ConstraintViolationException.class,()->this.subjectService.save(subject));
 		}
 }
