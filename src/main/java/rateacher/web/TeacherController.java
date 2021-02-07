@@ -1,10 +1,6 @@
 
 package rateacher.web;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -14,9 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import rateacher.model.Subject;
-import rateacher.model.Subjects;
 import rateacher.service.SubjectService;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,7 +33,6 @@ import rateacher.model.Teachers;
 import rateacher.service.ScoreService;
 import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
-import rateacher.util.DuplicatedStudentScoreException;
 import rateacher.util.ScoreValidator;
 
 import org.springframework.beans.BeanUtils;
@@ -69,7 +62,7 @@ public class TeacherController {
 
 	@InitBinder("score")
 	public void initTeacherBinder(WebDataBinder dataBinder) {
-		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
+		dataBinder.setValidator(new ScoreValidator());
 	}
 	
 	@GetMapping(value = { "/teachers" })

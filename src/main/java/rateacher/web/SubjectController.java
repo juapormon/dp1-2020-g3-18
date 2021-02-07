@@ -20,10 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import rateacher.model.Dean;
-import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Subject;
-import rateacher.model.Subjects;
 import rateacher.model.Teacher;
 import rateacher.model.TeachingPlan;
 import rateacher.service.DeanService;
@@ -32,13 +30,9 @@ import rateacher.service.SubjectService;
 import rateacher.service.TeacherService;
 import rateacher.service.TeachingPlanService;
 
-
-
 @Controller
 public class SubjectController {
 	private static final String VIEW_SUBJECT_CREATE_FORM ="subjects/newSubject";
-	private static final String VIEW_TEACHINGPLAN_CREATE_FORM ="teachingPlans/newTeachingPlan";
-
 	
 	private final SubjectService subjectService;
 	private final TeacherService teacherService;
