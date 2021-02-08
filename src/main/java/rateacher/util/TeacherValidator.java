@@ -1,14 +1,9 @@
 package rateacher.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import rateacher.model.Score;
 import rateacher.model.Teacher;
-import rateacher.service.ScoreService;
-import rateacher.service.StudentService;
-import rateacher.service.TeacherService;
 
 public class TeacherValidator implements Validator{
 

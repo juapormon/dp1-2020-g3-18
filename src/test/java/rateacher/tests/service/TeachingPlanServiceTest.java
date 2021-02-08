@@ -21,11 +21,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.TeachingPlan;
-import rateacher.model.TeachingPlan;
-import rateacher.model.Student;
-import rateacher.model.Subject;
-import rateacher.model.Teacher;
-import rateacher.model.TeachingPlan;
 import rateacher.repository.TeachingPlanRepository;
 import rateacher.service.TeachingPlanService;
 

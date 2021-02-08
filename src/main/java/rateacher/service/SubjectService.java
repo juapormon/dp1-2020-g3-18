@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.Subject;
-import rateacher.repository.DepartmentRepository;
 import rateacher.repository.SubjectRepository;
 
 
@@ -17,12 +16,10 @@ import rateacher.repository.SubjectRepository;
 public class SubjectService {
 	
 	private SubjectRepository subjectRepository;	
-	private DepartmentRepository departmentRepository;
 	
 	@Autowired
-	public SubjectService(SubjectRepository subjectRepository, DepartmentRepository departmentRepository) {
+	public SubjectService(SubjectRepository subjectRepository) {
 		this.subjectRepository = subjectRepository;
-		this.departmentRepository = departmentRepository;
 	}
 	
 	@Transactional(readOnly = true)	
