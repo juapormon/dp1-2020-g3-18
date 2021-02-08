@@ -15,11 +15,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
-import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.Score;
 import rateacher.model.Student;
@@ -35,7 +33,7 @@ public class StudentServiceTest2 {
 
 	StudentRepository repo = mock(StudentRepository.class);
 
-	StudentService studentService = new StudentService(repo, null);
+	StudentService studentService = new StudentService(repo);
 
 	Student s1;
 	Student s2;

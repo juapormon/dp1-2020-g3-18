@@ -37,8 +37,6 @@ import rateacher.util.ScoreValidator;
 
 import org.springframework.beans.BeanUtils;
 
-
-
 @Controller
 public class TeacherController {
 
@@ -104,7 +102,7 @@ public class TeacherController {
 	            Integer match = 1;
 	             for (Subject s: subjectsStudent) {
 	             	if (subjectsTeacher.contains(s)) {
-	             		match = match-match;
+	             		match -= match;
 	             	}
 	             }
 	             Boolean studentAuth = ((match==0) && (student != null));

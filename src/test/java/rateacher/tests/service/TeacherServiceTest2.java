@@ -1,13 +1,11 @@
 package rateacher.tests.service;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import junit.framework.AssertionFailedError;
 import rateacher.model.Department;
 import rateacher.model.Teacher;
 import rateacher.model.User;
@@ -53,7 +50,7 @@ public class TeacherServiceTest2 {
 	
 	StudentRepository studentRepo = mock(StudentRepository.class);
 	
-	StudentService studentService = new StudentService(studentRepo, teacherRepo);
+	StudentService studentService = new StudentService(studentRepo);
 	
 	DepartmentRepository departmentRepo = mock(DepartmentRepository.class);
 	
